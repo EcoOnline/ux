@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<head>
+		<meta charset="utf-8">
+		<title>UI/UX</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" loading="priority" href="./fonts/ecoonline_icon.css">
+		<!--<link rel='stylesheet' href='./build/expandable_table.css'>
+		<script defer src='./build/expandable_table.js'></script>
+		-->
+		<style>
+
+
+			:root {
+				--eo-primary-500: #272F96
+			}
+
+			body {
+				background-color: #f6f6f7;
+				text-align: center;
+				font-family:'IBM Plex Sans';
+				padding: 0;
+				margin: 0;
+			}
+			body > code {
+				width: 100%;
+				box-sizing: border-box;
+				padding: 24px;
+				background: #000;
+				color: #fff;
+				display: block;
+			}
+
+			.page {
+				width: 1230px;
+				max-width: 90%;
+				margin: 10px auto;
+				text-align: left;
+				border-radius: 12px;
+				background: #fff;
+				box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+				padding: 16px;
+			}
+
+
+			.badge {
+				display: inline-block;
+				padding: 4px 8px;
+				border-radius: 4px;
+				font-size: 12px;
+				text-transform: uppercase;
+				background-color: #5C5858;
+				color: #fff;
+				font-weight: 600;
+			}
+			.badge-success {
+				background-color: #1CD390;
+			}
+			.badge-error {
+				background-color: #AB211B;
+			}
+
+
+
+
+
+			.page-chunk {
+				display: inline-block;
+				margin: 16px 16px 16px 0;
+				width: 320px;
+				height: 600px;
+				background: #f6f6f7;
+			}
+
+			.lhs-menu {
+				background: #4e5761;
+				width: 284px;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				color: #fff;
+			}
+			.lhs-menu h2 {
+				padding: 0 16px;
+				
+			}
+			.lhs-menu .i {
+				color: #fff;
+			}
+			.lhs-menu .meta-info {
+				background: #363d45;
+				padding: 8px;
+			}
+			.lhs-menu .meta-info table {
+				width: 100%;
+			}
+			.lhs-menu .meta-info h4 {
+				text-align: center;
+				color: #5bae4f;
+				text-transform: uppercase;
+				font-size: 17.5px;
+				margin: 4px;
+			}
+			.lhs-menu .meta-info h2 {
+				text-align: center;
+				font-size: 26px;
+				margin: 4px;
+
+			}
+			.lhs-menu .meta-info td {
+				font-size: 12px;
+				padding: 4px 0px 4px 8px;
+			}
+			.lhs-menu .meta-info td:first-child {
+				font-weight: 700;
+			}
+			.lhs-menu .list {
+			}
+			.lhs-menu .list h4 {
+				font-size: 12px;
+				text-transform: uppercase;
+				margin: 0;
+				padding: 16px 0 12px 24px;
+				border-bottom: 1px solid #646f7d;
+			}
+			.lhs-menu .list ul {
+				margin: 0 0 48px 0;
+				padding: 0;
+				list-style: none;
+				border-bottom: 1px solid #646f7d;
+
+			}
+			.lhs-menu .list li {
+				height: 52px;
+				padding:  0 0 0 24px;
+				line-height: 52px;
+				cursor: pointer;
+				position: relative;
+				font-size: 16px;
+				font-weight: 400;
+				position: relative;
+			}
+			.lhs-menu .list .dotted li {
+				padding:  0 0 0 64px;
+			}
+			.lhs-menu .list .dotted li:before {
+				content: '';
+				height: 16px;
+				width: 16px;
+				border-radius: 16px;
+				border: 2px solid #5bae4f;
+				display: block;
+				position: absolute;
+				top: 50%;
+				margin-top: -8px;
+				left: 24px;
+			}
+			.lhs-menu .list li:hover {
+				background: #616e7b;
+			}
+
+			.lhs-menu .list li.selected {
+				background: #dfe8ef;
+				color: #4e5761;
+			}
+			.lhs-menu .list li.selected:hover {
+				background: #f6f6f7;
+			}
+
+			[class^="option"]:not(.option2) .scroller {
+				overflow: auto;
+			}
+			[class^="option"]:not(.option2) .scroller::-webkit-scrollbar {
+				width: 0px;
+				background: transparent; /* make scrollbar transparent */
+			}
+
+			.lhs-menu .list li svg {
+				vertical-align: middle;
+				margin-right: 8px;
+			}
+			.lhs-menu .list li path {
+				fill: #fff ! important;
+			}
+
+			.lhs-menu .status {
+				padding: 0 24px 24px 24px;
+				background: #363d45;
+			}
+			.lhs-menu .status h4 {
+				font-size: 12px;
+				text-transform: uppercase;
+				margin: 0 0 2px 0;
+				padding: 8px 0 0px 0px;
+			}
+			.lhs-menu .status .badge {
+				font-size: 18px;
+				text-transform: none;
+				text-align: center;
+				padding: 12px 0 ;
+				display: block;
+			}
+			.lhs-menu .badge-success {
+				background: #5bae4f;
+			}
+
+
+
+
+
+
+
+			/*option 1*/
+			.scroller-hint-blocker {
+				height: 32px;
+				width: 100%;
+				position: relative;
+			}
+			.scroller-hint-blocker:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 32px;
+				background: #4e5761;
+				z-index: 1;
+			}
+			.option1 .status {
+				position: relative;
+			}
+			.option1 .status:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: -32px;
+				width: 100%;
+				height: 32px;
+				background: linear-gradient(0deg, rgba(54,61,69,1) 0%, rgba(54,61,69,0) 100%);
+			}
+
+			/*option 2*/
+			.option2 .scroller {
+				overflow: auto;
+			} 
+
+
+
+			.option3 .lhs-menu .meta-info {
+				overflow: hidden;
+				max-height: 32px;
+				transition: max-height 0.5s;
+
+			}
+			.option3 .lhs-menu .meta-info.expanded {
+				max-height: 200px;
+			}
+
+			.toggler {
+				vertical-align: middle;
+				float: right;
+				cursor: pointer;
+			}
+			.expanded .toggler svg {
+				transform: rotate(180deg);
+			}
+
+
+			.option4 .scroller {
+				flex: 99;
+			}
+			.option4 .lhs-menu .list ul {
+				margin-bottom: 0;
+			}
+
+
+			.scroll-hint {
+				position: relative;
+			}
+			.scroll-hint:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: -32px;
+				width: 100%;
+				height: 32px;
+				background: linear-gradient(0deg, rgba(54,61,69,1) 0%, rgba(54,61,69,0) 100%);
+			}
+			.scroll-hint:after {
+				content: url("data:image/svg+xml,<svg width='16' height='25' viewBox='0 0 16 25' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M14 7.875V16.875C14 20.1887 11.3137 22.875 8 22.875C4.68629 22.875 2 20.1887 2 16.875V7.875C2 4.56129 4.68629 1.875 8 1.875C11.3137 1.875 14 4.56129 14 7.875ZM0.5 7.875C0.5 3.73286 3.85786 0.375 8 0.375C12.1421 0.375 15.5 3.73286 15.5 7.875V16.875C15.5 21.0171 12.1421 24.375 8 24.375C3.85786 24.375 0.5 21.0171 0.5 16.875V7.875ZM5.08318 9.53033L7.25003 7.36348V13.4812L5.08315 11.3143L4.02249 12.375L7.99997 16.3525L11.9774 12.375L10.9168 11.3143L8.75003 13.4811V7.36355L10.9168 9.53033L11.9775 8.46967L7.99999 4.4922L4.02252 8.46967L5.08318 9.53033Z' fill='white'/></svg>");
+				position: absolute;
+				left: 50%;
+				top: -28px;
+				width: 16px;
+				height: 24px;
+				margin-left: -8px;
+				background: linear-gradient(0deg, rgba(54,61,69,1) 0%, rgba(54,61,69,0) 100%);
+			}
+			.option5 .lhs-menu .meta-info {
+				overflow: hidden;
+				max-height: 32px;
+				transition: max-height 0.5s;
+
+			}
+			.option5 .scroller {
+				flex: 99;
+				position: relative;
+			}
+			.option5 .lhs-menu .meta-info.expanded {
+				max-height: 200px;
+			}
+			.option5 .lhs-menu .list ul {
+				margin-bottom: 0;
+			}
+			.option5 .list-holder {
+				position: relative;
+				margin-bottom: 32px;
+				min-height: calc(100% - 32px);
+			}
+			.option5 .scroller-hint-blocker {
+			    position: absolute;
+				bottom: -32px;
+			}
+
+
+			.tab-count {
+				background: #4e5761;
+				display: inline-block;
+				padding: 4px 8px;
+				border-radius: 4px;
+				font-size: 12px;
+				text-transform: uppercase;
+				color: #fff;
+				font-weight: 600;
+				position: absolute;
+				right: 8px;
+				top: 50%;
+				margin-top: -8px;
+				line-height: 12px;
+
+			}
+		</style>
+	</head>
+	<body>
+		<code><b>Problem:</b> The Inspector cuts off menu items and scroll isn't apparent in documents with large numbers of tabs.<br>This adds to users not being able to find links.<br><br>These potential solutions were <b>only</b> tested in Chrome</code>
+		<div class="page">
+
+			<h2>Status quo</h2>
+			<div class="option0">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						<div class="scroller">
+							<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+							<div class="meta-info">
+								<h4>Record ID</h4>
+								<h2>14</h2>
+								<table>
+									<tbody>
+										<tr>
+											<td>Creator</td>
+											<td>Adam.Erikson</td>
+										</tr>
+										<tr>
+											<td>Date</td>
+											<td>04/06/2021</td>
+										</tr>
+										<tr>
+											<td>Date Updated On (UTC)</td>
+											<td>04/06/2021</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+									</ul>
+								</div>
+								<div class="list">
+									<h4>Tools</h4>
+									<ul>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24">
+												<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+											</svg>
+											Attachments
+										</li>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+												<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+											</svg>
+											Links
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="status">
+							<h4>Status</h4>
+							<div class="badge badge-success">Complete Record</div>
+						</div>
+					</div>
+				</div>
+				<code style="display:inline-block">
+					<b>Imitation of current version</b><br>
+					Page height is artificially fixed to 600px to show scroll issues.<br>
+					There <b>is</b> actually scrolling there below 'positive' but no affordability.
+				</code>
+			</div>
+
+			<hr>
+
+			<h2>Option 1: Gradient</h2>
+			<div class="option1">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						<div class="scroller">
+							<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+							<div class="meta-info">
+								<h4>Record ID</h4>
+								<h2>14</h2>
+								<table>
+									<tbody>
+										<tr>
+											<td>Creator</td>
+											<td>Adam.Erikson</td>
+										</tr>
+										<tr>
+											<td>Date</td>
+											<td>04/06/2021</td>
+										</tr>
+										<tr>
+											<td>Date Updated On (UTC)</td>
+											<td>04/06/2021</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+									</ul>
+								</div>
+								<div class="list">
+									<h4>Tools</h4>
+									<ul>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24">
+												<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+											</svg>
+											Attachments
+										</li>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+												<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+											</svg>
+											Links
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="scroller-hint-blocker"></div>
+						</div>
+						<div class="status">
+							<h4>Status</h4>
+							<div class="badge badge-success">Complete Record</div>
+						</div>
+					</div>
+				</div>
+				<code style="display:inline-block">
+					Gradient is added for affordability. Pure CSS solution.<br>
+					<b>Still doesn't help</b> if nothing is showing through gradient like in the example.
+				</code>
+			</div>
+
+			
+
+			<hr>
+
+			<h2>Option 2: Scrollbar</h2>
+			<div class="option2">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						<div class="scroller">
+							<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+							<div class="meta-info">
+								<h4>Record ID</h4>
+								<h2>14</h2>
+								<table>
+									<tbody>
+										<tr>
+											<td>Creator</td>
+											<td>Adam.Erikson</td>
+										</tr>
+										<tr>
+											<td>Date</td>
+											<td>04/06/2021</td>
+										</tr>
+										<tr>
+											<td>Date Updated On (UTC)</td>
+											<td>04/06/2021</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+									</ul>
+								</div>
+								<div class="list">
+									<h4>Tools</h4>
+									<ul>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24">
+												<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+											</svg>
+											Attachments
+										</li>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+												<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+											</svg>
+											Links
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="status">
+							<h4>Status</h4>
+							<div class="badge badge-success">Complete Record</div>
+						</div>
+					</div>
+				</div>
+				<code style="display:inline-block">
+					This is hard to control on all browsers and may look very clunky.
+				</code>
+			</div>
+
+			<hr>
+
+			<h2>Option 3: Move Status to Meta-data & make expandible</h2>
+			<div class="option3">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						<div class="scroller">
+							<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+							<div class="meta-info">
+								<table>
+									<tbody>
+										<tr>
+											<td><b>RECORD ID</b></td>
+											<td>
+												<div class="badge badge-success">14</div>
+												<span class="toggler" onclick="document.querySelector('.option3 .meta-info').classList.toggle('expanded')">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5L4.5 8.99995L5.55 7.94995L12 14.4L18.45 7.94995L19.5 8.99995L12 16.5Z" fill="#fff"/>
+													</svg>
+												</span>
+											</td>
+										</tr>
+										<tr>
+											<td>Creator</td>
+											<td>Adam.Erikson</td>
+										</tr>
+										<tr>
+											<td>Date</td>
+											<td>04/06/2021</td>
+										</tr>
+										<tr>
+											<td>Date Updated</td>
+											<td>04/06/2021</td>
+										</tr>
+										<tr>
+											<td>Status</td>
+											<td><div class="badge badge-success">Complete Record</div></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+									</ul>
+								</div>
+								<div class="list">
+									<h4>Tools</h4>
+									<ul>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24">
+												<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+											</svg>
+											Attachments
+										</li>
+										<li>
+											<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+												<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+											</svg>
+											Links
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<code style="display:inline-block">
+					This saves a lot of room but doesn't solve all cases
+				</code>
+			</div>
+
+			<hr>
+
+			<h2>Option 4: Meta AND fixing tools to bottom, scrolling only tabs</h2>
+			<div class="option4 option3">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						
+						<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+						<div class="meta-info">
+							<table>
+								<tbody>
+									<tr>
+										<td><b>RECORD ID</b></td>
+										<td>
+											<div class="badge badge-success">14</div>
+											<span class="toggler" onclick="document.querySelector('.option4 .meta-info').classList.toggle('expanded')">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5L4.5 8.99995L5.55 7.94995L12 14.4L18.45 7.94995L19.5 8.99995L12 16.5Z" fill="#fff"/>
+												</svg>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>Creator</td>
+										<td>Adam.Erikson</td>
+									</tr>
+									<tr>
+										<td>Date</td>
+										<td>04/06/2021</td>
+									</tr>
+									<tr>
+										<td>Date Updated</td>
+										<td>04/06/2021</td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td><div class="badge badge-success">Complete Record</div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="scroller">
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+										<li>Never gonna give you up</li>
+										<li>Never gonna let you down</li>
+										<li>Never gonna run around</li>
+										<li>and desert you</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="list">
+							<h4>Tools</h4>
+							<ul>
+								<li>
+									<svg width="24" height="24" viewBox="0 0 24 24">
+										<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+									</svg>
+									Attachments
+								</li>
+								<li>
+									<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+										<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+									</svg>
+									Links
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+				<code style="display:inline-block">
+					Still some issues. Added extra menu items to tabs to enable scrolling
+				</code>
+			</div>
+
+			<hr>
+
+			<h2>Option 5: Best of above plus scroll icon?</h2>
+			<div class="option5">
+				<div class="page-chunk">
+					<div class="lhs-menu">
+						
+						<h2><div class="i i-observation i-l"><i></i></div> Observation</h2>
+						<div class="meta-info">
+							<table>
+								<tbody>
+									<tr>
+										<td><b>RECORD ID</b></td>
+										<td>
+											<div class="badge badge-success">14</div>
+											<span class="toggler" onclick="document.querySelector('.option5 .meta-info').classList.toggle('expanded')">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5L4.5 8.99995L5.55 7.94995L12 14.4L18.45 7.94995L19.5 8.99995L12 16.5Z" fill="#fff"/>
+												</svg>
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>Creator</td>
+										<td>Adam.Erikson</td>
+									</tr>
+									<tr>
+										<td>Date</td>
+										<td>04/06/2021</td>
+									</tr>
+									<tr>
+										<td>Date Updated</td>
+										<td>04/06/2021</td>
+									</tr>
+									<tr>
+										<td>Status</td>
+										<td><div class="badge badge-success">Complete Record</div></td>
+									</tr>
+									<tr>
+										<td>Incomplete Actions</td>
+										<td><div class="badge badge-error">2/4</div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="scroller">
+							<div class="list-holder">
+								<div class="list">
+									<h4>Tabs</h4>
+									<ul class="dotted">
+										<li>Initial details</li>
+										<li class="selected">Observations</li>
+										<li>At Risk Questions</li>
+										<li>Positive</li>
+										<li>Close Record</li>
+										<li>Never gonna give you up</li>
+										<li>Never gonna let you down</li>
+										<li>Never gonna run around</li>
+										<li>and desert you</li>
+									</ul>
+								</div>
+							<div class="scroller-hint-blocker"></div>
+							</div>
+						</div>
+						<div class="list scroll-hint">
+							<h4>Tools</h4>
+							<ul>
+								<li>
+									<svg width="24" height="24" viewBox="0 0 24 24">
+										<path d="M21.0749 14.1749L9.8249 2.92489C7.9499 0.974894 4.8749 0.974894 2.9249 2.84989C0.974902 4.72489 0.974902 7.87489 2.9249 9.74989L2.9999 9.82489L5.0999 11.9999L6.1499 10.9499L3.9749 8.77489C2.6999 7.49989 2.6999 5.32489 3.9749 4.04989C5.2499 2.77489 7.4249 2.69989 8.6999 3.97489C8.6999 3.97489 8.6999 3.97489 8.7749 4.04989L19.9499 15.2249C21.2999 16.4999 21.2999 18.6749 20.0249 19.9499C18.7499 21.2999 16.5749 21.2999 15.2999 20.0249C15.2999 20.0249 15.2999 20.0249 15.2249 19.9499L9.6749 14.3999C8.9249 13.6499 8.9999 12.4499 9.6749 11.7749C10.4249 11.0999 11.5499 11.0999 12.2999 11.7749L15.3749 14.8499L16.4249 13.7999L13.2749 10.6499C11.9249 9.37489 9.8249 9.44989 8.5499 10.7999C7.3499 12.0749 7.3499 14.0999 8.5499 15.4499L14.1749 21.0749C16.0499 23.0249 19.1249 23.0249 21.0749 21.1499C23.0249 19.2749 23.0249 16.1249 21.0749 14.1749C21.0749 14.2499 21.0749 14.1749 21.0749 14.1749Z" fill="#1A1919"/>
+									</svg>
+									Attachments
+									<div class="tab-count">0</div>
+								</li>
+								<li>
+									<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path d="M21.9373 5.06989C21.5193 4.65037 21.0225 4.3175 20.4755 4.09038C19.9285 3.86325 19.3421 3.74634 18.7498 3.74634C18.1576 3.74634 17.5711 3.86325 17.0241 4.09038C16.4772 4.3175 15.9804 4.65037 15.5623 5.06989L16.6273 6.13489C16.9065 5.85566 17.238 5.63417 17.6028 5.48306C17.9677 5.33194 18.3587 5.25416 18.7536 5.25416C19.1484 5.25416 19.5395 5.33194 19.9043 5.48306C20.2691 5.63417 20.6006 5.85566 20.8798 6.13489C21.159 6.41411 21.3805 6.7456 21.5316 7.11042C21.6828 7.47524 21.7605 7.86626 21.7605 8.26114C21.7605 8.65602 21.6828 9.04703 21.5316 9.41185C21.3805 9.77668 21.159 10.1082 20.8798 10.3874L14.8798 16.3874C14.3169 16.9513 13.553 17.2685 12.7562 17.2692C11.9594 17.2699 11.195 16.9541 10.6311 16.3911C10.0672 15.8282 9.74995 15.0643 9.74925 14.2675C9.74854 13.4707 10.0644 12.7063 10.6273 12.1424L11.6848 11.0774L10.6273 10.0124L9.56232 11.0774C9.1428 11.4955 8.80993 11.9922 8.58281 12.5392C8.35568 13.0862 8.23877 13.6726 8.23877 14.2649C8.23877 14.8572 8.35568 15.4436 8.58281 15.9906C8.80993 16.5376 9.1428 17.0343 9.56232 17.4524C10.4109 18.2901 11.5574 18.7568 12.7498 18.7499C13.3444 18.7523 13.9335 18.6369 14.4832 18.4104C15.0328 18.1838 15.5322 17.8506 15.9523 17.4299L21.9523 11.4299C22.793 10.5841 23.2637 9.43929 23.2609 8.24678C23.258 7.05428 22.782 5.91165 21.9373 5.06989Z"/>
+										<path d="M3.14235 18.6151C2.8623 18.3364 2.64007 18.005 2.48843 17.6401C2.3368 17.2752 2.25873 16.884 2.25873 16.4889C2.25873 16.0937 2.3368 15.7025 2.48843 15.3376C2.64007 14.9727 2.8623 14.6414 3.14235 14.3626L9.14235 8.36261C9.42111 8.08256 9.75245 7.86033 10.1173 7.70869C10.4822 7.55705 10.8735 7.47899 11.2686 7.47899C11.6637 7.47899 12.055 7.55705 12.4199 7.70869C12.7848 7.86033 13.1161 8.08256 13.3949 8.36261C13.6731 8.64356 13.8922 8.97751 14.0391 9.34467C14.1859 9.71184 14.2576 10.1047 14.2499 10.5001C14.2521 10.8967 14.1758 11.2898 14.0251 11.6567C13.8745 12.0236 13.6527 12.357 13.3724 12.6376L11.7824 14.2501L12.8474 15.3151L14.4374 13.7251C15.2837 12.8787 15.7592 11.7308 15.7592 10.5339C15.7592 9.33691 15.2837 8.18898 14.4374 7.34261C13.591 6.49624 12.4431 6.02075 11.2461 6.02075C10.0492 6.02075 8.90123 6.49624 8.05485 7.34261L2.05486 13.3426C1.63421 13.7608 1.30039 14.258 1.0726 14.8057C0.844807 15.3534 0.727539 15.9407 0.727539 16.5339C0.727539 17.127 0.844807 17.7143 1.0726 18.262C1.30039 18.8097 1.63421 19.3069 2.05486 19.7251C2.90897 20.5565 4.05803 21.015 5.24986 21.0001C6.45218 21.0013 7.60614 20.5267 8.45986 19.6801L7.39485 18.6151C7.1161 18.8952 6.78476 19.1174 6.41988 19.269C6.05499 19.4207 5.66375 19.4987 5.26861 19.4987C4.87347 19.4987 4.48222 19.4207 4.11733 19.269C3.75245 19.1174 3.42111 18.8952 3.14235 18.6151Z"/>
+									</svg>
+									Links
+
+									<div class="tab-count">3</div>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+		</div><!-- end .page -->
+		
+	</body>
+</html>

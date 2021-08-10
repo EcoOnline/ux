@@ -1,0 +1,42 @@
+
+.sticky-wrapper {
+	width:100%;
+	max-height: calc(100vh - 100px);
+	overflow:auto;
+}
+.sticky-wrapper tr {
+	position:relative;
+}
+.sticky-wrapper td.fat, .sticky-wrapper th.fat {
+	width: 100%; /*hacky just for a pretty demo*/
+}
+.sticky-wrapper th {
+	position:sticky ! important;
+	top:0;
+	z-index:3;
+	white-space:nowrap;
+	background:  var(--table-header);
+	color:  var(--table-header-color);
+	padding: 8px 16px;
+}
+.sticky-wrapper td {
+	border-bottom: 1px solid var(--table-row-border);
+	padding: 8px 16px;
+}
+.sticky-wrapper th:first-child {
+	left: 0px;
+	z-index: 4;
+	width: 120px;
+}
+.sticky-wrapper td:first-child {
+	position:sticky ! important;
+	background: #fff;
+	left:0px;
+	z-index: 2;
+	width: 120px;
+}
+
+.sticky-wrapper table {
+	width: 100%;
+	border-collapse: collapse;
+}

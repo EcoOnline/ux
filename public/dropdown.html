@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<head>
+		<meta charset="utf-8">
+		<title>UI/UX</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet">
+
+		<link rel='stylesheet' href='build/dropdown.css'>
+		<script defer src='build/dropdown.js'></script>
+		<style>
+			:root {
+			  --brand_blue: #272F96;
+			  --highlight: #F5F6FF; /* or #F5F5F5*/
+			  --surface_reduced: #FBFBFB;
+			  --background: #F6F6F7;
+			  --contrast_color: #FFFFFF;
+			  --page_width: 1088px;
+			  --border: #BABFC3;
+			  --menu_item_height: 48px;
+			  --menu_item_rows: 8;
+			  --menu_item_width:300px;
+			  --menu_selected_icon: #1CD390;
+			  --menu_selected_pill: #9397CA;
+			  --menu_selected_pill_icon: #FFF;
+			  --menu_selected_pill_icon_hover: #1CD390;
+			}
+
+			html, body {
+				margin:0;
+				padding:0;
+				width:100%;
+				height:100%;
+				font-weight:300;
+				font-size:16px;
+			}
+			body {
+				background: var(--background);
+				font-family:'IBM Plex Sans';
+			}
+
+			.table-wrapper {
+				width:100%;
+				border:1px solid var(--border);
+				border-top-left-radius:16px;
+				border-top-right-radius:16px;
+				max-height: calc(100vh - 100px);
+				overflow:auto;
+				margin:32px 0;
+			}
+			.table-wrapper table {
+				width:100%;
+				border-spacing: 0px;
+				border-collapse: collapse;
+			}
+
+			.table-wrapper tr {
+				position:relative;
+			}
+
+			.table-wrapper th, .table-wrapper td {
+				padding: 8px;
+				text-align:left;
+			}
+			
+			.table-wrapper th {
+				background-color: var(--surface_reduced);
+				position:sticky;
+				top:0;
+				z-index:3;
+				white-space:nowrap;
+				box-shadow:0 1px 1px rgba(0,0,0,0.16);
+			}
+			.table-wrapper td {
+				background-color:#fff;
+				border-bottom:1px solid var(--border);
+			}
+			.table-wrapper th:first-child {
+				left: 0px;
+				z-index: 4;
+			}
+			.table-wrapper td:first-child {
+				position:sticky ! important;
+				left:0px;
+				z-index: 2;
+			}
+			.table-wrapper tr:hover td {
+				background-color: var(--highlight);
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+</html>

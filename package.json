@@ -1,0 +1,27 @@
+{
+  "name": "svelte-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "carbon-components-svelte": "^0.29.2",
+    "carbon-icons-svelte": "^10.23.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-dnd-action": "^0.8.9"
+  },
+  "dependencies": {
+    "html2canvas": "*",
+    "react-social-login-buttons": "^3.4.0",
+    "sirv-cli": "^1.0.0"
+  }
+}

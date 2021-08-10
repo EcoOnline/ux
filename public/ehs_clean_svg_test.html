@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<head>
+		<meta charset="utf-8">
+		<title>UI/UX</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet">
+		<style>
+			:root {
+			  --primary: #fafafa;/*#0A81FF;*/
+			  --secondary: #233A57;
+			}
+
+			body {
+				background: var(--primary);
+				font-family:"IBM Plex Sans";
+				font-size:16px;
+			}
+			hr {
+				border:none;
+				border-top:1px solid #d3d3d3;
+				height:0;
+				margin:32px 0;
+			}
+			code {
+				color:#f90;
+			}
+
+			.tile {
+				display:inline-block;
+				width:168px;
+				height:168px;
+				border-radius:16px;
+				background:#fff;
+				text-align:center;
+				box-shadow:0 6px 10px rgba(186, 191, 195, 0.2);
+				margin:8px;
+				cursor:pointer;
+				transition: all 0.2s linear;
+				vertical-align:top;
+			}
+			.tile .icon {
+				width:64px;
+				height:64px;
+				margin:32px auto 8px auto;
+				background-color: transparent;
+				background-position: center center;
+				background-repeat:no-repeat;
+				background-size:cover;
+				transition: all 0.2s linear;
+			}
+			.tile b {
+				display:block;
+				line-height:24px;
+			}
+			.tile span {
+				display:block;
+				font-size:0.83em;
+				line-height:16px;
+				width: calc(100% - 16px);
+				margin:0 8px;
+				white-space:nowrap;
+				overflow:hidden;
+				text-overflow:ellipsis;
+			}
+			.tile .tools {
+				/*border-top:1px solid #eee;*/
+				padding:4px;
+				display:none;
+			}
+			.tile .tools a {
+				display:inline-block;
+				width:20px;
+				height:20px;
+				margin:0 2px;
+				background-color: transparent;
+				background-position: center center;
+				background-repeat:no-repeat;
+				background-size:cover;
+				border-radius:2px;
+				transition: all 0.2s linear;
+				opacity:0.8;
+			}
+			.tile .tools a:hover {
+				transform: scale(1.1);
+				opacity:1;
+			}
+			.tile .tools a.add 			{ background-image:url(./images/icons/add.svg) }
+			.tile .tools a.filter 		{ background-image:url(./images/icons/filter.svg) }
+			.tile .tools a.summary 		{ background-image:url(./images/icons/summary.svg) }
+			.tile .tools a.tool 		{ background-image:url(./images/icons/tool.svg) }
+
+			.tile:hover {
+				transform: scale(1.02);
+				box-shadow:0 10px 10px rgba(186, 191, 195, 0.3);
+			}
+			.tile:hover .icon {
+				transform: scale(1.05);
+			}
+			.tile:hover .tools {
+				display:block;
+			}
+			.panel {
+				display:block;
+				border-radius:16px;
+				background:#fff;
+				margin:8px;
+			}
+			.panel .icon {
+				display:inline-block;
+				width:32px;
+				height:32px;
+				margin:8px;
+				background-color: transparent;
+				background-position: center center;
+				background-repeat:no-repeat;
+				background-size:cover;
+			}
+
+			@media (max-width: 660px) {
+				.tile .tools {
+					display:block;
+				}
+				.tile .tools a {
+					opacity:0.5;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Platform</h2>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/platform.svg)"></div>
+			<b>Platform</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/ehs.svg)"></div>
+			<b>EcoOnline EHS</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/chemical_manager.svg)"></div>
+			<b>Chemical Manager</b>
+			<span>Big Company<span>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/chemical_manager.svg)"></div>
+			<b>Chemical Manager</b>
+			<span>Little Company<span>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/chemical_manager.svg)"></div>
+			<b>Chemical Manager</b>
+			<span>Very long company name that doesn't end<span>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/learning_manager.svg)"></div>
+			<b>Learning Manager</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/analytics.svg)"></div>
+			<b>Dashboards & Analytics</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/reseller.svg)"></div>
+			<b>Reseller</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/publisher.svg)"></div>
+			<b>Publisher</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/safety_manager.svg)"></div>
+			<b>Safety Manager</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/chem_doc.svg)"></div>
+			<b>Chemdoc</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/safe_doc.svg)"></div>
+			<b>Safedoc</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean/chemi_control.svg)"></div>
+			<b>Chemicontrol</b>
+		</div>
+		<div class="panel">
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/platform.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/ehs.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/chemical_manager.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/learning_manager.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/analytics.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/reseller.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/publisher.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/safety_manager.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/chem_doc.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/safe_doc.svg)"></div>
+			<div class="icon" style="background-image:url(./images/platform_svgs_clean_bw/chemi_control.svg)"></div>
+		</div>
+		<hr>
+		<h2>EcoOnline EHS</h2>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/actions.svg)"></div>
+			<b>Action</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/administration.svg)"></div>
+			<b>Administration</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/asset_register.svg)"></div>
+			<b>Asset Register</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/advanced_rca.svg)"></div>
+			<b>ARCA</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/audits.svg)"></div>
+			<b>Audit & Inspection</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/compliance.svg)"></div>
+			<b>Compliance</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/contractors.svg)"></div>
+			<b>Contractor</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/covid_19_tracker.svg)"></div>
+			<b>Covid-19 Tracker</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/csr.svg)"></div>
+			<b>CSR</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/documents.svg)"></div>
+			<b>Document</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/epr.svg)"></div>
+			<b>EP</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/hierarchy.svg)"></div>
+			<b>Hierarchy</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/incidents.svg)"></div>
+			<b>Incident</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/lost_time.svg)"></div>
+			<b>Lost Time</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/monthly_statistics.svg)"></div>
+			<b>Monthly Statistics</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/observations.svg)"></div>
+			<b>Observation</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/period_statistics.svg)"></div>
+			<b>Period Statistics</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/permit_to_work.svg)"></div>
+			<b>Permit to Work</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/pow_ra.svg)"></div>
+			<b>Point of Work</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/register.svg)"></div>
+			<b>Register</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/reports.svg)"></div>
+			<b>Report</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/risk_assessment.svg)"></div>
+			<b>Risk</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/scheduling.svg)"></div>
+			<b>Schedule</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/tracker.svg)"></div>
+			<b>Tracker</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+			</div>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean/workflow.svg)"></div>
+			<b>Workflow</b>
+			<div class="tools">
+				<a href="./" class="add"></a>
+				<a href="./" class="filter"></a>
+				<a href="./" class="summary"></a>
+				<a href="./" class="tool"></a>
+			</div>
+		</div>
+
+
+		<div class="panel">
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/actions.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/asset_register.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/advanced_rca.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/audits.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/compliance.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/contractors.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/covid_19_tracker.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/csr.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/documents.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/epr.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/hierarchy.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/incidents.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/lost_time.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/monthly_statistics.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/observations.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/period_statistics.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/permit_to_work.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/pow_ra.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/register.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/reports.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/risk_assessment.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/scheduling.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/tracker.svg)"></div>
+			<div class="icon" style="background-image:url(./images/ehs_svgs_clean_bw/workflow.svg)"></div>
+		</div>
+
+
+		<hr>
+		<h2>Chemical Manager</h2>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/actions.svg)"></div>
+			<b>Actions</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/custom_lists.svg)"></div>
+			<b>Custom Lists</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/exposure_register.svg)"></div>
+			<b>Exposure Register</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/help.svg)"></div>
+			<b>Help</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/locations.svg)"></div>
+			<b>Locations</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/offline.svg)"></div>
+			<b>Offline</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/previous_version.svg)"></div>
+			<b>Previous Version</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/ra_templates.svg)"></div>
+			<b>Risk Templates</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/read_link_qr.svg)"></div>
+			<b>Read Link & QR</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/reports.svg)"></div>
+			<b>Report</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/risk_assessment.svg)"></div>
+			<b>Risk</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/sds.svg)"></div>
+			<b>SDS</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/sds_request.svg)"></div>
+			<b>SDS Request</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/search.svg)"></div>
+			<b>Search</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/smartforms.svg)"></div>
+			<b>Smartforms</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/substitution.svg)"></div>
+			<b>Substitution</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/workplace_description.svg)"></div>
+			<b>Workplace Description</b>
+		</div>
+		<div class="tile">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean/your_products.svg)"></div>
+			<b>My Products</b>
+		</div>
+
+		<div class="panel">
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/actions.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/custom_lists.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/exposure_register.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/help.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/locations.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/offline.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/previous_version.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/ra_templates.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/read_link_qr.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/reports.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/risk_assessment.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/sds.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/sds_request.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/search.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/smartforms.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/substitution.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/workplace_description.svg)"></div>
+			<div class="icon" style="background-image:url(./images/cm_svgs_clean_bw/your_products.svg)"></div>
+		</div>
+
+		<hr>
+		<h2>Learning Manager</h2>
+		<code>TO DO</code>
+	</body>
+</html>

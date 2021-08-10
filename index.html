@@ -5,10 +5,74 @@
 		<title>UI/UX</title>
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet">
+        <link rel='stylesheet' href='./public/css/tokens.css'>
         <link rel='stylesheet' href='./public/css/common.css'>
+
+
+
+        <style>
+
+            .deprecated:before, .tool:before, .ongoing:before {
+				display: inline-block;
+				text-transform: uppercase;
+				color: #1a1919;
+				font-size: 8px;
+				border-radius: 2px;
+				font-weight: 600;
+				margin: 2px 8px 2px 0px;
+				padding: 4px 8px;
+				float: left;
+			}
+			.deprecated:before {
+				content: 'Deprecated';
+				background: #999;
+			}
+			.tool:before {
+				content: 'Tool';
+				background: #1CD390;
+			}
+			.ongoing:before {
+				content: 'Work In Progress';
+				background: #ccc;
+			}
+        </style>
+
     </head>
     <body>
-        <h1>Hello EcoOnline</h1>
+        <div class="page">
+            <h1>EcoOnline UX Tools & Experiments</h1>
+               
+            <h4>Rebranding experiments</h4>
+            <ul>
+                <li><a href="./public/logo_anim.html">Logo animation</a><span class="deprecated"></span></li>
+                <li><a href="./interactive_svg.html">Interactive SVGs on hover</a><span class="deprecated"></span></li>
+                <li><a href="./icon_test.html">Tile interaction on hover</a><span class="deprecated"></span></li>
+                <li><a href="./public/menu.html">Menu structure</a><span class="deprecated"></span></li>
+            </ul>
+            <h4>Public Web</h4>
+            <ul>
+                <li><a href="./public/hero_image.html">Hero Image frames</a><span class="tool"></span></li>
+                <li><a href="./public/public_web.html">Responsive scaling example</a></li>
+            </ul>
+            <h4>Design System</h4>
+            <ul>
+                <li><a href="./public/icon_color.html">Generating icon colours</a><span class="tool"></span></li>
+                <li><a href="./public/ehs_clean_svg_test.html">Accepted icons with tile hover</a></li>
+                <li><a href="./public/pagination.html">Pagination</a></li>
+                <li><a href="./public/icon_font.html">Icon font</a></li>
+                <li><a href="./public/button_max.html">Button max size</a><span class="tool"></span></li>
+                <li><a href="./public/training_image.html">Training Manager course images</a><span class="tool"></span></li>
+                <li><a href="./public/training_image2.html">Training Manager course images 2 (color overlay)</a><span class="tool"></span><span class="deprecated"></span></li>
+            </ul>
+            <h4>EHS pods</h4>
+            <ul>
+                <li><a href="./public/responsive_table.html">Responsive tables</a></li>
+                <li><a href="./public/audit_score.html">Audit Scoring POC</a></li>
+                <li><a href="./public/expandable_table.html">Actions expandable table</a></li>
+                <li><a href="./public/inspector.html">Actions inspector tests</a></li>
+                <li><a href="./public/masonry.html">Responsive Dashboard<span class="ongoing"></span></a></li>
+            </ul>
+        </div>
     </body>
 </html>
         

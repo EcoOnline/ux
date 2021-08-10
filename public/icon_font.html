@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Font Reference - ecoonline</title>
+		<!--
+			<link rel="preconnect" href="https://fonts.gstatic.com">
+			<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet">
+		-->
+		<link rel="stylesheet" loading="priority" href="./fonts/ecoonline_icon.css">
+		
+		<style>
+			body {
+				font-family:'IBM Plex Sans';
+				background-color:#fafafa;
+			}
+			ul, li {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+
+			}
+			li {
+				border-bottom: 1px solid #d3d3d3;
+				padding: 16px;
+			}
+
+			li h4 {
+				display:  inline-block;
+				min-width: 200px;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				margin: 16px;
+			}
+			td, th {
+				border: 1px solid #eee;
+				padding: 8px 16px;
+			}
+			th { text-align:left }
+
+			[class^="i-"],
+	[class*=" i-"] {
+		margin-right: 16px;
+	}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>EcoOnline Icon Font</h1>
+			<p>Explore the feasability of using an icon font instead of inline svg or background image svg</p>
+			<h4>Pros</h4>
+			- not heavy on dom (important for large reactive dom pages)<br>
+			- substantially 'lighter' All assets on this page weigh <b style="color:var(--success)">30kb</b> (8kb font, 10.7kb css 11.3kb html) Inline SVG would weigh approximately <b style="color:var(--error)">200kb</b> for the same.<br>
+			- updates to the font propogate system-wide (without having to update inline svg)<br>
+			- fewer requests than if background svgs were used
+
+
+
+			<h4>Cons</h4>
+			- “flash of invisible text” or the “flash of unstyled text”<br>
+			- considerable work making the css match the figma design files (there are small differences between the following icons and the originals)
+			
+			<h4>Comparison</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>Method</th>
+						<th>Page Weight</th>
+						<th>Requests</th>
+						<th>Cache</th>
+						<th>CSS Effects</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Inline SVG</th>
+						<td>~200kb</td>
+						<td>1</td>
+						<td>No (for most dynamic pages)</td>
+						<td>Yes (including individual parts)</td>
+					</tr>
+					<tr>
+						<th>Background SVGs</th>
+						<td>~30kb</td>
+						<td>108</td>
+						<td>Yes</td>
+						<td>Yes</td>
+					</tr>
+					<tr>
+						<th>Font Icon</th>
+						<td>~30kb</td>
+						<td>3</td>
+						<td>Yes</td>
+						<td>Yes</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h5>Also see</h5>
+			<ul>
+				<li><a href="https://www.filamentgroup.com/lab/bulletproof_icon_fonts">accessibility</a>
+				<li><a href="https://css-tricks.com/i-fonts-vs-svg/">issues (old)</a>
+			</ul>
+
+
+			<h4>Example markup</h4>
+<pre>
+	&lt;div class="i i-action i-xl"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-action i-l"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-action i-m"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-action i-s"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-action i-xs"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+</pre>
+
+			<p>
+				Normally the nested 'i' tag wouldn't be needed but the color icons make this necessary so might as well keep it consistent.<br>
+				This also means that any icon can be made color, and additional indicators can be added like mail with a green dot.
+			</p>
+			<ul>
+				<li>
+					<h4>Action</h4>
+					<div class="i i-action i-xl"><i></i></div>
+					<div class="i i-action i-l"><i></i></div>
+					<div class="i i-action i-m"><i></i></div>
+					<div class="i i-action i-s"><i></i></div>
+					<div class="i i-action i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Administration</h4>
+					<div class="i i-administration i-xl"><i></i></div>
+					<div class="i i-administration i-l"><i></i></div>
+					<div class="i i-administration i-m"><i></i></div>
+					<div class="i i-administration i-s"><i></i></div>
+					<div class="i i-administration i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Advanced EPR</h4>
+					<div class="i i-advanced-epr i-xl"><i></i></div>
+					<div class="i i-advanced-epr i-l"><i></i></div>
+					<div class="i i-advanced-epr i-m"><i></i></div>
+					<div class="i i-advanced-epr i-s"><i></i></div>
+					<div class="i i-advanced-epr i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Advanced RCA</h4>
+					<div class="i i-advanced-rca i-xl"><i></i></div>
+					<div class="i i-advanced-rca i-l"><i></i></div>
+					<div class="i i-advanced-rca i-m"><i></i></div>
+					<div class="i i-advanced-rca i-s"><i></i></div>
+					<div class="i i-advanced-rca i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Analytics</h4>
+					<div class="i i-analytics i-xl"><i></i></div>
+					<div class="i i-analytics i-l"><i></i></div>
+					<div class="i i-analytics i-m"><i></i></div>
+					<div class="i i-analytics i-s"><i></i></div>
+					<div class="i i-analytics i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Asset Register</h4>
+					<div class="i i-asset-register i-xl"><i></i></div>
+					<div class="i i-asset-register i-l"><i></i></div>
+					<div class="i i-asset-register i-m"><i></i></div>
+					<div class="i i-asset-register i-s"><i></i></div>
+					<div class="i i-asset-register i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Audit</h4>
+					<div class="i i-audit i-xl"><i></i></div>
+					<div class="i i-audit i-l"><i></i></div>
+					<div class="i i-audit i-m"><i></i></div>
+					<div class="i i-audit i-s"><i></i></div>
+					<div class="i i-audit i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>ChemDoc</h4>
+					<div class="i i-chem-doc i-xl"><i></i></div>
+					<div class="i i-chem-doc i-l"><i></i></div>
+					<div class="i i-chem-doc i-m"><i></i></div>
+					<div class="i i-chem-doc i-s"><i></i></div>
+					<div class="i i-chem-doc i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>ChemiControl</h4>
+					<div class="i i-chemi-control i-xl"><i></i></div>
+					<div class="i i-chemi-control i-l"><i></i></div>
+					<div class="i i-chemi-control i-m"><i></i></div>
+					<div class="i i-chemi-control i-s"><i></i></div>
+					<div class="i i-chemi-control i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Chemical Manager</h4>
+					<div class="i i-chemical-manager i-xl"><i></i></div>
+					<div class="i i-chemical-manager i-l"><i></i></div>
+					<div class="i i-chemical-manager i-m"><i></i></div>
+					<div class="i i-chemical-manager i-s"><i></i></div>
+					<div class="i i-chemical-manager i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Classroom</h4>
+					<div class="i i-classroom i-xl"><i></i></div>
+					<div class="i i-classroom i-l"><i></i></div>
+					<div class="i i-classroom i-m"><i></i></div>
+					<div class="i i-classroom i-s"><i></i></div>
+					<div class="i i-classroom i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Compliance</h4>
+					<div class="i i-compliance i-xl"><i></i></div>
+					<div class="i i-compliance i-l"><i></i></div>
+					<div class="i i-compliance i-m"><i></i></div>
+					<div class="i i-compliance i-s"><i></i></div>
+					<div class="i i-compliance i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Contractor</h4>
+					<div class="i i-contractor i-xl"><i></i></div>
+					<div class="i i-contractor i-l"><i></i></div>
+					<div class="i i-contractor i-m"><i></i></div>
+					<div class="i i-contractor i-s"><i></i></div>
+					<div class="i i-contractor i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>CSR</h4>
+					<div class="i i-csr i-xl"><i></i></div>
+					<div class="i i-csr i-l"><i></i></div>
+					<div class="i i-csr i-m"><i></i></div>
+					<div class="i i-csr i-s"><i></i></div>
+					<div class="i i-csr i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Custom Lists</h4>
+					<div class="i i-custom-lists i-xl"><i></i></div>
+					<div class="i i-custom-lists i-l"><i></i></div>
+					<div class="i i-custom-lists i-m"><i></i></div>
+					<div class="i i-custom-lists i-s"><i></i></div>
+					<div class="i i-custom-lists i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>Document</h4>
+					<div class="i i-document i-xl"><i></i></div>
+					<div class="i i-document i-l"><i></i></div>
+					<div class="i i-document i-m"><i></i></div>
+					<div class="i i-document i-s"><i></i></div>
+					<div class="i i-document i-xs"><i></i></div>
+				</li>
+				<li>
+					<h4>EcoOnline EHS</h4>
+					<div class="i i-ecoonline-ehs i-xl"><i></i></div>
+					<div class="i i-ecoonline-ehs i-l"><i></i></div>
+					<div class="i i-ecoonline-ehs i-m"><i></i></div>
+					<div class="i i-ecoonline-ehs i-s"><i></i></div>
+					<div class="i i-ecoonline-ehs i-xs"><i></i></div>
+				</li>
+			</ul>
+
+			<h2>Other uses</h2>
+			<h4>Statefulness</h4>
+			<p>(use with <b>great</b> discretion)</p>
+			<ul>
+				<li>
+					<div class="i i-document i-s"><i></i></div>
+					<div class="i i-document i-s i-disabled"><i></i></div>
+					<div class="i i-document i-s i-success"><i></i></div>
+					<div class="i i-document i-s i-warning"><i></i></div>
+					<div class="i i-document i-s i-pending"><i></i></div>
+					<div class="i i-document i-s i-error"><i></i></div>
+				</li>
+			</ul>
+<pre>
+	&lt;div class="i i-document i-s"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-s i-disabled"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-s i-success"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-s i-warning"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-s i-pending"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-s i-error"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+</pre>
+			<h4>Notifications</h4>
+			<ul>
+				<li>
+					<div class="i i-document i-m i-notify"><i></i></div>
+					<div class="i i-document i-m i-notify-success"><i></i></div>
+					<div class="i i-document i-m i-notify-warning"><i></i></div>
+					<div class="i i-document i-m i-notify-pending"><i></i></div>
+					<div class="i i-document i-m i-notify-error"><i></i></div>
+					<div class="i i-compliance i-m i-notify-error"><i></i></div>
+					<div class="i i-classroom i-m i-notify-success"><i></i></div>
+					<div class="i i-document i-m i-notify-success i-notify-pulse"><i></i></div>
+				</li>
+			</ul>
+<pre>
+	&lt;div class="i i-document i-m i-notify"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-m i-notify-success"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-m i-notify-warning"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-m i-notify-pending"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-m i-notify-error"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-compliance i-m i-notify-error"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-classroom i-m i-notify-success"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-document i-m i-notify-success i-notify-pulse"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+</pre>
+
+			<h4>Loading</h4>
+			<ul>
+				<li>
+					<div class="i i-loading"><i></i></div>
+					<div class="i i-spinner i-l"><i></i></div>
+					<div class="i i-spinner i-m"><i></i></div>
+					<div class="i i-spinner i-s"><i></i></div>
+					<div class="i i-spinner i-xs"><i></i></div>
+				</li>
+			</ul>
+<pre>
+	&lt;div class="i i-loading"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-spinner i-l"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-spinner i-m"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-spinner i-s"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+	&lt;div class="i i-spinner i-xs"&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;
+</pre>
+			<h4>As Links</h4>
+			<ul>
+				<li>
+					<a href="../../" class="i i-administration i-l"><i></i></a>
+					<a href="../../" class="i i-administration i-m"><i></i></a>
+					<a href="../../" class="i i-administration i-s"><i></i></a>
+					<a href="../../" class="i i-administration i-xs"><i></i></a>
+				</li>
+			</ul>
+<pre>
+	&lt;a href="/" class="i i-administration i-l"&gt;&lt;i&gt;&lt;/i&gt;&lt;/a&gt;
+	&lt;a href="/" class="i i-administration i-m"&gt;&lt;i&gt;&lt;/i&gt;&lt;/a&gt;
+	&lt;a href="/" class="i i-administration i-s"&gt;&lt;i&gt;&lt;/i&gt;&lt;/a&gt;
+	&lt;a href="/" class="i i-administration i-xs"&gt;&lt;i&gt;&lt;/i&gt;&lt;/a&gt;
+</pre>	
+			<p>(Needs to have more target space incorporated)
+		</div>
+	</body>
+</html>

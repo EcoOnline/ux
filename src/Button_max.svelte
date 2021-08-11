@@ -72,7 +72,6 @@
 		} else {
 			console.log('throttling', lang.name);
 		}
-		
 		supported_to_languages = supported_to_languages;
 	}
 

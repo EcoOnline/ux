@@ -282,22 +282,22 @@
 		transform-origin: 50% 50%;
 	}
 	.segment_1 {
-		top: -60px;
+		top: -90px;
 		right: -140px;
 	}
 	.segment_2 {
 		transform: rotate(45deg);
-		top: -160px;
-		right: -116px;
+		top: -190px;
+		right: -136px;
 	}
 	.segment_3 {
 		transform: rotate(60deg);
-		top: -196px;
-		right: -142px;
+		top: -216px;
+		right: -152px;
 	}
 	.segment_4 {
 		transform: rotate(-30deg);
-		top: -16px;
+		top: -36px;
 		right: -198px;
 	}
 	.logo {

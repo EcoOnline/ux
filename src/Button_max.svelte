@@ -107,7 +107,7 @@
 		<hr>
 		Translate "{button_text}" from {source_language.name}
 		<a href="/ecoonline/" class="btn" on:click|preventDefault="{translate}">Go</a><br>
-		<p>Please use <b>sparingly</b> as we only have 500 characters per month. If it proves useful we can expand the character limit.</p>
+		<p>Please use <b>considerately</b> as we only have 1M characters per month. If it proves useful we can expand the character limit.</p>
 		{#each supported_to_languages as lang}
 			{#if lang.code !== source_language.code && lang.translations.length}
 				<div class="form-row">

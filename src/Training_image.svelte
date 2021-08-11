@@ -282,23 +282,23 @@
 		transform-origin: 50% 50%;
 	}
 	.segment_1 {
-		top: -90px;
+		top: -100px;
 		right: -140px;
 	}
 	.segment_2 {
 		transform: rotate(45deg);
-		top: -190px;
+		top: -200px;
 		right: -136px;
 	}
 	.segment_3 {
 		transform: rotate(60deg);
-		top: -216px;
-		right: -152px;
+		top: -226px;
+		right: -142px;
 	}
 	.segment_4 {
 		transform: rotate(-30deg);
-		top: -36px;
-		right: -198px;
+		top: -46px;
+		right: -208px;
 	}
 	.logo {
 		position: absolute;
@@ -309,6 +309,18 @@
 	}
 	.include_code .logo {
 		top: 42px;
+	}
+	.include_code .segment_1 {
+		top: -90px;
+	}
+	.include_code .segment_2 {
+		top: -190px;
+	}
+	.include_code .segment_3 {
+		top: -216px;
+	}
+	.include_code .segment_4 {
+		top: -36px;
 	}
 	.course-body {
 		width: 560px;

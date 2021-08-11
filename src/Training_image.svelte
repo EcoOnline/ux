@@ -288,7 +288,7 @@
 	.segment_2 {
 		transform: rotate(45deg);
 		top: -200px;
-		right: -136px;
+		right: -146px;
 	}
 	.segment_3 {
 		transform: rotate(60deg);

@@ -37,10 +37,10 @@
 			} else {
 				let plucked_lang = supported_to_languages.filter( (lang) => {
 					return lang.code == source_language.code
-				})
+				});
 				plucked_lang[0].result = button_text; //of course
 			}
-		})
+		});
 	}
 	function translate_to(lang, i) {
 		lang.result = ''; //reset any previous translation

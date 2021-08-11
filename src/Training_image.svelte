@@ -141,7 +141,7 @@
 				</div>
 				<code>{whole_course_code}</code>
 				<div class="logo">
-					<svg width="86" height="86" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg width="64" height="64" viewBox="0 0 43 43" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M21.8074 15.1033L22.5949 13.3708C23.1461 12.0845 24.4324 11.2708 25.8236 11.2708C26.7686 11.2708 27.6611 11.6383 28.3174 12.3208L29.2361 13.2395C27.6086 14.132 26.5061 15.8645 26.5061 17.8333V20.7733C26.5061 25.0258 23.6186 28.6745 19.5236 29.6983L10.6249 31.877C10.1786 31.982 9.8111 32.3233 9.67985 32.7695C9.5486 33.2158 9.6536 33.6883 9.9686 34.0295C15.0349 39.6208 21.9911 41.3533 22.2799 41.432C22.3849 41.4583 22.4899 41.4583 22.5949 41.4583C22.6999 41.4583 22.8049 41.4583 22.9099 41.432C23.0411 41.3795 40.2874 37.0483 40.2874 20.4583V4.70825C40.2874 3.2645 39.1061 2.08325 37.6624 2.08325H7.47485C6.0311 2.08325 4.84985 3.2645 4.84985 4.70825V23.267L7.47485 20.642V4.70825H37.6624V20.4583C37.6624 33.977 24.8261 38.1507 22.5686 38.7808C21.4136 38.4395 17.0824 37.0483 13.4074 33.8195L20.1274 32.2183C25.4299 30.9058 29.1049 26.207 29.1049 20.747V17.8333C29.1049 16.3895 30.2861 15.2083 31.7299 15.2083H32.8324C33.5936 15.2083 33.9611 14.2895 33.4361 13.7645L30.1286 10.457C29.0261 9.302 27.4249 8.64575 25.8236 8.64575C23.3824 8.64575 21.1774 10.0633 20.1799 12.2683L19.4974 13.7908L0.912354 32.3758V36.1033L21.5186 15.4708C21.6499 15.3658 21.7286 15.2345 21.8074 15.1033Z" fill="white"/>
 					</svg>
 				</div>
@@ -152,41 +152,23 @@
 				</div>
 			</div>
 			<div class="course-body">
-				<h5>{lesson_type.name}</h5>
-				<h2>Some course name</h2>
-				<div class="stars">
-					<svg width="40" height="38" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.75 0.860596L11.939 7.59768H19.0228L13.2919 11.7614L15.4809 18.4985L9.75 14.3348L4.01909 18.4985L6.20811 11.7614L0.477199 7.59768H7.56099L9.75 0.860596Z" fill="#1CD390"/>
-					</svg>
-					<svg width="40" height="38" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.75 0.860596L11.939 7.59768H19.0228L13.2919 11.7614L15.4809 18.4985L9.75 14.3348L4.01909 18.4985L6.20811 11.7614L0.477199 7.59768H7.56099L9.75 0.860596Z" fill="#1CD390"/>
-					</svg>
-					<svg width="40" height="38" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.75 0.860596L11.939 7.59768H19.0228L13.2919 11.7614L15.4809 18.4985L9.75 14.3348L4.01909 18.4985L6.20811 11.7614L0.477199 7.59768H7.56099L9.75 0.860596Z" fill="#1CD390"/>
-					</svg>
-					<svg width="40" height="38" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.75 0.860596L11.939 7.59768H19.0228L13.2919 11.7614L15.4809 18.4985L9.75 14.3348L4.01909 18.4985L6.20811 11.7614L0.477199 7.59768H7.56099L9.75 0.860596Z" fill="#1CD390"/>
-					</svg>
-					<svg width="40" height="38" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M9.75 0.860596L11.939 7.59768H19.0228L13.2919 11.7614L15.4809 18.4985L9.75 14.3348L4.01909 18.4985L6.20811 11.7614L0.477199 7.59768H7.56099L9.75 0.860596Z" fill="#999"/>
-					</svg>
-				</div>
+				
 				<select class="form-control" bind:value="{category}">
 					{#each categories as cat}
 						<option value="{cat}">{cat.name}</option>
 					{/each}
 				</select>
 				<label><input type="checkbox" bind:checked={include_code}> Include course code</label>
-				{#if include_code}
+				
 					
-					<select class="form-control" bind:value="{lesson_type}">
-						{#each lesson_types as lesson}
-							<option value="{lesson}">{lesson.name}</option>
-						{/each}
-					</select>
-					<input class="form-control" type="text" bind:value="{course_number}">
-				{/if}
-				<a href="./" class="btn" on:click|preventDefault="{ (e) => { download_image(e);} }">Download</a>
+				<select class="form-control" bind:value="{lesson_type}">
+					{#each lesson_types as lesson}
+						<option value="{lesson}">{lesson.name}</option>
+					{/each}
+				</select>
+				<input class="form-control" type="text" bind:value="{course_number}">
+				
+				<a href="./" class="btn" on:click|preventDefault="{ (e) => { download_image(e);} }">Download</a> [filename: {whole_course_code}.png]
 				
 
 			</div>
@@ -321,7 +303,7 @@
 	.logo {
 		position: absolute;
 		top: 32px;
-		right: 16px;
+		right: 26px;
 		width: 100%;
 		text-align: right;
 	}
@@ -336,27 +318,7 @@
 		padding: 32px;
 		text-align: left;
 	}
-	.course-body h5 {
-		font-size: 30px;
-		font-weight: 300;
-		line-height: 1em;
-		padding: 0;
-		margin: 0;
-	}
-	.course-body h2 {
-		font-size: 38px;
-		line-height: 1em;
-		padding: 0;
-	}
-	.stars {
-		overflow: auto;
-		display: block;
-		margin-bottom: 32px;
-	}
-	.stars svg {
-		float: left;
-		margin-right: 8px;
-	}
+	
 
 	.btn {
 		padding: 8px 16px;

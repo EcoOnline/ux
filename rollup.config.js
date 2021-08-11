@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['button_max'].map((name, index) => ({
+export default ['training_image'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

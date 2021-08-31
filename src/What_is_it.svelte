@@ -10,7 +10,7 @@
 				break;
 			case "ArrowRight":
 				step++;
-				if(step > 7) {
+				if(step > 8) {
 					window.location.href = 'https://ecoonline.github.io/ux/';
 				}
 				break;
@@ -37,7 +37,7 @@
 			<ul>
 				<li>Started with the rebrand</li>
 				<li>Assist with Design System components</li>
-				<li>Create icons and ux mockups</li>
+				<li>Create icons and UX mockups</li>
 				<li>Make Arnfinn lose more hair</li>
 				<li>And...</li>
 				<li><b>Tools and experiments</b></li>
@@ -65,12 +65,15 @@
 				{#if step > 5}
 					<li>- SCALE: where possible self service without specialized roles/skills</li>
 				{/if}
+				{#if step > 6}
+					<li>- CONSISTENCY: implement our brand in a uniform way</li>
+				{/if}
 				
 			</ul>
 			
 		{/if}
-		{#if step > 6}
-			<h4>We have a github repository for this</h4>
+		{#if step > 7}
+			<h4>We now have a github repository for this</h4>
 			<p>(Thanks Øyvind)</p>
 		{/if}
 		

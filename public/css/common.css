@@ -16,6 +16,7 @@ html, body{
 
 .page {
     padding:50px;
+    position:relative;
 }
 
 a {

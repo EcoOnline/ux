@@ -10,6 +10,9 @@
 				break;
 			case "ArrowRight":
 				step++;
+				if(step > 7) {
+					window.location.href = 'https://ecoonline.github.io/ux/';
+				}
 				break;
 		}
 	};
@@ -53,8 +56,24 @@
 				<li>- DISCOVERY: new ideas or blue ocean strategies</li>
 			{/if}
 		</ul>
+		{#if step > 4}
+			<ul>
+				<li><b>TOOLS</b></li>
+				<li>- SCALE: small UX team doesn't want to be a blocker</li>
+				{#if step > 5}
+					<li>- SCALE: where possible self service without specialized roles/skills</li>
+				{/if}
+				
+			</ul>
+			
+		{/if}
+		{#if step > 6}
+			<h4>We have a github repository for this</h4>
+			<p>(Thanks Øyvind)</p>
+		{/if}
 		
 	{/if}
+	
 
 
 

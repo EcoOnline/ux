@@ -5,6 +5,9 @@
 	document.onkeydown = function(e) {
 		e = e || window.event;
 		switch (e.key) {
+			case "ArrowUp":
+				step = 0;
+				break;
 			case "ArrowLeft":
 				if(step > 0) { step--; }
 				break;
@@ -23,7 +26,7 @@
 <div class="page">
 	<div class="i i-shield-segment1"><i></i></div>
 	<div class="i i-shield-segment2"><i></i></div>
-	
+
 	<h1>EcoOnline UX Tools & Experiments</h1>
 
 	{#if step < 2}

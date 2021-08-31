@@ -25,10 +25,9 @@
 		<ul>
 			<li><b>Hayden Chambers</b></li>
 			<li>Role: Senior Product Dsigner, UX team</li>
-			<li>Came on board with Engage team</li>
-			<li>started with them nearly 4 years ago as a 'frontend'</li>
-			<li>- ux/ui</li>
-			<li>- fronted coding</li>
+			<li>Came on board with Engage team after nearly 4 years as 'frontend'</li>
+			<li>- UX/UI</li>
+			<li>- frontend JS coding</li>
 		</ul>
 		<h4>What do I do now?</h4>
 		<ul>

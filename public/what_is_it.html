@@ -14,14 +14,24 @@
 
 
         <style>
-
+            @keyframes rotation {
+                from {
+                transform: rotate(0deg);
+                }
+                to {
+                transform: rotate(359deg);
+                }
+            }
             .i-shield-segment1 {
-                font-size:600px;
+                font-size:500px;
                 position:absolute;
                 bottom:32px;
                 right:64px;
                 opacity:0.9;
                 color: var(--greenbg);
+                animation: rotation 180s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
             }
             .i-shield-segment2 {
                 font-size:300px;
@@ -30,6 +40,9 @@
                 right:96px;
                 opacity:0.9;
                 color: var(--sky);
+                animation: rotation 120s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
             }
 
 

@@ -11,6 +11,36 @@
 
 
         <style>
+             @keyframes rotation {
+                from {
+                transform: rotate(0deg);
+                }
+                to {
+                transform: rotate(359deg);
+                }
+            }
+            .i-shield-segment3 {
+                font-size:500px;
+                position:absolute;
+                bottom:132px;
+                right:164px;
+                opacity:0.9;
+                color: var(--yellowbg);
+                animation: rotation 360s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+            .i-shield-segment2 {
+                font-size:300px;
+                position:absolute;
+                bottom:164px;
+                right:196px;
+                opacity:0.9;
+                color: var(--purple);
+                animation: rotation 300s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
 
             .deprecated:before, .tool:before, .ongoing:before {
 				display: block;
@@ -40,6 +70,8 @@
     </head>
     <body>
         <div class="page">
+            <div class="i i-shield-segment3"><i></i></div>
+	        <div class="i i-shield-segment2"><i></i></div>
             <h1>EcoOnline UX Tools & Experiments</h1>
             <!--
             <h4>Rebranding experiments</h4>

@@ -132,7 +132,7 @@
 }
 
 
-/*
+
 .i-shield-segment1:before {
   content: "\5a";
 }
@@ -142,7 +142,7 @@
 .i-shield-segment3:before {
   content: "\31";
 }
-*/
+
  [class*=i-notify] i:after {
 	display: block;
 	content:' ';

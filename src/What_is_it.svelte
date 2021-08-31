@@ -21,13 +21,16 @@
 
 
 <div class="page">
+	<div class="i i-shield-segment1"><i></i></div>
+	<div class="i i-shield-segment2"><i></i></div>
+	
 	<h1>EcoOnline UX Tools & Experiments</h1>
 
 	{#if step < 2}
 		<h4>Who am I</h4>
 		<ul>
 			<li><b>Hayden Chambers</b></li>
-			<li>Role: Senior Product Dsigner, UX team</li>
+			<li>Role: Senior Product Designer, UX team</li>
 			<li>Came on board with Engage team after nearly 4 years as 'frontend'</li>
 			<li>- UX/UI</li>
 			<li>- frontend JS coding</li>
@@ -40,12 +43,12 @@
 				<li>Create icons and UX mockups</li>
 				<li>Make Arnfinn lose more hair</li>
 				<li>And...</li>
-				<li><b>Tools and experiments</b></li>
+				<li><b>Tools & Experiments</b></li>
 			</ul>
 		{/if}
 	{/if}
 	{#if step > 1}
-		<h4>What are tools and experiments?</h4>
+		<h4>What are Tools & Experiments?</h4>
 		<ul>
 			<li><b>EXPERIMENTS</b></li>
 			{#if step > 1}

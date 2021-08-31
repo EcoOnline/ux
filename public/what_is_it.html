@@ -5,15 +5,21 @@
 		<title>UI/UX</title>
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;600&display=swap" rel="stylesheet">
-        <link rel='stylesheet' href='./public/css/tokens.css'>
-        <link rel='stylesheet' href='./public/css/common.css'>
-		<link rel='stylesheet' href='build/what_is_it.css'>
-		<script defer src='build/what_is_it.js'></script>
+        <link rel='stylesheet' href='.css/tokens.css'>
+        <link rel='stylesheet' href='.css/common.css'>
+		<link rel='stylesheet' href='./build/what_is_it.css'>
+		<script defer src='./build/what_is_it.js'></script>
 
 
 
         <style>
-
+            .step {
+                position: absolute;
+                bottom:16px;
+                right:32px;
+                text-align: right;
+                font-size:10px;
+            }
             .deprecated:before, .tool:before, .ongoing:before {
 				display: block;
 				text-transform: uppercase;

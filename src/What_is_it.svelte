@@ -87,9 +87,5 @@
 		
 	{/if}
 	
-
-
-
-
 	<div class="step">{step}</div>
 </div>

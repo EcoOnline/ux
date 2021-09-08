@@ -1,3 +1,12 @@
-a {
-    color: rgb(255, 70, 101) ! important;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+/* actual font change */
+* {
+    font-family: 'IBM Plex Sans',sans-serif ! important;
+}
+
+
+/* indicator to show change has occured */
+#aw_home_button_container {
+    border:1px solid rgb(255, 70, 101) ! important;
 }

@@ -18,7 +18,9 @@
 			const favicon = document.getElementById('favicon');
 			const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-			console.log(isDark);
+			if(isDark.matches) {
+				favicon.href = "./logo_white.svg";
+			}
 		
 		</script>
 	</head>
@@ -27,5 +29,13 @@
 			<h1>Dynamic Favicon</h1>
 			<p>Update the favicon for darkmode</p>
 		</div>
+
+		<pre><code id="demo"></code></pre>
+
+		<script>
+			let code = document.getElementById('favicon_code');
+			let demo = document.getElementById('demo');
+			demo.innerText = code.innerText;
+		</script>
 	</body>
 </html>

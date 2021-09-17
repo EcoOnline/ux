@@ -28,16 +28,15 @@
 		<div class="page">
 			<h1>Dynamic Favicon</h1>
 			<p>Update the favicon for darkmode</p>
+	
+
+			<pre><code id="demo"></code></pre>
+
+			<script>
+				let code = document.getElementById('favicon_code');
+				let demo = document.getElementById('demo');
+				demo.innerText = code.innerText;
+			</script>
 		</div>
-
-		<pre><code id="demo"></code></pre>
-
-		<script>
-			let code = document.getElementById('favicon_code');
-			let demo = document.getElementById('demo');
-
-			console.log('code?', code);
-			demo.innerText = code.innerText;
-		</script>
 	</body>
 </html>

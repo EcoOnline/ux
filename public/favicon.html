@@ -5,9 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<title>Font Reference - ecoonline</title>
-		
-       	<link id="favicon" rel="shortcut icon" href="./logo.svg" type="image/x-icon" />
 
+       	<link id="favicon" rel="shortcut icon" href="./logo.svg" type="image/x-icon" />
 		<link rel="icon" type="image/svg" media="(prefers-color-scheme:dark)" href="./logo_white.svg" />
 		<link rel="icon" type="image/svg" media="(prefers-color-scheme:light)" href="./logo.svg" />
 		
@@ -18,30 +17,19 @@
         <link rel='stylesheet' href='./css/tokens.css'>
         <link rel='stylesheet' href='./css/common.css'>
 		<link rel="stylesheet" loading="priority" href="./fonts/ecoonline_icon.css">
-		<!--<script id="favicon_code">
-			const favicon = document.getElementById('favicon');
-			const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-			if(isDark.matches) {
-				favicon.href = "./logo_white.svg";
-			}
-		
-		</script>-->
 	</head>
 	<body>
 		<div class="page">
 			<h1>Dynamic Favicon</h1>
 			<p>Update the favicon for darkmode</p>
 	
-			<!--
-			<pre><code id="demo"></code></pre>
+			
+<pre><code>
+&lt;link id="favicon" rel="shortcut icon" href="./logo.svg" type="image/x-icon" /&gt; &lt;!-- browsers that dont support 'prefers-color-scheme' --&gt; 
+&lt;link rel="icon" type="image/svg" media="(prefers-color-scheme:dark)" href="./logo_white.svg" /&gt; &lt;!-- darkmode --&gt; 
+&lt;link rel="icon" type="image/svg" media="(prefers-color-scheme:light)" href="./logo.svg" />&gt; &lt;!-- lightmode --&gt; 
 
-			<script>
-				let code = document.getElementById('favicon_code');
-				let demo = document.getElementById('demo');
-				demo.innerText = code.innerText;
-			</script>
-			-->
+</code></pre>
 		</div>
 	</body>
 </html>

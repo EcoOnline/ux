@@ -1,6 +1,7 @@
 <script>
     import Items from "./Multiselect-item.svelte";
     import { createEventDispatcher } from 'svelte';
+    import { slide } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 
@@ -23,7 +24,8 @@
 {#if items.length}
     {#each items as item }
         {#if search_word == '' || item.name.startsWith(search_word) || JSON.stringify(item.children).indexOf('"name":"' + search_word)>=0}
-            <div class="dropdown-item" style="margin-left:{indentW*indent}px">
+        
+        <div class="dropdown-item" style="margin-left:{indentW*indent}px" transition:slide>
                 {#if item.children.length}
                     {#if item.open || search_word !== ''}
                         <svg on:click="{ () => { item.open = false}}" width="24" height="24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">

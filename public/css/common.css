@@ -48,5 +48,10 @@ li {
 }
 
 
-
+.note {
+    font-family: monospace;
+    color: #7B61FF;
+    font-size: 13px;
+    font-weight:bold;
+}
 

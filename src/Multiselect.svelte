@@ -381,6 +381,11 @@
     <!--
 	<pre><code>{JSON.stringify(src, null, 4)}</code></pre>
     -->
+
+    <p class="note">
+        - Search only works with correct capitalization eg Office not Office<br>
+        - Haven't put menu in "All locations", "Suggestions", "Selected"
+    </p>
 </div>
 
 

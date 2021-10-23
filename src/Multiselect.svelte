@@ -272,6 +272,14 @@
 		toggle_open(src, global_open);
 		src = src;
 	}
+    function click_badge(item) {
+        item.checked = false;
+        if(number_checked < 2 ){
+            level_checked = -1;
+            activate_levels(src);
+        }
+        src=src
+    }
 	function toggle_open(arr, bool) {
 		arr.forEach((item) => {
 			item.open = bool;
@@ -360,7 +368,7 @@
         </div>
         {#each checked_set as item, index}
             {#if index < 2}
-                <div class="badge" on:click|stopPropagation={ () => { item.checked = false; src=src}}>{item.name} 
+                <div class="badge" on:click|stopPropagation={() => { click_badge(item)}}>{item.name} 
                     <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><polygon points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"/></svg>
                 </div>
             {:else if index == 2}

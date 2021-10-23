@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['what_is_it'].map((name, index) => ({
+export default ['multiselect'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

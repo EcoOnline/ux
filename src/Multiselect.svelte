@@ -4,7 +4,7 @@
 	/* 
 		level doesnt necessarily correspond to depth in hierarchy
 	*/
-	let maxW = 480;
+	let maxW = 360;
 	$: indentW = Math.ceil(maxW/20);
     let search_word = '';
 	let src = [
@@ -389,6 +389,7 @@
         vertical-align: top;
         margin: 8px 4px 0 0;
         position:relative;
+        cursor: pointer;
     }
     .badge.end {
         padding: 2px 8px;

@@ -327,44 +327,49 @@
 
 
 <div class="page" on:click={ () => { dd_open = false; }}>
-	<div class="comp" style="width:{maxW}px"  on:click|stopPropagation={ () => { console.log('comp click');}}>
-		<div class="form-control">
-			<input bind:value={search_word} type="text" class="" placeholder="Select or type" on:focus={ () => { dd_open = true }}>
-			
-            {#if dd_open}
-                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                    <path d="M29,27.5859l-7.5521-7.5521a11.0177,11.0177,0,1,0-1.4141,1.4141L27.5859,29ZM4,13a9,9,0,1,1,9,9A9.01,9.01,0,0,1,4,13Z" transform="translate(0 0)"/>
-                </svg>
-            {:else}
-                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                    <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12 "/>
-                </svg>
-            {/if}
-              
-		</div>
-		<div class="dropdown" class:dd_open >
-			<div class="dropdown-item">
-				<svg on:click="{click_open}" width="24" height="24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-					{#if global_open}
-						<polygon points="16,10 26,20 24.6,21.4 16,12.8 7.4,21.4 6,20 "/>
-					{:else}
-						<polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12 "/>
-					{/if}
-				</svg>
-			</div>
-			<Items items={src_filtered} {search_word} indent={0} {indentW} on:handleCheck="{handleCheck}"></Items>
-		</div>
-	</div>
-    {#each checked_set as item, index}
-        {#if index < 2}
-            <div class="badge" on:click|stopPropagation={ () => { item.checked = false; src=src}}>{item.name} 
-                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><polygon points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"/></svg>
+    <div class="filter-box">
+        <b>Filter:</b>
+        Locations
+        <div class="comp" style="width:{maxW}px"  on:click|stopPropagation={ () => { console.log('comp click');}}>
+            <div class="form-control">
+                <input bind:value={search_word} type="text" class="" placeholder="Select or type" on:focus={ () => { dd_open = true }}>
+                
+                {#if dd_open}
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <path d="M29,27.5859l-7.5521-7.5521a11.0177,11.0177,0,1,0-1.4141,1.4141L27.5859,29ZM4,13a9,9,0,1,1,9,9A9.01,9.01,0,0,1,4,13Z" transform="translate(0 0)"/>
+                    </svg>
+                {:else}
+                    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12 "/>
+                    </svg>
+                {/if}
+                
             </div>
-        {:else if index == 2}
-            <div class="badge end">+{checked_set.length-2}</div>
-        {/if}
-    {/each}
-	
+            <div class="dropdown" class:dd_open style="width:{maxW}px">
+                <div class="dropdown-item">
+                    <svg on:click="{click_open}" width="24" height="24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                        {#if global_open}
+                            <polygon points="16,10 26,20 24.6,21.4 16,12.8 7.4,21.4 6,20 "/>
+                        {:else}
+                            <polygon points="16,22 6,12 7.4,10.6 16,19.2 24.6,10.6 26,12 "/>
+                        {/if}
+                    </svg>
+                </div>
+                <Items items={src_filtered} {search_word} indent={0} {indentW} on:handleCheck="{handleCheck}"></Items>
+            </div>
+        </div>
+        {#each checked_set as item, index}
+            {#if index < 2}
+                <div class="badge" on:click|stopPropagation={ () => { item.checked = false; src=src}}>{item.name} 
+                    <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><polygon points="24 9.4 22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4"/></svg>
+                </div>
+            {:else if index == 2}
+                <div class="badge end">+{checked_set.length-2}</div>
+            {/if}
+        {/each}
+
+        <a class="btn">Filter</a>
+	</div>
     <!--
 	<pre><code>{JSON.stringify(src, null, 4)}</code></pre>
     -->
@@ -374,6 +379,15 @@
 
 
 <style>
+    .filter-box {
+        border-radius:12px;
+        padding:16px 32px;
+        background: #fff;
+    }
+    .filter-box > b{
+       display: inline-block;
+       margin-right:32px
+    }
     .comp {
         display:inline-block;
     }
@@ -425,7 +439,8 @@
 		border-radius:4px;
 		height: calc( 6.5 * 48px); 
 		overflow-y: auto;
-		position:relative;
+		position:absolute;
+        background:#fff;
 	}
 	.dropdown.dd_open {
 		display:block;
@@ -438,6 +453,25 @@
         box-sizing: border-box;
         padding:14px 8px;
         color:#1a1919;
+    }
+
+
+    .btn {
+        height: 32px;
+        max-width: var(--button_width);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-radius: 54px;
+        padding: 0 16px;
+        color: #fff;
+        background: var(--eo-primary-500);
+        text-decoration: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        line-height: 32px;
+        min-width:  var(--button_min_width);
+        text-align: center;
+        float:right;
     }
 
 </style>

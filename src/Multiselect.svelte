@@ -383,7 +383,7 @@
     -->
 
     <p class="note">
-        - Search only works with correct capitalization eg Office not Office<br>
+        - Search only works with correct capitalization eg Office not office<br>
         - Haven't put menu in "All locations", "Suggestions", "Selected"
     </p>
 </div>

@@ -49,7 +49,7 @@ li {
 
 
 .note {
-    font-family: monospace;
+    font-family: courier, monospace;
     color: #7B61FF;
     font-size: 13px;
 }

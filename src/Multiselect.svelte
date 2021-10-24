@@ -227,6 +227,26 @@
             ]
         }
 	];
+    
+    // add super nesting to see it in effect 
+    let temp_id = src.length + '';
+    let temp_pos = src;
+    for(let i = 0; i < 20;i++) {
+        let temp_obj = {
+            id: temp_id,
+			name: "Test" + (i+1),
+			level: 1,
+			checked: false, 
+			disabled: false, //can be disabled if not at the same level of another selected item
+			permission: false, //might not have rights at this item
+			open: false,
+			children: []
+        };
+        temp_pos.push(temp_obj);
+        temp_id += '-0';
+        temp_pos = temp_pos[temp_pos.length-1].children
+    }
+    src = src;
 
 
 	let level_checked = -1;
@@ -395,7 +415,7 @@
 <style>
     .filter-box {
         border-radius:12px;
-        padding:16px 32px;
+        padding:16px;
         background: #fff;
     }
     .filter-box > b{
@@ -486,6 +506,7 @@
         min-width:  var(--button_min_width);
         text-align: center;
         float:right;
+        margin-top:6px;
     }
 
 </style>

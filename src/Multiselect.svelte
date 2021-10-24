@@ -382,9 +382,10 @@
 	<pre><code>{JSON.stringify(src, null, 4)}</code></pre>
     -->
 
-    <p class="note">
-        - Search only works with correct capitalization eg Office not office<br>
-        - Haven't put menu in "All locations", "Suggestions", "Selected"
+    <p class="note" style="max-width:480px">
+        - Search currently only works with correct capitalization eg Office not office and words that start with not contain but it should be a propper search<br>
+        - Haven't put menu in "All locations", "Suggestions", "Selected"<br>
+        - Global close/open all should change when all are expanded even if its manually<br>
     </p>
 </div>
 

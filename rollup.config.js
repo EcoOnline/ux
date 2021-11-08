@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['multiselect'].map((name, index) => ({
+export default ['rapid_qr'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

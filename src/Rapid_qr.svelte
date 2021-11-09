@@ -11,7 +11,7 @@
     let can_supply_photos = true;
     $: photo_param = (can_supply_photos ? 'photo=1' : '');
     let single_page = false;
-    $: singlepage_param = (single_page ? 'singlepage=1' : '');
+    $: singlepage_param = (single_page ? '&singlepage=1' : '');
 
     let location = false;
     let location_text = 'hi';
@@ -45,12 +45,18 @@
         'fi': 'Matti Meikäläinen',
         'no': 'Ola Nordmann'
     }
-    $: person_text = (person ? people[language.code] : '');
+    let person_text = '';
+    $: {
+        let l = language_param;
+        let p = person;
+        person_text = people[language.code];
+        console.log('checking person text', person_text);
+    }
     $: person_param = person ? '&person=' + encodeURI(person_text) : ''; 
     
 
     
-    $: value = base_url + photo_param + location_param + language_param + brand_param + person_param;
+    $: value = base_url + photo_param + singlepage_param + location_param + language_param + brand_param + person_param;
 
 	
 </script>
@@ -74,7 +80,7 @@
             {/if}
         </div>
         <div class="row">
-            <label><input type="checkbox" bind:checked={person}> Set person ID</label>
+            <label><input type="checkbox" bind:checked={person}> Set person</label>
         </div>
         <div class="row">
             <label><input type="checkbox" bind:checked={single_page}> Single page</label>

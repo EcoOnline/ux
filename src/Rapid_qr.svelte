@@ -14,7 +14,7 @@
     $: singlepage_param = (single_page ? '&singlepage=1' : '');
 
     let location = false;
-    let location_text = 'hi';
+    let location_text = 'Main Office';
     $: location_param = (location ? '&loc=' + encodeURI(location_text) : '');
 
 

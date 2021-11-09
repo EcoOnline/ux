@@ -30,9 +30,10 @@
 
 
     let brands = [
-        {'code': 'no_brand', 'name': 'No Brand', 'color': '#1CD390'},
-        {'code': 'metsa', 'name': 'Metsa', 'color': '#8FD300'},
-        {'code': 'mercedes', 'name': 'Mercedes Benz', 'color': '#00a19b'}
+        {'code': 'no_brand', 'name': 'No Brand',},
+        {'code': 'mercedes', 'name': 'Mercedes Benz'},
+        {'code': 'metsa', 'name': 'Metsa'},
+        {'code': 'viridor', 'name': 'Viridor'}
     ]
 
     let brand = brands[0];

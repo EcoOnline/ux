@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['rapid_qr'].map((name, index) => ({
+export default ['rapid'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

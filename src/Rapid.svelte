@@ -254,7 +254,7 @@
 
 
 	onMount(() => {
-		
+		window.scrollTo(0,1);//hack fullscreenish
 		var s = window.location.search; //?photo=1&loc=hi&lang=en&b_name=No%20Brand&b_color=#1CD390&person=John%20Smith
 		if(s) {
 			
@@ -695,7 +695,7 @@ payload
 		border-top:1px solid transparent;
 	}
 	.step {
-		height: calc(100vh - 66px);
+		height: calc(100vh - 82px);
 		position:relative;
 		border-top:1px solid transparent;
 	}
@@ -718,12 +718,15 @@ payload
 	.progress_wrapper {
 		position: fixed;
 		top: 0px;
-    	width: 480px;
+    	width: 512px;
 		max-width:100%;
 		background-color: var(--eo-surface-background);
 		padding-top: 64px;
 		z-index:90;
-
+		box-shadow: 0 16px 16px var(--eo-surface-background);
+    	margin-left: -16px;
+		padding-left: 16px;
+		padding-right: 16px;
 	}
 	.progress {
 		margin:32px 0;
@@ -747,6 +750,9 @@ payload
 		line-height:32px;
 		cursor:pointer;
 		transition: box-shadow 0.5s linear;
+	}
+	.photo_button.highlight {
+		box-shadow: inset 0px 0px 8px rgba(0,0,0,0.5);
 	}
 	.photo_button:hover {
 		box-shadow: 0 4px 16px rgba(0,0,0,0.1)
@@ -888,6 +894,21 @@ payload
 	}
 	.single_page h3 {
 		margin-top:64px;
+	}
+	@media (max-width: 576px) {
+		.pane{
+			padding: 0 16px;
+		}
+		.thumbnail {
+			width:109px;
+			height:109px;
+		}
+		.thumbnail:nth-child(4n-1) {
+			margin-right:8px;
+		}
+		.thumbnail:nth-child(3n) {
+			margin-right:0px;
+		}
 	}
 
 </style>

@@ -719,6 +719,7 @@ payload
 		position: fixed;
 		top: 0px;
     	width: 480px;
+		max-width:100%;
 		background-color: var(--eo-surface-background);
 		padding-top: 64px;
 		z-index:90;

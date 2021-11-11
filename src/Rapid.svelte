@@ -292,7 +292,7 @@
 			}
 			if(params.singlepage && params.singlepage == '1') {
 				single_page = true;
-				step_height = (window.innerHeight - 82) + 'px'
+				
 				
 			}
 
@@ -302,7 +302,7 @@
 			if(!can_supply_photos) {
 				steps.splice(steps.indexOf('photo'),1);
 			}
-
+			step_height = (single_page ? 'auto' : (window.innerHeight - 82) + 'px');
 			steps = steps;
 			
 		}

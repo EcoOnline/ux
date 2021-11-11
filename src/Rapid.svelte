@@ -337,6 +337,7 @@ payload
 </pre>
 	<div class="header">
 		<div class="pane">
+			{step_height}
 			{#if brand.logo !== ''}
 				<img src="{brand.logo}" alt="rapid report logo"/>
 			{:else}

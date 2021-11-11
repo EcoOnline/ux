@@ -29,6 +29,7 @@
 	let brand = brands[0];
 	let single_page = false;
 	let photo_modal = false;
+	let step_height = 'auto';
 	
 	
 	//form
@@ -207,6 +208,8 @@
 		"event_reporter": ''
 	}
 
+	
+
 
 
 	//date time picker
@@ -289,6 +292,8 @@
 			}
 			if(params.singlepage && params.singlepage == '1') {
 				single_page = true;
+				step_height = (window.innerHeight - 82) + 'px'
+				
 			}
 
 			if(params.photo) {
@@ -332,7 +337,6 @@ payload
 </pre>
 	<div class="header">
 		<div class="pane">
-			{h}
 			{#if brand.logo !== ''}
 				<img src="{brand.logo}" alt="rapid report logo"/>
 			{:else}
@@ -352,7 +356,7 @@ payload
 		{#if steps.indexOf('photo') >= 0 }
 
 			{#if (steps.indexOf('photo') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('photo') + 1} - {i18n[lang]['photo'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -402,7 +406,7 @@ payload
 		<!-- STEP LOCATION -->
 		{#if steps.indexOf('event_location') >= 0 }
 			{#if (steps.indexOf('event_location') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('event_location') + 1} - {i18n[lang]['event_location'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -432,7 +436,7 @@ payload
 		<!-- STEP WHEN -->
 		{#if steps.indexOf('event_time') >= 0 }
 			{#if (steps.indexOf('event_time') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('event_time') + 1} - {i18n[lang]['event_time'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -469,7 +473,7 @@ payload
 		<!-- STEP TYPE -->
 		{#if steps.indexOf('event_type') >= 0 }
 			{#if (steps.indexOf('event_type') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('event_type') + 1} - {i18n[lang]['event_type'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -505,7 +509,7 @@ payload
 		<!-- STEP DESCRIPTION -->
 		{#if steps.indexOf('event_desc') >= 0 }
 			{#if (steps.indexOf('event_desc') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('event_desc') + 1} - {i18n[lang]['event_desc'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -537,7 +541,7 @@ payload
 		<!-- STEP CORRECTIVE ACTION -->
 		{#if steps.indexOf('event_correction') >= 0 }
 			{#if (steps.indexOf('event_correction') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('event_correction') + 1} - {i18n[lang]['event_correction'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -573,7 +577,7 @@ payload
 				
 		{#if steps.indexOf('reporter') >= 0 }
 			{#if (steps.indexOf('reporter') == current_step) || (single_page && current_step < steps.length) }
-				<div class="step">
+				<div class="step" style="height:{step_height}">
 					<h3>{steps.indexOf('reporter') + 1} - {i18n[lang]['reporter'].title}</h3>
 					<div class="progress_steps">
 						{#each steps as step, i}
@@ -608,7 +612,7 @@ payload
 
 		<!-- STEP THANKS -->
 		{#if steps.length == current_step}
-			<div class="step" style="text-align:center">
+			<div class="step" style="text-align:center;height:{step_height}">
 				<h3>{i18n[lang]['thanks'].title} {payload.reporter ? payload.reporter : ''}</h3>
 				<svg width="97" height="97" viewBox="0 0 97 97" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path class="brand_fill" d="M42.9258 64.6409L27.9258 49.6379L32.1648 45.3989L42.9258 56.1569L65.6808 33.3989L69.9258 37.6439L42.9258 64.6409Z"/>
@@ -698,7 +702,7 @@ payload
 		border-top:1px solid transparent;
 	}
 	.step {
-		height: calc(100vh - 82px);
+		height: auto;
 		position:relative;
 		border-top:1px solid transparent;
 	}
@@ -891,9 +895,6 @@ payload
 		margin: 96px 0;
 		left: auto;
 		bottom: 48px;
-	}
-	.single_page .step {
-		height: auto;
 	}
 	.single_page h3 {
 		margin-top:64px;

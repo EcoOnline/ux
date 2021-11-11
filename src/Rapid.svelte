@@ -306,6 +306,7 @@
 			
 		}
 		step_height = (single_page ? 'auto' : (window.innerHeight - 82) + 'px');
+		console.log('setting step height', single_page, step_height);
 	});
 
 

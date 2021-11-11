@@ -305,9 +305,11 @@
 
 
 	let y;
+	let h = document.body.scrollHeight;
 	let pct = 0;
 
 	$: {
+		h = document.body.scrollHeight; //does this change with disappearing elements on safari ui etc
 		pct = y / (document.body.scrollHeight - document.body.offsetHeight) * 100;
 	}
 	
@@ -330,6 +332,7 @@ payload
 </pre>
 	<div class="header">
 		<div class="pane">
+			{h}
 			{#if brand.logo !== ''}
 				<img src="{brand.logo}" alt="rapid report logo"/>
 			{:else}

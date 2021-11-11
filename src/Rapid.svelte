@@ -302,10 +302,10 @@
 			if(!can_supply_photos) {
 				steps.splice(steps.indexOf('photo'),1);
 			}
-			step_height = (single_page ? 'auto' : (window.innerHeight - 82) + 'px');
 			steps = steps;
 			
 		}
+		step_height = (single_page ? 'auto' : (window.innerHeight - 82) + 'px');
 	});
 
 
@@ -338,9 +338,9 @@ payload
 	<div class="header">
 		<div class="pane">
 			{#if brand.logo !== ''}
-				<img src="{brand.logo}" alt="rapid report logo"/>
+				<img src="{brand.logo}" alt="rapid report logo" height="40px" width="auto"/>
 			{:else}
-				<img src="{brands[0].logo}" alt="rapid report logo"/>
+				<img src="{brands[0].logo}" alt="rapid report logo" height="40px" width="auto"/>
 			{/if}
 		</div>
 	</div>

@@ -89,55 +89,55 @@
 		},
 		"fi": {
 			"util": {
-				"back": "Edellinen",
-				"next": "Seuraava",
-				"submit": "Lähetä",
-				"co": "tästä",
-				"close": "Kiinni"
-			},
-			"photo": {
-				"title": "Ottaa valokuva",
-				"upload": "Lataa",
-				"no_photos": "Ei valokuvia",
-				"modal": {
-					"title": "Eikö sinulla todellakaan ole kuvia?",
-					"body": "Valokuvat ja videot voivat olla todella tärkeitä kuvaamaan tapahtumaa. He voivat auttaa tutkintaprosessissa ja suojella sinua ja organisaatiotasi...",
-					"yes": "Lataa",
-					"no": "Ei, en"
-				}
-			},
-			"event_location": {
-				"title": "Missä se tapahtui?",
-				"label": "Sivusto"
-			},
-			"event_time": {
-				"title": "Milloin se tapahtui?",
-				"label": "Treffiaika"
-			},
-			"event_type": {
-				"title": "Millainen tapaus on kyseessä?",
-				"label": " ",
-				"types": ["Vaara", "Liukastu, kompastu ja putoaa", "Vahinko", "Putoaa korkeuksista", "Muut"]
+                "back": "Edellinen",
+                "next": "Seuraava",
+                "submit": "Lähetä",
+                "co": "tästä", 
+                "close": "Sulje"
+            },
+            "photo": {
+                "title": "Ota valokuva",
+                "upload": "Lataa",
+                "no_photos": "Ei valokuvia",
+                "modal": {
+                    "title": "Eikö sinulla ole kuvia?",
+                    "body": "Valokuvat ja videot ovat tärkeitä kuvaamaan tapahtumaa. Ne voivat auttaa tutkintaprosessissa ja kehittämään ratkaisuja henkilöstön turvaksi...",
+                    "yes": "Lataa",
+                    "no": "Ei, en"
+                }
+            },
+            "event_location": {
+                "title": "Missä tilanne tapahtui?",
+                "label": "Toimipaikka"
+            },
+            "event_time": {
+                "title": "Milloin se tapahtui?",
+                "label": "Päivämäärä ja kellonaika"
+            },
+            "event_type": {
+                "title": "Millainen tapaus on kyseessä?",
+                "label": " ",
+                "types": ["Vaarallinen olosuhde", "Läheltä piti -tilanne", "Ympäristöpäästö tai -vaara", "Työtapaturma", "Muu"]
 
-			},
-			"event_desc": {
-				"title": "Mitä tapahtui?",
-				"label": "Tapahtuman kuvaus"
-			},
-			"event_correction": {
-				"title": "Mitä pitää tehdä?",
-				"label": "Neuvoja, jotta tämä ei toistu"
-			},
-			"reporter": {
-				"title": "Kuka raportoi?",
-				"label": "Nimesi tai sähköpostiosoitteesi",
-				"hint": "Jätä tyhjäksi pysyäksesi nimettömänä"
-			},
-			"thanks": {
-				"title": "Kiitos",
-				"body_prefix": "Olet juuri lähettänyt uuden pikaraportin. Kiitos, että autat tekemään",
-				"body_suffix": "turvallisemman paikan!"
-			}
+            },
+            "event_desc": {
+                "title": "Mitä tapahtui?",
+                "label": "Tapahtuman kuvaus"
+            },
+            "event_correction": {
+                "title": "Mitä pitää parantaa?",
+                "label": "Ehdotuksia vastaavien tilanteiden välttämiseksi"
+            },
+            "reporter": {
+                "title": "Kuka raportoi?",
+                "label": "Nimesi tai sähköpostiosoitteesi",
+                "hint": "Jätä tyhjäksi pysyäksesi nimettömänä"
+            },
+            "thanks": {
+                "title": "Kiitos",
+                "body_prefix": "Kiitos, kun teit vaararaportin ja autat tekemään työpaikastamme turvallisemman!"
+                
+            }
 
 		},
 		"no": {
@@ -619,7 +619,11 @@ payload
 					<path class="brand_fill" d="M42.9258 64.6409L27.9258 49.6379L32.1648 45.3989L42.9258 56.1569L65.6808 33.3989L69.9258 37.6439L42.9258 64.6409Z"/>
 					<path class="brand_fill" d="M48.9258 6.39893C40.619 6.39893 32.4987 8.86218 25.5918 13.4772C18.685 18.0922 13.3017 24.6517 10.1229 32.3262C6.94398 40.0007 6.11224 48.4455 7.73282 56.5927C9.3534 64.7399 13.3535 72.2236 19.2273 78.0974C25.1011 83.9712 32.5848 87.9713 40.732 89.5919C48.8792 91.2125 57.324 90.3807 64.9985 87.2019C72.673 84.023 79.2325 78.6397 83.8475 71.7329C88.4625 64.826 90.9258 56.7057 90.9258 48.3989C90.9258 37.2598 86.5008 26.577 78.6243 18.7004C70.7478 10.8239 60.0649 6.39893 48.9258 6.39893ZM48.9258 84.3989C41.8057 84.3989 34.8454 82.2876 28.9253 78.3318C23.0051 74.3761 18.3909 68.7537 15.6661 62.1755C12.9414 55.5974 12.2285 48.359 13.6175 41.3757C15.0066 34.3924 18.4353 27.9778 23.47 22.9431C28.5046 17.9084 34.9192 14.4797 41.9025 13.0907C48.8859 11.7016 56.1243 12.4145 62.7024 15.1393C69.2805 17.864 74.903 22.4782 78.8587 28.3984C82.8144 34.3186 84.9258 41.2788 84.9258 48.3989C84.9258 57.9467 81.1329 67.1035 74.3816 73.8548C67.6303 80.6061 58.4736 84.3989 48.9258 84.3989Z"/>
 				</svg>
-				<p>{i18n[lang]['thanks'].body_prefix} {(brand.code == 'no_brand' ? i18n[lang].util.co : brand.name)} {i18n[lang]['thanks'].body_suffix}</p>
+                {#if lang == 'fi'}
+                    <p>{i18n[lang]['thanks'].body_prefix}</p>
+                {:else}
+                    <p>{i18n[lang]['thanks'].body_prefix} {(brand.code == 'no_brand' ? i18n[lang].util.co : brand.name)} {i18n[lang]['thanks'].body_suffix}</p>
+                {/if}
 					
 			</div>
 		{/if}

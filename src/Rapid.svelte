@@ -64,7 +64,7 @@
 			"event_type": {
 				"title": "What type of incident is it?",
 				"label": " ",
-				"types": ["Hazard", "Slip trip & fall", "Injury", "Fall from heights", "Other"]
+				"types": ["Near miss", "Hazard", "Slip trip & fall", "Injury", "Other"]
 
 			},
 			"event_desc": {

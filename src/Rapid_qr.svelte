@@ -33,7 +33,8 @@
         {'code': 'no_brand', 'name': 'No Brand',},
         {'code': 'mercedes', 'name': 'Mercedes Benz'},
         {'code': 'metsa', 'name': 'Metsa'},
-        {'code': 'viridor', 'name': 'Viridor'}
+        {'code': 'viridor', 'name': 'Viridor'},
+        {'code': 'fcc', 'name': 'FCC'}
     ]
 
     let brand = brands[0];

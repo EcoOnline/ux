@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-    import {EXIF} from 'exif-js';
+    import {piexif} from 'piexifjs';
     
+    //EXIF.enableXmp();
 
     let payload = {
         photo: []
@@ -13,6 +14,18 @@
             exif_data = EXIF.getAllTags(this);
         })
     }
+    function base64ToArrayBuffer(base64, contentType) {
+        contentType = contentType || base64.match(/^data\:([^\;]+)\;base64,/mi)[1] || ''; // e.g. 'data:image/jpeg;base64,...' => 'image/jpeg'
+        base64 = base64.replace(/^data\:([^\;]+)\;base64,/gmi, '');
+        var binary = atob(base64);
+        var len = binary.length;
+        var buffer = new ArrayBuffer(len);
+        var view = new Uint8Array(buffer);
+        for (var i = 0; i < len; i++) {
+            view[i] = binary.charCodeAt(i);
+        }
+        return buffer;
+    }
 
 	let drop_region;
 	let highlight = false;
@@ -21,9 +34,22 @@
 	reader.onload = function(e) {
 		payload.photo.push(e.target.result);
 		payload.photo = payload.photo;
-        EXIF.getData(file_input, function(){
-            exif_data = EXIF.getAllTags(this);
+
+
+        exif_data = piexif.load(e.target.result)
+        /*
+        let img = document.createElement('img');
+        img.src = e.target.result;
+        document.body.appendChild(img);
+        */
+        /*
+        EXIF.getData(img, function(){
+
+            exif_data = EXIF.getAllTags(img);
+            console.log('img', img, exif_data, EXIF.pretty(img));
         })
+        */
+        
 		setTimeout(() => {
 			file_input.value = '';
 		}, 100);

@@ -18,11 +18,11 @@
     let payload = {
         photo: []
     }
+    let exif_data = {};
 	
     function get_exif(ev){
         EXIF.getData(ev.target, function(){
-            let allMetaData = EXIF.getAllTags(this);
-            console.log(allMetaData);
+            exif_data = EXIF.getAllTags(this);
         })
     }
 
@@ -100,6 +100,10 @@
                 <label for="event_location">Location</label>
                 <input bind:value={payload.event_location} id="event_location" type="text" class="form-control">
             </div>
+
+
+
+<pre><code>{exif_data}</code></pre>
         </div>
 	</div>
 </div>

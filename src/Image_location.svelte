@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-    import {piexif} from 'piexifjs';
+    import {EXIF} from 'exif-js';
     
-    //EXIF.enableXmp();
+    EXIF.enableXmp();
 
     let payload = {
         photo: []
@@ -36,19 +36,19 @@
 		payload.photo = payload.photo;
 
 
-        exif_data = piexif.load(e.target.result)
-        /*
+        //exif_data = piexif.load(e.target.result)
+        
         let img = document.createElement('img');
         img.src = e.target.result;
         document.body.appendChild(img);
-        */
-        /*
+        
+        
         EXIF.getData(img, function(){
 
-            exif_data = EXIF.getAllTags(img);
-            console.log('img', img, exif_data, EXIF.pretty(img));
+            exif_data = EXIF.getAllTags(this);
+            console.log('img', exif_data, EXIF.pretty(img));
         })
-        */
+        
         
 		setTimeout(() => {
 			file_input.value = '';

@@ -103,7 +103,7 @@
 
 
 
-<pre><code>{exif_data}</code></pre>
+<pre><code>{JSON.stringify(exif_data, null, 4)}</code></pre>
         </div>
 	</div>
 </div>

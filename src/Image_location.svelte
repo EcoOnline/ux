@@ -3,18 +3,6 @@
     import {EXIF} from 'exif-js';
     
 
-    
-
-	
-	
-    /*
-    EXIF.getData(img1, function() {
-        var make = EXIF.getTag(this, "Make");
-        var model = EXIF.getTag(this, "Model");
-        var makeAndModel = document.getElementById("makeAndModel");
-        makeAndModel.innerHTML = `${make} ${model}`;
-    });
-    */
     let payload = {
         photo: []
     }
@@ -33,6 +21,9 @@
 	reader.onload = function(e) {
 		payload.photo.push(e.target.result);
 		payload.photo = payload.photo;
+        EXIF.getData(file_input, function(){
+            exif_data = EXIF.getAllTags(this);
+        })
 		setTimeout(() => {
 			file_input.value = '';
 		}, 100);
@@ -88,7 +79,7 @@
 
             
             {#each payload.photo as pic, i}
-                <div on:click="{ () => { payload.photo.splice(i,1); payload.photo = payload.photo}}" class="thumbnail" style="background-image: url({pic})"><img on:load="{ (el)=> { get_exif(el)}}" src="{pic}" alt="upload"/></div>
+                <div on:click="{ () => { payload.photo.splice(i,1); payload.photo = payload.photo}}" class="thumbnail" style="background-image: url({pic})"></div>
             {/each}
         </div>
 

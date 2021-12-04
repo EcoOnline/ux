@@ -99,7 +99,7 @@
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3 26C2.44772 26 2 25.5523 2 25V8C2 7.44772 2.44772 7 3 7H9.46L11.17 4.45C11.354 4.17061 11.6655 4.00173 12 4H20C20.3345 4.00173 20.646 4.17061 20.83 4.45L22.54 7H29C29.5523 7 30 7.44772 30 8V25C30 25.5523 29.5523 26 29 26H3ZM10 16C10 19.3137 12.6863 22 16 22C19.3137 22 22 19.3137 22 16C22 12.6863 19.3137 10 16 10C12.6863 10 10 12.6863 10 16ZM12 16C12 13.7909 13.7909 12 16 12C18.2091 12 20 13.7909 20 16C20 18.2091 18.2091 20 16 20C13.7909 20 12 18.2091 12 16ZM28 24H4V9H10C10.3345 8.99827 10.646 8.82939 10.83 8.55L12.54 6H19.46L21.17 8.55C21.354 8.82939 21.6655 8.99827 22 9H28V24Z" fill="#1A1919"/>
                 </svg>
-                <input bind:this="{file_input}" on:change="{change_file}" type="file" accept="image/*" capture="camera">
+                <input bind:this="{file_input}" on:change="{change_file}" type="file" accept="image/jpg, image/jpeg" capture="camera">
             </div>
 
 

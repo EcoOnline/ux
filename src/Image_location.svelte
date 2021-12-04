@@ -40,6 +40,8 @@
         
         let img = document.createElement('img');
         img.src = e.target.result;
+        img.style.width = '15px';
+        img.style.height = '15px';   
         document.body.appendChild(img);
         
         

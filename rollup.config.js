@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['rapid'].map((name, index) => ({
+export default ['image_location'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

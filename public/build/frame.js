@@ -4458,7 +4458,7 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Frame", slots, []);
     	const comps = [{ id: "home", component: Frame_home }, { id: "incidents", component: Frame_incidents }];
-    	let comp = comps[1];
+    	let comp = comps[0];
 
     	/*
     	a responsive frame to hold smaller experiments so that they don't have to be continually framed,

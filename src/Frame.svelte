@@ -8,7 +8,7 @@
         { id: "incidents", component: Incidents, }
     ]
 
-    let comp = comps[1];
+    let comp = comps[0];
 
 	/*
 		a responsive frame to hold smaller experiments so that they don't have to be continually framed,

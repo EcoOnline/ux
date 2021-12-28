@@ -1,8 +1,10 @@
 
 .sticky-wrapper {
 	width:100%;
-	max-height: calc(100vh - 100px);
+	max-height: calc(100vh - 150px);
 	overflow:auto;
+    border-radius:12px;
+    position:relative;
 }
 .sticky-wrapper tr {
 	position:relative;
@@ -22,6 +24,7 @@
 .sticky-wrapper td {
 	border-bottom: 1px solid var(--table-row-border);
 	padding: 8px 16px;
+    background:#fff;
 }
 .sticky-wrapper th:first-child {
 	left: 0px;

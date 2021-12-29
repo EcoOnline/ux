@@ -4,6 +4,15 @@
 
 
     let tab = "dashboard";
+    export let tabnav = '';
+
+    $: {
+        let t = tabnav;
+        if(tabnav !== '') {
+            tab = t;
+
+        }
+    }
 
     function nav(str) {
 		dispatch('nav', {
@@ -15,21 +24,22 @@
 <div class="row sticky">
     <div class="col12 col-sm-5">
         <ul class="breadcrumb">
-            <li><a href="/">EcoOnline</a></li>
-            <li><a href="/" on:click|preventDefault="{ () => {nav('home')}}">EHS</a></li>
+            <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
+            <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
             <li>Incidents</li>
         </ul>
     </div>
     <div class="col12 col-sm-7 text-right">
        <!--<a href="/" class='btn btn-secondary'>Summary</a>-->
-        <a href="/" class='btn btn-secondary'>Query</a>
-        <a href="/" class='btn'>New</a>
+        <a href="#ehs/incidents/queries_new" on:click="{ () => {nav('queries_new')}}" class='btn btn-secondary'>Query</a>
+        <a href="#ehs/incidents/incidents_new" on:click="{ () => {nav('incidents_new')}}" class='btn'>New</a>
     </div>
 </div>
 
 <ul class="tabs">
-    <li><a href="/" class:active="{tab == 'dashboard'}" on:click|preventDefault ="{ () => { tab = 'dashboard';}}">Dashboard</a></li>
-    <li><a href="/" class:active="{tab == 'summary'}" on:click|preventDefault ="{ () => { tab = 'summary'; }}">Summary</a></li>
+    <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'dashboard'}" on:click ="{ () => { tab = 'dashboard';}}">Dashboard</a></li>
+    <li><a href="#ehs/incidents/summary" class:active="{tab == 'summary'}" on:click ="{ () => { tab = 'summary'; }}">Summary</a></li>
+    <li><a href="#ehs/incidents/admin" class:active="{tab == 'admin'}" on:click ="{ () => { tab = 'admin'; }}">Admin</a></li>
     <!--<li><a href="/" class:active="{tab == 'query'}" on:click|preventDefault ="{ () => { tab = 'query';}}">Query</a></li>-->
 </ul>
 {#if tab == 'dashboard'}

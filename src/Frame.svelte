@@ -1,30 +1,57 @@
 <script>
 
-	import Home from "./Frame_home.svelte";
-	import Incidents from "./Frame_incidents.svelte";
-
-    const comps = [
-        { id: "home", component: Home },
-        { id: "incidents", component: Incidents, }
-    ]
-
-    let comp = comps[0];
-
 	/*
 		a responsive frame to hold smaller experiments so that they don't have to be continually framed,
 	*/
+	
+	import Home from "./Frame_home.svelte";
+	import Incidents from "./Frame_incidents.svelte";
+	import IncidentsNew from "./Frame_incidents_new.svelte";
+	import QueriesNew from "./Frame_queries_new.svelte";
+	import QueriesResult from "./Frame_queries_result.svelte";
+	let tabnav = '';
+
+    const comps = [
+        { id: "ehs", component: Home },
+        { id: "incidents", component: Incidents },
+        { id: "incidents_new", component: IncidentsNew },
+        { id: "queries_new", component: QueriesNew },
+        { id: "queries_result", component: QueriesResult }
+    ]
+    let comp = comps[0];
+	let hash = window.location.hash.substring(1);
+	if(hash!== '') {
+		handleNavStr(hash);
+	}
+
 
    let grid = false;
 
-
-   function handleNav(event) {
-
- 		let ind = comps.findIndex((el) => el.id == event.detail.text);
-	   	//alert(ind + ':' + event.detail.text);
+   function handleNavStr(hash) {
+		tabnav = '';
+		let hash_arr = hash.split('/');
+		let id = hash_arr[hash_arr.length-1];
+		let ind = comps.findIndex((el) => el.id == id);
+		
 		if (ind >= 0) {
 			comp = comps[ind];
+			return;
+		} else {
+			tabnav = id;
+			id = hash_arr[hash_arr.length-2];
+			ind = comps.findIndex((el) => el.id == id);
+			if (ind >= 0) {
+				comp = comps[ind];
+				return;
+			}
 		}
-		
+		comp = comps[0]; //default to first
+
+   }
+
+   function handleNav(event) {
+		let hash = event.detail.text;
+		handleNavStr(hash);
 	}
 
 </script>
@@ -52,7 +79,7 @@
 </nav>
 <main>
 	<div class="frame">
-		<svelte:component this={comp.component} on:nav={handleNav}/>
+		<svelte:component this={comp.component} on:nav={handleNav} {tabnav}/>
 	</div>
 	
 </main>

@@ -365,3 +365,35 @@ li {
 .pagination {
    padding:8px;
 }
+
+
+h1 {
+    font-weight: 100;
+    margin-bottom:16px;
+}
+.i-16,
+.i-24,
+.i-24,
+.i-32 {
+    display:inline-block;
+    background-position: center center;
+    background-size:cover;
+    text-decoration:none;
+    vertical-align: middle;
+}
+.i-24 {
+    width:24px;
+    height:24px;
+}
+.i-32 {
+    width:32px;
+    height:32px;
+}
+h1 .i-32 {
+	margin-bottom: 6px;
+	vertical-align: middle;
+}
+.i-download { background-image:url(../images/icons/download.svg) }
+.i-edit { background-image:url(../images/icons/edit.svg) }
+.i-filter { background-image:url(../images/icons/filter.svg)}
+.i-incidents { background-image:url(../images/icons/incidents.svg)}

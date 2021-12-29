@@ -31,14 +31,14 @@
     {#if tab == 'home'}
         <div class="row">
             <div class="col6 col-sm-4 col-md-3 col-lg-2">
-                <div class="tile" on:click|preventDefault="{ () => {nav('incidents')}}">
+                <div class="tile" on:click|preventDefault="{ () => {nav('incidents');window.location.hash='#ehs/incidents'}}">
                     <div class="icon" style="background-image:url(./images/ehs_svgs_clean/incidents.svg)"></div>
                     <b>Incidents</b>
                     <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
+                        <a href="#ehs/incidents/incidents_new" class="add" on:click|stopPropagation="{ () => {nav('incidents_new')}}"> </a>
+                        <a href="#ehs/incidents/queries_new" class="filter" on:click|stopPropagation="{ () => {nav('queries_new')}}"> </a>
+                        <a href="#ehs/incidents/summary" class="summary" on:click|stopPropagation="{ () => {nav('incidents/summary')}}"> </a>
+                        <a href="#ehs/incidents/admin" class="tool" on:click|stopPropagation="{ () => {nav('incidents/admin')}}"> </a>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,8 @@
                     <div class="icon" style="background-image:url(./images/ehs_svgs_clean/actions.svg)"></div>
                     <b>Actions</b>
                     <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
+                        <a href="#incidents/incidents_new" class="add"> </a>
+                        <a href="queries_new" class="filter"> </a>
                         <a href="./" class="summary"> </a>
                         <a href="./" class="tool"> </a>
                     </div>

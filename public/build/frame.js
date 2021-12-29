@@ -4857,18 +4857,18 @@ var app = (function () {
     	let li3;
     	let t7;
     	let div1;
-    	let i0;
-    	let t8;
-    	let i1;
-    	let t9;
     	let a3;
-    	let t11;
+    	let t8;
+    	let i0;
+    	let t9;
     	let a4;
-    	let t13;
+    	let t11;
     	let a5;
+    	let t13;
+    	let a6;
     	let t15;
     	let h1;
-    	let i2;
+    	let i1;
     	let t16;
     	let t17;
     	let div7;
@@ -4942,21 +4942,21 @@ var app = (function () {
     			li3.textContent = "Query Result";
     			t7 = space();
     			div1 = element("div");
-    			i0 = element("i");
-    			t8 = space();
-    			i1 = element("i");
-    			t9 = space();
     			a3 = element("a");
-    			a3.textContent = "New query";
-    			t11 = space();
+    			t8 = space();
+    			i0 = element("i");
+    			t9 = space();
     			a4 = element("a");
-    			a4.textContent = "Add to dashboard";
-    			t13 = space();
+    			a4.textContent = "New query";
+    			t11 = space();
     			a5 = element("a");
-    			a5.textContent = "Save";
+    			a5.textContent = "Add to dashboard";
+    			t13 = space();
+    			a6 = element("a");
+    			a6.textContent = "Save";
     			t15 = space();
     			h1 = element("h1");
-    			i2 = element("i");
+    			i1 = element("i");
     			t16 = text(" Query results");
     			t17 = space();
     			div7 = element("div");
@@ -5038,61 +5038,64 @@ var app = (function () {
     			add_location(ul, file$1, 16, 8, 280);
     			attr_dev(div0, "class", "col12 col-sm-5");
     			add_location(div0, file$1, 15, 4, 243);
-    			attr_dev(i0, "class", "i-edit i-24");
-    			add_location(i0, file$1, 24, 8, 684);
-    			attr_dev(i1, "class", "i-download i-24");
-    			add_location(i1, file$1, 25, 8, 720);
-    			attr_dev(a3, "href", "/");
-    			attr_dev(a3, "class", "btn btn-secondary");
-    			add_location(a3, file$1, 26, 8, 760);
+    			attr_dev(a3, "title", "Edit this query");
+    			attr_dev(a3, "class", "i-edit i-24");
+    			attr_dev(a3, "href", "#ehs/incidents/queries_new");
+    			add_location(a3, file$1, 24, 8, 684);
+    			attr_dev(i0, "title", "Download these results");
+    			attr_dev(i0, "class", "i-download i-24");
+    			add_location(i0, file$1, 25, 8, 820);
     			attr_dev(a4, "href", "/");
     			attr_dev(a4, "class", "btn btn-secondary");
-    			add_location(a4, file$1, 27, 8, 820);
+    			add_location(a4, file$1, 26, 8, 891);
     			attr_dev(a5, "href", "/");
-    			attr_dev(a5, "class", "btn");
-    			add_location(a5, file$1, 28, 8, 887);
+    			attr_dev(a5, "class", "btn btn-secondary");
+    			add_location(a5, file$1, 27, 8, 951);
+    			attr_dev(a6, "href", "/");
+    			attr_dev(a6, "class", "btn");
+    			add_location(a6, file$1, 28, 8, 1018);
     			attr_dev(div1, "class", "col12 col-sm-7 text-right");
     			add_location(div1, file$1, 23, 4, 636);
     			attr_dev(div2, "class", "row sticky");
     			add_location(div2, file$1, 14, 0, 214);
-    			attr_dev(i2, "class", "i-filter i-32");
-    			add_location(i2, file$1, 31, 4, 942);
-    			add_location(h1, file$1, 31, 0, 938);
-    			add_location(th0, file$1, 39, 24, 1178);
-    			add_location(th1, file$1, 40, 24, 1221);
-    			add_location(th2, file$1, 41, 24, 1266);
-    			add_location(th3, file$1, 42, 24, 1306);
-    			add_location(th4, file$1, 43, 24, 1350);
-    			add_location(th5, file$1, 44, 24, 1388);
-    			add_location(th6, file$1, 45, 24, 1430);
-    			add_location(th7, file$1, 46, 24, 1469);
-    			add_location(th8, file$1, 47, 24, 1515);
-    			add_location(tr0, file$1, 38, 20, 1149);
-    			add_location(thead, file$1, 37, 16, 1121);
-    			add_location(b, file$1, 52, 28, 1659);
-    			add_location(td0, file$1, 52, 24, 1655);
-    			add_location(td1, file$1, 53, 24, 1699);
-    			add_location(td2, file$1, 54, 24, 1744);
-    			add_location(td3, file$1, 55, 24, 1780);
-    			add_location(td4, file$1, 56, 24, 1823);
-    			add_location(td5, file$1, 57, 24, 1865);
-    			add_location(td6, file$1, 58, 24, 1910);
-    			add_location(td7, file$1, 59, 24, 1950);
-    			add_location(td8, file$1, 60, 24, 1985);
-    			add_location(tr1, file$1, 51, 20, 1626);
-    			add_location(tbody, file$1, 50, 16, 1598);
+    			attr_dev(i1, "class", "i-filter i-32");
+    			add_location(i1, file$1, 31, 4, 1073);
+    			add_location(h1, file$1, 31, 0, 1069);
+    			add_location(th0, file$1, 39, 24, 1309);
+    			add_location(th1, file$1, 40, 24, 1352);
+    			add_location(th2, file$1, 41, 24, 1397);
+    			add_location(th3, file$1, 42, 24, 1437);
+    			add_location(th4, file$1, 43, 24, 1481);
+    			add_location(th5, file$1, 44, 24, 1519);
+    			add_location(th6, file$1, 45, 24, 1561);
+    			add_location(th7, file$1, 46, 24, 1600);
+    			add_location(th8, file$1, 47, 24, 1646);
+    			add_location(tr0, file$1, 38, 20, 1280);
+    			add_location(thead, file$1, 37, 16, 1252);
+    			add_location(b, file$1, 52, 28, 1790);
+    			add_location(td0, file$1, 52, 24, 1786);
+    			add_location(td1, file$1, 53, 24, 1830);
+    			add_location(td2, file$1, 54, 24, 1875);
+    			add_location(td3, file$1, 55, 24, 1911);
+    			add_location(td4, file$1, 56, 24, 1954);
+    			add_location(td5, file$1, 57, 24, 1996);
+    			add_location(td6, file$1, 58, 24, 2041);
+    			add_location(td7, file$1, 59, 24, 2081);
+    			add_location(td8, file$1, 60, 24, 2116);
+    			add_location(tr1, file$1, 51, 20, 1757);
+    			add_location(tbody, file$1, 50, 16, 1729);
     			attr_dev(table, "class", "table");
-    			add_location(table, file$1, 36, 12, 1083);
+    			add_location(table, file$1, 36, 12, 1214);
     			attr_dev(div3, "class", "pagination");
-    			add_location(div3, file$1, 65, 44, 2143);
+    			add_location(div3, file$1, 65, 44, 2274);
     			attr_dev(div4, "class", "pagination-wrapper");
-    			add_location(div4, file$1, 65, 12, 2111);
+    			add_location(div4, file$1, 65, 12, 2242);
     			attr_dev(div5, "class", "sticky-wrapper");
-    			add_location(div5, file$1, 35, 8, 1042);
+    			add_location(div5, file$1, 35, 8, 1173);
     			attr_dev(div6, "class", "col12");
-    			add_location(div6, file$1, 34, 4, 1014);
+    			add_location(div6, file$1, 34, 4, 1145);
     			attr_dev(div7, "class", "row");
-    			add_location(div7, file$1, 33, 0, 992);
+    			add_location(div7, file$1, 33, 0, 1123);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5113,18 +5116,18 @@ var app = (function () {
     			append_dev(ul, li3);
     			append_dev(div2, t7);
     			append_dev(div2, div1);
-    			append_dev(div1, i0);
-    			append_dev(div1, t8);
-    			append_dev(div1, i1);
-    			append_dev(div1, t9);
     			append_dev(div1, a3);
-    			append_dev(div1, t11);
+    			append_dev(div1, t8);
+    			append_dev(div1, i0);
+    			append_dev(div1, t9);
     			append_dev(div1, a4);
-    			append_dev(div1, t13);
+    			append_dev(div1, t11);
     			append_dev(div1, a5);
+    			append_dev(div1, t13);
+    			append_dev(div1, a6);
     			insert_dev(target, t15, anchor);
     			insert_dev(target, h1, anchor);
-    			append_dev(h1, i2);
+    			append_dev(h1, i1);
     			append_dev(h1, t16);
     			insert_dev(target, t17, anchor);
     			insert_dev(target, div7, anchor);
@@ -5179,7 +5182,8 @@ var app = (function () {
     				dispose = [
     					listen_dev(a0, "click", /*click_handler*/ ctx[1], false, false, false),
     					listen_dev(a1, "click", /*click_handler_1*/ ctx[2], false, false, false),
-    					listen_dev(a2, "click", /*click_handler_2*/ ctx[3], false, false, false)
+    					listen_dev(a2, "click", /*click_handler_2*/ ctx[3], false, false, false),
+    					listen_dev(a3, "click", /*click_handler_3*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -5238,6 +5242,10 @@ var app = (function () {
     		nav("incidents");
     	};
 
+    	const click_handler_3 = () => {
+    		nav("queries_new");
+    	};
+
     	$$self.$capture_state = () => ({
     		createEventDispatcher,
     		dispatch,
@@ -5253,7 +5261,7 @@ var app = (function () {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [nav, click_handler, click_handler_1, click_handler_2];
+    	return [nav, click_handler, click_handler_1, click_handler_2, click_handler_3];
     }
 
     class Frame_queries_result extends SvelteComponentDev {

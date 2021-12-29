@@ -22,8 +22,8 @@
         </ul>
     </div>
     <div class="col12 col-sm-7 text-right">
-        <i class="i-edit i-24"></i>
-        <i class="i-download i-24"></i>
+        <a title="Edit this query" class="i-edit i-24" href="#ehs/incidents/queries_new" on:click="{ () => {nav('queries_new')}}"> </a>
+        <i title="Download these results" class="i-download i-24"></i>
         <a href="/" class='btn btn-secondary'>New query</a>
         <a href="/" class='btn btn-secondary'>Add to dashboard</a>
         <a href="/" class='btn'>Save</a>

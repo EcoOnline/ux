@@ -165,7 +165,7 @@ li {
     display:inline-block;
     width:20px;
     height:20px;
-    margin:0 2px;
+    margin:0 8px;
     background-color: transparent;
     background-position: center center;
     background-repeat:no-repeat;
@@ -224,6 +224,9 @@ li {
     .col-sm-12 { width: calc(12 * var(--c) + 11 * var(--g) ) }
 }
 @media (min-width: 960px) {
+    .tile .tools a {
+        margin:0 2px;
+    }
     .tile b { font-size:135%; }
     .tile .tools {
         opacity:0;
@@ -384,6 +387,11 @@ h1 {
 .i-24 {
     width:24px;
     height:24px;
+    cursor:pointer
+}
+
+.text-right .i-24+.i-24 {
+    margin-left:8px;
 }
 .i-32 {
     width:32px;

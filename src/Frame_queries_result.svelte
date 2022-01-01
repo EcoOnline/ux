@@ -13,7 +13,7 @@
 </script>
 
 <div class="row sticky">
-    <div class="col12 col-sm-5">
+    <div class="col12 col-md-5">
         <ul class="breadcrumb">
             <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
@@ -21,10 +21,10 @@
             <li>Query Result</li>
         </ul>
     </div>
-    <div class="col12 col-sm-7 text-right">
+    <div class="col12 col-md-7 text-right">
         <a title="Edit this query" class="i-edit i-24" href="#ehs/incidents/queries_new" on:click="{ () => {nav('queries_new')}}"> </a>
         <i title="Download these results" class="i-download i-24"></i>
-        <a href="/" class='btn btn-secondary'>New query</a>
+        <a href="#ehs/incidents/queries_new" class='btn btn-secondary' on:click="{ () => {nav('queries_new')}}">New query</a>
         <a href="/" class='btn btn-secondary'>Add to dashboard</a>
         <a href="/" class='btn'>Save</a>
     </div>

@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col12 col-md-6">
             <div class="row">
-                <div class="col12 col-sm-6">
+                <div class="col6">
                     <div class="card card-31">
                         <div class="card-header">Open Events</div>
                         <div class="card-body">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col12 col-sm-6">
+                <div class="col6">
                     <div class="card card-31">
                         <div class="card-header">Awaiting Investigation</div>
                         <div class="card-body">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col12 col-sm-6">
+                <div class="col6">
                     <div class="card card-31">
                         <div class="card-header">Awaiting SignOff</div>
                         <div class="card-body">
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col12 col-sm-6">
+                <div class="col6">
                     <div class="card card-31">
                         <div class="card-header">High Potential Severity</div>
                         <div class="card-body">

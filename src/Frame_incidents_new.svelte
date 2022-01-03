@@ -126,7 +126,7 @@
             </div>
             <div class="card">
                 <div class="card-body blank_state">
-                    <img src="../images/illustrations/events.png">
+                    <img src="./images/illustrations/events.png">
                     <h5>Primary event</h5>
                     <p>You <b>must</b> add at least one event and this should be 
                         the most serious part of the incident.<br>

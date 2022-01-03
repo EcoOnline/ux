@@ -4413,16 +4413,16 @@ var app = (function () {
     			add_location(h1, file$3, 124, 16, 3729);
     			add_location(div0, file$3, 123, 12, 3707);
     			if (img.src !== (img_src_value = "../images/illustrations/events.png")) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "class", "svelte-ajbweq");
+    			attr_dev(img, "class", "svelte-n9iyb");
     			add_location(img, file$3, 128, 20, 3867);
-    			attr_dev(h5, "class", "svelte-ajbweq");
+    			attr_dev(h5, "class", "svelte-n9iyb");
     			add_location(h5, file$3, 129, 20, 3934);
     			add_location(b, file$3, 130, 27, 3984);
     			add_location(br, file$3, 131, 62, 4101);
     			add_location(p, file$3, 130, 20, 3977);
-    			attr_dev(div1, "class", "card-body blank_state svelte-ajbweq");
+    			attr_dev(div1, "class", "card-body blank_state svelte-n9iyb");
     			add_location(div1, file$3, 127, 16, 3811);
-    			attr_dev(div2, "class", "card svelte-ajbweq");
+    			attr_dev(div2, "class", "card svelte-n9iyb");
     			add_location(div2, file$3, 126, 12, 3776);
     			attr_dev(a0, "class", "btn btn-secondary btn-left");
     			attr_dev(a0, "href", "#ehs/incidents/incidents_new/report");
@@ -4540,7 +4540,7 @@ var app = (function () {
     			a = element("a");
     			a.textContent = "Next";
     			add_location(h1, file$3, 104, 12, 2902);
-    			attr_dev(h4, "class", "svelte-ajbweq");
+    			attr_dev(h4, "class", "svelte-n9iyb");
     			add_location(h4, file$3, 107, 20, 3014);
     			add_location(label0, file$3, 110, 24, 3108);
     			attr_dev(input0, "type", "text");
@@ -4556,7 +4556,7 @@ var app = (function () {
     			add_location(div1, file$3, 113, 20, 3240);
     			attr_dev(div2, "class", "card-body form");
     			add_location(div2, file$3, 106, 16, 2965);
-    			attr_dev(div3, "class", "card svelte-ajbweq");
+    			attr_dev(div3, "class", "card svelte-n9iyb");
     			add_location(div3, file$3, 105, 12, 2930);
     			attr_dev(a, "class", "btn");
     			attr_dev(a, "href", "#ehs/incidents/incidents_new/events");
@@ -4676,13 +4676,23 @@ var app = (function () {
     	let input4;
     	let t35;
     	let div11;
-    	let t37;
-    	let div12;
-    	let t39;
-    	let div13;
+    	let label7;
+    	let input5;
+    	let t36;
     	let span1;
-    	let t41;
+    	let t37;
+    	let t38;
+    	let div12;
+    	let label8;
+    	let input6;
+    	let t39;
     	let span2;
+    	let t40;
+    	let t41;
+    	let div13;
+    	let span3;
+    	let t43;
+    	let span4;
     	let mounted;
     	let dispose;
 
@@ -4766,28 +4776,36 @@ var app = (function () {
     			input4 = element("input");
     			t35 = space();
     			div11 = element("div");
-    			div11.textContent = "Was the person given medical care?";
-    			t37 = space();
-    			div12 = element("div");
-    			div12.textContent = "Is there Lost Time involved?";
-    			t39 = space();
-    			div13 = element("div");
+    			label7 = element("label");
+    			input5 = element("input");
+    			t36 = space();
     			span1 = element("span");
-    			span1.textContent = "Add event";
-    			t41 = space();
+    			t37 = text("\n                    Was the person given medical care?");
+    			t38 = space();
+    			div12 = element("div");
+    			label8 = element("label");
+    			input6 = element("input");
+    			t39 = space();
     			span2 = element("span");
-    			span2.textContent = "Cancel";
-    			attr_dev(div0, "class", "mask svelte-ajbweq");
+    			t40 = text("\n                    Is there Lost Time involved?");
+    			t41 = space();
+    			div13 = element("div");
+    			span3 = element("span");
+    			span3.textContent = "Add event";
+    			t43 = space();
+    			span4 = element("span");
+    			span4.textContent = "Cancel";
+    			attr_dev(div0, "class", "mask svelte-n9iyb");
     			toggle_class(div0, "visible", /*mask_visible*/ ctx[2]);
     			toggle_class(div0, "block", /*mask_block*/ ctx[1]);
     			add_location(div0, file$3, 148, 8, 4707);
     			attr_dev(i, "class", "i-close i-24");
     			add_location(i, file$3, 151, 81, 4961);
-    			attr_dev(span0, "class", "close svelte-ajbweq");
+    			attr_dev(span0, "class", "close svelte-n9iyb");
     			add_location(span0, file$3, 151, 30, 4910);
-    			attr_dev(h2, "class", "svelte-ajbweq");
+    			attr_dev(h2, "class", "svelte-n9iyb");
     			add_location(h2, file$3, 151, 16, 4896);
-    			attr_dev(div1, "class", "pullout-head svelte-ajbweq");
+    			attr_dev(div1, "class", "pullout-head svelte-n9iyb");
     			add_location(div1, file$3, 150, 12, 4853);
     			add_location(label0, file$3, 156, 20, 5126);
     			option0.__value = "Accident";
@@ -4827,11 +4845,11 @@ var app = (function () {
     			add_location(label2, file$3, 174, 20, 5962);
     			attr_dev(input0, "type", "radio");
     			add_location(input0, file$3, 177, 24, 6102);
-    			attr_dev(div4, "class", "form-control radio inline svelte-ajbweq");
+    			attr_dev(div4, "class", "form-control radio inline svelte-n9iyb");
     			add_location(div4, file$3, 176, 20, 6038);
     			attr_dev(input1, "type", "radio");
     			add_location(input1, file$3, 180, 24, 6238);
-    			attr_dev(div5, "class", "form-control radio inline svelte-ajbweq");
+    			attr_dev(div5, "class", "form-control radio inline svelte-n9iyb");
     			add_location(div5, file$3, 179, 20, 6174);
     			attr_dev(div6, "class", "form-item");
     			add_location(div6, file$3, 173, 16, 5918);
@@ -4861,22 +4879,36 @@ var app = (function () {
     			add_location(input4, file$3, 199, 20, 7056);
     			attr_dev(div10, "class", "form-item");
     			add_location(div10, file$3, 197, 16, 6964);
+    			attr_dev(input5, "type", "checkbox");
+    			attr_dev(input5, "class", "svelte-n9iyb");
+    			add_location(input5, file$3, 203, 24, 7229);
+    			attr_dev(span1, "class", "slider svelte-n9iyb");
+    			add_location(span1, file$3, 204, 24, 7311);
+    			attr_dev(label7, "class", "switch svelte-n9iyb");
+    			add_location(label7, file$3, 202, 20, 7182);
     			attr_dev(div11, "class", "form-item");
     			add_location(div11, file$3, 201, 16, 7138);
+    			attr_dev(input6, "type", "checkbox");
+    			attr_dev(input6, "class", "svelte-n9iyb");
+    			add_location(input6, file$3, 210, 24, 7554);
+    			attr_dev(span2, "class", "slider svelte-n9iyb");
+    			add_location(span2, file$3, 211, 24, 7637);
+    			attr_dev(label8, "class", "switch svelte-n9iyb");
+    			add_location(label8, file$3, 209, 20, 7507);
     			attr_dev(div12, "class", "form-item");
-    			add_location(div12, file$3, 204, 16, 7256);
-    			attr_dev(span1, "class", "btn");
-    			add_location(span1, file$3, 208, 20, 7412);
-    			attr_dev(span2, "class", "btn btn-secondary");
-    			add_location(span2, file$3, 209, 20, 7467);
+    			add_location(div12, file$3, 208, 16, 7463);
+    			attr_dev(span3, "class", "btn");
+    			add_location(span3, file$3, 216, 20, 7827);
+    			attr_dev(span4, "class", "btn btn-secondary");
+    			add_location(span4, file$3, 217, 20, 7882);
     			attr_dev(div13, "class", "form-item");
-    			add_location(div13, file$3, 207, 16, 7368);
-    			attr_dev(div14, "class", "pullout-body form svelte-ajbweq");
+    			add_location(div13, file$3, 215, 16, 7783);
+    			attr_dev(div14, "class", "pullout-body form svelte-n9iyb");
     			add_location(div14, file$3, 153, 12, 5033);
-    			attr_dev(div15, "class", "pullout svelte-ajbweq");
+    			attr_dev(div15, "class", "pullout svelte-n9iyb");
     			toggle_class(div15, "in", /*pullout*/ ctx[3]);
     			add_location(div15, file$3, 149, 8, 4798);
-    			attr_dev(div16, "class", "drawer svelte-ajbweq");
+    			attr_dev(div16, "class", "drawer svelte-n9iyb");
     			add_location(div16, file$3, 147, 4, 4678);
     		},
     		m: function mount(target, anchor) {
@@ -4944,20 +4976,34 @@ var app = (function () {
     			append_dev(div10, input4);
     			append_dev(div14, t35);
     			append_dev(div14, div11);
-    			append_dev(div14, t37);
+    			append_dev(div11, label7);
+    			append_dev(label7, input5);
+    			input5.checked = /*event*/ ctx[4].medical_bool;
+    			append_dev(label7, t36);
+    			append_dev(label7, span1);
+    			append_dev(div11, t37);
+    			append_dev(div14, t38);
     			append_dev(div14, div12);
-    			append_dev(div14, t39);
+    			append_dev(div12, label8);
+    			append_dev(label8, input6);
+    			input6.checked = /*event*/ ctx[4].losttime_bool;
+    			append_dev(label8, t39);
+    			append_dev(label8, span2);
+    			append_dev(div12, t40);
+    			append_dev(div14, t41);
     			append_dev(div14, div13);
-    			append_dev(div13, span1);
-    			append_dev(div13, t41);
-    			append_dev(div13, span2);
+    			append_dev(div13, span3);
+    			append_dev(div13, t43);
+    			append_dev(div13, span4);
 
     			if (!mounted) {
     				dispose = [
     					listen_dev(span0, "click", /*hide_event_drawer*/ ctx[7], false, false, false),
     					listen_dev(select0, "change", /*select0_change_handler*/ ctx[17]),
     					listen_dev(input2, "input", /*input2_input_handler*/ ctx[18]),
-    					listen_dev(span2, "click", /*hide_event_drawer*/ ctx[7], false, false, false)
+    					listen_dev(input5, "change", /*input5_change_handler*/ ctx[19]),
+    					listen_dev(input6, "change", /*input6_change_handler*/ ctx[20]),
+    					listen_dev(span4, "click", /*hide_event_drawer*/ ctx[7], false, false, false)
     				];
 
     				mounted = true;
@@ -4978,6 +5024,14 @@ var app = (function () {
 
     			if (dirty & /*event*/ 16 && input2.value !== /*event*/ ctx[4].person) {
     				set_input_value(input2, /*event*/ ctx[4].person);
+    			}
+
+    			if (dirty & /*event*/ 16) {
+    				input5.checked = /*event*/ ctx[4].medical_bool;
+    			}
+
+    			if (dirty & /*event*/ 16) {
+    				input6.checked = /*event*/ ctx[4].losttime_bool;
     			}
 
     			if (dirty & /*pullout*/ 8) {
@@ -5158,19 +5212,19 @@ var app = (function () {
     			if (if_block1) if_block1.c();
     			if_block1_anchor = empty();
     			attr_dev(a0, "href", "#platform");
-    			attr_dev(a0, "class", "svelte-ajbweq");
+    			attr_dev(a0, "class", "svelte-n9iyb");
     			add_location(a0, file$3, 63, 16, 1287);
-    			attr_dev(li0, "class", "svelte-ajbweq");
+    			attr_dev(li0, "class", "svelte-n9iyb");
     			add_location(li0, file$3, 63, 12, 1283);
     			attr_dev(a1, "href", "#ehs");
-    			attr_dev(a1, "class", "svelte-ajbweq");
+    			attr_dev(a1, "class", "svelte-n9iyb");
     			add_location(a1, file$3, 64, 16, 1380);
-    			attr_dev(li1, "class", "svelte-ajbweq");
+    			attr_dev(li1, "class", "svelte-n9iyb");
     			add_location(li1, file$3, 64, 12, 1376);
     			attr_dev(a2, "href", "#ehs/incidents");
-    			attr_dev(a2, "class", "svelte-ajbweq");
+    			attr_dev(a2, "class", "svelte-n9iyb");
     			add_location(a2, file$3, 65, 16, 1457);
-    			attr_dev(li2, "class", "svelte-ajbweq");
+    			attr_dev(li2, "class", "svelte-n9iyb");
     			add_location(li2, file$3, 65, 12, 1453);
     			add_location(li3, file$3, 66, 12, 1552);
     			attr_dev(ul0, "class", "breadcrumb");
@@ -5204,37 +5258,37 @@ var app = (function () {
     			add_location(h1, file$3, 80, 8, 2015);
     			attr_dev(div3, "class", "card-body");
     			add_location(div3, file$3, 82, 12, 2105);
-    			attr_dev(div4, "class", "card svelte-ajbweq");
+    			attr_dev(div4, "class", "card svelte-n9iyb");
     			add_location(div4, file$3, 81, 8, 2074);
-    			attr_dev(h40, "class", "svelte-ajbweq");
+    			attr_dev(h40, "class", "svelte-n9iyb");
     			add_location(h40, file$3, 86, 8, 2193);
     			attr_dev(a9, "href", "#ehs/incidents/incidents_new/report");
-    			attr_dev(a9, "class", "svelte-ajbweq");
+    			attr_dev(a9, "class", "svelte-n9iyb");
     			add_location(a9, file$3, 88, 49, 2287);
-    			attr_dev(li4, "class", "svelte-ajbweq");
+    			attr_dev(li4, "class", "svelte-n9iyb");
     			toggle_class(li4, "active", /*tab*/ ctx[5] == "report");
     			add_location(li4, file$3, 88, 12, 2250);
     			attr_dev(a10, "href", "#ehs/incidents/incidents_new/events");
-    			attr_dev(a10, "class", "svelte-ajbweq");
+    			attr_dev(a10, "class", "svelte-n9iyb");
     			add_location(a10, file$3, 89, 49, 2460);
-    			attr_dev(li5, "class", "svelte-ajbweq");
+    			attr_dev(li5, "class", "svelte-n9iyb");
     			toggle_class(li5, "active", /*tab*/ ctx[5] == "events");
     			add_location(li5, file$3, 89, 12, 2423);
-    			attr_dev(ul1, "class", "side_menu svelte-ajbweq");
+    			attr_dev(ul1, "class", "side_menu svelte-n9iyb");
     			add_location(ul1, file$3, 87, 8, 2215);
-    			attr_dev(h41, "class", "svelte-ajbweq");
+    			attr_dev(h41, "class", "svelte-n9iyb");
     			add_location(h41, file$3, 91, 8, 2606);
-    			attr_dev(li6, "class", "svelte-ajbweq");
+    			attr_dev(li6, "class", "svelte-n9iyb");
     			add_location(li6, file$3, 93, 12, 2664);
-    			attr_dev(li7, "class", "svelte-ajbweq");
+    			attr_dev(li7, "class", "svelte-n9iyb");
     			add_location(li7, file$3, 94, 12, 2695);
-    			attr_dev(li8, "class", "svelte-ajbweq");
+    			attr_dev(li8, "class", "svelte-n9iyb");
     			add_location(li8, file$3, 95, 12, 2725);
-    			attr_dev(li9, "class", "svelte-ajbweq");
+    			attr_dev(li9, "class", "svelte-n9iyb");
     			add_location(li9, file$3, 96, 12, 2758);
-    			attr_dev(li10, "class", "svelte-ajbweq");
+    			attr_dev(li10, "class", "svelte-n9iyb");
     			add_location(li10, file$3, 97, 12, 2785);
-    			attr_dev(ul2, "class", "side_menu svelte-ajbweq");
+    			attr_dev(ul2, "class", "side_menu svelte-n9iyb");
     			add_location(ul2, file$3, 92, 8, 2629);
     			attr_dev(div5, "class", "col12 col-md-3");
     			add_location(div5, file$3, 79, 4, 1978);
@@ -5476,6 +5530,16 @@ var app = (function () {
     		$$invalidate(4, event);
     	}
 
+    	function input5_change_handler() {
+    		event.medical_bool = this.checked;
+    		$$invalidate(4, event);
+    	}
+
+    	function input6_change_handler() {
+    		event.losttime_bool = this.checked;
+    		$$invalidate(4, event);
+    	}
+
     	$$self.$$set = $$props => {
     		if ("tabnav" in $$props) $$invalidate(9, tabnav = $$props.tabnav);
     	};
@@ -5544,7 +5608,9 @@ var app = (function () {
     		click_handler_5,
     		click_handler_6,
     		select0_change_handler,
-    		input2_input_handler
+    		input2_input_handler,
+    		input5_change_handler,
+    		input6_change_handler
     	];
     }
 

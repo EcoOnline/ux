@@ -29,6 +29,7 @@
 
    function handleNavStr(hash) {
 		tabnav = '';
+		console.log('hash', hash);
 		let hash_arr = hash.split('/');
 		let id = hash_arr[hash_arr.length-1];
 		let ind = comps.findIndex((el) => el.id == id);
@@ -84,7 +85,7 @@
 			<span class="menu-icon"><i class="i-rocket i-24"></i></span>
 			<span class="menu-icon"><i class="i-filter i-24"></i></span>
 			<span class="menu-icon"><i class="i-notification i-24"></i></span>
-			<span class="menu-icon"><i class="i-hinton-plot i-24"></i></span>
+			<span class="menu-icon"><i class="i-switcher i-24"></i></span>
 			<span class="menu-icon profile-picture">A</span>
 
 			<span class="menu-icon mobile"><i class="i-menu i-24"></i></span>

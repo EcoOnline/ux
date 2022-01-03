@@ -72,14 +72,27 @@ li {
     text-align: center;
     margin-right:8px;
     margin-left:0;
+    cursor:pointer;
 }
 .btn-secondary{
     background: #fff;
     color: var(--eo-primary-500);
 }
+.btn.disabled {
+    background: var(--eo-primary-100);
+    border-color: var(--eo-primary-100);
+    color: var(--eo-primary-300);
+    cursor:no-drop;
+}
 .btn-secondary:hover {
     background-color: var(--eo-surface-background);
 }
+.btn-left {
+    float:left;
+    margin-right:8px ! important;
+    margin-left:0 ! important;
+}
+
 .btn svg {
     display: inline-block;
     vertical-align: middle;
@@ -426,6 +439,7 @@ h1 .i-32 {
 }
 .i-actions { background-image:url(../images/icons/actions.svg) }
 .i-attachment { background-image:url(../images/icons/attachment.svg) }
+.i-close { background-image:url(../images/icons/close.svg) }
 .i-download { background-image:url(../images/icons/download.svg) }
 .i-edit { background-image:url(../images/icons/edit.svg) }
 .i-filter { background-image:url(../images/icons/filter.svg)}
@@ -436,6 +450,7 @@ h1 .i-32 {
 .i-printer { background-image:url(../images/icons/printer.svg)}
 .i-rocket { background-image:url(../images/icons/rocket.svg)}
 .i-search { background-image:url(../images/icons/search.svg)}
+.i-switcher { background-image:url(../images/icons/switcher.svg)}
 .i-trash { background-image:url(../images/icons/trash-can.svg)}
 
 
@@ -503,6 +518,7 @@ h1 .i-32 {
 }
 .form .form-item {
     margin-bottom:32px;
+    overflow: auto;
 }
 
 .form label {

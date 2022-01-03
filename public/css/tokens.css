@@ -1,5 +1,7 @@
 :root {
 	--black:  #1A1919;
+    --eo-primary-100: #D4D5EA;
+    --eo-primary-300: #9397CA;
 	--eo-primary-500: #272F96;
 	--eo-secondary-500: #1CD390;
 	--eo-critical-500: #E40C0C;
@@ -9,6 +11,8 @@
     --eo-surface-selected: #E4E5E7;
 
     --eo-border-input: #72737A;
+    --eo-border-reduced: #D6DCE0;
+    --eo-border: #BABFC3;
 
 	--table-header:  #c4c9cf;
 	--table-header-color:  #1a1919;

@@ -167,8 +167,9 @@
              //3 replace synonyms (normalisation)
             syn_keys.forEach((key) => {
                 let k = key.replace(/_/g, ' ');
-                str = str.replace(new RegExp(' ' + k, 'g'), ' ' + synonyms[key]); 
-                str = str.replace(new RegExp(k + ' ', 'g'), synonyms[key] + ' '); 
+                //str = str.replace(new RegExp(' ' + k, 'g'), ' ' + synonyms[key]); 
+                //str = str.replace(new RegExp(k + ' ', 'g'), synonyms[key] + ' '); 
+                str = str.replace(new RegExp(k, 'g'), ' ' + synonyms[key]); 
             });
         }
        

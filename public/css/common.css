@@ -535,3 +535,14 @@ h1 .i-32 {
     width:100%;
     max-width: 480px;
 }
+
+
+
+.print_block { display: none }
+.print_flex { display: flex }
+
+@media print { 
+    .print_block { display: block ! important }
+    .print_flex { display: flex ! important }
+    .no_print { display: none ! important }
+}

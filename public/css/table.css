@@ -43,3 +43,30 @@
 	width: 100%;
 	border-collapse: collapse;
 }
+
+
+@media print { 
+    .sticky-wrapper {
+        overflow:visible;
+    }
+    .sticky-wrapper.print_all {
+        max-height: auto ! important;
+    }
+
+
+    .sticky-wrapper th {
+        position:relative ! important;
+        top: auto ! important;
+        white-space: normal ! important;
+    }
+
+    .sticky-wrapper td {
+        white-space: normal ! important;
+    }
+    .sticky-wrapper th:first-child {
+        left: auto ! important;
+    }
+    .sticky-wrapper td:first-child {
+        position: relative ! important;
+    }
+}

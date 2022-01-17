@@ -259,7 +259,9 @@
                 }
 
                 row.terms.forEach( (term) => {
-                    all_terms[term] = all_terms[term] ? {"count": all_terms[term].count + 1}  : {"count":1} ;
+                    if(term !== '') {
+                        all_terms[term] = all_terms[term] ? {"count": all_terms[term].count + 1}  : {"count":1} ;
+                    }
                 });
 
                 let clean_url = cleanUrl(row.url);

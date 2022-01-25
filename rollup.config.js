@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['walkme_report'].map((name, index) => ({
+export default ['frame'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

@@ -1,5 +1,20 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Form from './components/form/Form.svelte';
+
+	import Items from "./Multiselect-item.svelte";
+
+    import RecordID from "./components/table/RecordID.svelte";
+    import Status from "./components/table/Status.svelte";
+
+
+   
+
+	let components = {
+		"record_id": RecordID,
+		"status": Status
+	}
+    
     const dispatch = createEventDispatcher();
 
 
@@ -12,6 +27,174 @@
             tab = t;
 
         }
+    }
+   
+    let columns = [
+        {
+            "key": "section",
+            "value": "Common Fields",
+            "children": [
+                {
+                    "key": "record_id",
+                    "value": "Record ID",
+                    "selectable": true,
+                    "selected": true,
+                    "pii": false
+                },
+                
+                {
+                    "key": "created_date",
+                    "value": "Date created on",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                },
+                {
+                    "key": "created_by",
+                    "value": "Creator",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": true
+                },
+                {
+                    "key": "updated_date",
+                    "value": "Date updated on",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                },
+                {
+                    "key": "updated_by",
+                    "value": "Updated by",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": true
+                },
+                {
+                    "key": "status",
+                    "value": "Status",
+                    "selectable": true,
+                    "selected": true,
+                    "pii": false
+                },
+                {
+                    "key": "group",
+                    "value": "Group",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                },
+                {
+                    "key": "division",
+                    "value": "Division",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                },
+                {
+                    "key": "sector",
+                    "value": "Sector",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                }
+            ]
+        },
+        {
+            "key": "section",
+            "value": "Report Event",
+            "children": [
+                {
+                    "key": "site",
+                    "value": "Site",
+                    "selectable": true,
+                    "selected": false,
+                    "pii": false
+                },
+                {
+                    "key": "primary_event_type",
+                    "value": "Event",
+                    "selectable": true,
+                    "selected": true,
+                    "pii": false
+                }
+
+                
+                
+            ]
+        }
+    ];
+    let table_settings_form = [
+        {
+            item_type: "input_multi",
+            id: "0_1",
+            label: "Columns to show",
+            hint: "Remember all users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
+            options: columns,
+            answer: ""
+        }
+    ]
+
+    let selected_columns = [];
+
+    $: {
+        let temp_sel = {};
+        let c = columns;
+        c.forEach( (group) => {
+            group.children.forEach( (col) => {
+                if(col.selected == true) {
+                    temp_sel[col.key] = col;
+                }
+            });
+        })
+        selected_columns = temp_sel;
+        console.log(selected_columns);
+    }
+
+    let table_data = [
+        { 
+            "created_date": "2022-01-24T3:48:19.430Z",
+            "created_by": "Mike Wazowski",
+            "update_date": "2022-01-24T3:48:19.430Z",
+            "update_by": "Mike Wazowski",
+            "group": "Ireland",
+            "division": "Cork",
+            "sector": "Plumbing",
+            "record_id": 485,
+            "channel": "rapid",
+            "primary_event_type": "Near miss",
+            "date_time": "2022-01-24T3:48:19.430Z",
+            "time_relative": "9hr 42min",
+            "location": "Main Office",
+            "custom_field_shift": "Yellow Shift",
+            "open_actions": 0,
+            "total_actions": 2,
+            "open_total_actions": "0/2",
+            "status": "in_progress"
+        }
+    ]
+
+    let table_settings_pullout = false;
+    let show_drawer = false;
+    let mask_block = false;
+    let mask_visible = false;
+    let pullout = false;
+
+    function show_table_drawer() {
+        show_drawer = true;
+        mask_block = false;
+        mask_visible = true;
+        setTimeout(() => {
+            table_settings_pullout = true;
+        }, 300);
+    }
+    function hide_table_drawer() {
+        mask_block = false;
+        mask_visible = false;
+        table_settings_pullout = false;
+        setTimeout(() => {
+            show_drawer = false;
+        }, 1000);
     }
 
     function nav(str) {
@@ -48,7 +231,7 @@
             <div class="row">
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Open Events</div>
+                        <div class="card-header">Open Events<a href="/" class="i-pin i-20 btn-right"> </a></div>
                         <div class="card-body">
                             <div class="big-num">40</div>
                         </div>
@@ -56,7 +239,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Awaiting Investigation</div>
+                        <div class="card-header">Awaiting Investigation<a href="/" class="i-pin i-20 btn-right"> </a></div>
                         <div class="card-body">
                             <div class="big-num minor">11</div>
                         </div>
@@ -64,7 +247,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Awaiting SignOff</div>
+                        <div class="card-header">Awaiting SignOff<a href="/" class="i-pin i-20 btn-right"> </a></div>
                         <div class="card-body">
                             <div class="big-num minor">3</div>
                         </div>
@@ -72,7 +255,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">High Potential Severity</div>
+                        <div class="card-header">High Potential Severity<a href="/" class="i-pin i-20 btn-right"> </a></div>
                         <div class="card-body">
                             <div class="big-num danger">1</div>
                         </div>
@@ -83,9 +266,62 @@
         </div>
         <div class="col12 col-md-6">
             <div class="card card-32">
-                <div class="card-header">Events by Type</div>
+                <div class="card-header">Events by Type<a href="/" class="i-pin i-20 btn-right"> </a></div>
                 <div class="card-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-svg" class="zc-svg" viewBox="0 0 428 203" width="90%"  display="block"><defs id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-defs"></defs><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-main" class="zc-rel zc-main"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-main-c" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-objects-bottom" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graphset" class="zc-abs"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0" class="zc-abs"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-c" class="zc-abs zc-layer zc-persistent"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotarea"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotarea-c" class="zc-abs zc-layer"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scales-bl" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scales-bl-0-c" class="zc-abs zc-layer"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-guide-6-path" d="M 35.5 162.5 L 407.5 162.5 M 35.5 138.5 L 407.5 138.5 M 35.5 114.5 L 407.5 114.5 M 35.5 91.5 L 407.5 91.5 M 35.5 67.5 L 407.5 67.5 M 35.5 43.5 L 407.5 43.5 M 35.5 19.5 L 407.5 19.5" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#DCDCDC" stroke-width="1" stroke-opacity="1"></path></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plots-bl-0" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-0-bl-0-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-1-bl-0-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-2-bl-0-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-3-bl-0-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-4-bl-0-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plots-bl-1" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-0-bl-1-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-0-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 39.5 150.5 L 68.5 150.5 L 68.5 162.5 L 39.5 162.5 L 39.5 150.5 L 39.5 150.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-1-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 76.5 138.5 L 105.5 138.5 L 105.5 162.5 L 76.5 162.5 L 76.5 138.5 L 76.5 138.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-2-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 113.5 162.5 L 143.5 162.5 L 143.5 162.5 L 113.5 162.5 L 113.5 162.5 L 114.5 162.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-3-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 151.5 162.5 L 180.5 162.5 L 180.5 162.5 L 151.5 162.5 L 151.5 162.5 L 151.5 162.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-4-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 188.5 162.5 L 217.5 162.5 L 217.5 162.5 L 188.5 162.5 L 188.5 162.5 L 188.5 162.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-5-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 225.5 150.5 L 254.5 150.5 L 254.5 162.5 L 225.5 162.5 L 225.5 150.5 L 225.5 150.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-6-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 262.5 150.5 L 291.5 150.5 L 291.5 162.5 L 262.5 162.5 L 262.5 150.5 L 262.5 150.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-7-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 299.5 150.5 L 329.5 150.5 L 329.5 162.5 L 299.5 162.5 L 299.5 150.5 L 300.5 150.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-8-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 337.5 162.5 L 366.5 162.5 L 366.5 162.5 L 337.5 162.5 L 337.5 162.5 L 337.5 162.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-9-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-0-node-area zc-node-area" d="M 374.5 126.5 L 403.5 126.5 L 403.5 162.5 L 374.5 162.5 L 374.5 126.5 L 374.5 126.5" fill="#6F8CC4" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-1-bl-1-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-0-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 39.5 138.5 L 68.5 138.5 L 68.5 150.5 L 39.5 150.5 L 39.5 138.5 L 39.5 138.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-1-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 76.5 114.5 L 105.5 114.5 L 105.5 138.5 L 76.5 138.5 L 76.5 114.5 L 76.5 114.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-2-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 113.5 162.5 L 143.5 162.5 L 143.5 162.5 L 113.5 162.5 L 113.5 162.5 L 114.5 162.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-3-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 151.5 150.5 L 180.5 150.5 L 180.5 162.5 L 151.5 162.5 L 151.5 150.5 L 151.5 150.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-4-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 188.5 162.5 L 217.5 162.5 L 217.5 162.5 L 188.5 162.5 L 188.5 162.5 L 188.5 162.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-5-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 225.5 138.5 L 254.5 138.5 L 254.5 150.5 L 225.5 150.5 L 225.5 138.5 L 225.5 138.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-6-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 262.5 126.5 L 291.5 126.5 L 291.5 150.5 L 262.5 150.5 L 262.5 126.5 L 262.5 126.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-7-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 299.5 150.5 L 329.5 150.5 L 329.5 150.5 L 299.5 150.5 L 299.5 150.5 L 300.5 150.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-8-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 337.5 162.5 L 366.5 162.5 L 366.5 162.5 L 337.5 162.5 L 337.5 162.5 L 337.5 162.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-9-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-1-node-area zc-node-area" d="M 374.5 114.5 L 403.5 114.5 L 403.5 126.5 L 374.5 126.5 L 374.5 114.5 L 374.5 114.5" fill="#CE735D" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-2-bl-1-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-0-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 39.5 138.5 L 68.5 138.5 L 68.5 138.5 L 39.5 138.5 L 39.5 138.5 L 39.5 138.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-1-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 76.5 55.5 L 105.5 55.5 L 105.5 114.5 L 76.5 114.5 L 76.5 55.5 L 76.5 55.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-2-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 113.5 138.5 L 143.5 138.5 L 143.5 162.5 L 113.5 162.5 L 113.5 138.5 L 114.5 138.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-3-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 151.5 150.5 L 180.5 150.5 L 180.5 150.5 L 151.5 150.5 L 151.5 150.5 L 151.5 150.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-4-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 188.5 138.5 L 217.5 138.5 L 217.5 162.5 L 188.5 162.5 L 188.5 138.5 L 188.5 138.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-5-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 225.5 138.5 L 254.5 138.5 L 254.5 138.5 L 225.5 138.5 L 225.5 138.5 L 225.5 138.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-6-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 262.5 126.5 L 291.5 126.5 L 291.5 126.5 L 262.5 126.5 L 262.5 126.5 L 262.5 126.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-7-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 299.5 150.5 L 329.5 150.5 L 329.5 150.5 L 299.5 150.5 L 299.5 150.5 L 300.5 150.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-8-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 337.5 162.5 L 366.5 162.5 L 366.5 162.5 L 337.5 162.5 L 337.5 162.5 L 337.5 162.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-9-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-2-node-area zc-node-area" d="M 374.5 114.5 L 403.5 114.5 L 403.5 114.5 L 374.5 114.5 L 374.5 114.5 L 374.5 114.5" fill="#EEB55F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-3-bl-1-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-0-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 39.5 138.5 L 68.5 138.5 L 68.5 138.5 L 39.5 138.5 L 39.5 138.5 L 39.5 138.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-1-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 76.5 55.5 L 105.5 55.5 L 105.5 55.5 L 76.5 55.5 L 76.5 55.5 L 76.5 55.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-2-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 113.5 138.5 L 143.5 138.5 L 143.5 138.5 L 113.5 138.5 L 113.5 138.5 L 114.5 138.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-3-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 151.5 150.5 L 180.5 150.5 L 180.5 150.5 L 151.5 150.5 L 151.5 150.5 L 151.5 150.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-4-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 188.5 138.5 L 217.5 138.5 L 217.5 138.5 L 188.5 138.5 L 188.5 138.5 L 188.5 138.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-5-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 225.5 138.5 L 254.5 138.5 L 254.5 138.5 L 225.5 138.5 L 225.5 138.5 L 225.5 138.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-6-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 262.5 114.5 L 291.5 114.5 L 291.5 126.5 L 262.5 126.5 L 262.5 114.5 L 262.5 114.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-7-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 299.5 150.5 L 329.5 150.5 L 329.5 150.5 L 299.5 150.5 L 299.5 150.5 L 300.5 150.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-8-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 337.5 162.5 L 366.5 162.5 L 366.5 162.5 L 337.5 162.5 L 337.5 162.5 L 337.5 162.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-9-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-3-node-area zc-node-area" d="M 374.5 102.5 L 403.5 102.5 L 403.5 114.5 L 374.5 114.5 L 374.5 102.5 L 374.5 102.5" fill="#5BA65F" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-4-bl-1-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-0-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 39.5 138.5 L 68.5 138.5 L 68.5 138.5 L 39.5 138.5 L 39.5 138.5 L 39.5 138.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-1-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 76.5 31.5 L 105.5 31.5 L 105.5 55.5 L 76.5 55.5 L 76.5 31.5 L 76.5 31.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-2-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 113.5 138.5 L 143.5 138.5 L 143.5 138.5 L 113.5 138.5 L 113.5 138.5 L 114.5 138.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-3-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 151.5 150.5 L 180.5 150.5 L 180.5 150.5 L 151.5 150.5 L 151.5 150.5 L 151.5 150.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-4-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 188.5 138.5 L 217.5 138.5 L 217.5 138.5 L 188.5 138.5 L 188.5 138.5 L 188.5 138.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-5-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 225.5 138.5 L 254.5 138.5 L 254.5 138.5 L 225.5 138.5 L 225.5 138.5 L 225.5 138.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-6-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 262.5 114.5 L 291.5 114.5 L 291.5 114.5 L 262.5 114.5 L 262.5 114.5 L 262.5 114.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-7-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 299.5 150.5 L 329.5 150.5 L 329.5 150.5 L 299.5 150.5 L 299.5 150.5 L 300.5 150.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-8-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 337.5 162.5 L 366.5 162.5 L 366.5 162.5 L 337.5 162.5 L 337.5 162.5 L 337.5 162.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-9-path" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-node-area AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plotset-plot-4-node-area zc-node-area" d="M 374.5 102.5 L 403.5 102.5 L 403.5 102.5 L 374.5 102.5 L 374.5 102.5 L 374.5 102.5" fill="#9E4BA0" fill-opacity="1" stroke-linecap="square" stroke-linejoin="miter" stroke-opacity="1"></path></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plots-bl-2" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-0-bl-2-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-1-bl-2-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-2-bl-2-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-3-bl-2-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-4-bl-2-c" class="zc-abs zc-layer zc-bl" data-clip="34,18,376,147" style="display: block;"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scales-ml-0-c" class="zc-abs zc-layer"><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-path" d="M 34.5 162.5 L 408.5 162.5 M 35.5 162.5 L 35.5 167.5 M 72.5 162.5 L 72.5 167.5 M 109.5 162.5 L 109.5 167.5 M 147.5 162.5 L 147.5 167.5 M 184.5 162.5 L 184.5 167.5 M 221.5 162.5 L 221.5 167.5 M 258.5 162.5 L 258.5 167.5 M 295.5 162.5 L 295.5 167.5 M 333.5 162.5 L 333.5 167.5 M 370.5 162.5 L 370.5 167.5 M 407.5 162.5 L 407.5 167.5" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#8C8C8C" stroke-width="1" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-path" d="M 35.5 162.5 L 35.5 19.5" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#8C8C8C" stroke-width="1" stroke-opacity="1"></path><path id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-tick-6-path" d="M 35.5 162.5 L 30.5 162.5 M 35.5 138.5 L 30.5 138.5 M 35.5 114.5 L 30.5 114.5 M 35.5 91.5 L 30.5 91.5 M 35.5 67.5 L 30.5 67.5 M 35.5 43.5 L 30.5 43.5 M 35.5 19.5 L 30.5 19.5" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#8C8C8C" stroke-width="1" stroke-opacity="1"></path></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plots-fl-0"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-0-fl-0-c" class="zc-abs zc-layer zc-fl" data-clip="30,14,384,155" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-1-fl-0-c" class="zc-abs zc-layer zc-fl" data-clip="30,14,384,155" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-2-fl-0-c" class="zc-abs zc-layer zc-fl" data-clip="30,14,384,155" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-3-fl-0-c" class="zc-abs zc-layer zc-fl" data-clip="30,14,384,155" style="display: block;"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-4-fl-0-c" class="zc-abs zc-layer zc-fl" data-clip="30,14,384,155" style="display: block;"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scales-fl" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scales-fl-0-c" class="zc-abs zc-layer"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scroll"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plots-vb"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-0-vb-c" class="zc-abs zc-layer zc-vb"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-1-vb-c" class="zc-abs zc-layer zc-vb"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-2-vb-c" class="zc-abs zc-layer zc-vb"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-3-vb-c" class="zc-abs zc-layer zc-vb"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-plot-4-vb-c" class="zc-abs zc-layer zc-vb"></g></g></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-objects-maps" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-objects-top" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-hover" class="zc-abs"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-hover" class="zc-abs" clip-path="url(#AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip-hover)"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-hover-c" class="zc-abs zc-layer"></g></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-objects-front" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-text" class="zc-abs zc-text"><text x="40.1" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_0" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="41.95" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="45.38" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-01 </tspan></text><text x="374.9" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_9" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="376.75" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="380.18" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-10 </tspan></text><text x="77.3" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_1" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="79.15" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="82.58" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-02 </tspan></text><text x="114.5" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_2" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="116.35" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="119.78" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-03 </tspan></text><text x="151.7" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_3" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="153.55" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="156.98" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-04 </tspan></text><text x="188.9" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_4" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="190.75" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="194.18" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-05 </tspan></text><text x="226.1" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_5" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="227.95" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="231.38" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-06 </tspan></text><text x="263.3" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_6" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="265.15" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="268.58" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-07 </tspan></text><text x="300.5" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_7" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="302.35" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="305.78" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-08 </tspan></text><text x="337.7" y="170" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_x-item_8" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-x-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="339.55" y="180" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2021 </tspan><tspan x="342.98" y="180" color="#808285" fill="#808285" dy="12.5" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 10px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">-09 </tspan></text><text x="21.41" y="155.2" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_0" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="21.41" y="167.2" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">0</tspan></text><text x="13.81" y="12.2" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_6" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="13.81" y="24.2" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">12</tspan></text><text x="21.41" y="131.37" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_1" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="21.41" y="143.37" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">2</tspan></text><text x="21.41" y="107.54" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_2" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="21.41" y="119.54" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">4</tspan></text><text x="21.41" y="83.7" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_3" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="21.41" y="95.7" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">6</tspan></text><text x="21.41" y="59.87" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_4" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="21.41" y="71.87" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">8</tspan></text><text x="13.81" y="36.04" id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale_y-item_5" class="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-y-item AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-scale-item zc-scale-item" opacity="1"><tspan x="13.81" y="48.04" color="#808285" fill="#808285" dy="0" style="font-weight: normal; font-style: normal; text-decoration: none; font-size: 12px; font-family: &quot;Lucida Sans Unicode&quot;, &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Helvetica, Arial, sans-serif; dominant-baseline: auto;">10</tspan></text></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-legend" class="zc-abs"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-tools" class="zc-abs"><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-static-c" class="zc-abs zc-layer"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-guide-c" class="zc-abs zc-layer zc-guide-c"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-trigger-c" class="zc-abs zc-layer"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-print-c" class="zc-abs zc-layer"></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-textprint-c" class="zc-abs zc-layer"></g></g><g id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-text-top" class="zc-abs"></g></g><clipPath id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip"><polygon id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip-shape" points="34,18 410,18 410,165 34,165 34,18"></polygon></clipPath><clipPath id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip-hover"><polygon id="AwUniqueId1d2b767a326d4b5eb97922f8f46c2a5e-graph-id0-clip-hover-shape" points="30,14 414,14 414,169 30,169 30,14"></polygon></clipPath></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1"  class="demo_graph" viewBox="0 0 428 203" width="90%"  display="block">
+                        
+                        <!-- horizontal grid lines -->
+                        <path class="grid_lines" d="M 35 162 L 407 162 M 35 138 L 407 138 M 35 114 L 407 114 M 35 91 L 407 91 M 35 67 L 407 67 M 35 43 L 407 43 M 35 19 L 407 19"></path>
+                        
+                        <rect class="leg1" x=39 y=150 width=29 height=12 />
+                        <rect class="leg1" x=76 y=138 width=29 height=24 />
+                        <rect class="leg1" x=225 y=150 width=29 height=12 />
+                        <rect class="leg1" x=262 y=150 width=29 height=12 />
+                        <rect class="leg1" x=299 y=150 width=29 height=12 />
+                        <rect class="leg1" x=374 y=126 width=29 height=36 />
+
+
+                        <rect class="leg2" x=39 y=138 width=29 height=12 />
+                        <rect class="leg2" x=76 y=114 width=29 height=24 />
+                        <rect class="leg2" x=151 y=150 width=29 height=12 />
+                        <rect class="leg2" x=225 y=138 width=29 height=12 />
+                        <rect class="leg2" x=262 y=126 width=29 height=24 />
+                        <rect class="leg2" x=374 y=114 width=29 height=12 />
+                                        
+                        
+                        <rect class="leg3" x=76 y=55 width=29 height=60 />
+                        <rect class="leg3" x=113 y=138 width=29 height=24 />
+                        <rect class="leg3" x=188 y=138 width=29 height=24 />
+                        
+                        <rect class="leg4" x=262 y=114 width=29 height=12 />
+                        <rect class="leg4" x=374 y=102 width=29 height=12 />
+                                       
+                        <rect class="leg5" x=76 y=31 width=29 height=24 />
+                                        
+                        <!-- X axis with ticks -->
+                        <path class="axis" d="M 34 162 L 408 162 M 35 162 L 35 167 M 72 162 L 72 167 M 109 162 L 109 167 M 147 162 L 147 167 M 184 162 L 184 167 M 221 162 L 221 167 M 258 162 L 258 167 M 295 162 L 295 167 M 333 162 L 333 167 M 370 162 L 370 167 M 407 162 L 407 167" ></path>
+                        <!-- Y axis with ticks -->
+                        <path class="axis" d="M 35 162 L 35 19 M 35 162 L 30 162 M 35 138 L 30 138 M 35 114 L 30 114 M 35 91 L 30 91 M 35 67 L 30 67 M 35 43 L 30 43 M 35 19 L 30 19"></path>
+
+                        <text x="40.1" y="170" opacity="1"><tspan x="41.95" y="180" dy="0">2021 </tspan><tspan x="45.38" y="180" dy="12.5">-01 </tspan></text>
+                        <text x="374.9" y="170" opacity="1"><tspan x="376.75" y="180" dy="0">2021 </tspan><tspan x="380.18" y="180" dy="12.5">-10 </tspan></text>
+                        <text x="77.3" y="170" opacity="1"><tspan x="79.15" y="180" dy="0">2021 </tspan><tspan x="82.58" y="180" dy="12.5">-02 </tspan></text>
+                        <text x="114.5" y="170" opacity="1"><tspan x="116.35" y="180" dy="0">2021 </tspan><tspan x="119.78" y="180" dy="12.5">-03 </tspan></text>
+                        <text x="151.7" y="170" opacity="1"><tspan x="153.55" y="180" dy="0">2021 </tspan><tspan x="156.98" y="180" dy="12.5">-04 </tspan></text>
+                        <text x="188.9" y="170" opacity="1"><tspan x="190.75" y="180" dy="0">2021 </tspan><tspan x="194.18" y="180" dy="12.5">-05 </tspan></text>
+                        <text x="226.1" y="170" opacity="1"><tspan x="227.95" y="180" dy="0">2021 </tspan><tspan x="231.38" y="180" dy="12.5">-06 </tspan></text>
+                        <text x="263.3" y="170" opacity="1"><tspan x="265.15" y="180" dy="0">2021 </tspan><tspan x="268.58" y="180" dy="12.5">-07 </tspan></text>
+                        <text x="300.5" y="170" opacity="1"><tspan x="302.35" y="180" dy="0">2021 </tspan><tspan x="305.78" y="180" dy="12.5">-08 </tspan></text>
+                        <text x="337.7" y="170" opacity="1"><tspan x="339.55" y="180" dy="0">2021 </tspan><tspan x="342.98" y="180" dy="12.5">-09 </tspan></text>
+                        <text x="21.41" y="155.2" opacity="1"><tspan x="21.41" y="167.2" dy="0">0</tspan></text>
+                        <text x="13.81" y="12.2" opacity="1"><tspan x="13.81" y="24.2" dy="0">12</tspan></text>
+                        <text x="21.41" y="131.37" opacity="1"><tspan x="21.41" y="143.37" dy="0">2</tspan></text>
+                        <text x="21.41" y="107.54" opacity="1"><tspan x="21.41" y="119.54" dy="0">4</tspan></text>
+                        <text x="21.41" y="83.7" opacity="1"><tspan x="21.41" y="95.7" dy="0">6</tspan></text>
+                        <text x="21.41" y="59.87" opacity="1"><tspan x="21.41" y="71.87" dy="0">8</tspan></text>
+                        <text x="13.81" y="36.04" opacity="1"><tspan x="13.81" y="48.04" dy="0">10</tspan></text>
+                        
+                    </svg>
                 </div>
             </div>
         </div>
@@ -93,11 +329,18 @@
     </div>
     <div class="row">
         <div class="col12">
-            <h4>Latest events</h4>
+            <h4 style="">Latest Events
+                <a href="/" class="i-pin i-20 btn-right"> </a>
+                <a href="/" class="i-settings i-20 btn-right"  on:click|preventDefault="{show_table_drawer}"> </a>
+            </h4>
             <div class="sticky-wrapper">
                 <table class="table">
                     <thead>
                         <tr>
+                            {#each Object.entries(selected_columns) as [k, th]}
+                                <th>{th.value}</th>
+                            {/each}
+                            <!--
                             <th>Record ID</th>
                             <th>Report Type</th>
                             <th>Source</th>
@@ -106,10 +349,24 @@
                             <th>Location</th>
                             <th>Shift</th>
                             <th>Open Actions</th>
-                            <th>Status</th>
+                            <th>Status</th>-->
                         </tr>
                     </thead>
                     <tbody>
+                        {#each table_data as row}
+                            <tr>
+                                {#each Object.entries(selected_columns) as [k, th]}
+                                    <td>
+                                        {#if components[th.key]}
+                                            <svelte:component this={components[th.key]} obj={row[th.key]} />
+                                        {:else}
+                                            {row[th.key]}
+                                        {/if}
+                                    </td>
+                                {/each}
+                            </tr>
+                        {/each}
+                        <!--
                         <tr>
                             <td><b>485</b></td>
                             <td>Full Report</td>
@@ -121,7 +378,7 @@
                             <td>0</td>
                             <td>In Progress</td>
                         </tr>
-                        
+                        -->
                     </tbody>
                 </table>
                 <div class="pagination-wrapper"><div class="pagination"> </div></div>
@@ -133,10 +390,68 @@
     <h2>Summary</h2>
 {/if}
 
+
+{#if show_drawer}
+    <div class="drawer">
+        <div class="mask" class:visible="{mask_visible}" class:block="{mask_block}"></div>
+        <div class="pullout" class:in="{table_settings_pullout}">
+            <div class="pullout-head">
+                <h2>Table settings <span class="close" on:click="{hide_table_drawer}"><i class="i-close i-24"></i></span></h2>
+            </div>
+            <div class="pullout-body form">
+
+               
+                <Form f={table_settings_form} ></Form>
+               
+                <div class="form-item">
+                    <span class="btn">Save</span>
+                    <span class="btn btn-secondary" on:click="{hide_table_drawer}">Cancel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}
+
 <style>
     .sticky-wrapper {
         box-shadow:0 6px 10px rgba(186, 191, 195, 0.2);
     }
+
+
+    .demo_graph .axis {
+        fill: none;
+        stroke-linecap:butt;
+        stroke-linejoin: round;
+        stroke: var(--eo-border);
+        stroke-width:1;
+        stroke-opacity:1;
+    }
+    .demo_graph .grid_lines {
+        fill: none;
+        stroke-linecap:butt;
+        stroke-linejoin: round;
+        stroke: var(--eo-border-reduced);
+        stroke-width:1;
+        stroke-opacity:1;
+    }
+    .demo_graph text {
+        font-size:10px;
+    }
+    .demo_graph rect { 
+        opacity:0.9;
+        transition: opacity 0.5s linear;
+    }
+    .demo_graph .leg1 { fill: #404387; }
+    .demo_graph .leg2 { fill: #29788E; }
+    .demo_graph .leg3 { fill: #22A784; }
+    .demo_graph .leg4 { fill: #79D151; }
+    .demo_graph .leg5 { fill: #FDE724; }
+
+    .demo_graph rect:hover { cursor:pointer;opacity:1 ! important }
+    .demo_graph:hover rect {opacity:0.5}
+
+
+
 </style>
 	
         

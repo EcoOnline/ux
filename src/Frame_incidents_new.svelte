@@ -1,6 +1,54 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Form from './components/form/Form.svelte';
     const dispatch = createEventDispatcher();
+
+    let form_test = 'Form testttttt';
+    let f = [
+        {
+            item_type: "section",
+            label: "Section name",
+            children: [
+                {
+                    item_type: "input_select",
+                    id: "0_1",
+                    label: "Type of ID",
+                    hint: false,
+                    options: [
+                        {value: '', text: "Select one"},
+                        {value: 'PP', text: "Passport"},
+                        {value: 'ID', text: "National ID"},
+                    ],
+                    answer: ""
+                },
+                {
+                    item_type: "input_text",
+                    id: "0_2",
+                    label: "Name",
+                    hint: "As it appears on your ID",
+                    placeholder: "eg. Joe K Bloggs",
+                    answer: ""
+                },
+                {
+                    item_type: "input_textarea",
+                    id: "0_3",
+                    label: "Write a short essay",
+                    hint: "Go on, let it all out",
+                    answer: ""
+                }
+            ]
+        }
+    ];
+    let form_text = '';
+
+    $: {
+        let daform = f;
+        form_text = JSON.stringify(daform, null, 4);
+    }
+
+    function update_payload_text() {
+		console.log(form_test, JSON.stringify(f, null, 4));
+	}
 
     let show_drawer = false;
     let mask_block = false;
@@ -103,23 +151,9 @@
 
         {#if tab == 'report'}
             <h1>Report</h1>
-            <div class="card">
-                <div class="card-body form">
-                    <h4>Initial details</h4>
-
-                    <div class="form-item">
-                        <label>Site</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-item">
-                        <label>Date and time of event</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="text-right">
-                <a class="btn" href="#ehs/incidents/incidents_new/events" on:click="{ () => nav('ehs/incidents/incidents_new/events')}">Next</a>
-            </div>
+            <Form {f} ></Form>
+            <span on:click="{update_payload_text}">Test</span>
+            
         {:else if tab =='events'}
             <div>
                 <h1>Events</h1>
@@ -224,43 +258,7 @@
 
 
 <style>
-    .drawer {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        z-index: 1000;
-    }
-    .drawer .mask {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        pointer-events: none;
-        background-color: rgba(0,0,0,0);
-        transition: background-color 1s linear;
-    }
-    .drawer .mask.block {
-        pointer-events:all;
-    }
-
-    .drawer .mask.visible {
-        background-color: rgba(0,0,0,0.2);
-    }
-    .drawer .pullout {
-        position:absolute;
-        left:100%;
-        width:544px;
-        height:100%;
-        background:#fff;
-        transition:left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .drawer .pullout.in {
-        left: calc(100% - 544px);
-        box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    }
+   
     .radio {
         display:block;
     }
@@ -273,26 +271,6 @@
         margin-left:16px;
     }
 
-    .pullout {
-        display:flex;
-        flex-direction: column;
-    }
-
-    .pullout-head {
-        padding: 0 32px;
-    }
-    .pullout-head h2 {
-        font-weight:300;
-    }
-    .pullout-body {
-        flex:1;
-        padding:32px;
-        overflow-y: auto;
-    }
-
-    .pullout .close {
-        float:right;
-    }
     .card {
         margin-bottom:16px;
     }

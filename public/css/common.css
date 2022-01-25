@@ -45,6 +45,18 @@ li {
     border-radius: 4px;
     padding: 4px 8px;
     width: 300px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+.form-item label{
+   display:block;
+   font-weight:bold;
+   padding-bottom:4px;
+}
+.form-item p{
+   display:block;
+   color:#666;
+   padding-bottom:12px;
+   margin:0;
 }
 
 
@@ -91,6 +103,11 @@ li {
     float:left;
     margin-right:8px ! important;
     margin-left:0 ! important;
+}
+.btn-right {
+    float:right;
+    margin-left:8px ! important;
+    margin-right:0 ! important;
 }
 
 .btn svg {
@@ -348,6 +365,67 @@ li {
 
 }
 
+
+
+.drawer {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 1000;
+}
+.drawer .mask {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 1s linear;
+}
+.drawer .mask.block {
+    pointer-events:all;
+}
+
+.drawer .mask.visible {
+    background-color: rgba(0,0,0,0.2);
+}
+.drawer .pullout {
+    position:absolute;
+    left:100%;
+    width:544px;
+    height:100%;
+    background:#fff;
+    transition:left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.drawer .pullout.in {
+    left: calc(100% - 544px);
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+.pullout {
+    display:flex;
+    flex-direction: column;
+}
+
+.pullout-head {
+    padding: 0 32px;
+}
+.pullout-head h2 {
+    font-weight:300;
+}
+.pullout-body {
+    flex:1;
+    padding:32px;
+    overflow-y: auto;
+}
+
+.pullout .close {
+    float:right;
+}
+
 .card {
     aspect-ratio:revert;
     width:100%;
@@ -437,21 +515,24 @@ h1 .i-32 {
 	margin-bottom: 6px;
 	vertical-align: middle;
 }
-.i-actions { background-image:url(../images/icons/actions.svg) }
-.i-attachment { background-image:url(../images/icons/attachment.svg) }
-.i-close { background-image:url(../images/icons/close.svg) }
-.i-download { background-image:url(../images/icons/download.svg) }
-.i-edit { background-image:url(../images/icons/edit.svg) }
-.i-filter { background-image:url(../images/icons/filter.svg)}
-.i-hinton-plot { background-image:url(../images/icons/hinton-plot.svg)}
-.i-incidents { background-image:url(../images/icons/incidents.svg)}
-.i-menu { background-image:url(../images/icons/menu.svg)}
-.i-notification { background-image:url(../images/icons/notification.svg)}
-.i-printer { background-image:url(../images/icons/printer.svg)}
-.i-rocket { background-image:url(../images/icons/rocket.svg)}
-.i-search { background-image:url(../images/icons/search.svg)}
-.i-switcher { background-image:url(../images/icons/switcher.svg)}
-.i-trash { background-image:url(../images/icons/trash-can.svg)}
+.i-actions              { background-image:url(../images/icons/actions.svg) }
+.i-attachment           { background-image:url(../images/icons/attachment.svg) }
+.i-close                { background-image:url(../images/icons/close.svg) }
+.i-download             { background-image:url(../images/icons/download.svg) }
+.i-edit                 { background-image:url(../images/icons/edit.svg) }
+.i-filter               { background-image:url(../images/icons/filter.svg)}
+.i-hinton-plot          { background-image:url(../images/icons/hinton-plot.svg)}
+.i-incidents            { background-image:url(../images/icons/incidents.svg)}
+.i-menu                 { background-image:url(../images/icons/menu.svg)}
+.i-notification         { background-image:url(../images/icons/notification.svg)}
+.i-pin                  { background-image:url(../images/icons/pin.svg)}
+.i-printer              { background-image:url(../images/icons/printer.svg)}
+.i-qr                   { background-image:url(../images/icons/qr.svg)}
+.i-rocket               { background-image:url(../images/icons/rocket.svg)}
+.i-search               { background-image:url(../images/icons/search.svg)}
+.i-settings             { background-image:url(../images/icons/settings.svg)}
+.i-switcher             { background-image:url(../images/icons/switcher.svg)}
+.i-trash                { background-image:url(../images/icons/trash-can.svg)}
 
 
 .menu-icons {
@@ -508,7 +589,11 @@ h1 .i-32 {
     height:40px;
 }
 
-
+.tag {
+    color: var(--black);
+    background: var(--eo-border-input);
+    font-size:14px;
+}
 
 
 .form h4 {

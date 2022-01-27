@@ -1,9 +1,8 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import PubSub from 'pubsub-js'
+
     import Form from './components/form/Form.svelte';
-
-	import Items from "./Multiselect-item.svelte";
-
     import RecordID from "./components/table/RecordID.svelte";
     import Status from "./components/table/Status.svelte";
 
@@ -37,6 +36,13 @@
                 {
                     "key": "record_id",
                     "value": "Record ID",
+                    "selectable": false,
+                    "selected": true,
+                    "pii": false
+                },
+                {
+                    "key": "channel",
+                    "value": "Channel",
                     "selectable": true,
                     "selected": true,
                     "pii": false
@@ -46,7 +52,7 @@
                     "key": "created_date",
                     "value": "Date created on",
                     "selectable": true,
-                    "selected": false,
+                    "selected": true,
                     "pii": false
                 },
                 {
@@ -124,16 +130,21 @@
             ]
         }
     ];
-    let table_settings_form = [
-        {
-            item_type: "input_multi",
-            id: "0_1",
-            label: "Columns to show",
-            hint: "Remember all users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
-            options: columns,
-            answer: ""
+    let edit_columns = [];
+    let table_settings_form = [];
+    let channel = "TABLE";
+    let sub = PubSub.subscribe(channel, read_answer);
+
+    function read_answer(msg, data) {
+        if(data.id == "table_settings_multi") { 
+            edit_columns = data.options;
         }
-    ]
+    }
+    function save_table_settings() {
+        columns = edit_columns;
+        table_settings_form[0].options = edit_columns;
+        hide_table_drawer();
+    }
 
     let selected_columns = [];
 
@@ -148,7 +159,6 @@
             });
         })
         selected_columns = temp_sel;
-        console.log(selected_columns);
     }
 
     let table_data = [
@@ -176,6 +186,29 @@
 
     let table_settings_pullout = false;
     let show_drawer = false;
+
+    $: {
+        let s = show_drawer;
+        if(s) {
+            console.log('drawer IS showing_____________________');
+            table_settings_form = [
+                {
+                    item_type: "input_multi",
+                    id: "table_settings_multi",
+                    label: "Columns to show",
+                    hint: "Remember all users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
+                    options: JSON.parse(JSON.stringify(columns)),
+                    answer: ""
+                }
+            ];
+        } else {
+            console.log('drawer is NOT showing_________________');
+
+        }
+    }
+
+
+
     let mask_block = false;
     let mask_visible = false;
     let pullout = false;
@@ -194,6 +227,9 @@
         table_settings_pullout = false;
         setTimeout(() => {
             show_drawer = false;
+
+            table_settings_form.options = columns;
+            table_settings_form = table_settings_form;
         }, 1000);
     }
 
@@ -401,10 +437,10 @@
             <div class="pullout-body form">
 
                
-                <Form f={table_settings_form} ></Form>
+                <Form f={table_settings_form} {channel}></Form>
                
                 <div class="form-item">
-                    <span class="btn">Save</span>
+                    <span class="btn" on:click="{save_table_settings}">Save</span>
                     <span class="btn btn-secondary" on:click="{hide_table_drawer}">Cancel</span>
                 </div>
             </div>

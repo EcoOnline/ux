@@ -7,6 +7,7 @@
 	import InputTextarea from "./InputTextarea.svelte";
 
     export let f;
+    export let channel = 'ANSWER';
 
     let components = {
         "section": Section,
@@ -24,7 +25,7 @@
 
 {#each f as f}
     {#if components[f.item_type]}
-        <svelte:component this={components[f.item_type]} {f} />
+        <svelte:component this={components[f.item_type]} {f} {channel}/>
     {:else}
         Unknown component <b>{f.item_type}</b> on Form.svelte.
     {/if}

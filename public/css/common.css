@@ -517,6 +517,10 @@ h1 .i-32 {
 }
 .i-actions              { background-image:url(../images/icons/actions.svg) }
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
+.i-checkbox             { background-image:url(../images/icons/checkbox.svg) }
+.i-checkbox-selected    { background-image:url(../images/icons/checkbox-selected.svg) }
+.i-chevron-down         { background-image:url(../images/icons/chevron-down.svg) }
+.i-chevron-up           { background-image:url(../images/icons/chevron-up.svg) }
 .i-close                { background-image:url(../images/icons/close.svg) }
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
@@ -591,8 +595,23 @@ h1 .i-32 {
 
 .tag {
     color: var(--black);
-    background: var(--eo-border-input);
+    background: var(--eo-border-reduced);
     font-size:14px;
+    line-height:24px;
+    display:inline-block;
+    margin-right:4px;
+    margin-bottom:4px;
+    padding:0px 8px 0px 12px;
+    min-height:24px;
+    border-radius:12px;
+    cursor: pointer;
+}
+.tag.no_delete {
+    padding-left:8px;
+    cursor: default;
+}
+.tag i {
+    opacity:0.5;
 }
 
 
@@ -603,7 +622,7 @@ h1 .i-32 {
 }
 .form .form-item {
     margin-bottom:32px;
-    overflow: auto;
+    overflow: auto; /* why was this here? */
 }
 
 .form label {
@@ -612,6 +631,7 @@ h1 .i-32 {
     margin-bottom:4px;
 }
 .form-control {
+    font-family: "IBM Plex Sans", sans-serif;
     font-size:16px;
     line-height:24px;
     padding:12px 16px;
@@ -619,6 +639,21 @@ h1 .i-32 {
     border:1px solid var(--eo-border-input);
     width:100%;
     max-width: 480px;
+}
+div.form-control {
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+div.form-control input {
+    font-family: "IBM Plex Sans", sans-serif;
+    padding: 12px 0px;
+    font-size:16px;
+    line-height:24px;
+    border: none;
+    flex:1;
+    outline:none;
 }
 
 

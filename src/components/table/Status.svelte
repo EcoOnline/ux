@@ -9,6 +9,10 @@
         "awaiting_triage": {
             value: "Awaiting Triage",
             color: "warning"
+        },
+        "awaiting_investigation": {
+            value: "Awaiting Investigation",
+            color: "critical"
         }
     }
 </script>
@@ -37,5 +41,9 @@
     .badge.warning {
         background-color: var(--eo-warning-500);
         color:var(--black);
+    }
+    .badge.critical {
+        background-color: var(--eo-critical-500);
+        color:#fff;
     }
 </style>

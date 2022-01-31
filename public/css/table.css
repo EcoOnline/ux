@@ -73,3 +73,41 @@
         position: relative ! important;
     }
 }
+th.sortable {
+    cursor:pointer;
+}
+th.sortable:after {
+    content: '';
+    display:inline-block;
+    margin-left:4px;
+    margin-bottom:-2px;
+    width:16px;
+    height:16px;
+    background: url('../images/icons/arrow-down.svg') center center no-repeat;
+    background-size: contain;
+    opacity:0;
+    /*position:absolute;
+    top:4px;
+    right:4px;
+    */
+}
+
+th.sortable:hover:after {
+    opacity:0.5;
+}
+th.sortable.desc:after {
+    background-image: url('../images/icons/arrow-down.svg');
+    opacity:1;
+}
+th.sortable.asc:after {
+    background-image: url('../images/icons/arrow-up.svg');
+    opacity:1;
+}
+th.sortable.desc:hover:after {
+    background-image: url('../images/icons/arrow-up.svg');
+    opacity:1;
+}
+th.sortable.asc:hover:after {
+    background-image: url('../images/icons/arrow-down.svg');
+    opacity:1;
+}

@@ -44,14 +44,17 @@
                     "value": "Record ID",
                     "selectable": false,
                     "selected": true,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true,
+                    "sorted": "desc"
                 },
                 {
                     "key": "channel",
                     "value": "Channel",
                     "selectable": true,
                     "selected": true,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true
                 },
                 
                 {
@@ -59,56 +62,66 @@
                     "value": "Date created on",
                     "selectable": true,
                     "selected": true,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true,
+                    "sortable_type": "date"
                 },
                 {
                     "key": "created_by",
                     "value": "Creator",
                     "selectable": true,
                     "selected": true,
-                    "pii": true
+                    "pii": true,
+                    "sortable": true
                 },
                 {
                     "key": "updated_date",
                     "value": "Date updated on",
                     "selectable": true,
                     "selected": false,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true,
+                    "sortable_type": "date"
                 },
                 {
                     "key": "updated_by",
                     "value": "Updated by",
                     "selectable": true,
                     "selected": false,
-                    "pii": true
+                    "pii": true,
+                    "sortable": true
                 },
                 {
                     "key": "status",
                     "value": "Status",
                     "selectable": true,
                     "selected": true,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true
                 },
                 {
                     "key": "group",
                     "value": "Group",
                     "selectable": true,
                     "selected": false,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true
                 },
                 {
                     "key": "division",
                     "value": "Division",
                     "selectable": true,
                     "selected": false,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true
                 },
                 {
                     "key": "sector",
                     "value": "Sector",
                     "selectable": true,
                     "selected": false,
-                    "pii": false
+                    "pii": false,
+                    "sortable": true
                 }
             ]
         },
@@ -170,13 +183,13 @@
         })
         selected_columns = temp_sel;
     }
-
+    
     let table_data = [
         { 
-            "created_date": "2022-01-22T13:48:19.430Z",
+            "created_date": "2022-01-22T13:08:10.430Z",
             "created_by": "Mike Wazowski",
-            "update_date": "2022-01-24T3:48:19.430Z",
-            "update_by": "Mike Wazowski",
+            "updated_date": "2022-01-24T3:48:19.430Z",
+            "updated_by": "Mike Wazowski",
             "group": "Ireland",
             "division": "Cork",
             "sector": "Plumbing",
@@ -193,10 +206,10 @@
             "status": "in_progress"
         },
         { 
-            "created_date": "2022-01-22T13:48:19.430Z",
+            "created_date": "2022-01-22T03:48:19.430Z",
             "created_by": "James P Sullivan",
-            "update_date": "2022-01-24T3:48:19.430Z",
-            "update_by": "James P Sullivan",
+            "updated_date": "2022-01-24T3:48:19.430Z",
+            "updated_by": "Fungus",
             "group": "Ireland",
             "division": "Cork",
             "sector": "Plumbing",
@@ -211,8 +224,67 @@
             "total_actions": 2,
             "open_total_actions": "0/2",
             "status": "awaiting_triage"
+        },
+        { 
+            "created_date": "2022-01-22T18:56:19.430Z",
+            "created_by": "Boo",
+            "updated_date": "2022-01-24T3:48:19.430Z",
+            "updated_by": "Fungus",
+            "group": "Ireland",
+            "division": "Cork",
+            "sector": "Plumbing",
+            "record_id": 486,
+            "channel": "rapid",
+            "primary_event_type": "Accident",
+            "date_time": "2022-01-24T3:48:19.430Z",
+            "time_relative": "9hr 42min",
+            "location": "Main Office",
+            "custom_field_shift": "Blue Shift",
+            "open_actions": 0,
+            "total_actions": 2,
+            "open_total_actions": "0/2",
+            "status": "awaiting_investigation"
         }
     ]
+    
+    function sort_table(th) {
+
+        if(!th.sortable) {
+            console.log('cant sort this column');
+            return false;
+        }
+        
+        let new_sort_dir = th.sorted == 'asc' ? 'desc' : 'asc';
+        let new_sort_key = th.key;
+        //remove old key
+        let c = selected_columns[sort_key];
+        if(c) {
+            delete c.sorted;
+        }
+        //update new
+        th.sorted = new_sort_dir;
+        sort_dir = new_sort_dir;
+        sort_key = new_sort_key;
+        columns = columns;
+    }
+
+    let sort_key = 'record_id';
+    let sort_dir = 'desc';
+
+    $:table_data_sorted = table_data.sort((a, b) => {
+        
+        let A = (a[sort_key] + '').toLowerCase();
+        let B = (b[sort_key] + '').toLowerCase();
+
+        if(sort_dir == 'desc') {
+            return A<B ? 1 : -1;
+        } else {
+            return A>B ? 1 : -1;
+        }
+
+       
+
+    })
 
     let table_drawer = false;
     
@@ -428,22 +500,12 @@
                     <thead>
                         <tr>
                             {#each Object.entries(selected_columns) as [k, th]}
-                                <th>{th.value}</th>
+                                <th on:click="{ () => { sort_table(th)}}"class:sortable="{th.sortable}" class:asc="{th.sorted == 'asc'}" class:desc="{th.sorted == 'desc'}">{th.value}</th>
                             {/each}
-                            <!--
-                            <th>Record ID</th>
-                            <th>Report Type</th>
-                            <th>Source</th>
-                            <th>Event Type</th>
-                            <th>When</th>
-                            <th>Location</th>
-                            <th>Shift</th>
-                            <th>Open Actions</th>
-                            <th>Status</th>-->
                         </tr>
                     </thead>
                     <tbody>
-                        {#each table_data as row}
+                        {#each table_data_sorted as row}
                             <tr>
                                 {#each Object.entries(selected_columns) as [k, th]}
                                     <td>

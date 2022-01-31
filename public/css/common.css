@@ -538,6 +538,8 @@ h1 .i-32 {
 	vertical-align: middle;
 }
 .i-actions              { background-image:url(../images/icons/actions.svg) }
+.i-arrow-down           { background-image:url(../images/icons/arrow-down.svg) }
+.i-arrow-up             { background-image:url(../images/icons/arrow-up.svg) }
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
 .i-checkbox             { background-image:url(../images/icons/checkbox.svg) }
 .i-checkbox-selected    { background-image:url(../images/icons/checkbox-selected.svg) }

@@ -34,9 +34,17 @@
         {#if f.pii}
                 <i title="Personally Identifiable Information" class="i-fingerprint i-16"></i>
         {/if}
+        {#if f.children}
+            {#if f.expanded}
+                <i class="i-chevron-up i-20" on:click="{ () => { f.expanded = false; } }"></i>
+            {:else if f.expanded === false}
+                <i class="i-chevron-down i-20" on:click="{ () => { f.expanded = true; } }"></i>
+            {/if}
+      
+        {/if}
     
     </div>
-    {#if f.children}
+    {#if f.children && f.expanded}
         {#each f.children as f}
             <svelte:self {f} indent={indent+1} on:item_update="{handleItemUpdate}"/>
         {/each}

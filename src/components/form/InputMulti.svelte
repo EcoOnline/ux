@@ -5,11 +5,9 @@
     import Item from './InputMultiItem.svelte';
 
     export let f;
-    let orginal_options = JSON.parse(JSON.stringify(f.options));
+    let orginal_options = JSON.parse(JSON.stringify(f.options)); //make a copy for resetting
 
     let dd_in = false;
-
-    let opts = [];
     let tab="all";
 
     export let channel = 'ANSWER';
@@ -38,15 +36,18 @@
 
     function cull(arr, txt) {
         let found = false;
-        let found_in_children = false;
         arr.forEach( (item, i) => {
+            let found_in_children = false;
             if(Array.isArray(item.children)) {
-                //console.log("children?", Array.isArray(item.children), cull(item.children, txt));
-                let c = cull(item.children, txt);
-                if(c) {
+                item.expanded = (typeof item.expanded !== 'undefined' ? item.expanded : false);
+                if(cull(item.children, txt)) {
                     found_in_children = true;
                 }
             }
+           /* if( item.value == 'Common Fields' || item.value == 'Report Event') {
+                console.log(item.value, txt=='', item.value.toLowerCase().indexOf(txt) >= 0, found_in_children)
+            }*/
+
             if(txt == '' || item.value.toLowerCase().indexOf(txt) >= 0 || found_in_children){
                 item.visible = true;
                 found = true
@@ -58,11 +59,15 @@
     }
 
     $: {
+        let txt = f.answer;
+        recalc();
+        /*
         console.log("filtering");
         cull(f.options, f.answer);
         if(f.answer !== '') {
             dd_in = true;
         }
+        */
     }
     
     let w = 0;
@@ -82,8 +87,12 @@
     }
     
     function recalc() {
-        selected = tree_to_selected(opts);
-   
+        console.log("recalcing");
+        cull(f.options, f.answer);
+        if(f.answer !== '') {
+            dd_in = true;
+        }
+        selected = tree_to_selected(f.options);
         
         if(w>0) {
             let char_width = 12; //rough approximation
@@ -100,30 +109,25 @@
             });
             selected_shortlist = selected.slice(0, num_tags);
             let answer = JSON.parse(JSON.stringify(f));
-            answer.options = opts;
+            //answer.options = opts;
             PubSub.publish(channel, answer);
         }
     }
 
     function remove_tag(tag) {
         tag.selected = false;
-        //opts = JSON.parse(JSON.stringify(f.options));
-        f.options = JSON.parse(JSON.stringify(opts));
+        f.options = f.options;
         recalc();
     }
     function handleItemUpdate(ev) {
-        opts = JSON.parse(JSON.stringify(f.options));
         recalc();
     }
     function handleItemUpdate2(ev) {
-        console.log('selected update', ev.detail.item)
-        f.options = JSON.parse(JSON.stringify(opts));
         recalc();
     }
 
 
     onMount(() => {
-        opts = JSON.parse(JSON.stringify(orginal_options));
         w = item.offsetWidth;
         recalc();
 	})
@@ -174,10 +178,12 @@
                 <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'selected'}" on:click|preventDefault ="{ () => { tab = 'selected'; }}">Selected</a></li>
             </ul>
             {#if tab == 'all'}
-                {#each f.options as f}
-                    
+                {#each f.options as f} 
                     <Item {f} on:item_update="{handleItemUpdate}"/>
                 {/each}
+            
+
+
             {:else if tab == 'selected'}
                 {#each selected as f}
                     <Item {f} on:item_update="{handleItemUpdate2}"/>

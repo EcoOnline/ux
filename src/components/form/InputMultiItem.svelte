@@ -21,22 +21,26 @@
     }
 </script>
 
-
-<div class="multi-item indent{indent_class}" >
-    {#if f.selectable}
-        {#if f.selected}
-            <i class="i-checkbox-selected i-20" on:click="{toggle_item}"></i>
-        {:else}
-            <i class="i-checkbox i-20" on:click="{toggle_item}"></i>
+{#if f.visible}
+    <div class="multi-item indent{indent_class}" >
+        {#if f.selectable}
+            {#if f.selected}
+                <i class="i-checkbox-selected i-20" on:click="{toggle_item}"></i>
+            {:else}
+                <i class="i-checkbox i-20" on:click="{toggle_item}"></i>
+            {/if}
         {/if}
-        <!--<input type="checkbox" bind:checked="{f.selected}"/>-->
+        {f.value}
+        {#if f.pii}
+                <i title="Personally Identifiable Information" class="i-fingerprint i-16"></i>
+        {/if}
+    
+    </div>
+    {#if f.children}
+        {#each f.children as f}
+            <svelte:self {f} indent={indent+1} on:item_update="{handleItemUpdate}"/>
+        {/each}
     {/if}
-    {f.value}
-</div>
-{#if f.children}
-    {#each f.children as f}
-        <svelte:self {f} indent={indent+1} on:item_update="{handleItemUpdate}"/>
-    {/each}
 {/if}
 
 <style>

@@ -39,7 +39,7 @@
         arr.forEach( (item, i) => {
             let found_in_children = false;
             if(Array.isArray(item.children)) {
-                item.expanded = (typeof item.expanded !== 'undefined' ? item.expanded : false);
+                item.expanded = (typeof item.expanded !== 'undefined' ? item.expanded : true); //default to open
                 if(cull(item.children, txt)) {
                     found_in_children = true;
                 }
@@ -163,7 +163,7 @@
     {/if}
     <div class="multi-wrapper">
         <div class="form-control">
-            <input bind:value="{f.answer}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
+            <input bind:value="{f.answer}" on:focus="{ (ev) => { ev.target.select()}}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
             {#if !dd_in}
                 <i class="i-chevron-down i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
             {:else}

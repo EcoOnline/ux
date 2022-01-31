@@ -12,6 +12,9 @@
 .sticky-wrapper td.fat, .sticky-wrapper th.fat {
 	width: 100%; /*hacky just for a pretty demo*/
 }
+.sticky-wrapper thead tr {
+	background:  var(--table-header);
+}
 .sticky-wrapper th {
 	position:sticky ! important;
 	top:0;

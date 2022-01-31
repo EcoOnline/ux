@@ -1,5 +1,4 @@
 <script>
-    
 	import InputSelect from "./InputSelect.svelte";
 	import InputText from "./InputText.svelte";
 	import InputMulti from "./InputMulti.svelte";
@@ -14,6 +13,7 @@
     
 
     export let f;
+    export let channel;
 
 </script>
 
@@ -31,7 +31,7 @@
                 {#if components[f.item_type]}
                     <svelte:component this={components[f.item_type]} {f} />
                 {:else}
-                    you tried loading an unknown component <b>{f.item_type}</b>
+                    <div>Tried loading an unknown component <b>{f.item_type}</b></div>
                 {/if}
             {/each}
         {/if}

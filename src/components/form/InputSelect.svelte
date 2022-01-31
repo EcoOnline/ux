@@ -1,5 +1,6 @@
 <script>
     export let f;
+    export let channel = 'ANSWER';
 </script>
 
 

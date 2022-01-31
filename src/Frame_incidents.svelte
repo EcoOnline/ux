@@ -2,16 +2,22 @@
     import { createEventDispatcher } from 'svelte';
     import PubSub from 'pubsub-js'
 
+    import Pullout from './components/Pullout.svelte';
+
     import Form from './components/form/Form.svelte';
     import RecordID from "./components/table/RecordID.svelte";
     import Status from "./components/table/Status.svelte";
+    import Channel from "./components/table/Channel.svelte";
+    import DateComp from "./components/table/Date.svelte";
 
 
    
 
 	let components = {
 		"record_id": RecordID,
-		"status": Status
+		"status": Status,
+		"channel": Channel,
+		"created_date": DateComp
 	}
     
     const dispatch = createEventDispatcher();
@@ -143,7 +149,11 @@
     function save_table_settings() {
         columns = edit_columns;
         table_settings_form[0].options = edit_columns;
-        hide_table_drawer();
+        table_cancel();
+        /*
+        table_settings_form.options = columns;
+        table_settings_form = table_settings_form;
+        */
     }
 
     let selected_columns = [];
@@ -163,7 +173,7 @@
 
     let table_data = [
         { 
-            "created_date": "2022-01-24T3:48:19.430Z",
+            "created_date": "2022-01-22T13:48:19.430Z",
             "created_by": "Mike Wazowski",
             "update_date": "2022-01-24T3:48:19.430Z",
             "update_by": "Mike Wazowski",
@@ -173,7 +183,7 @@
             "record_id": 485,
             "channel": "rapid",
             "primary_event_type": "Near miss",
-            "date_time": "2022-01-24T3:48:19.430Z",
+            "date_time": "2022-01-24T03:48:19.430Z",
             "time_relative": "9hr 42min",
             "location": "Main Office",
             "custom_field_shift": "Yellow Shift",
@@ -181,14 +191,33 @@
             "total_actions": 2,
             "open_total_actions": "0/2",
             "status": "in_progress"
+        },
+        { 
+            "created_date": "2022-01-22T13:48:19.430Z",
+            "created_by": "James P Sullivan",
+            "update_date": "2022-01-24T3:48:19.430Z",
+            "update_by": "James P Sullivan",
+            "group": "Ireland",
+            "division": "Cork",
+            "sector": "Plumbing",
+            "record_id": 484,
+            "channel": "eco",
+            "primary_event_type": "Accident",
+            "date_time": "2022-01-24T3:48:19.430Z",
+            "time_relative": "9hr 42min",
+            "location": "Main Office",
+            "custom_field_shift": "Red Shift",
+            "open_actions": 0,
+            "total_actions": 2,
+            "open_total_actions": "0/2",
+            "status": "awaiting_triage"
         }
     ]
 
-    let table_settings_pullout = false;
-    let show_drawer = false;
-
+    let table_drawer = false;
+    
     $: {
-        let s = show_drawer;
+        let s = table_drawer;
         if(s) {
             table_settings_form = [
                 {
@@ -198,7 +227,7 @@
                     hint: "All users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
                     max_warning: {
                         value: 10,
-                        message: "If you have too many columns this page may become unresponsive for all users. You can always pin this table to your own dashboard to customize further."
+                        message: 'If you have too many columns this page may become unresponsive for all users. You can always pin this table to your own dashboard to customize further.'
                     },
                     options: JSON.parse(JSON.stringify(columns)),
                     answer: ""
@@ -206,38 +235,63 @@
             ];
         }
     }
-
-
-
-    let mask_block = false;
-    let mask_visible = false;
-    let pullout = false;
-
-    function show_table_drawer() {
-        show_drawer = true;
-        mask_block = false;
-        mask_visible = true;
-        setTimeout(() => {
-            table_settings_pullout = true;
-        }, 300);
+    function table_cancel() {
+        table_drawer = false;
     }
-    function hide_table_drawer() {
-        mask_block = false;
-        mask_visible = false;
-        table_settings_pullout = false;
-        setTimeout(() => {
-            show_drawer = false;
 
-            table_settings_form.options = columns;
-            table_settings_form = table_settings_form;
-        }, 1000);
-    }
+
+
+    
 
     function nav(str) {
 		dispatch('nav', {
 			text: str
 		});
 	}
+
+    let pin_title = 'Pin module';
+    let pin_drawer = false;
+    let pin_form = [
+        {
+            item_type: "input_select",
+            id: "pin_module_dashboard",
+            label: "Select a dashboard to pin it to",
+            options: [
+                { "value": 1, "text": "Dashboard 1"},
+                { "value": 2, "text": "Dashboard 2"},
+                { "value": 3, "text": "Dashboard 3"},
+                { "value": 4, "text": "Dashboard 4"},
+                { "value": 5, "text": "Dashboard 5"}
+            ],
+            answer: ""
+        },
+        {
+            item_type: "input_checkbox",
+            id: "pin_module_navigate",
+            options: [
+                { "value": false, "text": "Open the dashboard after you pin it?"}
+            ],
+            answer: ""
+        }
+    ]
+    function pin_module(title) {
+        pin_title = "Pin " + title;
+        pin_drawer = true;
+    }
+    function pin_save() {
+        pin_drawer = false;
+        if(pin_form[1].options[0].value) {
+            alert('Pinned');
+            window.location.hash = "#ehs/dashboards";
+        } else {
+            alert('Pinned')
+        }
+    }
+    function pin_cancel() {
+        pin_drawer = false;
+    }
+
+
 </script>
 
 <div class="row sticky">
@@ -267,7 +321,7 @@
             <div class="row">
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Open Events<a href="/" class="i-pin i-20 btn-right"> </a></div>
+                        <div class="card-header">Open Events<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Open Events')}}"> </a></div>
                         <div class="card-body">
                             <div class="big-num">40</div>
                         </div>
@@ -275,7 +329,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Awaiting Investigation<a href="/" class="i-pin i-20 btn-right"> </a></div>
+                        <div class="card-header">Awaiting Investigation<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Awaiting investigation')}}"> </a></div>
                         <div class="card-body">
                             <div class="big-num minor">11</div>
                         </div>
@@ -283,7 +337,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">Awaiting SignOff<a href="/" class="i-pin i-20 btn-right"> </a></div>
+                        <div class="card-header">Awaiting Signoff<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Awaiting Signoff')}}"> </a></div>
                         <div class="card-body">
                             <div class="big-num minor">3</div>
                         </div>
@@ -291,7 +345,7 @@
                 </div>
                 <div class="col6">
                     <div class="card card-31">
-                        <div class="card-header">High Potential Severity<a href="/" class="i-pin i-20 btn-right"> </a></div>
+                        <div class="card-header">High Potential Severity<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('High Potential Severity')}}"> </a></div>
                         <div class="card-body">
                             <div class="big-num danger">1</div>
                         </div>
@@ -302,7 +356,7 @@
         </div>
         <div class="col12 col-md-6">
             <div class="card card-32">
-                <div class="card-header">Events by Type<a href="/" class="i-pin i-20 btn-right"> </a></div>
+                <div class="card-header">Events by Type<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Events by Type')}}"> </a></div>
                 <div class="card-body">
                     <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1"  class="demo_graph" viewBox="0 0 428 203" width="90%"  display="block">
                         
@@ -366,8 +420,8 @@
     <div class="row">
         <div class="col12">
             <h4 style="">Latest Events
-                <a href="/" class="i-pin i-20 btn-right"> </a>
-                <a href="/" class="i-settings i-20 btn-right"  on:click|preventDefault="{show_table_drawer}"> </a>
+                <a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Latest Events')}}"> </a>
+                <a href="/" class="i-settings i-20 btn-right"  on:click|preventDefault="{ () => { table_drawer=true;}}"> </a>
             </h4>
             <div class="sticky-wrapper">
                 <table class="table">
@@ -427,26 +481,20 @@
 {/if}
 
 
-{#if show_drawer}
-    <div class="drawer">
-        <div class="mask" class:visible="{mask_visible}" class:block="{mask_block}"></div>
-        <div class="pullout" class:in="{table_settings_pullout}">
-            <div class="pullout-head">
-                <h2>Table settings <span class="close" on:click="{hide_table_drawer}"><i class="i-close i-24"></i></span></h2>
-            </div>
-            <div class="pullout-body form">
-
-               
-                <Form f={table_settings_form} {channel}></Form>
-               
-                <div class="form-item">
-                    <span class="btn" on:click="{save_table_settings}">Save</span>
-                    <span class="btn btn-secondary" on:click="{hide_table_drawer}">Cancel</span>
-                </div>
-            </div>
-        </div>
+<Pullout show_drawer={table_drawer} title="Table settings" on:close={table_cancel}>
+    <Form f={table_settings_form} {channel}></Form>
+    <div class="form-item">
+        <span class="btn" on:click="{save_table_settings}">Save</span>
+        <span class="btn btn-secondary" on:click="{table_cancel}">Cancel</span>
     </div>
-{/if}
+</Pullout>
+
+<Pullout show_drawer={pin_drawer} title={pin_title} on:close={pin_cancel}>
+    <Form f={pin_form}></Form>
+    <span class="btn" on:click="{pin_save}">Pin</span>
+    <!--<span class="btn btn-secondary" on:click="{pin_cancel}">Pin and Open Dashboard</span>-->
+    <span class="btn btn-secondary" on:click="{pin_cancel}">Cancel</span>
+</Pullout>
 
 <style>
     .sticky-wrapper {

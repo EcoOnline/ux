@@ -23,6 +23,13 @@
 
 {#if f.visible}
     <div class="multi-item indent{indent_class}" >
+        {#if f.children}
+            {#if f.expanded}
+                <i class="i-chevron-up i-20" on:click="{ () => { f.expanded = false; } }"></i>
+            {:else if f.expanded === false}
+                <i class="i-chevron-down i-20" on:click="{ () => { f.expanded = true; } }"></i>
+            {/if}
+        {/if}
         {#if f.selectable}
             {#if f.selected}
                 <i class="i-checkbox-selected i-20" on:click="{toggle_item}"></i>
@@ -34,14 +41,7 @@
         {#if f.pii}
                 <i title="Personally Identifiable Information" class="i-fingerprint i-16"></i>
         {/if}
-        {#if f.children}
-            {#if f.expanded}
-                <i class="i-chevron-up i-20" on:click="{ () => { f.expanded = false; } }"></i>
-            {:else if f.expanded === false}
-                <i class="i-chevron-down i-20" on:click="{ () => { f.expanded = true; } }"></i>
-            {/if}
-      
-        {/if}
+        
     
     </div>
     {#if f.children && f.expanded}

@@ -5,11 +5,18 @@
         "in_progress": {
             value: "In Progress",
             color: "success"
+        },
+        "awaiting_triage": {
+            value: "Awaiting Triage",
+            color: "warning"
         }
     }
 </script>
-
-<span class="badge {status_list[obj].color}">{status_list[obj].value}</span>
+{#if status_list[obj]}
+    <span class="badge {status_list[obj].color}">{status_list[obj].value}</span>
+{:else}
+    <span class="badge unknown">{obj}</span>
+{/if}
 
 <style>
     .badge {
@@ -21,9 +28,14 @@
         background-color: var(--eo-border);
         color: var(--eo-border-input);
         border-radius:4px;
+        white-space: nowrap;
     }
     .badge.success {
         background-color: var(--eo-secondary-500);
-        color:#fff;
+        color:var(--black);
+    }
+    .badge.warning {
+        background-color: var(--eo-warning-500);
+        color:var(--black);
     }
 </style>

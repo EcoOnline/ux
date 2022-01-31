@@ -1,19 +1,22 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Pullout from './components/Pullout.svelte';
     import Form from './components/form/Form.svelte';
+    
     const dispatch = createEventDispatcher();
 
     let form_test = 'Form testttttt';
     let f = [
         {
             item_type: "section",
-            label: "Section name",
+            label: "Initial details",
             children: [
                 {
-                    item_type: "input_select",
+                    item_type: "input_text",
                     id: "0_1",
-                    label: "Type of ID",
+                    label: "Site",
                     hint: false,
+                    placeholder: "Click or type to select...",
                     options: [
                         {value: '', text: "Select one"},
                         {value: 'PP', text: "Passport"},
@@ -24,16 +27,60 @@
                 {
                     item_type: "input_text",
                     id: "0_2",
-                    label: "Name",
-                    hint: "As it appears on your ID",
-                    placeholder: "eg. Joe K Bloggs",
+                    label: "Date and time of event",
+                    hint: false,
+                    answer: "",
+                    shortcuts: [
+                        {
+                            value: new Date(), text: "Now"
+                        }
+                    ]
+                },
+                {
+                    item_type: "input_text",
+                    id: "0_3",
+                    label: "Date and time reported",
+                    hint: false,
+                    answer: "",
+                    shortcuts: [
+                        {
+                            value: new Date(), text: "Now"
+                        }
+                    ]
+                },
+                {
+                    item_type: "input_text",
+                    id: "0_4",
+                    label: "Offsite location",
+                    optional: true,
+                    hint: false,
+                    answer: ""
+                }
+            ]
+        },
+        {
+            item_type: "section",
+            label: "Details of event",
+            children: [
+                {
+                    item_type: "input_text",
+                    id: "0_5",
+                    label: "Manual reference number",
+                    optional: true,
+                    hint: false,
                     answer: ""
                 },
                 {
-                    item_type: "input_textarea",
-                    id: "0_3",
-                    label: "Write a short essay",
-                    hint: "Go on, let it all out",
+                    item_type: "input_text",
+                    id: "0_6",
+                    label: "Time into shift",
+                    optional: true,
+                    answer: ""
+                },
+                {
+                    item_type: "input_lookup",
+                    id: "0_7",
+                    label: "Location level 1",
                     answer: ""
                 }
             ]
@@ -152,7 +199,6 @@
         {#if tab == 'report'}
             <h1>Report</h1>
             <Form {f} ></Form>
-            <span on:click="{update_payload_text}">Test</span>
             
         {:else if tab =='events'}
             <div>

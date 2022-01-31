@@ -1,13 +1,10 @@
-
 <script>
+
     export let obj; //assumes this is a date string
 
-    let str = '';
-    try {
-        let d = new Date(obj);
-        str = d.toLocaleString();
-    } catch (error) {
-        str = obj;
-    }
+    let str = JSON.parse(JSON.stringify(obj));
+    
+    $: formatted = (new Date(obj + '')).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+
 </script>
-{str}
+<span title="UTC: {obj}">{formatted}</span>

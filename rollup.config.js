@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['training_image'].map((name, index) => ({
+export default ['frame'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

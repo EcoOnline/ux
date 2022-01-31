@@ -17,6 +17,53 @@
     let item = false;
     let selected = [];
     let selected_shortlist = [];
+    let filtered = [];
+
+    function filter_item(item, txt) {
+        let item_ok = false;
+        console.log('found in item?', item.value.toLowerCase(), txt, item.value.toLowerCase().indexOf(txt) >= 0)
+        if( item.value.toLowerCase().indexOf(txt) >= 0 ) {
+            item_ok = true;
+        }
+        if(item.children) {
+            item.children.forEach( (item) => {
+                let child_ok = filter_item(item, txt);
+                if(child_ok) {
+                    item_ok = true;
+                }
+            });
+        };
+        return item_ok;
+    }
+
+    function cull(arr, txt) {
+        let found = false;
+        let found_in_children = false;
+        arr.forEach( (item, i) => {
+            if(Array.isArray(item.children)) {
+                //console.log("children?", Array.isArray(item.children), cull(item.children, txt));
+                let c = cull(item.children, txt);
+                if(c) {
+                    found_in_children = true;
+                }
+            }
+            if(txt == '' || item.value.toLowerCase().indexOf(txt) >= 0 || found_in_children){
+                item.visible = true;
+                found = true
+            } else {
+                item.visible = false;
+            }
+        });
+        return found;
+    }
+
+    $: {
+        console.log("filtering");
+        cull(f.options, f.answer);
+        if(f.answer !== '') {
+            dd_in = true;
+        }
+    }
     
     let w = 0;
 
@@ -90,8 +137,13 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
+    {#if f.max_warning}
+        {#if selected.length >= f.max_warning.value}
+            <div class="idea"><i class="i-idea i-24"></i><p>{f.max_warning.message}</p></div>
+        {/if}
+    {/if}
     {#if dd_in}
-        <div class="multi-mask" on:click={ () => { dd_in = false; }}></div>
+        <div class="multi-mask" on:click={ () => { dd_in = false;f.answer=''; }}></div>
     {/if}
     {#if selected_shortlist.length}
         {#each selected_shortlist as tag}
@@ -107,11 +159,11 @@
     {/if}
     <div class="multi-wrapper">
         <div class="form-control">
-            <input type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
+            <input bind:value="{f.answer}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
             {#if !dd_in}
                 <i class="i-chevron-down i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
             {:else}
-                <i class="i-chevron-up i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
+                <i class="i-chevron-up i-20" on:click="{ () => { dd_in = !dd_in; f.answer=''}}"></i>
             {/if}
         </div>
         
@@ -123,6 +175,7 @@
             </ul>
             {#if tab == 'all'}
                 {#each f.options as f}
+                    
                     <Item {f} on:item_update="{handleItemUpdate}"/>
                 {/each}
             {:else if tab == 'selected'}
@@ -148,12 +201,28 @@
         background:transparent;
         position:absolute;
         left:0;
-        top:0;
+        top:60px;
         width:100%;
         height:100%;
     }
     .multi-wrapper {
         position:relative;
+    }
+
+    .idea {
+        padding:8px;
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        border:1px solid var(--eo-border-reduced);
+        border-radius:8px;
+        margin-bottom:8px;
+    }
+    .idea p {
+        flex: 1;
+	    font-size: 14px;
+	    margin: 0 0 0 8px;
+        padding: 0;
     }
 
     .multi-dropdown {

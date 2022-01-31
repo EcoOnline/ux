@@ -14,10 +14,10 @@
 <style>
     .badge {
         font-weight:bold;
-        font-size:12px;
+        font-size:11px;
         line-height: 12px;
         text-transform: uppercase ;
-        padding:4px 8px;
+        padding:2.5px 8px;
         background-color: var(--eo-border);
         color: var(--eo-border-input);
         border-radius:4px;

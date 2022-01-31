@@ -59,7 +59,7 @@
                     "key": "created_by",
                     "value": "Creator",
                     "selectable": true,
-                    "selected": false,
+                    "selected": true,
                     "pii": true
                 },
                 {
@@ -190,20 +190,20 @@
     $: {
         let s = show_drawer;
         if(s) {
-            console.log('drawer IS showing_____________________');
             table_settings_form = [
                 {
                     item_type: "input_multi",
                     id: "table_settings_multi",
                     label: "Columns to show",
-                    hint: "Remember all users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
+                    hint: "All users will see these changes. Any that contain personally identifiable information will be redacted if the user doesn't have permission.",
+                    max_warning: {
+                        value: 10,
+                        message: "If you have too many columns this page may become unresponsive for all users. You can always pin this table to your own dashboard to customize further."
+                    },
                     options: JSON.parse(JSON.stringify(columns)),
                     answer: ""
                 }
             ];
-        } else {
-            console.log('drawer is NOT showing_________________');
-
         }
     }
 

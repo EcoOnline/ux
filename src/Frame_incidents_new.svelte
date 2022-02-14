@@ -1072,7 +1072,7 @@
                         {/each}
                         <td>
                             {#each matrix.y_criteria[0].options as {label, selected}, i}
-                                <div class="matrix_cell" class:selected="{matrix.y_criteria[0].options[i].selected}" on:click="{ () => { matrix_col_selected = i}}">{label}</div>
+                                <div class="matrix_cell" class:selected="{matrix.y_criteria[0].options[i].selected}" on:click="{ () => { select_criteria_y(i, 0)}}">{label}</div>
                             {/each}
                         </td>
                     </tr>

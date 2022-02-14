@@ -27,17 +27,17 @@
 
 <style>
     .form-control {
-        width:76px;
+        width:82px;
         padding:4px;
     }
     .matrix {
         border:1px solid var(--eo-border-reduced);
         border-radius:8px;
-        width: 32px;
-        height: 32px;
+        width: 38px;
+        height: 38px;
         margin-right:8px;
         text-align: center;
-        line-height: 32px;
+        line-height: 38px;
         font-weight: 900;
     }
     .matrix.ok {

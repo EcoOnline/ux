@@ -49,8 +49,6 @@
                     <div class="tools">
                         <a href="#incidents/incidents_new" class="add"> </a>
                         <a href="queries_new" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
                     </div>
                 </div>
             </div>
@@ -86,6 +84,17 @@
                         <a href="./" class="add"> </a>
                         <a href="./" class="filter"> </a>
                         <a href="./" class="summary"> </a>
+                        <a href="./" class="tool"> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                <div class="tile" on:click|preventDefault="{ () => {nav('hazard_assessments');window.location.hash='#ehs/hazard_assessments'}}">
+                    <div class="icon" style="background-image:url(./images/ehs_svgs_clean/hazard_assessment.svg)"></div>
+                    <b>Hazard Assessment</b>
+                    <div class="tools">
+                        <a href="./" class="add"> </a>
+                        <a href="./" class="filter"> </a>
                         <a href="./" class="tool"> </a>
                     </div>
                 </div>

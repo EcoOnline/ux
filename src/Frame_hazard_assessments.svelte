@@ -3,6 +3,7 @@
     import PubSub from 'pubsub-js'
 
     import Pullout from './components/Pullout.svelte';
+    import BigNumber from './components/cards/BigNumber.svelte';
 
     import Form from './components/form/Form.svelte';
     import RecordID from "./components/table/RecordID.svelte";
@@ -371,7 +372,7 @@
         <ul class="breadcrumb">
             <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
-            <li>Incidents</li>
+            <li>Hazard Assessments</li>
         </ul>
     </div>
     <div class="col12 col-sm-7 text-right">
@@ -382,11 +383,10 @@
 </div>
 
 
-<h1 class="page-title"><i class="i-incidents i-32"></i>Incidents</h1>
+<h1 class="page-title"><i class="i-hazard-assessments i-32"></i>Hazard Assessments</h1>
 
 <ul class="tabs">
-    <li><a href="#ehs/incidents/overview" class:active="{tab == 'overview'}" on:click ="{ () => { tab = 'overview';}}">Overview</a></li>
-    <li><a href="#ehs/incidents/summary" class:active="{tab == 'summary'}" on:click ="{ () => { tab = 'summary'; }}">Summary</a></li>
+    <li><a href="#ehs/incidents/overview" class:active="{tab == 'overview'}" on:click ="{ () => { tab = 'dashboard';}}">Overview</a></li>
     <li><a href="#ehs/incidents/admin" class:active="{tab == 'admin'}" on:click ="{ () => { tab = 'admin'; }}">Admin</a></li>
     <!--<li><a href="/" class:active="{tab == 'query'}" on:click|preventDefault ="{ () => { tab = 'query';}}">Query</a></li>-->
 </ul>
@@ -395,55 +395,91 @@
         <div class="col12 col-md-6">
             <div class="row">
                 <div class="col6">
-                    <div class="card card-31">
-                        <div class="card-header">Open Events<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Open Events')}}"> </a></div>
-                        <div class="card-body">
-                            <div class="big-num">40</div>
-                        </div>
-                    </div>
+
+                    <BigNumber t={
+                        {"title": "Open Assessments",
+                        "data": {
+                            "content": "40",
+                            "status": "xx"
+                        }
+                    }}></BigNumber>
                 </div>
                 <div class="col6">
-                    <div class="card card-31">
-                        <div class="card-header">Awaiting Investigation<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Awaiting investigation')}}"> </a></div>
-                        <div class="card-body">
-                            <div class="big-num minor">11</div>
-                        </div>
-                    </div>
+                    <BigNumber t={
+                        {"title": "Awaiting Signoff",
+                        "data": {
+                            "content": "11",
+                            "status": "minor"
+                        }
+                    }}></BigNumber>
                 </div>
                 <div class="col6">
-                    <div class="card card-31">
-                        <div class="card-header">Awaiting Signoff<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Awaiting Signoff')}}"> </a></div>
-                        <div class="card-body">
-                            <div class="big-num minor">3</div>
-                        </div>
-                    </div>
+                    <BigNumber t={
+                        {"title": "Awaiting Completion",
+                        "data": {
+                            "content": "3",
+                            "status": "minor"
+                        }
+                    }}></BigNumber>
                 </div>
                 <div class="col6">
-                    <div class="card card-31">
-                        <div class="card-header">High Potential Severity<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('High Potential Severity')}}"> </a></div>
-                        <div class="card-body">
-                            <div class="big-num danger">1</div>
-                        </div>
-                    </div>
+                    <BigNumber t={
+                        {"title": "Review Due Within 7 Days",
+                        "data": {
+                            "content": "1",
+                            "status": "critical"
+                        }
+                    }}></BigNumber>
                 </div>
             </div>
 
         </div>
         <div class="col12 col-md-6">
             <div class="card card-32">
-                <div class="card-header">Events by Type<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Events by Type')}}"> </a></div>
+                <div class="card-header">Hazard Assessments by Site/Status<a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Events by Type')}}"> </a></div>
                 <div class="card-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1"  class="demo_graph" viewBox="0 0 428 203" width="90%"  display="block">
+                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1"  class="demo_graph" viewBox="0 0 428 210" width="90%"  display="block">
                         
                         <!-- horizontal grid lines -->
                         <path class="grid_lines" d="M 35 162 L 407 162 M 35 138 L 407 138 M 35 114 L 407 114 M 35 91 L 407 91 M 35 67 L 407 67 M 35 43 L 407 43 M 35 19 L 407 19"></path>
                         
-                        <rect class="leg1" x=39 y=150 width=29 height=12 />
-                        <rect class="leg1" x=76 y=138 width=29 height=24 />
-                        <rect class="leg1" x=225 y=150 width=29 height=12 />
-                        <rect class="leg1" x=262 y=150 width=29 height=12 />
-                        <rect class="leg1" x=299 y=150 width=29 height=12 />
-                        <rect class="leg1" x=374 y=126 width=29 height=36 />
+                        <rect class="leg1" x=39 y=150 width=44 height=12 />
+                        <rect class="leg1" x=92 y=90 width=44 height=72 />
+                        <rect class="leg1" x=145 y=126 width=44 height=36 />
+                        <rect class="leg1" x=198 y=126 width=44 height=36 />
+                        <rect class="leg1" x=251 y=102 width=44 height=60 />
+                        <rect class="leg1" x=304 y=114 width=44 height=48 />
+                        <rect class="leg1" x=357 y=126 width=44 height=36 />
+
+
+                        <rect class="leg2" x=39 y=126 width=44 height=24 />
+                        <rect class="leg2" x=92 y=78 width=44 height=12 />
+                        <rect class="leg2" x=145 y=114 width=44 height=12 />
+                        <rect class="leg2" x=198 y=126 width=44 height=0 />
+                        <rect class="leg2" x=251 y=66 width=44 height=36 />
+                        <rect class="leg2" x=304 y=102 width=44 height=12 />
+                        <rect class="leg2" x=357 y=126 width=44 height=0 />
+
+                        <rect class="leg3" x=39 y=126 width=44 height=0 />
+                        <rect class="leg3" x=92 y=66 width=44 height=12 />
+                        <rect class="leg3" x=145 y=102 width=44 height=12 />
+                        <rect class="leg3" x=198 y=126 width=44 height=0 />
+                        <rect class="leg3" x=251 y=54 width=44 height=12 />
+                        <rect class="leg3" x=304 y=90 width=44 height=12 />
+                        <rect class="leg3" x=357 y=78 width=44 height=48 />
+
+                        <rect class="leg4" x=39 y=90 width=44 height=36 />
+                        <rect class="leg4" x=92 y=66 width=44 height=0 />
+                        <rect class="leg4" x=145 y=102 width=44 height=0 />
+                        <rect class="leg4" x=198 y=126 width=44 height=0 />
+                        <rect class="leg4" x=251 y=30 width=44 height=24 />
+                        <rect class="leg4" x=304 y=78 width=44 height=12 />
+                        <rect class="leg4" x=357 y=78 width=44 height=0 />
+
+
+                        <rect class="leg5" x=251 y=18 width=44 height=12/>
+
+                        <!--
 
 
                         <rect class="leg2" x=39 y=138 width=29 height=12 />
@@ -462,29 +498,37 @@
                         <rect class="leg4" x=374 y=102 width=29 height=12 />
                                        
                         <rect class="leg5" x=76 y=31 width=29 height=24 />
+                        -->
                                         
                         <!-- X axis with ticks -->
-                        <path class="axis" d="M 34 162 L 408 162 M 35 162 L 35 167 M 72 162 L 72 167 M 109 162 L 109 167 M 147 162 L 147 167 M 184 162 L 184 167 M 221 162 L 221 167 M 258 162 L 258 167 M 295 162 L 295 167 M 333 162 L 333 167 M 370 162 L 370 167 M 407 162 L 407 167" ></path>
+                        <path class="axis" d="M 34 162 L 408 162 
+                            M 35 162 L 35 167 
+                            M 88 162 L 88 167 
+                            M 141 162 L 141 167 
+                            M 194 162 L 194 167 
+                            M 247 162 L 247 167 
+                            M 300 162 L 300 167 
+                            M 353 162 L 353 167 
+                            M 407 162 L 407 167" ></path>
                         <!-- Y axis with ticks -->
                         <path class="axis" d="M 35 162 L 35 19 M 35 162 L 30 162 M 35 138 L 30 138 M 35 114 L 30 114 M 35 91 L 30 91 M 35 67 L 30 67 M 35 43 L 30 43 M 35 19 L 30 19"></path>
 
-                        <text x="40.1" y="170" opacity="1"><tspan x="41.95" y="180" dy="0">2021 </tspan><tspan x="45.38" y="180" dy="12.5">-01 </tspan></text>
-                        <text x="374.9" y="170" opacity="1"><tspan x="376.75" y="180" dy="0">2021 </tspan><tspan x="380.18" y="180" dy="12.5">-10 </tspan></text>
-                        <text x="77.3" y="170" opacity="1"><tspan x="79.15" y="180" dy="0">2021 </tspan><tspan x="82.58" y="180" dy="12.5">-02 </tspan></text>
-                        <text x="114.5" y="170" opacity="1"><tspan x="116.35" y="180" dy="0">2021 </tspan><tspan x="119.78" y="180" dy="12.5">-03 </tspan></text>
-                        <text x="151.7" y="170" opacity="1"><tspan x="153.55" y="180" dy="0">2021 </tspan><tspan x="156.98" y="180" dy="12.5">-04 </tspan></text>
-                        <text x="188.9" y="170" opacity="1"><tspan x="190.75" y="180" dy="0">2021 </tspan><tspan x="194.18" y="180" dy="12.5">-05 </tspan></text>
-                        <text x="226.1" y="170" opacity="1"><tspan x="227.95" y="180" dy="0">2021 </tspan><tspan x="231.38" y="180" dy="12.5">-06 </tspan></text>
-                        <text x="263.3" y="170" opacity="1"><tspan x="265.15" y="180" dy="0">2021 </tspan><tspan x="268.58" y="180" dy="12.5">-07 </tspan></text>
-                        <text x="300.5" y="170" opacity="1"><tspan x="302.35" y="180" dy="0">2021 </tspan><tspan x="305.78" y="180" dy="12.5">-08 </tspan></text>
-                        <text x="337.7" y="170" opacity="1"><tspan x="339.55" y="180" dy="0">2021 </tspan><tspan x="342.98" y="180" dy="12.5">-09 </tspan></text>
-                        <text x="21.41" y="155.2" opacity="1"><tspan x="21.41" y="167.2" dy="0">0</tspan></text>
-                        <text x="13.81" y="12.2" opacity="1"><tspan x="13.81" y="24.2" dy="0">12</tspan></text>
-                        <text x="21.41" y="131.37" opacity="1"><tspan x="21.41" y="143.37" dy="0">2</tspan></text>
-                        <text x="21.41" y="107.54" opacity="1"><tspan x="21.41" y="119.54" dy="0">4</tspan></text>
-                        <text x="21.41" y="83.7" opacity="1"><tspan x="21.41" y="95.7" dy="0">6</tspan></text>
-                        <text x="21.41" y="59.87" opacity="1"><tspan x="21.41" y="71.87" dy="0">8</tspan></text>
-                        <text x="13.81" y="36.04" opacity="1"><tspan x="13.81" y="48.04" dy="0">10</tspan></text>
+                        <text><tspan text-anchor="middle" x="61" y="180" dy="0">Amox</tspan><tspan text-anchor="middle" x="61" y="180" dy="12.5">Distribution</tspan><tspan text-anchor="middle" x="61" y="180" dy="25">Hub</tspan></text>
+                        <text><tspan text-anchor="middle" x="114" y="180" dy="0">Dublin</tspan><tspan text-anchor="middle" x="114" y="180" dy="12.5">Office</tspan></text>
+                        <text><tspan text-anchor="middle" x="167" y="180" dy="0">Golbrews</tspan><tspan text-anchor="middle" x="167" y="180" dy="12.5">South</tspan></text>
+                        <text><tspan text-anchor="middle" x="220" y="180" dy="0">Ama</tspan><tspan text-anchor="middle" x="220" y="180" dy="12.5">Systems</tspan></text>
+                        <text><tspan text-anchor="middle" x="273" y="180" dy="0">Crysalnite</tspan><tspan text-anchor="middle" x="273" y="180" dy="12.5">Facility</tspan></text>
+                        <text><tspan text-anchor="middle" x="326" y="180" dy="0">Floatbed</tspan><tspan text-anchor="middle" x="326" y="180" dy="12.5">Plant</tspan></text>
+                        <text><tspan text-anchor="middle" x="379" y="180" dy="0">Factory</tspan><tspan text-anchor="middle" x="379" y="180" dy="12.5">Line 2</tspan></text>
+                        
+
+                        <text x="21.41" y="155.2"><tspan x="21.41" y="167.2" dy="0">0</tspan></text>
+                        <text x="13.81" y="12.2"><tspan x="13.81" y="24.2" dy="0">12</tspan></text>
+                        <text x="21.41" y="131.37"><tspan x="21.41" y="143.37" dy="0">2</tspan></text>
+                        <text x="21.41" y="107.54"><tspan x="21.41" y="119.54" dy="0">4</tspan></text>
+                        <text x="21.41" y="83.7"><tspan x="21.41" y="95.7" dy="0">6</tspan></text>
+                        <text x="21.41" y="59.87"><tspan x="21.41" y="71.87" dy="0">8</tspan></text>
+                        <text x="13.81" y="36.04"><tspan x="13.81" y="48.04" dy="0">10</tspan></text>
                         
                     </svg>
                 </div>
@@ -494,7 +538,7 @@
     </div>
     <div class="row">
         <div class="col12">
-            <h4 style="">Latest Events
+            <h4 style="">Latest Hazard Assessments
                 <a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Latest Events')}}"> </a>
                 <a href="/" class="i-settings i-20 btn-right"  on:click|preventDefault="{ () => { table_drawer=true;}}"> </a>
             </h4>

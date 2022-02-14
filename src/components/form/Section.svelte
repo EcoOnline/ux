@@ -3,12 +3,16 @@
 	import InputText from "./InputText.svelte";
 	import InputMulti from "./InputMulti.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
+	import InputSwitch from "./InputSwitch.svelte";
+	import InputMatrix from "./InputMatrix.svelte";
 
 	let components = {
 		"input_text": InputText,
 		"input_multi": InputMulti,
 		"input_select": InputSelect,
-		"input_textarea": InputTextarea
+		"input_textarea": InputTextarea,
+		"input_switch": InputSwitch,
+		"input_matrix": InputMatrix
 	}
     
 
@@ -42,9 +46,14 @@
 <style>
     .card {
         margin-bottom:16px;
-        padding:16px;
+        padding:0px;
         padding-top:16px;
         padding-bottom:16px;
+    }
+    @media (min-width: 960px) {
+        .card {
+            padding: 16px;
+        }
     }
     h3 {
         margin:0 0 16px 0;

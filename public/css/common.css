@@ -134,7 +134,7 @@ li {
     background: var(--eo-surface-background);
     z-index:998;
     align-items: center;
-    padding-bottom:8px;
+    padding-bottom:0px;
 }
 
 .row {
@@ -151,6 +151,8 @@ li {
     margin-bottom:0;
 }
 
+
+/* this grid system is CRAP */
 .col1 { width: calc(var(--c)) }
 .col2 { width: calc(2 * var(--c) + 1 * var(--g) ) }
 .col3 { width: calc(3 * var(--c) + 2 * var(--g) ) }
@@ -163,6 +165,12 @@ li {
 .col10 { width: calc(10 * var(--c) + 9 * var(--g) ) }
 .col11 { width: calc(11 * var(--c) + 10 * var(--g) ) }
 .col12 { width: calc(12 * var(--c) + 11 * var(--g) ) }
+
+/*so it needs hacking for nested */
+
+.col-md-9 .col12 { width: 100% !important }
+.col-md-9 .col12 { width: 100% !important }
+
 
 
 .tile {
@@ -234,9 +242,24 @@ li {
     transition: all 0.5s linear;
     opacity:1;
 }
+
+
+
+.d960up-flex {
+    display:none;
+}
+.d960up-block {
+    display:none;
+}
 @media (min-width: 600px) {
     .search-bar {
         display:flex ! important;
+    }
+    .card-3_5 {
+        aspect-ratio: 6/2!important;
+    }
+    .card-61 {
+        aspect-ratio: 6/2.1125!important;
     }
     .card-31 {
         aspect-ratio: 3/1.5!important;
@@ -245,6 +268,9 @@ li {
         aspect-ratio: 2/1.03125 !important;
     }
     .card .big-num {
+        text-align:left ! important;
+    }
+    .card .mid-num {
         text-align:left ! important;
     }
     .tile b { font-size:120%; }
@@ -263,6 +289,21 @@ li {
 }
 @media (min-width: 960px) {
 
+    .drawer .i-maximize {
+        display:inline-block ! important;
+    }
+    .pullout-head {
+        padding: 0 32px;
+    }
+    .pullout-body {
+        padding:32px;
+    }
+    .d960up-flex {
+        display:flex;
+    }
+    .d960up-block {
+        display:block;
+    }
     
     .menu-icon {
         display:inline-block ! important;
@@ -289,6 +330,9 @@ li {
     .col-md-10 { width: calc(10 * var(--c) + 9 * var(--g) ) }
     .col-md-11 { width: calc(11 * var(--c) + 10 * var(--g) ) }
     .col-md-12 { width: calc(12 * var(--c) + 11 * var(--g) ) }
+
+    .col-md-9 .col-md-3 { width: calc(3/9 * 100% - 16px) !important; }
+    .col-md-9 .col-md-6 { width: calc(6/9 * 100% - 16px) !important; }
 }
 @media (min-width: 1264px) {
     .tile b { font-size:127%; }
@@ -372,7 +416,7 @@ li {
 
 
 .drawer {
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
     width:100%;
@@ -404,7 +448,7 @@ li {
     max-width:100%;
     height:100%;
     background:#fff;
-    transition:right 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition:right 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.3s linear;
 }
 .drawer .pullout:after {
     content: '';
@@ -427,14 +471,17 @@ li {
 }
 
 .pullout-head {
-    padding: 0 32px;
+    padding: 0 16px;
 }
 .pullout-head h2 {
     font-weight:300;
 }
+.drawer .i-maximize {
+    display:none;
+}
 .pullout-body {
     flex:1;
-    padding:32px;
+    padding:16px;
     overflow-y: auto;
 }
 
@@ -466,12 +513,16 @@ li {
     color: var(--eo-primary-500);
     text-align:center;
 }
-.card .big-num.minor {
-    color: #72737A
+.card .mid-num {
+    font-size:2.4em;
+    line-height:1em;
+    color: var(--eo-border-input);
+    text-align:center;
 }
-.card .big-num.danger {
-    color: var(--eo-critical-500);
+.card p {
+    margin:0;
 }
+
 
 
 
@@ -551,11 +602,16 @@ h1 .i-32 {
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
 .i-filter               { background-image:url(../images/icons/filter.svg)}
 .i-fingerprint          { background-image:url(../images/icons/fingerprint.svg)}
+.i-hazard-assessments   { background-image:url(../images/icons/hazard-assessments.svg)}
 .i-hinton-plot          { background-image:url(../images/icons/hinton-plot.svg)}
 .i-idea                 { background-image:url(../images/icons/idea.svg)}
 .i-incidents            { background-image:url(../images/icons/incidents.svg)}
+.i-maximize             { background-image:url(../images/icons/maximize.svg)}
+.i-minimize             { background-image:url(../images/icons/minimize.svg)}
 .i-menu                 { background-image:url(../images/icons/menu.svg)}
 .i-notification         { background-image:url(../images/icons/notification.svg)}
+.i-page-single          { background-image:url(../images/icons/page-single.svg)}
+.i-page-tabs            { background-image:url(../images/icons/page-tabs.svg)}
 .i-pin                  { background-image:url(../images/icons/pin.svg)}
 .i-printer              { background-image:url(../images/icons/printer.svg)}
 .i-qr                   { background-image:url(../images/icons/qr.svg)}
@@ -565,6 +621,13 @@ h1 .i-32 {
 .i-switcher             { background-image:url(../images/icons/switcher.svg)}
 .i-trash                { background-image:url(../images/icons/trash-can.svg)}
 
+
+h1.page-title {
+    margin-top:0;
+}
+h1.page-title i {
+    margin-right:8px;
+}
 
 .menu-icons {
      flex:1;

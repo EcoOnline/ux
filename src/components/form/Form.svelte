@@ -6,6 +6,8 @@
 	import InputMulti from "./InputMulti.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
 	import InputCheckbox from "./InputCheckbox.svelte";
+	import InputSwitch from "./InputSwitch.svelte";
+	import InputMatrix from "./InputMatrix.svelte";
 
     export let f;
     export let channel = 'ANSWER';
@@ -16,7 +18,9 @@
 		"input_multi": InputMulti,
 		"input_select": InputSelect,
 		"input_textarea": InputTextarea,
-		"input_checkbox": InputCheckbox
+		"input_checkbox": InputCheckbox,
+		"input_switch": InputSwitch,
+		"input_matrix": InputMatrix
     }
 
     onMount(() => {

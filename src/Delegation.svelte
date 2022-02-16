@@ -44,7 +44,7 @@
                 <line x1="0" y1="174" x2="100" y2="115.50" ></line>
                 <line x1="100" y1="115.5" x2="200" y2="174"></line>
             </g>
-            <text transform="rotate(-90) translate(20, 130)"><tspan x="0" y="0" text-anchor="middle">Authority</tspan></text>
+            <text transform="rotate(-90) translate(20, 120)"><tspan x="0" y="0" text-anchor="middle">Authority</tspan></text>
             <text transform="rotate(-30) skewX(-30) translate(-40, 180)"><tspan x="0" y="0" text-anchor="middle">Responsibility</tspan></text>
             <text transform="rotate(30) skewX(30) translate(300, 70)"><tspan x="0" y="0" text-anchor="middle">Accountability</tspan></text> 
 

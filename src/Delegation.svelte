@@ -49,7 +49,7 @@
             <text transform="rotate(30) skewX(30) translate(300, 70)"><tspan x="0" y="0" text-anchor="middle">Accountability</tspan></text> 
 
             <!-- <path d="M100 115.50 L100 57.75 L200 57.75 L200 176Z"></path>-->
-            <g transform="translate({shiftx}, {shifty})">
+            <g id="holder" transform="translate({shiftx}, {shifty})">
                 <rect class="face" x=0 y=0 width="{facew}" height="{faceh}"></rect>
                 <rect class="top" x=0 y=0 width="{topw}" height="{toph}" style="transform: rotate(210deg) skew(-30deg) translate(-200px, -60px) scaleY(0.864);"></rect>
                 <!--<rect class="top2" x=0 y=0 width=100 height=100></rect>
@@ -80,6 +80,11 @@
     }
     rect {
         transform-origin: 0 0;
+        transition: all 0.3s linear
+    }
+    #holder {
+        transition: all 0.3s linear
+
     }
     .face { transform: rotate(-30deg) skewX(-30deg) translate(130px, 172px) scaleY(0.864);fill: rgba(255,230,100,0.8) }
     .side { transform: rotate(90deg) skewX(-30deg) translate(69px, -113px) scaleY(0.864);fill: rgba(255,250,200,0.8)}

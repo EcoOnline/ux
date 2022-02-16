@@ -10,7 +10,7 @@
     $: topw = Math.max(accountability, 1);
     $: toph = Math.max(responsibility, 1);
 
-    let min = 3;
+    let min = 5;
     $: sidew = Math.max(authority, min);
     $: sideh = Math.max(accountability, min);
 
@@ -37,16 +37,16 @@
 <div class="page">
     
     <svg width="400" height="400" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g transform="translate(100, 20)">
-            <g transform="translate(13, 17)">
+        <g transform="translate(100, 70)">
+            <g transform="translate(13, 20)">
 
                 <line x1="100" y1="115.50" x2="100" y2="0"></line>
-                <line x1="0" y1="176" x2="100" y2="115.50" ></line>
-                <line x1="100" y1="115.5" x2="200" y2="176"></line>
+                <line x1="0" y1="174" x2="100" y2="115.50" ></line>
+                <line x1="100" y1="115.5" x2="200" y2="174"></line>
             </g>
-            <text transform="translate(113, 10)"><tspan x="0" y="0" text-anchor="middle">Authority</tspan></text>
-            <text transform="translate(-30, 220)"><tspan x="0" y="0" text-anchor="middle">Responsibility</tspan></text>
-            <text transform="translate(250, 220)"><tspan x="0" y="0" text-anchor="middle">Accountability</tspan></text> 
+            <text transform="rotate(-90) translate(20, 130)"><tspan x="0" y="0" text-anchor="middle">Authority</tspan></text>
+            <text transform="rotate(-30) skewX(-30) translate(-40, 180)"><tspan x="0" y="0" text-anchor="middle">Responsibility</tspan></text>
+            <text transform="rotate(30) skewX(30) translate(300, 70)"><tspan x="0" y="0" text-anchor="middle">Accountability</tspan></text> 
 
             <!-- <path d="M100 115.50 L100 57.75 L200 57.75 L200 176Z"></path>-->
             <g transform="translate({shiftx}, {shifty})">
@@ -81,10 +81,10 @@
     rect {
         transform-origin: 0 0;
     }
-    .face { transform: rotate(-30deg) skewX(-30deg) translate(130px, 172px) scaleY(0.864);fill: rgba(255,200,0,0.5) }
-    .side { transform: rotate(90deg) skewX(-30deg) translate(69px, -113px) scaleY(0.864);fill: rgba(255,200,0,0.2)}
+    .face { transform: rotate(-30deg) skewX(-30deg) translate(130px, 172px) scaleY(0.864);fill: rgba(255,230,100,0.8) }
+    .side { transform: rotate(90deg) skewX(-30deg) translate(69px, -113px) scaleY(0.864);fill: rgba(255,250,200,0.8)}
 
-    .top {  transform: rotate(210deg) skew(-30deg) translate(-200px, -60px) scaleY(0.864);fill: rgba(255,200,0,0.1)}
+    .top {  transform: rotate(210deg) skew(-30deg) translate(-200px, -60px) scaleY(0.864);fill: rgba(255,200,0,0.8)}
 
 
 

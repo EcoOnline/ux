@@ -1057,7 +1057,9 @@
     </div>
     <div slot="fs">
         {#if matrix}
-
+            <p style="width:100%;max-width:480px">
+                To choose the appropriate severity first choose the matrix row by scanning down each description and finding the lowest one appropriate to this event. Then choose the matrix column by scanning across from that row choosing the column with the number of people at risk in this event.
+            </p>
             <table class="matrix_table" style="width:{window.innerWidth-64}px">
                 <tbody>
                     <tr>
@@ -1066,7 +1068,7 @@
                     </tr>
                     <tr>
                         {#each matrix.x_criteria as xcrit}
-                            <td>
+                            <td style="width: calc((100% - 364px) / 4)">
                                 <h4>{xcrit.label}</h4>
                             </td>
                         {/each}
@@ -1124,8 +1126,11 @@
         cursor:pointer;
         border-radius:8px;
     }
+    .matrix_table .criteria:hover {
+        background: #ece9f0;
+    }
     .matrix_table td.selected {
-        background: #e3e1eb; /*eo-primary-50?*/
+        background: #e3e1f0; /*eo-primary-50?*/
     }
     
     .matrix_cell {

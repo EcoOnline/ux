@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['delegation'].map((name, index) => ({
+export default ['carl_tac'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

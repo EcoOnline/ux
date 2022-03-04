@@ -4,6 +4,7 @@
     import { createEventDispatcher } from 'svelte';
     import Pullout from './components/Pullout.svelte';
     import Form from './components/form/Form.svelte';
+    import Slide from './components/Slide.svelte';
     //import { validate_each_keys } from 'svelte/internal';
     
     const dispatch = createEventDispatcher();
@@ -288,7 +289,7 @@
         "created_by": "Hayden Chambers",
         "created_date": "2022-02-07T17:06:09.111Z",
         "updated_by": "Hayden Chambers",
-        "updated_date": "2022-02-07T17:06:09.111Z"
+        "updated_date": (new Date()).toISOString()//"2022-02-07T17:06:09.111Z"
     }
 
     function save_incident() {
@@ -525,7 +526,7 @@
     let matrix = false;
     let matrix_holder = false;
     let matrix_drawer = false;
-    let matrix_fs = false;
+    let matrix_fs = true;
     let matrix_col_selected = -1;
     let matrix_row_selected = -1;
     function select_criteria_y(i,j) {
@@ -728,7 +729,22 @@
                 </div>
                 <div class="card overview_3">
                     <div class="card-body">
-                        <p>stuff</p>
+                        <table class="overview_combined">
+                            <tr>
+                                <td><i class="i-incidents i-20"></i> <b>Event type</b></td>
+                                <td>Injury</td>
+                            </tr>
+                            <tr>
+                                <td><i class="i-location i-20"></i> <b>Location</b></td>
+                                <td>London tower</td>
+                            </tr>
+                            <tr>
+                                <td><i class="i-time i-20"></i> <b>Last update</b></td>
+                                <td>{date_format(incident.updated_date)}</td>
+                            </tr>
+                        </table>
+                        <p></p>
+
                     </div>
                 </div>
                 <div class="card overview_4">
@@ -758,7 +774,7 @@
                 <div class="card overview_8">
                     <div class="card-header">Medical attention given</div>
                     <div class="card-body">
-                        <p>stuff</p>
+                        <i class="i-thumbs-up i-32"></i>
                     </div>
                 </div>
                 <div class="card overview_9">
@@ -776,7 +792,7 @@
                 <div class="card overview_11">
                     <div class="card-header">Attachments</div>
                     <div class="card-body">
-                        <p>slideshow</p>
+                        <Slide />
                     </div>
                 </div>
             </div>
@@ -1222,7 +1238,10 @@
     }
     .menu-buttons {
         vertical-align: middle;
-
+    }
+    .menu-buttons .btn{
+        margin-right:0;
+        margin-left:8px;
     }
     @media (min-width: 960px) {
         .menu-icons {
@@ -1342,6 +1361,37 @@
 .overview_grid {
   display: grid;
   grid-template-areas:
+    'cell1'
+    'cell2'
+    'cell3'
+    'cell4'
+    'cell5'
+    'cell6'
+    'cell7'
+    'cell8'
+    'cell9'
+    'cell10'
+    'cell11';
+  grid-gap: 16px;
+}
+@media (min-width: 600px) {
+    .overview_grid {
+  display: grid;
+  grid-template-areas:
+    'cell1 cell2'
+    'cell3 cell3'
+    'cell4 cell5'
+    'cell6 cell7'
+    'cell8 cell9'
+    'cell10 cell10'
+    'cell11 cell11';
+  grid-gap: 16px;
+}
+    }
+@media (min-width: 960px) {
+    .overview_grid {
+  display: grid;
+  grid-template-areas:
     'cell1 cell3 cell3'
     'cell2 cell3 cell3'
     'cell4 cell5 cell6'
@@ -1349,6 +1399,14 @@
     'cell10 cell10 cell10'
     'cell11 cell11 cell11';
   grid-gap: 16px;
+}
+    }
+.overview_combined {
+    margin-top:16px;
+}
+.overview_combined td {
+    padding-right:16px;
+    padding-bottom:16px;
 }
 .overview_grid .card {
     margin:0;

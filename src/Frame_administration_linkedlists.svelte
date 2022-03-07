@@ -225,7 +225,7 @@
                         <h1>Parent List & Child Options</h1>
                         <div class="overflow">
                             {#each selected_ll.parent_list.options as pl}
-                                <h3 class="ll-title" class:active={selected_parent == pl} on:click="{ () => { select_parent(pl) }}" >{pl.title} ({pl.children.length})</h3>
+                                <h3 class="ll-title" class:active={selected_parent == pl} on:click="{ () => { select_parent(pl) }}" >{pl.title} ({pl.children.length}) <i class="i-add i-20 right"></i></h3>
                                 {#each pl.children.sort() as opt, i}
                                     <p class="ll" on:click="{ () => remove_child_option(pl,i) }">{opt} <i class="i-trash i-20 right"></i></p>
                                 {:else}
@@ -405,6 +405,9 @@
         margin: 16px 0 12px 8px
     }
     .ll2 .ll:hover .right {
+        display: inline-block;
+    }
+    .ll2 h3:hover .right {
         display: inline-block;
     }
 

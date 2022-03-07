@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
     import { createEventDispatcher } from 'svelte';
     import Pullout from './components/Pullout.svelte';
     import Form from './components/form/Form.svelte';
@@ -289,7 +289,8 @@
         "created_by": "Hayden Chambers",
         "created_date": "2022-02-07T17:06:09.111Z",
         "updated_by": "Hayden Chambers",
-        "updated_date": (new Date()).toISOString()//"2022-02-07T17:06:09.111Z"
+        "updated_date": (new Date()).toISOString(),//"2022-02-07T17:06:09.111Z"
+        "description": "Mike and I saw a really big tree branch had fallen down near the entrance"
     }
 
     function save_incident() {
@@ -304,6 +305,77 @@
         let daform = f;
         form_text = JSON.stringify(daform, null, 4);
     }
+    let censor_pii = false;
+    let censor_mode = false;
+    let print_mode = false;
+    let print_options = ["overview", "report", "events"]
+    let total_pages = [
+        {key: "overview", title: "Overview", type: 'tab'},
+        {key: "report", title: "Report", type: 'tab' },
+        {key: "events", title: "Events", type: 'tab' },
+        {key: "witnesses", title: "Witnesses", type: 'tool' },
+        {key: "vehicles", title: "Vehicles", type: 'tool' },
+        {key: "attachments", title: "Attachments", type: 'tool' },
+        {key: "links", title: "Links & Actions", type: 'tool' },
+        {key: "claim", title: "Claim", type: 'tool' },
+    ];
+    
+	function censor_it() {
+
+        let censor_span = document.createElement("span");
+        censor_span.classList.add('censor_custom');
+        let sel = window.getSelection();
+        let selection = window.getSelection().getRangeAt(0);
+        let selectedText = sel + '';
+        let n = selection.extractContents();
+
+        censor_span.innerText = selectedText;
+        selection.insertNode(censor_span);
+    }
+    document.addEventListener('keydown', (e) => {
+        if(e.code == 'Enter' && censor_mode) {
+            censor_it();
+        }
+    });
+
+    function logKey(e) {
+        
+    }
+    
+    $: vis_pages = total_pages.filter( (page) => {
+        if(incident.id) { 
+            return true
+        } else {
+            return page.key !== 'overview';
+        }
+    })
+    let filtered_pages = [];
+    $: {
+        //triggers
+        let i = incident.id;
+        let v = vis_pages;
+        let t = tab;
+        let s = single_page;
+        let p = print_mode;
+
+
+        filtered_pages = vis_pages.map(({key}) => key);
+        if(!s && !p) {
+            //single page view
+            filtered_pages = filtered_pages.filter( (page) => {
+                return page == t;
+            })
+        }
+
+        if(p) {
+            //if in print mode only show the ones that selected to print
+            filtered_pages = filtered_pages.filter( (page) => {
+                return print_options.indexOf(page) >= 0;
+            })
+        }
+        
+    }
+
 
     function update_payload_text() {
 		console.log(form_test, JSON.stringify(f, null, 4));
@@ -362,12 +434,13 @@
 
         }
     }
-
+    /*
     function print_mode(bool) {
         dispatch('print', {
             text: bool
         })
     }
+    */
 
     function nav(str) {
         
@@ -634,7 +707,7 @@
             {/if}
             <a href="/" class='i-actions i-24'> </a>
             <a href="/" class='i-attachment i-24'> </a>
-            <a href="/" class='i-printer i-24' on:click|preventDefault="{ () => { print_mode(true) }}"> </a>
+            <a href="/" class='i-printer i-24' on:click|preventDefault="{ () => { print_mode = !print_mode }}"> </a>
         </div>
         <div class="menu-buttons">
             <a href="/" class='btn btn-secondary' on:click|preventDefault="{save_incident}">Save Progress</a>
@@ -710,8 +783,32 @@
         </div>
     </div>
     <div class="col12 col-md-9">
-
-        {#if tab == 'overview' || (single_page && incident.id)}
+        {#if print_mode}
+        <div class="card" in:fly="{{ y: -200, duration: 1000 }}" out:fade>
+            <div class="card-header">
+                Print options
+            </div>
+            <div class="card-body print-options">
+                {#each vis_pages as page}
+                    <label><input type="checkbox" value="{page.key}" bind:group={print_options}> {page.title}</label>
+                {/each}
+                <br>
+                <label><input type="checkbox" bind:checked="{censor_pii}"> Censor PII</label>
+                <label><input type="checkbox" bind:checked="{censor_mode}"> Custom Censor</label>
+                {#if censor_mode}
+                    select text and hit 'Return'
+                {/if}
+            </div>
+        </div>
+        {/if}
+        {#if filtered_pages.length == 0}
+            {#if print_mode}
+                <h1>Printing nothing saves trees :)</h1>
+            {:else}
+                <h1>Nothing to see here</h1>
+            {/if}
+        {/if}
+        {#if filtered_pages.indexOf('overview') >= 0}
             <h1 bind:this="{hs[7].el}" class="page-title">Overview</h1>
             <div class="overview_grid">
                 
@@ -762,7 +859,7 @@
                 <div class="card overview_6">
                     <div class="card-header">Reported by</div>
                     <div class="card-body">
-                        <p class="pii">John Smith</p>
+                        <p class="pii" class:censor_pii>John Smith</p>
                     </div>
                 </div>
                 <div class="card overview_7">
@@ -786,7 +883,7 @@
                 <div class="card overview_10">
                     <div class="card-header">Description</div>
                     <div class="card-body">
-                        <p>I saw a big tree branch had fallen down near the entrance</p>
+                        <p>{incident.description}</p>
                     </div>
                 </div>
                 <div class="card overview_11">
@@ -797,11 +894,11 @@
                 </div>
             </div>
         {/if}
-        {#if tab == 'report' || single_page}
+        {#if filtered_pages.indexOf('report') >= 0}
             <h1 bind:this="{hs[0].el}" class="page-title">Report</h1>
             <Form {f} ></Form>
         {/if}
-        {#if tab =='events' || single_page}
+        {#if filtered_pages.indexOf('events') >= 0}
             <div>
                 <h1 bind:this="{hs[1].el}" class="page-title">Events</h1>
             </div>
@@ -825,7 +922,7 @@
             </div>
 
         {/if}
-        {#if tab =='witnesses' || single_page}
+        {#if filtered_pages.indexOf('witnesses') >= 0}
             <div>
                 <h1 bind:this="{hs[2].el}" class="page-title">Witnesses</h1>
             </div>
@@ -847,7 +944,7 @@
             </div>
 
         {/if}
-        {#if tab =='vehicles' || single_page}
+        {#if filtered_pages.indexOf('vehicles') >= 0}
             <div>
                 <h1 bind:this="{hs[3].el}" class="page-title">Vehicles</h1>
             </div>
@@ -869,8 +966,8 @@
             </div>
         {/if}
 
-
-        {#if tab =='attachments' || single_page}
+        
+        {#if filtered_pages.indexOf('attachments') >= 0}
             <div>
                 <h1 bind:this="{hs[4].el}" class="page-title">Attachments</h1>
             </div>
@@ -895,8 +992,8 @@
 
         {/if}
 
-
-        {#if tab =='links' || single_page}
+        
+        {#if filtered_pages.indexOf('links') >= 0}
             <div>
                 <h1 bind:this="{hs[5].el}" class="page-title">Links & Actions</h1>
             </div>
@@ -924,8 +1021,8 @@
 
 
 
-
-        {#if tab =='claim' || single_page}
+        
+        {#if filtered_pages.indexOf('claim') >= 0}
             <div>
                 <h1 bind:this="{hs[6].el}" class="page-title">Claim</h1>
             </div>
@@ -1413,6 +1510,16 @@
 }
 .overview_grid .card p {
     margin-bottom:8px;
+}
+
+.print-options label {
+    margin-right:16px;
+}
+.censor_pii {
+    filter:blur(5px)
+}
+div :global(.censor_custom) {
+    filter:blur(5px)
 }
 </style>
 	

@@ -5,7 +5,7 @@
 	*/
 
 	import Home from "./Frame_home.svelte";
-	import AdminLinkedLists from "./Frame_administration_linkedlists.svelte";
+	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Incidents from "./Frame_incidents.svelte";
 	import IncidentsNew from "./Frame_incidents_new.svelte";
 	import HazardAssessments from "./Frame_hazard_assessments.svelte";
@@ -15,7 +15,7 @@
 
     const comps = [
         { id: "ehs", component: Home },
-        { id: "linkedlists", component: AdminLinkedLists },
+        { id: "linkedfields", component: AdminLinkedFields },
         { id: "incidents", component: Incidents },
         { id: "incidents_new", component: IncidentsNew },
         { id: "queries_new", component: QueriesNew },

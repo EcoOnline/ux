@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    
     import { distance as dl } from 'damerau-levenshtein-js';
 	
     let tab = "select";
@@ -181,10 +181,6 @@
     }
 
 
-
-    onMount(() => {
-        console.log('linked lists ready')
-    });    
 </script>
 
 <div class="row sticky">
@@ -193,7 +189,7 @@
             <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
             <li><a href="#ehs/administration" on:click="{ () => {nav('administration')}}">Administration</a></li>
-            <li>Linked Lists</li>
+            <li>Linked Fields</li>
         </ul>
     </div>
 
@@ -203,7 +199,7 @@
     <div class="col12 col-md-4 ll1">
         <div class="card">
            <div class="card-body">
-                <h1>Linked Lists</h1>
+                <h1>Linked Fields</h1>
 
                 <div class="overflow">
                     {#each lls as section}
@@ -222,20 +218,20 @@
             <div class="col12 col-md-4 ll2">
                 <div class="card">
                     <div class="card-body">
-                        <h1>Parent List & Child Options</h1>
+                        <h1>Parent Field & Child Options</h1>
                         <div class="overflow">
                             {#each selected_ll.parent_list.options as pl}
                                 <h3 class="ll-title" class:active={selected_parent == pl} on:click="{ () => { select_parent(pl) }}" >{pl.title} ({pl.children.length}) <i class="i-add i-20 right"></i></h3>
                                 {#each pl.children.sort() as opt, i}
                                     <p class="ll" on:click="{ () => remove_child_option(pl,i) }">{opt} <i class="i-trash i-20 right"></i></p>
                                 {:else}
-                                    <p  class="ll" style="opacity:0.5">City list will not be visible</p>
+                                    <p  class="ll" style="opacity:0.5">{selected_ll.child_list.title} input will not be visible</p>
                                 {/each}
                             {/each}
                         </div>
                         <div>
                             <span on:click="{faux_save}" class="btn right" class:disabled={!dirty_flag}>Save</span>
-                            <span on:click="{ () => { test_mode = true} }" class="btn btn-secondary right">Test Linked List</span>
+                            <span on:click="{ () => { test_mode = true} }" class="btn btn-secondary right">Test Linked Fields</span>
                             
                         </div>
                     </div>

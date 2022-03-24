@@ -4,25 +4,30 @@
 		a responsive frame to hold smaller experiments so that they don't have to be continually framed,
 	*/
 
+	import Platform from "./Frame_platform.svelte";
 	import Home from "./Frame_home.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Incidents from "./Frame_incidents.svelte";
 	import IncidentsNew from "./Frame_incidents_new.svelte";
+	import IncidentsAdmin from "./Frame_incidents_admin.svelte";
 	import HazardAssessments from "./Frame_hazard_assessments.svelte";
 	import QueriesNew from "./Frame_queries_new.svelte";
 	import QueriesResult from "./Frame_queries_result.svelte";
+	
 	let tabnav = '';
 
-    const comps = [
-        { id: "ehs", component: Home },
-        { id: "linkedfields", component: AdminLinkedFields },
-        { id: "incidents", component: Incidents },
-        { id: "incidents_new", component: IncidentsNew },
-        { id: "queries_new", component: QueriesNew },
-        { id: "queries_result", component: QueriesResult },
-        { id: "hazard_assessments", component: HazardAssessments }
-    ]
-    let comp = comps[0];
+    const comps = {
+        "platform": Platform,
+        "ehs": Home,
+        "linkedfields": AdminLinkedFields,
+        "incidents": Incidents,
+        "incidents_new": IncidentsNew,
+        "incidents_admin": IncidentsAdmin,
+        "queries_new": QueriesNew,
+        "queries_result": QueriesResult,
+        "hazard_assessments": HazardAssessments
+	}
+    let comp = comps.ehs;
 	let hash = window.location.hash.substring(1);
 	if(hash!== '') {
 		handleNavStr(hash);
@@ -31,26 +36,31 @@
 
    let grid = false;
 
+   function handleHash() {
+		let hash = window.location.hash.substring(1);
+		if(hash !== '') {
+			handleNavStr(hash);
+		}
+   }
+
    function handleNavStr(hash) {
 		tabnav = '';
-		console.log('hash', hash);
+		console.log('nav hash', hash);
 		let hash_arr = hash.split('/');
 		let id = hash_arr[hash_arr.length-1];
-		let ind = comps.findIndex((el) => el.id == id);
 		
-		if (ind >= 0) {
-			comp = comps[ind];
+		if (comps[id]) {
+			comp = comps[id];
 			return;
 		} else {
 			tabnav = id;
 			id = hash_arr[hash_arr.length-2];
-			ind = comps.findIndex((el) => el.id == id);
-			if (ind >= 0) {
-				comp = comps[ind];
+			if (comps[id]) {
+				comp = comps[id];
 				return;
 			}
 		}
-		comp = comps[0]; //default to first
+		comp = comps.ehs; //default to first
 
    }
 
@@ -70,6 +80,9 @@
 {#if grid}
 <div class="grid"><div class="frame"></div></div>
 {/if}
+
+<svelte:window on:hashchange={handleHash}/>
+
 <nav>
 
 	<div class="frame">
@@ -109,7 +122,7 @@
 </nav>
 <main on:scroll={handleScroll}>
 	<div class="frame">
-		<svelte:component this={comp.component} on:nav={handleNav} {tabnav} {bodyScroll}/>
+		<svelte:component this={comp} on:nav={handleNav} {tabnav} {bodyScroll}/>
 	</div>
 	
 </main>

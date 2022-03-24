@@ -2,6 +2,7 @@
 	import InputSelect from "./InputSelect.svelte";
 	import InputText from "./InputText.svelte";
 	import InputMulti from "./InputMulti.svelte";
+	import InputLookup from "./InputLookup.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
 	import InputSwitch from "./InputSwitch.svelte";
 	import InputMatrix from "./InputMatrix.svelte";
@@ -9,6 +10,7 @@
 	let components = {
 		"input_text": InputText,
 		"input_multi": InputMulti,
+		"input_lookup": InputLookup,
 		"input_select": InputSelect,
 		"input_textarea": InputTextarea,
 		"input_switch": InputSwitch,
@@ -33,7 +35,7 @@
 
             {#each f.children as f} 
                 {#if components[f.item_type]}
-                    <svelte:component this={components[f.item_type]} {f} />
+                    <svelte:component this={components[f.item_type]} {f} {channel}/>
                 {:else}
                     <div>Tried loading an unknown component <b>{f.item_type}</b></div>
                 {/if}

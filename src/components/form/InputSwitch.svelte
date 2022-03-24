@@ -1,10 +1,15 @@
 <script>
     export let f;
     export let channel = 'ANSWER';
+    function announce() {
+      let answer = JSON.parse(JSON.stringify(f));
+      //answer.options = opts;
+      PubSub.publish(channel, answer);
+    }
 </script>
 
 
-<div class="form-item">
+<div class="form-item" class:clamp={f.clamp}>
     {#if f.label}
         <label for="{f.id}">{f.label}</label>
     {/if}
@@ -17,7 +22,7 @@
                     <input type="checkbox" bind:checked={option.value}>
                     <span class="slider"></span>
                 </label>
-                <span on:click="{ () => { option.value = !option.value}}">{option.text}</span>
+                <span on:click="{ () => { option.value = !option.value; announce(); }}">{option.text}</span>
             </div>
     {/each}
 </div>
@@ -35,6 +40,7 @@
   position: relative;
   display: inline-block;
   width: 36px;
+  min-width: 36px;
   height: 20px;
   margin-right:8px;
 }

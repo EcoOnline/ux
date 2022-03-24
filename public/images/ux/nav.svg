@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>open-panel--left</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1069.000000, -602.000000)">
+            <g id="open-panel--left" transform="translate(1069.000000, 602.000000)">
+                <path d="M112,16 L16,16 C11.581722,16 8,19.581722 8,24 L8,104 C8,108.418278 11.581722,112 16,112 L112,112 C116.418278,112 120,108.418278 120,104 L120,24 C120,19.581722 116.418278,16 112,16 Z M16,24 L40,24 L40,104 L16,104 L16,24 Z M112,104 L48,104 L48,24 L112,24 L112,104 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+                <rect id="_Transparent_Rectangle_" x="0" y="0" width="128" height="128"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

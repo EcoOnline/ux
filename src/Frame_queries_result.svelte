@@ -15,9 +15,9 @@
 <div class="row sticky">
     <div class="col12 col-md-5">
         <ul class="breadcrumb">
-            <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
-            <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
-            <li><a href="#ehs/incidents" on:click="{ () => {nav('incidents')}}">Incidents</a></li>
+            <li><a href="#platform">EcoOnline</a></li>
+            <li><a href="#ehs">EHS</a></li>
+            <li><a href="#ehs/incidents">Incidents</a></li>
             <li>Query Result</li>
         </ul>
     </div>
@@ -29,7 +29,7 @@
         <a href="/" class='btn'>Save</a>
     </div>
 </div>
-<h1><i class="i-filter i-32"></i> Query results</h1>
+<h1 class="page-title"><i class="i-filter i-32"></i> Query results</h1>
 
 <div class="row">
     <div class="col12">

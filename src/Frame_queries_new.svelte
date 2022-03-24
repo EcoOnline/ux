@@ -15,18 +15,23 @@
 <div class="row sticky">
     <div class="col12 col-sm-7">
         <ul class="breadcrumb">
-            <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
-            <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
-            <li><a href="#ehs/incidents" on:click="{ () => {nav('incidents')}}">Incidents</a></li>
+            <li><a href="#platform">EcoOnline</a></li>
+            <li><a href="#ehs">EHS</a></li>
+            <li><a href="#ehs/incidents">Incidents</a></li>
             <li>New Query</li>
         </ul>
     </div>
     <div class="col12 col-sm-5 text-right">
-        <a href="#ehs/incidents/queries_result" on:click="{ () => {nav('queries_result')}}" class='btn'>Run</a>
+        <a href="#ehs/incidents/queries_result" class='btn'>Run</a>
     </div>
 </div>
-<h1><i class="i-filter i-32"></i> New query</h1>
-
+<h1 class="page-title"><i class="i-filter i-32"></i> New query</h1>
+<ul class="tabs">
+    <li><a href="#ehs/incidents">Overview</a></li>
+    <li><a href="#ehs/incidents/queries_new" class="active">Query</a></li>
+    <li><a href="#ehs/incidents/summary">Summary</a></li>
+    <li><a href="#ehs/incidents/incidents_admin">Admin</a></li>
+</ul>
 <div class="row">
     <div class="col12 col-md-3">
         <div class="card">

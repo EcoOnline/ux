@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="104px" viewBox="0 0 80 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Marketing Icons</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-200.000000, -626.000000)" fill="#1A1919" fill-rule="nonzero">
+            <g id="Marketing-Icons" transform="translate(200.000000, 626.000000)">
+                <polygon id="Path" points="48 92.72 37.64 82.36 32 88 48 104 80 72 74.36 66.36"></polygon>
+                <path d="M8,96 L8,24 L56,24 L56,60 L64,60 L64,8 C63.9976,5.879 63.154,3.8456 61.654,2.34584 C60.1544,0.84608 58.1208,0.00244 56,7.10542736e-15 L8,7.10542736e-15 C5.87892,0.00212 3.84532,0.84564 2.34548,2.34548 C0.84564,3.84532 0.00212,5.87892 0,8 L0,96 C0.00244,98.1208 0.84608,100.1544 2.34584,101.654 C3.8456,103.154 5.879,103.9976 8,104 L24,104 L24,96 L8,96 Z M8,8 L56,8 L56,16 L8,16 L8,8 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

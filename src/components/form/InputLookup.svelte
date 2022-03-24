@@ -2,7 +2,7 @@
 
     import { onMount} from 'svelte';
     import PubSub from 'pubsub-js'
-    import Item from './InputMultiItem.svelte';
+    import Item from './InputLookupItem.svelte';
 
     export let f;
     let orginal_options = JSON.parse(JSON.stringify(f.options)); //make a copy for resetting
@@ -86,11 +86,8 @@
     }
     
     function recalc() {
-        
         cull(f.options, f.answer);
-        if(f.answer !== '') {
-            dd_in = true;
-        }
+        
         selected = tree_to_selected(f.options);
         
         if(w>0) {
@@ -113,17 +110,12 @@
         }
     }
 
-    function remove_tag(tag) {
-        tag.selected = false;
-        f.options = f.options;
-        recalc();
-    }
     function handleItemUpdate(ev) {
+        f.answer = ev.detail.item.value;
         recalc();
+        dd_in = false;
     }
-    function handleItemUpdate2(ev) {
-        recalc();
-    }
+    
 
 
     onMount(() => {
@@ -140,54 +132,23 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    {#if f.max_warning}
-        {#if selected.length >= f.max_warning.value}
-            <div class="idea"><i class="i-idea i-24"></i><p>{f.max_warning.message}</p></div>
-        {/if}
-    {/if}
     {#if dd_in}
-        <div class="multi-mask" on:click={ () => { dd_in = false;f.answer=''; }}></div>
-    {/if}
-    {#if selected_shortlist.length}
-        {#each selected_shortlist as tag}
-            {#if tag.key == 'record_id'}
-                <div class="tag no_delete">{tag.value}</div>
-            {:else}
-                <div class="tag" on:click="{ () => remove_tag(tag)}">{tag.value}<i class="i-close i-20"></i></div>
-            {/if}
-        {/each}
-        {#if selected_shortlist.length < selected.length}
-            <div class="tag no_delete">+{selected.length - selected_shortlist.length}</div>
-        {/if}
+        <div class="multi-mask" on:click={ () => { dd_in = false; }}></div>
     {/if}
     <div class="multi-wrapper">
         <div class="form-control">
-            <input bind:value="{f.answer}" on:focus="{ (ev) => { ev.target.select()}}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
+            <input bind:value="{f.answer}" on:keyup="{ () => { dd_in = true}}" on:focus="{ (ev) => { ev.target.select()}}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
             {#if !dd_in}
-                <i class="i-chevron-down i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
+                <i class="i-chevron-down i-20" on:click="{ () => {f.answer=''; dd_in = !dd_in}}"></i>
             {:else}
-                <i class="i-chevron-up i-20" on:click="{ () => { dd_in = !dd_in; f.answer=''}}"></i>
+                <i class="i-chevron-up i-20" on:click="{ () => { dd_in = !dd_in;}}"></i>
             {/if}
         </div>
         
         <div class="multi-dropdown" class:dd_in>
-            <ul class="tabs">
-                <li class="select"><a>Select</a></li>
-                <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'all'}" on:click|preventDefault ="{ () => { tab = 'all';}}">All</a></li>
-                <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'selected'}" on:click|preventDefault ="{ () => { tab = 'selected'; }}">Selected</a></li>
-            </ul>
-            {#if tab == 'all'}
-                {#each f.options as f} 
-                    <Item {f} on:item_update="{handleItemUpdate}"/>
-                {/each}
-            
-
-
-            {:else if tab == 'selected'}
-                {#each selected as f}
-                    <Item {f} on:item_update="{handleItemUpdate2}"/>
-                {/each}
-            {/if}
+            {#each f.options as f} 
+                <Item {f} on:item_update="{handleItemUpdate}"/>
+            {/each}
         </div>
 
     </div>

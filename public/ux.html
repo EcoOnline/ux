@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<head>
+		<meta charset="utf-8">
+		<title>UI/UX</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;900&display=swap" rel="stylesheet">
+		<link rel='stylesheet' href='build/ux.css'>
+		<script defer src='build/ux.js'></script>
+        
+		<style>
+			:root {
+                --grey: #2A3850;
+                --blue: #3986E0;
+                --lightgrey: #9EB0CC;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html, body {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                color: var(--grey);
+            }
+            html {
+                overflow: hidden;
+            }
+            body {
+                background:#f0f0f0;
+                font-family: 'Inter', sans-serif;
+                font-size:21px;
+            }
+            img {
+                max-width: 90%;
+            }
+            .prev, .next {
+                transition: opacity 1s linear;
+                opacity:0.1;
+            }
+            .prev:hover, .next:hover {
+                opacity:1;
+            }
+            @media (max-width: 699px) {
+                body {
+                    font-size:12px;
+                }
+            }
+            @media (max-width: 1024px) {
+                body {
+                    font-size:16px;
+                }
+            }
+		</style>
+	</head>
+	<body>
+	</body>
+</html>

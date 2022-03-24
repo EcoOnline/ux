@@ -269,12 +269,6 @@
                     label: "Time into shift",
                     optional: true,
                     answer: ""
-                },
-                {
-                    item_type: "input_lookup",
-                    id: "0_11",
-                    label: "Location level 1",
-                    answer: ""
                 }
             ]
         }

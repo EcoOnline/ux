@@ -8,12 +8,17 @@
 		});
 	}
     let tab = "home";
+    export let tabnav = '';
+    $: {
+        let t = tabnav;
+        tab = (t == '' ? 'home' : t);
+    }
 </script>
 
     <div class="row sticky">
         <div class="col12">
             <ul class="breadcrumb">
-                <li><a href="/">EcoOnline</a></li>
+                <li><a href="#platform">EcoOnline</a></li>
                 <li>EHS</li>
             </ul>
         </div>
@@ -22,10 +27,10 @@
     
 
     <ul class="tabs">
-        <li><a href="/" class:active="{tab == 'home'}" on:click|preventDefault ="{ () => { tab = 'home';}}">Home</a></li>
-        <li><a href="/" class:active="{tab == 'dashboards'}" on:click|preventDefault ="{ () => { tab = 'dashboards'; }}">Dashboards</a></li>
-        <li><a href="/" class:active="{tab == 'reports'}" on:click|preventDefault ="{ () => { tab = 'reports';}}">Reports</a></li>
-        <li><a href="/" class:active="{tab == 'tasks'}" on:click|preventDefault ="{ () => { tab = 'tasks';}}">My Tasks</a></li>
+        <li><a href="#ehs" class:active="{tab == 'home'}">Home</a></li>
+        <li><a href="#ehs/dashboards" class:active="{tab == 'dashboards'}">Dashboards</a></li>
+        <li><a href="#ehs/reports" class:active="{tab == 'reports'}">Reports</a></li>
+        <li><a href="#ehs/tasks" class:active="{tab == 'tasks'}">My Tasks</a></li>
     </ul>
 
     {#if tab == 'home'}
@@ -38,7 +43,7 @@
                         <a href="#ehs/incidents/incidents_new" class="add" on:click|stopPropagation="{ () => {nav('incidents_new')}}"> </a>
                         <a href="#ehs/incidents/queries_new" class="filter" on:click|stopPropagation="{ () => {nav('queries_new')}}"> </a>
                         <a href="#ehs/incidents/summary" class="summary" on:click|stopPropagation="{ () => {nav('incidents/summary')}}"> </a>
-                        <a href="#ehs/incidents/admin" class="tool" on:click|stopPropagation="{ () => {nav('incidents/admin')}}"> </a>
+                        <a href="#ehs/incidents/incidents_admin" class="tool" on:click="{ () => {nav('incidents/incidents_admin')}}" > </a>
                     </div>
                 </div>
             </div>
@@ -208,15 +213,9 @@
                 </div>
             </div>
             <div class="col6 col-sm-4 col-md-3 col-lg-2">
-                <div class="tile">
+                <div class="tile" on:click|preventDefault="{ () => {nav('linkedfields');window.location.hash='#ehs/administration/linkedfields'}}">
                     <div class="icon" style="background-image:url(./images/ehs_svgs_clean/administration.svg)"></div>
                     <b>Administration</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
                 </div>
             </div>
             

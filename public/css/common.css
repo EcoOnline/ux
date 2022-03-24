@@ -166,8 +166,8 @@ li {
 .col11 { width: calc(11 * var(--c) + 10 * var(--g) ) }
 .col12 { width: calc(12 * var(--c) + 11 * var(--g) ) }
 
-/*so it needs hacking for nested */
 
+/*so it needs hacking for nested */
 .col-md-9 .col12 { width: 100% !important }
 .col-md-9 .col12 { width: 100% !important }
 
@@ -575,7 +575,9 @@ h1 {
     height:24px;
     cursor:pointer
 }
-
+.text-center {
+    text-align: center;
+}
 .text-right .i-24+.i-24 {
     margin-left:16px;
     margin-right:4px;
@@ -598,6 +600,7 @@ h1 .i-32 {
 .i-chevron-down         { background-image:url(../images/icons/chevron-down.svg) }
 .i-chevron-up           { background-image:url(../images/icons/chevron-up.svg) }
 .i-close                { background-image:url(../images/icons/close.svg) }
+.i-dashboard            { background-image:url(../images/icons/dashboard.svg) }
 .i-desktop              { background-image:url(../images/icons/desktop.svg) }
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
@@ -607,6 +610,7 @@ h1 .i-32 {
 .i-hinton-plot          { background-image:url(../images/icons/hinton-plot.svg)}
 .i-idea                 { background-image:url(../images/icons/idea.svg)}
 .i-incidents            { background-image:url(../images/icons/incidents.svg)}
+.i-link                 { background-image:url(../images/icons/link.svg)}
 .i-location             { background-image:url(../images/icons/location.svg)}
 .i-maximize             { background-image:url(../images/icons/maximize.svg)}
 .i-minimize             { background-image:url(../images/icons/minimize.svg)}
@@ -620,10 +624,12 @@ h1 .i-32 {
 .i-rocket               { background-image:url(../images/icons/rocket.svg)}
 .i-search               { background-image:url(../images/icons/search.svg)}
 .i-settings             { background-image:url(../images/icons/settings.svg)}
+.i-summary 		        { background-image:url(../images/icons/summary.svg)}
 .i-switcher             { background-image:url(../images/icons/switcher.svg)}
 .i-thumbs-down          { background-image:url(../images/icons/thumbs-down.svg)}
 .i-thumbs-up            { background-image:url(../images/icons/thumbs-up.svg)}
 .i-time                 { background-image:url(../images/icons/time.svg)}
+.i-tool 		        { background-image:url(../images/icons/tool.svg)}
 .i-trash                { background-image:url(../images/icons/trash-can.svg)}
 
 
@@ -646,13 +652,23 @@ h1.page-title i {
     line-height:24px;
     font-size:24px;
     padding-top:6px;
+    display:inline-block;
+}
+.menu-icons .menu-icon {
     display:none;
 }
 .menu-icon.mobile {
     display:inline-block;
 }
 .menu-icon:hover {
-    background-color:#f5f6ff;
+    /*background-color:#f5f6ff;*/
+    background:rgb(39 47 150 / 5%);
+}
+.menu-icon.selected {
+    background:rgb(39 47 150 / 10%);
+}
+.menu-icon.selected:hover {
+    background:rgb(39 47 150 / 10%);
 }
 .profile-picture {
     background-color: var(--eo-primary-500);
@@ -719,6 +735,10 @@ h1.page-title i {
     margin-bottom:32px;
     overflow: auto; /* why was this here? */
 }
+.clamp {
+    /* reduce top margin so inputs clamp together*/
+    margin-top:-24px;
+}
 
 .form label {
     font-weight:700;
@@ -751,7 +771,12 @@ div.form-control input {
     outline:none;
 }
 
-
+.mt1 { margin-top:1em ! important }
+.mt2 { margin-top:2em ! important }
+.ml1 { margin-left:1em ! important }
+.ml2 { margin-left:2em ! important }
+.mb1 { margin-bottom:1em ! important }
+.mb2 { margin-bottom:2em ! important }
 
 .print_block { display: none }
 .print_flex { display: flex }

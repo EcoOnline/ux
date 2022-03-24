@@ -1382,7 +1382,6 @@
         top:0;
         border-radius:2px;
         width: 4px;
-        
         height:100%;
         background: var(--eo-border-reduced);
         transition: height 0.3s linear, top 0.3s linear;

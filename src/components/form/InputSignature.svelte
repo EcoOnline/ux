@@ -30,7 +30,11 @@
         uuid: unique_num
     });
 
-
+    function randomref() {
+        unique_num = (Math.random() + '').substring(2);
+        coms_num = unique_num;
+        qr_value = base_url + coms_num;
+    }
     
 
     onMount(() => {
@@ -100,7 +104,7 @@
             </div>
         {/if}
     </div>
-    
+    <span on:click="{randomref}">test</span>
 </div>
 
 <style>

@@ -98,7 +98,7 @@
         </div>
         {#if !is_mobile}
             <div class="signature-qr">
-                <QrCode {qr_value}/>
+                <QrCode value={qr_value}/>
                 {qr_value}
                 <!--or sign with mobile-->
             </div>

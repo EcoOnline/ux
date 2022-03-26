@@ -11,6 +11,7 @@
 
     let x1 = 0;
     let x2 = 0;
+    let tick = 0;
 
 
     function anounceSig() {
@@ -75,6 +76,7 @@
     function touchmove() {
         let touch = e.touches[0];
         x1 = touch.clientX;
+        tick++;
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,
             offsetX: touch.clientX,
@@ -109,7 +111,7 @@
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
 
-    {x1}:{x2}
+    {x1}:{x2}:{tick}
 </div>
 <style>
     .canvas-holder {

@@ -70,9 +70,12 @@
 
     function touchmove() {
         let touch = e.touches[0];
+        console.log('touchmove', touch.clientX);
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,
-            clientY: touch.clientY
+            offsetX: touch.clientX,
+            clientY: touch.clientY,
+            offsetY: touch.clientY
         });
         canvas.dispatchEvent(mouseEvent);
     }

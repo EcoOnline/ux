@@ -208,6 +208,7 @@
     .multi-dropdown.dd_in {
         max-height: 50vh;
     }
+    /*
     .tabs {
         margin-left:16px;
     }
@@ -217,4 +218,5 @@
     .select {
         flex:1;
     }
+    */
 </style>

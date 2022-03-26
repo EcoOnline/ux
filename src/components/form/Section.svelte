@@ -1,21 +1,26 @@
 <script>
+    
+	import InputCheckbox from "./InputCheckbox.svelte";
+	import InputLookup from "./InputLookup.svelte";
+	import InputMatrix from "./InputMatrix.svelte";
+	import InputMulti from "./InputMulti.svelte";
 	import InputSelect from "./InputSelect.svelte";
 	import InputText from "./InputText.svelte";
-	import InputMulti from "./InputMulti.svelte";
-	import InputLookup from "./InputLookup.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
+	import InputSignature from "./InputSignature.svelte";
 	import InputSwitch from "./InputSwitch.svelte";
-	import InputMatrix from "./InputMatrix.svelte";
 
 	let components = {
-		"input_text": InputText,
-		"input_multi": InputMulti,
+		"input_checkbox": InputCheckbox,
 		"input_lookup": InputLookup,
+		"input_matrix": InputMatrix,
+		"input_multi": InputMulti,
 		"input_select": InputSelect,
-		"input_textarea": InputTextarea,
+		"input_signature": InputSignature,
 		"input_switch": InputSwitch,
-		"input_matrix": InputMatrix
-	}
+		"input_text": InputText,
+		"input_textarea": InputTextarea
+    }
     
 
     export let f;

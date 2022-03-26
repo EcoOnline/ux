@@ -269,6 +269,13 @@
                     label: "Time into shift",
                     optional: true,
                     answer: ""
+                },
+                {
+                    item_type: "input_signature",
+                    id: "0_11",
+                    label: "Signature required",
+                    optional: false,
+                    answer: ""
                 }
             ]
         }

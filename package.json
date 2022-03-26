@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "carbon-components-svelte": "^0.29.2",
     "carbon-icons-svelte": "^10.23.0",
@@ -29,6 +30,7 @@
     "papaparse": "^5.3.1",
     "piexifjs": "^1.0.4",
     "pubsub-js": "^1.9.4",
+    "pusher": "^5.0.1",
     "react-social-login-buttons": "^3.4.0",
     "sirv-cli": "^1.0.0",
     "svelte-qrcode": "^1.0.0"

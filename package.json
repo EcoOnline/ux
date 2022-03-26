@@ -29,6 +29,7 @@
     "html2canvas": "*",
     "papaparse": "^5.3.1",
     "piexifjs": "^1.0.4",
+    "pubnub": "^5.0.1",
     "pubsub-js": "^1.9.4",
     "pusher": "^5.0.1",
     "react-social-login-buttons": "^3.4.0",

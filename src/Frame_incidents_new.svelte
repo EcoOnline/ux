@@ -5,7 +5,6 @@
     import Pullout from './components/Pullout.svelte';
     import Form from './components/form/Form.svelte';
     import Slide from './components/Slide.svelte';
-    //import { validate_each_keys } from 'svelte/internal';
     
     const dispatch = createEventDispatcher();
 

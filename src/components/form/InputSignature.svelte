@@ -4,11 +4,12 @@
 	import QrCode from "svelte-qrcode";
     import SigCanvas from './InputSignatureCanvas.svelte';
 
-    
+
     export let f;
     let ref = '';
     let base_url = "https://ecoonline.github.io/ux/public/mobile_signature.html?ref=";
-    $: qr_value = base_url + coms_num;
+    let qr_value = base_url;
+   
 
 
     //pusher credentials
@@ -43,6 +44,7 @@
         } else {
             is_mobile = false;
         }
+        qr_value = base_url + coms_num;
 
 
         var publishPayload = {

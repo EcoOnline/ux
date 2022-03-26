@@ -12,6 +12,7 @@
     let single_page = false; //view as tabs
 
     let form_test = 'Form testttttt';
+    let channel = 'NEW_INCIDENT';
     let f = [
         {
             item_type: "section",
@@ -897,7 +898,7 @@
         {/if}
         {#if filtered_pages.indexOf('report') >= 0}
             <h1 bind:this="{hs[0].el}" class="page-title">Report</h1>
-            <Form {f} ></Form>
+            <Form {f} {channel}></Form>
         {/if}
         {#if filtered_pages.indexOf('events') >= 0}
             <div>

@@ -96,6 +96,7 @@
         <div class="signature-box form-control">
             <SigCanvas></SigCanvas>
         </div>
+        
         {#if !is_mobile}
             <div class="signature-qr">
                 <QrCode value={qr_value}/>

@@ -4,6 +4,7 @@
 	import QrCode from "svelte-qrcode";
     import SigCanvas from './InputSignatureCanvas.svelte';
 
+    
     export let f;
     let ref = '';
     let base_url = "https://ecoonline.github.io/ux/public/mobile_signature.html?ref=";

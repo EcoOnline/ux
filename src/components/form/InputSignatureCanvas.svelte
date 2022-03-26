@@ -9,12 +9,16 @@
     let marks = false;
 
 
+    let x1 = 0;
+    let x2 = 0;
+
 
     function anounceSig() {
         let data = canvas.toDataURL();
     }
 
     function getMousePosition(e) {
+        x2 = e.offsetX;
         var mouseX = e.offsetX * canvas.width / canvas.clientWidth | 0;
         var mouseY = e.offsetY * canvas.height / canvas.clientHeight | 0;
         return {x: mouseX, y: mouseY};
@@ -70,7 +74,7 @@
 
     function touchmove() {
         let touch = e.touches[0];
-        console.log('touchmove', touch.clientX);
+        x1 = touch.clientX;
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,
             offsetX: touch.clientX,
@@ -104,6 +108,8 @@
     {:else}
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
+
+    {x1}:{x2}
 </div>
 <style>
     .canvas-holder {

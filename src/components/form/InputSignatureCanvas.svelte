@@ -83,6 +83,7 @@
 
     function touchpaint(e) {
         let touch = e.touches[0];
+        log += touch.clientX + '|' + touch.offsetX + '|';
         paint({
             clientX: touch.clientX,
             offsetX: touch.offsetX,

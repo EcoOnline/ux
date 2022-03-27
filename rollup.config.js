@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['mobile_signature'].map((name, index) => ({
+export default ['frame'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

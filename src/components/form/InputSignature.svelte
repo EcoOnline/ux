@@ -52,7 +52,7 @@
 
         let queryParams = new URLSearchParams(window.location.search);
         ref = queryParams.get("ref");
-
+        console.log('ref?', ref);
         if(ref) {
             is_mobile = true;
             coms_num = ref;

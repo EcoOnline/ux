@@ -19,6 +19,8 @@
         let d = dataurl;
 
         if(d) {
+            //clear first
+            context.clearRect(0, 0, canvas.width, canvas.height);
             //paint from message onto canvas
             let img = new Image;
             img.onload = function(){
@@ -52,6 +54,10 @@
             setTimeout(() => {
                 clearFunc(i);
             }, 5);
+        } else {
+            dispatch('signature', {
+                signature: canvas.toDataURL()
+            });
         }
     }
 
@@ -136,9 +142,9 @@
         on:touchend="{touchdisengage}"
     ></canvas>
     {#if marks}
-        <i class="i-trash i-20" on:click={clearCanvas}></i>
+        <i class="i-reset i-20" on:click={clearCanvas}></i>
     {:else}
-        <i class="i-trash i-20" style="opacity:0.5"></i>
+        <i class="i-reset i-20" style="opacity:0.5"></i>
     {/if}
 </div>
 <style>

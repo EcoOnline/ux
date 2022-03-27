@@ -273,7 +273,7 @@
                 {
                     item_type: "input_signature",
                     id: "0_11",
-                    label: "Signature required",
+                    label: "Please sign this document",
                     optional: false,
                     answer: ""
                 }

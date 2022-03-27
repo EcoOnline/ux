@@ -89,12 +89,12 @@
 
 <div class="form-item">
     {#if f.label}
-        <label for="{f.id}">{f.label}</label>
+        <label for="{f.id}">{f.label} {#if f.optional}<span class="optional">(Optional)</span>{/if}</label>
     {/if}
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    <div class="signature-holder" class:is_mobile>
+    <div class="signature-holder" class:is_mobile class:mandatory={!f.optional}>
         <div class="form-control signature-box">
             <SigCanvas on:signature="{handleSignature}" {dataurl}></SigCanvas>
         </div>
@@ -123,6 +123,9 @@
         overflow: visible;
         height:160px;
         padding:0;
+    }
+    .mandatory {
+        box-shadow: inset 0 0 0 12px rgb(255,185,0,0.1);
     }
     .signature-qr {
         position:absolute;

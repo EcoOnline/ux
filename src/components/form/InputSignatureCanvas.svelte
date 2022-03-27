@@ -9,6 +9,8 @@
     let marks = false;
 
     let log = '';
+    let offX = 0;
+    let offY = 0;
 
 
     function anounceSig() {
@@ -42,7 +44,7 @@
 
         if (dragging) {
             let pos = getMousePosition(e);
-            log += 'paint / ';
+            log += 'paint ' + e.offsetX + '/';
             context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
@@ -85,9 +87,9 @@
         log += 'touchpaint|' + touch.clientX + '|' + touch.offsetX + '|' + JSON.stringify(touch);
         paint({
             clientX: touch.clientX,
-            offsetX: touch.clientX,
+            offsetX: touch.clientX - offX,
             clientY: touch.clientY,
-            offsetY: touch.clientY
+            offsetY: touch.clientY - offY
         });
     }
     
@@ -96,6 +98,10 @@
         context = canvas.getContext('2d');
         context.mozImageSmoothingEnabled = false;
         context.imageSmoothingEnabled = false;
+
+        let rect = canvas.getClientRects();
+        offX = rect.x;
+        offY = rect.Y;
     });
 
 </script>
@@ -117,7 +123,7 @@
     {/if}
     <br>
     {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLEAR2 </span>
+    <span on:click="{ ()=> { log=''}}"> CLEAR3 </span>
     <br>
     <br>
     <br>

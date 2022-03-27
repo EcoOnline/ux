@@ -28,6 +28,7 @@
                 marks = true;
             };
             img.src = d;
+            dataurl = false;
         }
     }
 
@@ -44,6 +45,7 @@
 
     function clearCanvas() {
         marks = false;
+        dataurl = false;
         clearFunc(0);
 
     }

@@ -150,7 +150,7 @@
     }
     .is_mobile {
         max-width:100% ! important;
-        aspect-ratio: 1/2;
+        aspect-ratio: 3;
         height:auto
     }
 

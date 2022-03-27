@@ -43,15 +43,15 @@
     }
 
     function clearCanvas() {
-        clearFunc(0);
         marks = false;
+        clearFunc(0);
 
     }
     function clearFunc(i) {
         i+= 10;
         context.clearRect(0, 0, i, canvas.height);
 
-        if(i < canvas.width){
+        if(i <= canvas.width){
             setTimeout(() => {
                 clearFunc(i);
             }, 5);

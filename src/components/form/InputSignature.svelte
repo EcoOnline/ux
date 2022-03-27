@@ -33,7 +33,6 @@
 
     function handleSignature(event) {
         console.log('signature received', event.detail.signature);
-        f.label = f.label + '.';
         pubnub.publish({
             channel : "signature",
             message: {

@@ -25,6 +25,7 @@
             let img = new Image;
             img.onload = function(){
                 context.drawImage(img,0,0);
+                marks = true;
             };
             img.src = d;
         }
@@ -142,7 +143,7 @@
         on:touchend="{touchdisengage}"
     ></canvas>
     {#if marks}
-        <i class="i-reset i-20" on:click={clearCanvas}></i>
+        <i class="i-reset i-20" on:click|stopPropagation|preventDefault={clearCanvas}></i>
     {:else}
         <i class="i-reset i-20" style="opacity:0.5"></i>
     {/if}

@@ -48,6 +48,7 @@
     function paint(e) {
         e.preventDefault();
         e.stopPropagation();
+        log += 'paint / ';
         if (dragging) {
             context.lineTo(getMousePosition(e).x, getMousePosition(e).y);
             context.lineWidth = radius * 2;
@@ -64,11 +65,13 @@
         dragging = true;
         paint(e);
         marks = true;
+        log += 'engage / ';
 
     };
     function disengage() {
         dragging = false;
         context.beginPath();
+        log += 'disengage / ';
 
 
         //convert canvas to data and send up to parent
@@ -78,7 +81,7 @@
         let touch = e.touches[0];
         x1 = touch.clientX;
         tick++;
-        log = JSON.stringify(touch);
+        log += 'touchmove / ';
         /*
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,
@@ -113,9 +116,12 @@
     {:else}
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
-
+    <br>
     {x1}:{x2}:{tick}<br>
     {log}
+    <br>
+    <br>
+    <br>
 </div>
 <style>
     .canvas-holder {

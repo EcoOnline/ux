@@ -76,6 +76,20 @@
 
         //convert canvas to data and send up to parent
     };
+    function touchengage(e) {
+        dragging = true;
+        marks = true;
+        log += 'touchengage / ';
+
+    };
+    function touchdisengage() {
+        dragging = false;
+        context.beginPath();
+        log += 'touchdisengage / ';
+
+
+        //convert canvas to data and send up to parent
+    };
 
     function touchmove() {
         let touch = e.touches[0];
@@ -108,8 +122,10 @@
         on:mousemove="{paint}"
         on:mouseup="{disengage}"
         on:contextmenu="{disengage}"
+
+        on:touchstart="{touchengage}"
         on:touchmove="{touchmove}"
-        on:touchend="{disengage}"
+        on:touchend="{touchdisengage}"
     ></canvas>
     {#if marks}
         <i class="i-trash i-20" on:click={clearCanvas}></i>

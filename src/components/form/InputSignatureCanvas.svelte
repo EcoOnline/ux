@@ -100,7 +100,8 @@
         context.imageSmoothingEnabled = false;
 
         let rect = canvas.getClientRects();
-        offX = rect.x;
+        console.log('wrecked', rect);
+        offX = rect.X;
         offY = rect.Y;
     });
 
@@ -123,7 +124,7 @@
     {/if}
     <br>
     {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLEAR4 </span>
+    <span on:click="{ ()=> { log=''}}"> CLEAR5 </span>
     <br>
     <br>
     <br>

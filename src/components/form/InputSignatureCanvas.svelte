@@ -86,9 +86,9 @@
         log += touch.clientX + '|' + touch.offsetX + '|';
         paint({
             clientX: touch.clientX,
-            offsetX: touch.offsetX,
+            offsetX: touch.clientX,
             clientY: touch.clientY,
-            offsetY: touch.offsetY
+            offsetY: touch.clientY
         });
     }
     

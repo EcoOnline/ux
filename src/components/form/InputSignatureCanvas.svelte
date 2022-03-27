@@ -43,7 +43,7 @@
 
         if (dragging) {
             let pos = getMousePosition(e);
-            log += 'paint / ' + pos.x;
+            log += 'paint / ' + pos.x + '/' + e.offsetX + '/' + canvas.width + '/' + canvas.clientWidth + '/';
             context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
@@ -52,9 +52,6 @@
             context.fill();
             context.beginPath();
             context.moveTo(pos.x, pos.y);
-        } else {
-
-            log += 'no drag! / ';
         }
     };
 
@@ -62,13 +59,11 @@
         dragging = true;
         paint(e);
         marks = true;
-        log += 'engage / ';
 
     };
     function disengage() {
         dragging = false;
         context.beginPath();
-        log += 'disengage / ';
 
 
         //convert canvas to data and send up to parent
@@ -76,22 +71,18 @@
     function touchengage(e) {
         dragging = true;
         marks = true;
-        log += 'touchengage / ';
 
     };
     function touchdisengage() {
         dragging = false;
         context.beginPath();
-        log += 'touchdisengage / ';
 
 
         //convert canvas to data and send up to parent
     };
 
     function touchpaint(e) {
-        log += 'touchpaint / ' + (e.touches ? 'yes' : 'no');
         let touch = e.touches[0];
-        
         paint({
             clientX: touch.clientX,
             offsetX: touch.offsetX,
@@ -115,7 +106,6 @@
         on:mousemove="{paint}"
         on:mouseup="{disengage}"
         on:contextmenu="{disengage}"
-
         on:touchstart="{touchengage}"
         on:touchmove="{touchpaint}"
         on:touchend="{touchdisengage}"

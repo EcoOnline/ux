@@ -91,8 +91,8 @@
         //convert canvas to data and send up to parent
     };
 
-    function touchmove(e) {
-        log += 'touchmove / ';
+    function touchpaint(e) {
+        log += 'touchpaint / ';
         let touch = e.touches[0];
         x1 = touch.clientX;
         tick++;
@@ -124,7 +124,7 @@
         on:contextmenu="{disengage}"
 
         on:touchstart="{touchengage}"
-        on:touchmove="{touchmove}"
+        on:touchmove="{touchpaint}"
         on:touchend="{touchdisengage}"
     ></canvas>
     {#if marks}

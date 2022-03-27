@@ -12,6 +12,7 @@
     let x1 = 0;
     let x2 = 0;
     let tick = 0;
+    let log = '';
 
 
     function anounceSig() {
@@ -77,6 +78,8 @@
         let touch = e.touches[0];
         x1 = touch.clientX;
         tick++;
+        log = JSON.stringify(touch);
+        /*
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,
             offsetX: touch.clientX,
@@ -84,6 +87,7 @@
             offsetY: touch.clientY
         });
         canvas.dispatchEvent(mouseEvent);
+        */
     }
     
         
@@ -101,7 +105,6 @@
         on:mousemove="{paint}"
         on:mouseup="{disengage}"
         on:contextmenu="{disengage}"
-        on:touchstart="{engage}"
         on:touchmove="{touchmove}"
         on:touchend="{disengage}"
     ></canvas>
@@ -111,7 +114,8 @@
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
 
-    {x1}:{x2}:{tick}
+    {x1}:{x2}:{tick}<br>
+    {log}
 </div>
 <style>
     .canvas-holder {

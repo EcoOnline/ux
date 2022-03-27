@@ -65,7 +65,6 @@
     function disengage() {
         dragging = false;
         context.beginPath();
-
         dispatch('signature', {
 			signature: canvas.toDataURL()
 		});
@@ -80,6 +79,9 @@
     function touchdisengage() {
         dragging = false;
         context.beginPath();
+        dispatch('signature', {
+			signature: canvas.toDataURL()
+		});
 
 
         //convert canvas to data and send up to parent

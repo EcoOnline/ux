@@ -36,13 +36,13 @@
         qr_value = base_url + coms_num;
     }
     function handleSignature(event) {
-        console.log('signature received', event.detail.text);
+        console.log('signature received', event.detail.signature);
         f.label = f.label + '.';
         pubnub.publish({
             channel : "signature",
             message: {
                 uuid: coms_num,
-                description: event.detail.text
+                description: event.detail.signature
             }, function(status, response) {
                 console.log('?', status, response);
             }

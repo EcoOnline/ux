@@ -46,8 +46,6 @@
 
 
     function paint(e) {
-        e.preventDefault();
-        e.stopPropagation();
         log += 'paint / ';
         if (dragging) {
             context.lineTo(getMousePosition(e).x, getMousePosition(e).y);
@@ -92,19 +90,15 @@
     };
 
     function touchpaint(e) {
-        log += 'touchpaint / ';
+        log += 'touchpaint / ' + (e.touches ? 'yes' : 'no');
         let touch = e.touches[0];
-        x1 = touch.clientX;
-        tick++;
-        /*
-        let mouseEvent = new MouseEvent("mousemove", {
+        
+        paint({
             clientX: touch.clientX,
-            offsetX: touch.clientX,
+            offsetX: touch.offsetX,
             clientY: touch.clientY,
-            offsetY: touch.clientY
+            offsetY: touch.offsetY
         });
-        canvas.dispatchEvent(mouseEvent);
-        */
     }
     
         
@@ -133,7 +127,7 @@
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
     <br>
-    {x1}:{x2}:{tick}<br>
+    {x1}:{x2}<br>
     {log}
     <br>
     <br>

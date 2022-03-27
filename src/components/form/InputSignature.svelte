@@ -35,6 +35,17 @@
         coms_num = unique_num;
         qr_value = base_url + coms_num;
     }
+    function handleSignature(event) {
+        pubnub.publish({
+            channel : "signature",
+            message: {
+                uuid: coms_num,
+                payload: event.detail.text
+            }, function(status, response) {
+                console.log('?', status, response);
+            }
+        });
+    }
     
 
     onMount(() => {
@@ -51,18 +62,19 @@
         qr_value = base_url + coms_num;
 
 
-        var publishPayload = {
-            channel : "signature",
-            message: {
-                uuid: coms_num,
-                payload: "This is my first message!"
-            }
-        }
+        
         pubnub.addListener({
             message: function (m) {
                 if(m.message.uuid == coms_num) {
                     console.log('SIGNATURE FROM LEGIT COMMS');
                     console.log(m.message.uuid, m.message.payload);
+
+                    //paint from message onto canvas
+                    let img = new Image;
+                    img.onload = function(){
+                        context.drawImage(img,0,0);
+                    };
+                    img.src = m.message.payload;
                 }
             }
         });
@@ -74,11 +86,8 @@
         }
         
 
-        pubnub.publish(publishPayload, function(status, response) {
-            console.log('?', status, response);
-        });
+       
 
-        
 	})
 
 </script>
@@ -93,8 +102,8 @@
         <p>{f.hint}</p>
     {/if}
     <div class="signature-holder">
-        <div class="form-control signature-box" css:is_mobile>
-            <SigCanvas></SigCanvas>
+        <div class="form-control signature-box" class:is_mobile>
+            <SigCanvas on:signature="{handleSignature}"></SigCanvas>
         </div>
 
         {#if !is_mobile}
@@ -139,7 +148,7 @@
         display:block;
         margin:0 auto;
     }
-    :global(.is_mobile) {
+    .is_mobile {
         max-width:100% ! important;
         aspect-ratio: 1/2;
         height:auto

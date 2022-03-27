@@ -32,16 +32,18 @@
     });
 
     function handleSignature(event) {
-        console.log('signature received', event.detail.signature);
-        pubnub.publish({
-            channel : "signature",
-            message: {
-                uuid: coms_num,
-                description: event.detail.signature
-            }, function(status, response) {
-                console.log('?', status, response);
-            }
-        });
+        console.log('signature received');
+        if(is_mobile) {
+            pubnub.publish({
+                channel : "signature",
+                message: {
+                    uuid: coms_num,
+                    description: event.detail.signature
+                }, function(status, response) {
+                    console.log('?', status, response);
+                }
+            });
+        }
     }
     
 
@@ -63,7 +65,7 @@
         
         pubnub.addListener({
             message: function (m) {
-                console.log('message received', m.message);
+                console.log('message received');
                 if(m.message.uuid == coms_num) {
                     console.log('SIGNATURE FROM LEGIT COMMS');
                     dataurl = m.message.description;  

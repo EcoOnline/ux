@@ -118,7 +118,7 @@
     {/if}
     <br>
     {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLear </span>
+    <span on:click="{ ()=> { log=''}}"> CLEAR </span>
     <br>
     <br>
     <br>

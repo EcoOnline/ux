@@ -16,7 +16,6 @@
     }
 
     function getMousePosition(e) {
-
         var mouseX = e.offsetX * canvas.width / canvas.clientWidth | 0;
         var mouseY = e.offsetY * canvas.height / canvas.clientHeight | 0;
         return {x: mouseX, y: mouseY};
@@ -43,7 +42,7 @@
 
         if (dragging) {
             let pos = getMousePosition(e);
-            log += 'paint / ' + pos.x + '/' + e.offsetX + '/' + canvas.width + '/' + canvas.clientWidth + '/';
+            log += 'paint / ';
             context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
@@ -83,7 +82,7 @@
 
     function touchpaint(e) {
         let touch = e.touches[0];
-        log += touch.clientX + '|' + touch.offsetX + '|';
+        log += 'touchpaint|' + touch.clientX + '|' + touch.offsetX + '|' + JSON.stringify(touch);
         paint({
             clientX: touch.clientX,
             offsetX: touch.clientX,
@@ -118,7 +117,7 @@
     {/if}
     <br>
     {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLEAR1 </span>
+    <span on:click="{ ()=> { log=''}}"> CLEAR2 </span>
     <br>
     <br>
     <br>

@@ -6,7 +6,7 @@
     
     let canvas;
     let context;
-    let radius = 3;
+    let radius = 1;
     let dragging = false;
     let marks = false;
 
@@ -132,7 +132,7 @@
         on:mouseup="{disengage}"
         on:contextmenu="{disengage}"
         on:touchstart="{touchengage}"
-        on:touchmove="{touchpaint}"
+        on:touchmove|preventDefault|stopPropagation="{touchpaint}"
         on:touchend="{touchdisengage}"
     ></canvas>
     {#if marks}

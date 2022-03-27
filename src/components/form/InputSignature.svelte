@@ -31,11 +31,6 @@
         uuid: unique_num
     });
 
-    function randomref() {
-        unique_num = (Math.random() + '').substring(2);
-        coms_num = unique_num;
-        qr_value = base_url + coms_num;
-    }
     function handleSignature(event) {
         console.log('signature received', event.detail.signature);
         f.label = f.label + '.';
@@ -107,12 +102,10 @@
         {#if !is_mobile}
             <div class="signature-qr">
                 <QrCode value={qr_value}/>
-                {qr_value}
-                <!--or sign with mobile-->
+                or sign with mobile
             </div>
         {/if}
     </div>
-    <span on:click="{randomref}">test</span>
 </div>
 
 <style>

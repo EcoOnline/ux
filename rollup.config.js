@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
-import { url } from 'inspector';
 
 const production = !process.env.ROLLUP_WATCH;
 

@@ -172,7 +172,7 @@
         
         <div class="multi-dropdown" class:dd_in>
             <ul class="tabs">
-                <li class="select"><a>Select</a></li>
+                <li class="select"><a href="#ehs/incidents/dashboard" on:click|preventDefault ="{ () => { tab = 'all';}}">Select</a></li>
                 <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'all'}" on:click|preventDefault ="{ () => { tab = 'all';}}">All</a></li>
                 <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'selected'}" on:click|preventDefault ="{ () => { tab = 'selected'; }}">Selected</a></li>
             </ul>

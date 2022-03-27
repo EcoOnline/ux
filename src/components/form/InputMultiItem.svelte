@@ -1,6 +1,5 @@
 <script>
     import { createEventDispatcher } from 'svelte';
-    import Item from './InputMultiItem.svelte';
     export let f;
     export let indent = 0;
     const dispatch = createEventDispatcher();

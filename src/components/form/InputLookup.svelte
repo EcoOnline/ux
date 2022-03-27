@@ -1,7 +1,7 @@
 <script>
 
     import { onMount} from 'svelte';
-    import PubSub from 'pubsub-js'
+    import PubSub from 'pubsub-js';
     import Item from './InputLookupItem.svelte';
 
     export let f;
@@ -160,9 +160,6 @@
     .form-item {
         overflow: initial;
     }
-    .tag {
-        position:relative;
-    }
     .multi-mask {
         background:transparent;
         position:absolute;
@@ -173,22 +170,6 @@
     }
     .multi-wrapper {
         position:relative;
-    }
-
-    .idea {
-        padding:8px;
-        display:flex;
-        flex-direction:row;
-        align-items: center;
-        border:1px solid var(--eo-border-reduced);
-        border-radius:8px;
-        margin-bottom:8px;
-    }
-    .idea p {
-        flex: 1;
-	    font-size: 14px;
-	    margin: 0 0 0 8px;
-        padding: 0;
     }
 
     .multi-dropdown {

@@ -1,6 +1,6 @@
 <script>
     export let f;
-    export let channel = 'ANSWER';
+    //export let channel = 'ANSWER';
 </script>
 
 

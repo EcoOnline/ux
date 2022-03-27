@@ -31,7 +31,7 @@
 		overflow:hidden;
 	}
 	
-	main, nav {
+	main {
 		padding: 0 16px;
 		width:100%;
 		text-align: center;

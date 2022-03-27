@@ -1,12 +1,13 @@
 <script>
     export let f;
-    export let channel = 'ANSWER';
+    //export let channel = 'ANSWER';
 
 </script>
 
 
 <div class="form-item">
     {#if f.label}
+        <!-- svelte-ignore a11y-label-has-associated-control -->
         <label>{f.label}</label>
     {/if}
     {#if f.hint}

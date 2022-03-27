@@ -16,6 +16,7 @@
     }
 
     function getMousePosition(e) {
+
         var mouseX = e.offsetX * canvas.width / canvas.clientWidth | 0;
         var mouseY = e.offsetY * canvas.height / canvas.clientHeight | 0;
         return {x: mouseX, y: mouseY};
@@ -36,8 +37,6 @@
             }, 5);
         }
     }
-
-
 
 
     function paint(e) {
@@ -127,7 +126,8 @@
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
     <br>
-    {log}
+    {log}<br>
+    <span on:click="{ ()=> { log=''}}"> CLear </span>
     <br>
     <br>
     <br>

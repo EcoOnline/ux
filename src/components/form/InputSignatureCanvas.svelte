@@ -8,10 +8,6 @@
     let dragging = false;
     let marks = false;
 
-
-    let x1 = 0;
-    let x2 = 0;
-    let tick = 0;
     let log = '';
 
 
@@ -20,7 +16,6 @@
     }
 
     function getMousePosition(e) {
-        x2 = e.offsetX;
         var mouseX = e.offsetX * canvas.width / canvas.clientWidth | 0;
         var mouseY = e.offsetY * canvas.height / canvas.clientHeight | 0;
         return {x: mouseX, y: mouseY};
@@ -46,16 +41,21 @@
 
 
     function paint(e) {
-        log += 'paint / ';
+
         if (dragging) {
-            context.lineTo(getMousePosition(e).x, getMousePosition(e).y);
+            let pos = getMousePosition(e);
+            log += 'paint / ' + pos.x;
+            context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
             context.beginPath();
-            context.arc(getMousePosition(e).x, getMousePosition(e).y, radius, 0, Math.PI * 2);
+            context.arc(pos.x, pos.y, radius, 0, 3.14156 * 2);
             context.fill();
             context.beginPath();
-            context.moveTo(getMousePosition(e).x, getMousePosition(e).y);
+            context.moveTo(pos.x, pos.y);
+        } else {
+
+            log += 'no drag! / ';
         }
     };
 
@@ -127,7 +127,6 @@
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
     <br>
-    {x1}:{x2}<br>
     {log}
     <br>
     <br>

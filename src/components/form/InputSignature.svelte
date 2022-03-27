@@ -36,13 +36,13 @@
         qr_value = base_url + coms_num;
     }
     function handleSignature(event) {
-        console.log('signature received');
+        console.log('signature received', event.detail.text);
         f.label = f.label + '.';
         pubnub.publish({
             channel : "signature",
             message: {
                 uuid: coms_num,
-                payload: event.detail.text
+                description: event.detail.text
             }, function(status, response) {
                 console.log('?', status, response);
             }
@@ -71,14 +71,14 @@
                 console.log('message received', m.message);
                 if(m.message.uuid == coms_num) {
                     console.log('SIGNATURE FROM LEGIT COMMS');
-                    console.log(m.message.uuid, m.message.payload);
+                    console.log(m.message.uuid, m.message.description);
 
                     //paint from message onto canvas
                     let img = new Image;
                     img.onload = function(){
                         context.drawImage(img,0,0);
                     };
-                    img.src = m.message.payload;
+                    img.src = m.message.description;
                 }
             }
         });

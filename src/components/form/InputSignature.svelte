@@ -36,6 +36,8 @@
         qr_value = base_url + coms_num;
     }
     function handleSignature(event) {
+        console.log('signature received');
+        f.label = f.label + '.';
         pubnub.publish({
             channel : "signature",
             message: {
@@ -66,6 +68,7 @@
         
         pubnub.addListener({
             message: function (m) {
+                console.log('message received', m.message);
                 if(m.message.uuid == coms_num) {
                     console.log('SIGNATURE FROM LEGIT COMMS');
                     console.log(m.message.uuid, m.message.payload);

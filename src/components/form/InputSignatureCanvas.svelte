@@ -8,7 +8,6 @@
     let dragging = false;
     let marks = false;
 
-    let log = '';
     let offX = 0;
     let offY = 0;
 
@@ -44,7 +43,6 @@
 
         if (dragging) {
             let pos = getMousePosition(e);
-            log += 'paint ' + pos.x + '/';
             context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
@@ -84,7 +82,6 @@
 
     function touchpaint(e) {
         let touch = e.touches[0];
-        log += 'touchpaint|' + touch.clientX + '|' + offX;
         paint({
             clientX: touch.clientX,
             offsetX: touch.clientX - offX,
@@ -100,7 +97,6 @@
         context.imageSmoothingEnabled = false;
 
         let rect = canvas.getBoundingClientRect();
-        console.log('wrecked', rect.x, rect.y);
         offX = rect.x;
         offY = rect.y;
     });
@@ -122,12 +118,6 @@
     {:else}
         <i class="i-trash i-20" style="opacity:0.5"></i>
     {/if}
-    <br>
-    {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLEAR7 </span>
-    <br>
-    <br>
-    <br>
 </div>
 <style>
     .canvas-holder {

@@ -102,8 +102,8 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    <div class="signature-holder">
-        <div class="form-control signature-box" class:is_mobile>
+    <div class="signature-holder" class:is_mobile>
+        <div class="form-control signature-box">
             <SigCanvas on:signature="{handleSignature}"></SigCanvas>
         </div>
 
@@ -121,6 +121,7 @@
 <style>
     .signature-holder {
         position:relative;
+        max-width:480px;
     }
 
     .form-item {
@@ -152,7 +153,10 @@
         display:block;
         margin:0 auto;
     }
-    .is_mobile {
+    .is_mobile{
+        max-width:100% ! important;
+    }
+    .is_mobile .signature-box{
         max-width:100% ! important;
         aspect-ratio: 3;
         height:auto

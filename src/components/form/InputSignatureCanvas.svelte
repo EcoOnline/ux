@@ -44,7 +44,7 @@
 
         if (dragging) {
             let pos = getMousePosition(e);
-            log += 'paint ' + e.offsetX + '/';
+            log += 'paint ' + pos.x + '/';
             context.lineTo(pos.x,pos.y);
             context.lineWidth = radius * 2;
             context.stroke();
@@ -84,7 +84,7 @@
 
     function touchpaint(e) {
         let touch = e.touches[0];
-        log += 'touchpaint|' + touch.clientX + '|' + touch.offsetX + '|' + JSON.stringify(touch);
+        log += 'touchpaint|' + touch.clientX + '|' + offX;
         paint({
             clientX: touch.clientX,
             offsetX: touch.clientX - offX,
@@ -123,7 +123,7 @@
     {/if}
     <br>
     {log}<br>
-    <span on:click="{ ()=> { log=''}}"> CLEAR3 </span>
+    <span on:click="{ ()=> { log=''}}"> CLEAR4 </span>
     <br>
     <br>
     <br>

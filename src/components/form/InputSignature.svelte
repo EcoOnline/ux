@@ -93,10 +93,10 @@
         <p>{f.hint}</p>
     {/if}
     <div class="signature-holder">
-        <div class="signature-box form-control">
+        <div class="form-control signature-box" css:is_mobile>
             <SigCanvas></SigCanvas>
         </div>
-        
+
         {#if !is_mobile}
             <div class="signature-qr">
                 <QrCode value={qr_value}/>
@@ -113,12 +113,10 @@
         position:relative;
     }
 
-    .form-item {
-        max-width:480px;
-        overflow: visible;
-    }
 
     .signature-box {
+        max-width:480px;
+        overflow: visible;
         height:160px;
         padding:0;
     }
@@ -140,6 +138,11 @@
         width:120px;
         display:block;
         margin:0 auto;
+    }
+    :global(.is_mobile) {
+        max-width:100% ! important;
+        aspect-ratio: 1/2;
+        height:auto
     }
 
 </style>

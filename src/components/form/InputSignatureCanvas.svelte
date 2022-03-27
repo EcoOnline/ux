@@ -13,6 +13,21 @@
     let offX = 0;
     let offY = 0;
 
+    export let dataurl = false;
+
+    $: {
+        let d = dataurl;
+
+        if(d) {
+            //paint from message onto canvas
+            let img = new Image;
+            img.onload = function(){
+                context.drawImage(img,0,0);
+            };
+            img.src = d;
+        }
+    }
+
 
     function anounceSig() {
         let data = canvas.toDataURL();

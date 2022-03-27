@@ -9,6 +9,7 @@
     let ref = '';
     let base_url = "https://ecoonline.github.io/ux/public/mobile_signature.html?ref=";
     let qr_value = base_url;
+    let dataurl = false;
    
 
 
@@ -71,14 +72,7 @@
                 console.log('message received', m.message);
                 if(m.message.uuid == coms_num) {
                     console.log('SIGNATURE FROM LEGIT COMMS');
-                    console.log(m.message.uuid, m.message.description);
-
-                    //paint from message onto canvas
-                    let img = new Image;
-                    img.onload = function(){
-                        context.drawImage(img,0,0);
-                    };
-                    img.src = m.message.description;
+                    dataurl = m.message.description;  
                 }
             }
         });
@@ -107,7 +101,7 @@
     {/if}
     <div class="signature-holder" class:is_mobile>
         <div class="form-control signature-box">
-            <SigCanvas on:signature="{handleSignature}"></SigCanvas>
+            <SigCanvas on:signature="{handleSignature}" {dataurl}></SigCanvas>
         </div>
 
         {#if !is_mobile}

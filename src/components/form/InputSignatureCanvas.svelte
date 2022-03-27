@@ -91,11 +91,11 @@
         //convert canvas to data and send up to parent
     };
 
-    function touchmove() {
+    function touchmove(e) {
+        log += 'touchmove / ';
         let touch = e.touches[0];
         x1 = touch.clientX;
         tick++;
-        log += 'touchmove / ';
         /*
         let mouseEvent = new MouseEvent("mousemove", {
             clientX: touch.clientX,

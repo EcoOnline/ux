@@ -54,6 +54,7 @@
         ref = queryParams.get("ref");
         console.log('ref?', ref);
         if(ref) {
+            console.log('is mobile so setting var to true');
             is_mobile = true;
             coms_num = ref;
         } else {
@@ -122,6 +123,9 @@
         position:relative;
     }
 
+    .form-item {
+        overflow: visible ! important;
+    }
 
     .signature-box {
         max-width:480px;

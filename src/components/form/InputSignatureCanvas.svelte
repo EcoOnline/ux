@@ -1,5 +1,7 @@
 <script>
     import { onMount} from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
     
     
     let canvas;
@@ -64,6 +66,9 @@
         dragging = false;
         context.beginPath();
 
+        dispatch('signature', {
+			signature: canvas.toDataURL()
+		});
 
         //convert canvas to data and send up to parent
     };

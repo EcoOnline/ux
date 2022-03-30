@@ -14,6 +14,7 @@
     let offY = 0;
 
     export let dataurl = false;
+    export let is_mobile = false;
 
     $: {
         let d = dataurl;
@@ -121,6 +122,39 @@
         });
     }
     
+
+
+    //example using passwordless.dev
+    const apiKey = "demobackend:public:c203e65b581443778ea4823b3ef0d6af";
+    const backendUrl = "https://demo-backend.passwordless.dev";
+    let output = '';
+    let email = 'sample@ecoonline.com'; //should be actual client email
+
+    async function Register(alias) {
+      const p = new Passwordless.Client({ apiKey });
+      const myToken = await fetch(backendUrl + "/create-token?alias=" + alias).then((r) => r.text());
+      await p.register(myToken);
+      output += ("Register succeded");
+    }
+    async function Signin(alias) {
+      const p = new Passwordless.Client({ apiKey });
+      const token = await p.signinWithAlias(alias);
+      const user = await fetch(backendUrl + "/verify-signin?token=" + token).then((r) => r.json());
+      console.log("User details", user);
+      output += ("user");
+      output += (JSON.stringify(user));
+      return user;
+    }
+
+    function faceid() {
+        
+        Signin(email);
+
+        // Call Register('unique@email') to register with faceid/touchid/authenticator
+        // Call Signin('unique@email') to signin using faceid/touchid/authenticator
+    }
+
+
         
     onMount(() => {
         context = canvas.getContext('2d');
@@ -144,11 +178,18 @@
         on:touchmove|preventDefault|stopPropagation="{touchpaint}"
         on:touchend="{touchdisengage}"
     ></canvas>
-    {#if marks}
-        <i class="i-reset i-20" on:click|stopPropagation|preventDefault={clearCanvas}></i>
-    {:else}
-        <i class="i-reset i-20" style="opacity:0.5"></i>
+    {#if typeof window.Passwordless !== 'undefined' && is_mobile }
+        <i class="i-fingerprint i-20 left" on:click|stopPropagation|preventDefault={faceid}></i>
     {/if}
+    {#if marks}
+        <i class="i-reset i-20 right" on:click|stopPropagation|preventDefault={clearCanvas}></i>
+    {:else}
+        <i class="i-reset i-20 right" style="opacity:0.5"></i>
+    {/if}
+
+    {output}
+
+    <span on:click="{ () => Register('sample@ecoonline.com') }">test register</span>
 </div>
 <style>
     .canvas-holder {
@@ -164,7 +205,12 @@
     .i-20 {
         position:absolute;
         top:8px;
+    }
+    .i-20.right {
         right:8px;
+    }
+    .i-20.left {
+        left:8px;
     }
 
 </style>

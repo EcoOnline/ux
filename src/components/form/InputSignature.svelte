@@ -97,7 +97,7 @@
     {/if}
     <div class="signature-holder" class:is_mobile class:mandatory={!f.optional}>
         <div class="form-control signature-box">
-            <SigCanvas on:signature="{handleSignature}" {dataurl}></SigCanvas>
+            <SigCanvas on:signature="{handleSignature}" {dataurl} {is_mobile}></SigCanvas>
         </div>
 
         {#if !is_mobile}

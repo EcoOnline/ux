@@ -689,7 +689,7 @@
     });    
 </script>
 <!-- svelte-ignore a11y-media-has-caption -->
-<audio src="../sound/click.mp3" bind:this={audio}></audio>
+<audio src="./sound/click.mp3" bind:this={audio}></audio>
 <div class="row sticky">
     <div class="col12 col-md-6">
         <ul class="breadcrumb">

@@ -12,14 +12,6 @@
     let dataurl = false;
    
 
-
-    //pusher credentials
-    /*
-    let app_id = "8549";
-    let key = "c5d029ed185464bb76ed";
-    let secret = "67fdc58637775aa28ffd";
-    let cluster = "mt1";
-    */
     let unique_num = (Math.random() + '').substring(2);
     let is_mobile = false;
     let coms_num = unique_num;

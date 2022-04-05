@@ -8,13 +8,22 @@
     export let f;
     let ref = '';
     let base_url = "https://ecoonline.github.io/ux/public/mobile_signature.html?ref=";
-    let qr_value = base_url;
+    let base_mobile = "com.ecoonline.ecomobile://signature?id=";
+    let selected_qr = 'url';
+    let qr_value = (selected_qr == 'url' ? base_url : base_mobile);
     let dataurl = false;
+
    
 
     let unique_num = (Math.random() + '').substring(2);
     let is_mobile = false;
     let coms_num = unique_num;
+
+    $: {
+        let c = coms_num;
+        let s = selected_qr;
+        qr_value = (s == 'url' ? base_url : base_mobile) + c;
+    }  
 
     // pubnub creds
     let pubnub = new PubNub({
@@ -43,7 +52,7 @@
 
         let queryParams = new URLSearchParams(window.location.search);
         ref = queryParams.get("ref");
-        console.log('ref?', ref);
+        
         if(ref) {
             console.log('is mobile so setting var to true');
             is_mobile = true;
@@ -51,7 +60,6 @@
         } else {
             is_mobile = false;
         }
-        qr_value = base_url + coms_num;
 
 
         
@@ -95,7 +103,8 @@
         {#if !is_mobile}
             <div class="signature-qr">
                 <QrCode value={qr_value}/>
-                or sign with mobile
+                <span class:selected="{selected_qr == 'url'}" on:click="{ () => { selected_qr = 'url'}}">Web-sign</span>
+                <span class:selected="{selected_qr == 'mobile'}" on:click="{ () => { selected_qr = 'mobile'}}">Mobile-sign</span>
             </div>
         {/if}
     </div>
@@ -127,12 +136,20 @@
         width:160px;
         height:160px;
         padding: 0px 16px;
-        font-size: 12px;
-        line-height: 24px;
-        padding: 12px 16px;
+        padding: 12px;
         border-radius: 12px;
         text-align:center;
         border: 1px solid var(--eo-border-input);
+    }
+    .signature-qr span {
+        font-size: 12px;
+        line-height: 16px;
+        margin:4px;
+        display:inline-block;
+        cursor:pointer
+    }
+    .signature-qr span.selected {
+        border-bottom: 1px solid var(--eo-secondary-500);
     }
     :global(.signature-qr img) {
         width:120px;

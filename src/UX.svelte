@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { fade, fly } from 'svelte/transition';
-	import UXNPS from "./UX_nps.svelte";
+	import UXQR from "./UX_qr.svelte";
 
     let name=false;
     let co = false;
@@ -10,7 +10,7 @@
     let wx = w;
     let slide = 0;
     let holder= false;
-    let total_slides = 11;
+    let total_slides = 19;
 
     let h = window.location.hash.substring(1)
     if(h !== '') {
@@ -123,117 +123,308 @@
 	{#if slide == 0}
         <div class="screen title" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
             <h1>UX</h1>
-            <h3>A story about Bob</h3>
-            <h4 class="tip">(AKA how empathy paid off)</h4>
+            <h3>EcoOnline Incidents Project</h3>
+            <h4 class="tip">(AKA here's how I could help {co ? co : 'you'})</h4>
             <p style="font-size:0.83em;margin-top:64px;">Left & right arrow to navigate.</p>
         </div>
     {/if}
 
     {#if slide == 1}
         <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>A story about Bob:</h2>
-            <h4><b>Client:</b> Effective Software</h4>
+            <h2>Incidents Project:</h2>
+            <h4><b>Client:</b> EcoOnline Health & Safety Application</h4>
             <h4><b>My role:</b> Lead Designer</h4>
-           
+            <h4><b>Worked with:</b></h4>
+            <h4>&mdash; Aneta Kmiecik (Lead Researcher)</h4>
+            <h4>&mdash; Ran workshops with 3 other designers</h4>
         </div>
     {/if}
     {#if slide == 2}
         <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
             <h2>Business Context:</h2>
-            <h4>Effective Software was a Health & Safety platform.</h4>
-            <h4>The domain space is very dry, legal, sometimes with some very serious types of reporting.</h4>
-            <h4>A basic pixel design had been established that was calm, robust, solid, but not overly human...</h4>
-            <h4 class="tip">Except for Bob</h4>
+            <h4>EcoOnline is the amalgamation of nearly a dozen companies.</h4>
+            <h4>It had recently gone through a rebrand so all products are in the long slow process of UI refresh with an evolving design system.</h4>
+            <h4>The Incidents Project was the first true full UX project from discovery & research to ideation and testing for a company accustomed to feature-driven development.</h4>
+            <h4 class="tip">(Imagine how amazing a product could be doing great UX from the beginning)</h4>
 
         </div>
     {/if}
     {#if slide == 3}
         <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Meet Bob:</h2>
-            <img alt="Maybe Bob left the building?" src="https://www.unco.co.nz/ux3/images/bob.png" style="float:left;margin:0 32px 50vh 0">
-            <h4>Bob (the builder, as they became known internally) was only present on one screen and wasn't communicating.</h4>
-            <h4>It would be like Duolingo only using the owl as a splash screen.</h4>
-            <h4>Bob needed fleshing out in order to give the product a human touch.</h4>
-            <h4 class="tip">(In a product like this empathy would go a long way)</h4>
+            <h2>Product Context:</h2>
+            <h4>The EcoOnline Incident Reporting module is how to report workplace incidents and accidents.</h4>
+            <h4>It is by <i>far</i> the most used of the EcoOnline Suite of modules (65%).</h4>
+            <h4>It's dynamic, no two clients are set up the same.</h4>
+            <h4><b>Reporting levels were actually dropping</b> as existing clients migrated.</h4>
+            <h4 class="tip">(Hard problems are fun)</h4>
 
         </div>
     {/if}
     {#if slide == 4}
-        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Meet Bob:</h2>
-            <img alt="Bob of many faces" src="https://www.unco.co.nz/ux3/images/bob_emotions.png" style="float:left;margin:0 32px 50vh 0">
-            <h4>I developed <b>14 different emotions</b> for use in distinct occasions.</h4>
-            <h4>Particular sensitivity was required around system errors and report completion (you dont want to celebrate the reporting of potentially horrific accidents)</h4>
-            <h4>Sometimes series of emotions were used during lengthy data imports. Happy -> Meh -> Concerned</h4>
-
+        <div class="screen marker" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <p>General internal opinion:</p>
+            <h1>“The module is great, it only needs a few changes”</h1>
+            <h4>Narrator: “It wasn’t and it didn’t”</h4>
         </div>
     {/if}
     {#if slide == 5}
         <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Bob went to work:</h2>
-            <div class="center">
-                <img alt="Maybe Bob left the building?" src="https://www.unco.co.nz/ux3/images/bob_dialogue_party.png" style="max-width:80%;margin:0 auto;">
-            </div>
+            <h2>Discovery & Research:</h2>
+            <h4><b>Interviews:</b> 10+ hours</h4>
+            <h4><b>Survey:</b> 180 Responses</h4>
+            <h4><b>Key findings:</b> (There were dozens more)</h4>
+            <h4>&mdash; End users were not using the report fully (config)</h4>
+            <h4>&mdash; Reporting was too complex (drop-off in submissions)</h4>
+            <h4>&mdash; Photos were underused as a source of evidence</h4>
+            <h4>&mdash; Big difference between safety manager and end users</h4>
+            <h4 class="tip">(<i>Really</i> grokking a problem is <b>important</b>)</h4>
 
         </div>
     {/if}
     {#if slide == 6}
-        <div class="screen marker" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <p>They came into their own:</p>
-            <img alt="Maybe Bob left the building?" src="https://www.unco.co.nz/ux3/images/appstore_image_4.png" style="border-radius:8px;box-shadow:0 0 32px rgba(0,0,0,0.3);width:240px;float:right;margin:0 0 50vh 32px">
-            <h1>Bob became the public touchpoint for communication</h1>
-            <h4>And we started getting requests</h4>
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Discovery & Research:</h2>
+            <div class="center">
+                <img src="./images/ux/existing.png" style="margin:0 auto" alt="existing">
+            </div>
+
         </div>
     {/if}
     {#if slide == 7}
         <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Requests:</h2>
-            <h4>Can Bob have friends?</h4>
-            <h4>Can Bob match our colour scheme? </h4>
-            <!--<h4 class="tip">(Yes)</h4>-->
-            <p>In addition to typical application settings, customers were given a choice of helper.<br>
-                From a technical level Bob was implemented with an icon font.<br> A simple class change on the body updated all helpers.
-            </p><br>
-            <div class="center">
-                <img src="https://www.unco.co.nz/ux3/images/bob-wink2.png" style="margin:0 auto" alt="wink">
-                <img src="https://www.unco.co.nz/ux3/images/bobby-wink.png" style="margin:0 auto" alt="wink">
-                <img src="https://www.unco.co.nz/ux3/images/ash-wink.png" style="margin:0 auto" alt="wink">
-                <img src="https://www.unco.co.nz/ux3/images/eddie-wink.png" style="margin:0 auto" alt="wink">
+            <h2>Ideation:</h2>
+            <div class="row">
+                <div class="col">
+                    <h4 class="special">30+ ideas</h4>
+                    <p>I developed <b>high-fidelity</b> visual ideas<br> for a <b>multitude</b> of improvements</p>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>ML prediction of a claim being made</li>
+                        <li class="hilight">new menu</li>
+                        <li>single page view</li>
+                        <li class="hilight">overview page</li>
+                        <li>submit checklist</li>
+                        <li>attachment quick links</li>
+                        <li>ML input shortcuts</li>
+                        <li>better pre-filling</li>
+                        <li>autosaving</li>
+                        <li>step through submission errors</li>
+                        <li>improved print options</li>
+                        <li class="hilight">mobile first quick form</li>
+                        <li>personal info censorship</li>
+                        <li>email-to-attach</li>
+                        <li>inline tutorials</li>
+                        <li>CCTV playback</li>
+                        <li>“I don’t know”</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>elapsed time and improved date suggestions</li>
+                        <li>form comments and subscription</li>
+                        <li>full-screen gallery view</li>
+                        <li>classified attachments</li>
+                        <li>time sensitive help</li>
+                        <li>reporting gamification</li>
+                        <li>safety year in review</li>
+                        <li>notification feedback loop</li>
+                        <li class="hilight">dashboard</li>
+                        <li>risk matrix simplification</li>
+                        <li>action shortcuts</li>
+                        <li>progress tiles</li>
+                        <li>reporting plugin for other sites</li>
+                        <li>lock & sign witness statement</li>
+                        <li>inline signature</li>
+                        <li>User feedback for managers</li>
+                        <li>Voice input</li>
+                    </ul>
+
+                </div>
             </div>
 
         </div>
     {/if}
+
     {#if slide == 8}
-        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Affinity:</h2>
-            <h4>Bob and friends created an affinity with the product.</h4>
-            <h4><b>&gt; 35%</b> of clients chose a character.</h4>
-            <h4><b>&lt; 1%</b> of clients chose none.</h4>
-            <h4>Partly responsible for a <b>13pt</b> increase in NPS.</h4>
-            <div class="center">
-                
-            </div>
+        <div class="screen scatter" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Ideation:</h2>
+            {#if sz !== 'xs'}
+                {#each ideation as idea, i}
+                    <img alt="id-{i}" src="./images/ux/id{i}.png" style="left:{idea[sz].x}%;top:{idea[sz].y}%;">
+                {/each}
+            {:else}
+                <div class="center">
+                    {#each ideation as idea, i}
+                        <img class="mob" alt="id-{i}" src="./images/ux/id{i}.png">
+                    {/each}
+                </div>
+            {/if}
 
         </div>
     {/if}
     {#if slide == 9}
-        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h2>Interactive:</h2>
-            <p>See how Bob responds to NPS interaction</p>
-            
-           <UXNPS></UXNPS>
-
+        <div class="screen marker" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <p>Streamlined:</p>
+            <h2>3 core proposals:</h2>
+            <h4>Given the pre-defined development window the ideas were reduced to the most impact for the space available to be tested with end users.</h4>
+            <div class="row" style="margin-top:100px">
+                <div class="col center">
+                    <svg style="margin-bottom:24px;" width="80px" height="104px" viewBox="0 0 80 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill-rule="nonzero" fill="var(--grey)">
+                        <polygon id="Path" points="48 92.72 37.64 82.36 32 88 48 104 80 72 74.36 66.36"></polygon>
+                        <path d="M8,96 L8,24 L56,24 L56,60 L64,60 L64,8 C63.9976,5.879 63.154,3.8456 61.654,2.34584 C60.1544,0.84608 58.1208,0.00244 56,7.10542736e-15 L8,7.10542736e-15 C5.87892,0.00212 3.84532,0.84564 2.34548,2.34548 C0.84564,3.84532 0.00212,5.87892 0,8 L0,96 C0.00244,98.1208 0.84608,100.1544 2.34584,101.654 C3.8456,103.154 5.879,103.9976 8,104 L24,104 L24,96 L8,96 Z M8,8 L56,8 L56,16 L8,16 L8,8 Z" id="Shape"></path>
+                    </svg>
+                    <p>Mobile first quick report</p>
+                </div>
+                <div class="col center">
+                    <svg style="margin-bottom:16px;" width="113px" height="112px" viewBox="0 0 113 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="var(--grey)" fill-rule="nonzero">
+                        <polygon id="Path" points="96 76 88 76 88 96 96 96"></polygon>
+                        <polygon id="Path" points="80 56 72 56 72 96 80 96"></polygon>
+                        <path d="M36,96 C30.6976,95.9936 25.61412,93.8848 21.86476,90.1352 C18.1154,86.386 16.00624,81.3024 16,76 L24,76 C24,78.3732 24.7038,80.6936 26.02236,82.6668 C27.34096,84.6404 29.21508,86.1784 31.4078,87.0864 C33.6004,87.9948 36.0132,88.2324 38.3412,87.7696 C40.6688,87.3064 42.8072,86.1636 44.4852,84.4852 C46.1636,82.8072 47.3064,80.6688 47.7696,78.3412 C48.2324,76.0132 47.9948,73.6004 47.0864,71.4076 C46.1784,69.2152 44.6404,67.3408 42.6668,66.0224 C40.6936,64.7036 38.3732,64 36,64 L36,56 C41.3044,56 46.3916,58.1072 50.142,61.858 C53.8928,65.6084 56,70.6956 56,76 C56,81.3044 53.8928,86.3916 50.142,90.142 C46.3916,93.8928 41.3044,96 36,96 Z" id="Path"></path>
+                        <path d="M104,0 L8,0 C5.87892,0.00212 3.84532,0.84564 2.34548,2.34548 C0.84564,3.84532 0.00212,5.87892 0,8 L0,104 C0.00244,106.1208 0.84608,108.1544 2.34584,109.654 C3.8456,111.154 5.879,111.9976 8,112 L104,112 C106.1208,111.9972 108.154,111.1532 109.6536,109.6536 C111.1532,108.154 111.9972,106.1208 112,104 L112,8 C111.9976,5.879 111.154,3.8456 109.654,2.34584 C108.1544,0.84608 106.1208,0.00244 104,0 L104,0 Z M104,36 L48,36 L48,8 L104,8 L104,36 Z M40,8 L40,36 L8,36 L8,8 L40,8 Z M8,104 L8,44 L104.0028,44 L104.008,104 L8,104 Z" id="Shape"></path>
+                    </svg>
+                    <p>Dashboard access</p>
+                </div>
+                <div class="col center">
+                    <svg style="margin-bottom:0px;" width="128px" height="128px" viewBox="0 0 128 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="var(--grey)" fill-rule="nonzero">
+                        <path d="M112,16 L16,16 C11.581722,16 8,19.581722 8,24 L8,104 C8,108.418278 11.581722,112 16,112 L112,112 C116.418278,112 120,108.418278 120,104 L120,24 C120,19.581722 116.418278,16 112,16 Z M16,24 L40,24 L40,104 L16,104 L16,24 Z M112,104 L48,104 L48,24 L112,24 L112,104 Z" id="Shape" ></path>       
+                    </svg>
+                    <p>Improved nav & overview</p>
+                </div>
+            </div>
         </div>
     {/if}
     {#if slide == 10}
-        <div class="screen title" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
-            <h1>Key takeaways:</h1>
-            <h3>&mdash; Judicious use of tone helped humanise the product</h3>
-            <h3>&mdash; Bob unexpectedly became a key element to hinge the brand off</h3>
-            <h3>&mdash; Low time investment produced disproportionate results</h3>
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - Mobile Quick Report:</h2>
+            <div class="row">
+                <div class="col center">
+                    <img src="./images/ux/mob1.png" style="margin:0 auto" alt="existing">
+                </div>
+                <div class="col center">
+                    <img src="./images/ux/mob2.png" style="margin:0 auto" alt="existing">
+                </div>
+                <div class="col center">
+                    <img src="./images/ux/mob3.png" style="margin:0 auto" alt="existing">
+                </div>
+            </div>
         </div>
     {/if}
     {#if slide == 11}
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - Mobile Quick Report:</h2>
+
+            <h4 class="tip">Your turn to try {(name ? name : '')}</h4>
+            <p>
+                I built a mobile prototype and a multi-lingual QR code configurator using sveltejs for on-site testing with clients in Finland and England.
+            </p>
+
+            <UXQR />
+        </div>
+    {/if}
+    {#if slide == 12}
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - Dashboard:</h2>
+            <div class="center">
+                <img src="./images/ux/dashboard.png" style="margin:0 auto" alt="dashboard">
+            </div>
+
+        </div>
+    {/if}
+    {#if slide == 13}
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - Overview:</h2>
+            <div class="center">
+                <img src="./images/ux/overview.png" style="margin:0 auto" alt="overview">
+            </div>
+
+        </div>
+    {/if}
+    {#if slide == 14}
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - Future roadmap:</h2>
+            <div class="center">
+                <img src="./images/ux/full_page.png" style="margin:0 auto" alt="full page">
+            </div>
+        </div>
+    {/if}
+    {#if slide == 15}
+        <div class="screen" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h2>Testing - on site:</h2>
+            <div class="center">
+                <img src="./images/ux/testing1.png" style="margin:0 auto;max-width:37%" alt="testing1">
+                <img src="./images/ux/testing2.png" style="margin:0 auto;max-width:37%" alt="testing2">
+                <img src="./images/ux/testing3.png" style="margin:0 auto;max-width:24%" alt="testing3">
+                <h4 class="tip">(I will literally go to the ends of the earth)</h4>
+            </div>
+        </div>
+    {/if}
+    
+    {#if slide == 16}
+        <div class="screen marker" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <p>Results:</p>
+            <h1>“Is that it? Is it that easy? It’s not!... I can’t believe it”</h1>
+            <h4>Narrator: “It was and it is”</h4>
+            <!--
+            <p>Went through a refinement based on feedback and now implementation is in progress. We’ve set <i>conservative</i> goals for a 50% increase in reporting.</p>
+            <p>*This <b>is</b> an actual quote, I just can't show the video of it.</p>
+            -->
+            <div class="row steps">
+                <div class="col">
+                    <div class="step">Problem definition</div>
+                </div>
+                <div class="col">
+                    <div class="step">Interviews & surveys</div>
+                </div>
+                <div class="col">
+                    <div class="step">Synthesis</div>
+                </div>
+                <div class="col">
+                    <div class="step">Ideation</div>
+                </div>
+                <div class="col">
+                    <div class="step">Prototyping</div>
+                </div>
+                <div class="col">
+                    <div class="step">On site testing</div>
+                </div>
+                <div class="col">
+                    <div class="step">Refinement</div>
+                </div>
+                <div class="col">
+                    <div class="step">Validation</div>
+                </div>
+                <div class="col">
+                    <div class="step nextstep here">Development</div>
+                </div>
+                <div class="col">
+                    <div class="step nextstep">Review</div>
+                </div>
+            </div>
+            <div class="row steps">
+                <div class="col" style="flex:3">
+                    <div class="step">Research<br>2 months</div>
+                </div>
+                <div class="col" style="flex:5">
+                    <div class="step">Design<br>3 weeks</div>
+                </div>
+                <div class="col" style="flex:2">
+                    <div class="step nextstep here2">Development<br>2 months</div>
+                </div>
+            </div>
+        </div>
+    {/if}
+    {#if slide == 17}
+        <div class="screen title" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
+            <h1>Key takeaways:</h1>
+            <h3>&mdash; Created something <i>loved</i> by end users</h3>
+            <h3>&mdash; Developed a product design language</h3>
+            <h3>&mdash; Leveraged one process for future product opportunities</h3>
+            <h3>&mdash; Exposed weaknesses in our own biases</h3>
+            <h4 class="tip">&mdash; Can repeat this for {co ? co : 'you'}</h4>
+        </div>
+    {/if}
+    {#if slide == 18}
         <div class="screen end" in:fly="{{ x: wx, duration: 1000 }}" out:fade>
             <p>So {(name ? name : '')}...</p>
             <h1>How can I help solve<br><u style="color:var(--blue)">your</u> problems?</h1>

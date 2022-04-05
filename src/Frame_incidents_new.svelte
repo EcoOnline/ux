@@ -682,13 +682,14 @@
         matrix_drawer = false;
     }
 
+    let audio;
+
     onMount(() => {
-        let timer = setInterval(() => {
-            counter += 10;
-        }, 10000); //updates every 10 seconds
+        audio.volume = 0.1;
     });    
 </script>
-
+<!-- svelte-ignore a11y-media-has-caption -->
+<audio src="../sound/click.mp3" bind:this={audio}></audio>
 <div class="row sticky">
     <div class="col12 col-md-6">
         <ul class="breadcrumb">
@@ -769,16 +770,16 @@
                     {#if incident.id }
                         <li class:active="{tab == 'overview'}"><a href="#ehs/incidents/incidents_new/overview" on:click="{ () => nav('ehs/incidents/incidents_new/overview')}">Overview</a></li>
                     {/if}
-                    <li class:active="{tab == 'report'}"><a href="#ehs/incidents/incidents_new/report" on:click="{ () => nav('ehs/incidents/incidents_new/report')}">Report</a></li>
-                    <li class:active="{tab == 'events'}"><a href="#ehs/incidents/incidents_new/events" on:click="{ () => nav('ehs/incidents/incidents_new/events')}">Events</a></li>
+                    <li class:active="{tab == 'report'}"><a href="#ehs/incidents/incidents_new/report"on:mouseenter="{ () => { audio.play();} }"  on:click="{ () => nav('ehs/incidents/incidents_new/report')}">Report</a></li>
+                    <li class:active="{tab == 'events'}"><a href="#ehs/incidents/incidents_new/events"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/events')}">Events</a></li>
                 </ul>
                 <h4>Tools</h4>
                 <ul class="side_menu">
-                    <li class:active="{tab == 'witnesses'}"><a href="#ehs/incidents/incidents_new/witnesses" on:click="{ () => nav('ehs/incidents/incidents_new/witnesses')}">Witnesses</li>
-                    <li class:active="{tab == 'vehicles'}"><a href="#ehs/incidents/incidents_new/vehicles" on:click="{ () => nav('ehs/incidents/incidents_new/vehicles')}">Vehicles</a></li>
-                    <li class:active="{tab == 'attachments'}"><a href="#ehs/incidents/incidents_new/attachments" on:click="{ () => nav('ehs/incidents/incidents_new/attachments')}">Attachments</a></li>
-                    <li class:active="{tab == 'links'}"><a href="#ehs/incidents/incidents_new/links" on:click="{ () => nav('ehs/incidents/incidents_new/links')}">Links & Actions</a></li>
-                    <li class:active="{tab == 'claim'}"><a href="#ehs/incidents/incidents_new/claim" on:click="{ () => nav('ehs/incidents/incidents_new/claim')}">Claim</a></li>
+                    <li class:active="{tab == 'witnesses'}"><a href="#ehs/incidents/incidents_new/witnesses"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/witnesses')}">Witnesses</li>
+                    <li class:active="{tab == 'vehicles'}"><a href="#ehs/incidents/incidents_new/vehicles"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/vehicles')}">Vehicles</a></li>
+                    <li class:active="{tab == 'attachments'}"><a href="#ehs/incidents/incidents_new/attachments"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/attachments')}">Attachments</a></li>
+                    <li class:active="{tab == 'links'}"><a href="#ehs/incidents/incidents_new/links"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/links')}">Links & Actions</a></li>
+                    <li class:active="{tab == 'claim'}"><a href="#ehs/incidents/incidents_new/claim"on:mouseenter="{ () => { audio.play();}}"  on:click="{ () => nav('ehs/incidents/incidents_new/claim')}">Claim</a></li>
                 </ul>
             {/if}
         </div>

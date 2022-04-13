@@ -7,7 +7,7 @@
 
     //naive approach to removing fluff words
     const fluffWords = [
-        "dse", "fluff","other", "the", "my", "you", "get", "what", "is", "do", "an", "of", "not", "have", "to", "view", "this", "type", "how", "off", "on", "if", "i", "when", "want", "why", "add", "line", "a", "change", "create", "list", "can", "for"
+        "dse", "fluff","other", "the", "my", "at", "as", "in", "you", "get", "what", "is", "do", "an", "of", "not", "have", "to", "view", "this", "type", "how", "off", "on", "if", "i", "when", "want", "why", "add", "line", "a", "change", "create", "list", "can", "for"
     ];
 
     //structuring this way is faster but still naive
@@ -30,6 +30,7 @@
         "event": "incident",
         "events": "incident",
         "incidents": "incident",
+        "lang": "language",
         "translation": "language",
         "translations": "language",
         "subscription": "notification",
@@ -97,9 +98,12 @@
 
     let all_terms = {};
     let all_terms_sorted = [];
+
+    let all_terms_count_limit = 1;
     $: {
         let entries = Object.entries(all_terms);
-        all_terms_sorted = entries.sort((a, b) => b[1].count - a[1].count);
+        let limit  = all_terms_count_limit;
+        all_terms_sorted = entries.filter( (item) => { console.log(item);return item[1].count > limit }).sort((a, b) => b[1].count - a[1].count);
     }
 
     let all_urls = {};
@@ -161,16 +165,15 @@
             arr = arr.filter(t => t !== fluff)
         })
 
-        str = arr.join(' ').trim(); //back to string
+        str = ' ' + arr.join(' ').trim() + ' '; //back to string
         
         if(normalisation) {
              //3 replace synonyms (normalisation)
             syn_keys.forEach((key) => {
                 let k = key.replace(/_/g, ' ');
-                //str = str.replace(new RegExp(' ' + k, 'g'), ' ' + synonyms[key]); 
-                //str = str.replace(new RegExp(k + ' ', 'g'), synonyms[key] + ' '); 
-                str = str.replace(new RegExp(k, 'g'), ' ' + synonyms[key]); 
+                str = str.replace(new RegExp(k + ' ', 'g'), synonyms[key] + ' ');
             });
+            str = str.trim();
         }
        
         
@@ -412,6 +415,7 @@
                                             <span class="badge">{term}</span>
                                         {/if}
                                     {/each}
+
                                 </td>
                                 <td>{row.terms.length}</td>
                                 <td>
@@ -451,7 +455,7 @@
                 <thead>
                     <tr>
                         <th>Term</th>
-                        <th>Count</th>
+                        <th>Count <span class="header_input">above <input type="number" bind:value="{all_terms_count_limit}"/></span></th>
                         <th class="no_print"></th>
                         <th class="no_print"></th>
                     </tr>
@@ -533,6 +537,8 @@
         user-select: none;
         position: relative;
         cursor:n-resize;
+        line-height: 24px;
+        padding: 11px 8px;
     }
 
     .term_action {
@@ -568,4 +574,18 @@
         background: var(--eo-surface-selected);
 
     }
+
+    .header_input {
+        font-weight:normal;
+    }
+    .header_input input {
+        border:none;
+        width: 50px;
+        vertical-align: middle;
+        padding: 4px;
+        background: rgba(255,255,255,0.4);
+        border-radius: 4px;
+        margin-left: 4px;
+    }
+
 </style>

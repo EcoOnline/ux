@@ -1,9 +1,26 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import Search from './components/Search.svelte';
     const dispatch = createEventDispatcher();
 
 
     let tab = "dashboard";
+
+
+    let search_config = {
+        domain: "incidents",
+        btn: "Run Query",
+        conditions: [], //selected conditions, this could be pre-populated from 
+        condition_options:[
+            {
+                label: "Person involved"
+            }
+
+        ],
+        condition_matches: {}
+
+        ]
+    }
 
     function nav(str) {
 		dispatch('nav', {
@@ -33,17 +50,12 @@
     <li><a href="#ehs/incidents/incidents_admin">Admin</a></li>
 </ul>
 <div class="row">
-    <div class="col12 col-md-3">
+    <div class="col12">
         <div class="card">
-            <div class="card-header">
-                <h2>Add a filter</h2>
-            </div>
-        </div>
-    </div>
-    <div class="col12 col-md-9">
-        <div class="card">
-            <div class="card-header">
-                <h2>Query filters</h2>
+            <div class="card-body">
+
+                <Search {search_config}></Search>
+
             </div>
         </div>
     </div>

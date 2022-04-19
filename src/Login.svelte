@@ -57,6 +57,8 @@
         padding: 16px;
         margin: 16px;
         border-radius: 12px;
+        box-shadow:0 6px 10px rgba(186, 191, 195, 0.2);
+        margin-top: calc((100vh - 400px)/4); /*dont center because expanding rules maake action look odd */
    }
    .center {
        text-align: center;

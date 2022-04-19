@@ -9,7 +9,7 @@ html, body{
     margin:0;
     padding:0;
     font-family: "IBM Plex Sans", sans-serif;
-    font-weight:300;
+    font-weight:400;
     font-size:16px;
     background-color: var(--eo-surface-background);
 }
@@ -112,6 +112,10 @@ li {
     float:right;
     margin-left:8px ! important;
     margin-right:0 ! important;
+}
+.btn.mob {
+    width:100%;
+    line-height: 48px;
 }
 
 .btn svg {
@@ -548,7 +552,8 @@ h1 {
 .i-16,
 .i-20,
 .i-24,
-.i-32 {
+.i-32,
+.i-40 {
     display:inline-block;
     background-position: center center;
     background-size:cover;
@@ -575,6 +580,11 @@ h1 {
     height:24px;
     cursor:pointer
 }
+.i-40 {
+    width:40px;
+    height:40px;
+    cursor:pointer
+}
 .text-center {
     text-align: center;
 }
@@ -597,6 +607,7 @@ h1 .i-32 {
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
 .i-checkbox             { background-image:url(../images/icons/checkbox.svg) }
 .i-checkbox-selected    { background-image:url(../images/icons/checkbox-selected.svg) }
+.i-checkmark-green      { background-image:url(../images/icons/checkmark-green.svg) }
 .i-chevron-down         { background-image:url(../images/icons/chevron-down.svg) }
 .i-chevron-up           { background-image:url(../images/icons/chevron-up.svg) }
 .i-close                { background-image:url(../images/icons/close.svg) }
@@ -604,6 +615,7 @@ h1 .i-32 {
 .i-desktop              { background-image:url(../images/icons/desktop.svg) }
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
+.i-error                { background-image:url(../images/icons/error.svg) }
 .i-filter               { background-image:url(../images/icons/filter.svg)}
 .i-fingerprint          { background-image:url(../images/icons/fingerprint.svg)}
 .i-hazard-assessments   { background-image:url(../images/icons/hazard-assessments.svg)}
@@ -612,6 +624,7 @@ h1 .i-32 {
 .i-incidents            { background-image:url(../images/icons/incidents.svg)}
 .i-link                 { background-image:url(../images/icons/link.svg)}
 .i-location             { background-image:url(../images/icons/location.svg)}
+.i-logo                 { background-image:url(../images/icons/logo.svg)}
 .i-maximize             { background-image:url(../images/icons/maximize.svg)}
 .i-minimize             { background-image:url(../images/icons/minimize.svg)}
 .i-menu                 { background-image:url(../images/icons/menu.svg)}
@@ -632,6 +645,7 @@ h1 .i-32 {
 .i-time                 { background-image:url(../images/icons/time.svg)}
 .i-tool 		        { background-image:url(../images/icons/tool.svg)}
 .i-trash                { background-image:url(../images/icons/trash-can.svg)}
+.i-view                 { background-image:url(../images/icons/view.svg)}
 
 
 h1.page-title {
@@ -734,8 +748,10 @@ h1.page-title i {
 }
 .form-item {
     margin-bottom:32px;
-    overflow: auto; /* why was this here? */
+    /*overflow: auto; /* why was this here? */
 }
+
+
 .clamp {
     /* reduce top margin so inputs clamp together*/
     margin-top:-24px;
@@ -755,6 +771,13 @@ h1.page-title i {
     border:1px solid var(--eo-border-input);
     width:100%;
     max-width: 480px;
+    outline: none;
+}
+.form-control:focus {
+    background: #F5F6FF;
+    border:1px solid var(--eo-primary-500);
+    box-shadow: 0 0 4px var(--eo-primary-500);
+
 }
 div.form-control {
     padding: 0px 16px;

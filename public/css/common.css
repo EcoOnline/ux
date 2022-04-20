@@ -94,14 +94,27 @@ li {
     background: #fff;
     color: var(--eo-primary-500);
 }
+.btn-secondary:hover {
+    background-color: var(--eo-surface-background);
+}
+.btn-clear{
+    background: transparent;
+    border-color: transparent;
+    color: var(--eo-primary-500);
+    margin-bottom:0 !important;
+}
+.btn-clear:hover{
+    background: transparent;
+    border-color: var(--eo-surface-background);
+}
+.btn-secondary:hover {
+    background-color: var(--eo-surface-background);
+}
 .btn.disabled {
     background: var(--eo-primary-100);
     border-color: var(--eo-primary-100);
     color: var(--eo-primary-300);
     cursor:no-drop;
-}
-.btn-secondary:hover {
-    background-color: var(--eo-surface-background);
 }
 .btn-left {
     float:left;
@@ -113,9 +126,10 @@ li {
     margin-left:8px ! important;
     margin-right:0 ! important;
 }
-.btn.mob {
+.btn-mob {
     width:100%;
     line-height: 48px;
+    margin-bottom:16px;
 }
 
 .btn svg {

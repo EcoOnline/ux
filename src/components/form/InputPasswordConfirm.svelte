@@ -54,13 +54,20 @@
         right:8px;
         top:12px;
     }
+    .password-shell:hover .i-view {
+        opacity:1;
+    }
+    .i-view {
+        opacity:0;
+        transition: all 0.3s ease-out;
+    }
     .form-item {
         margin-bottom:0;
     }
     .validation-message {
         display:block;
         height:24px;
-        margin:4px 12px;
+        margin:4px 12px 8px 12px;
         font-size: 14px;
     }
 </style>

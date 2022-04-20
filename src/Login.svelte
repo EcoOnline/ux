@@ -8,11 +8,7 @@
             id: "0_1",
             label: "Password",
             hint: false,
-            options: [
-                {value: '', text: "Select one"},
-                {value: 'PP', text: "Passport"},
-                {value: 'ID', text: "National ID"},
-            ],
+            confirm: '0_2',
             answer: ""
         },
         {
@@ -37,13 +33,15 @@
 
     <Form {f} {channel}></Form>
 
-    <a href="" class="btn mob">Create Password</a>
+    <a href="" class="btn btn-mob">Create Password</a>
+    <a href="" class="btn btn-mob btn-clear">Other Login Options</a>
+    <a href="" class="btn btn-mob btn-clear">Help</a>
 </div>
 
 
 <style>
     .i-logo {
-        margin:24px 0 16px 0;
+        margin:24px 0 8px 0;
     }
     h2, h3 {
         font-weight:normal;
@@ -58,7 +56,7 @@
         margin: 16px;
         border-radius: 12px;
         box-shadow:0 6px 10px rgba(186, 191, 195, 0.2);
-        margin-top: calc((100vh - 400px)/4); /*dont center because expanding rules maake action look odd */
+        margin-top: calc((100vh - 750px)/2); /*dont center because expanding rules maake action look odd */
    }
    .center {
        text-align: center;

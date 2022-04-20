@@ -21,9 +21,56 @@
         v_symbols);
 
     let validation_showing = false;
+
+    function keyHandler(e) {
+        //test if paste was used
+        //if valid password was paste jump to confirmation
+        if(e.key == 'v' && e.metaKey && f.confirm) {
+            setTimeout(() => {
+                //allow time for validation update
+                let confirmation_input = document.getElementById(f.confirm);
+                if(v_all && confirmation_input) {
+                    /*
+                    wont work untrusted event
+                    var evt = document.createEvent("KeyboardEvent");
+                    console.log(evt);
+                    (evt.initKeyEvent || evt.initKeyboardEvent)("keypress", true, true, window, 0, 0, 0, 0, 0, 9) 
+                    */
+
+                    /*
+                    wont work normal event bug doesnt function for tab key
+                    var eventObj = document.createEventObject ? document.createEventObject() : document.createEvent("Events");
+
+                    if(eventObj.initEvent){
+                        eventObj.initEvent("keydown", true, true);
+                    }
+                    eventObj.keyCode = 9;
+                    eventObj.which = 9;
+                    eventObj.key = 'Tab';
+                    eventObj.code = 'Tab'
+
+                    input_password.dispatchEvent ? input_password.dispatchEvent(eventObj) : input_password.fireEvent("onkeydown", eventObj); 
+                    */
+
+                    /*
+                        hack using focus for 'next' input (doesnt respect tabindex)
+                        ok for demo only 
+                    */
+                    confirmation_input.focus();
+  
+                }
+               
+            }, 100)
+        }
+
+        /*
+
+        
+
+                    */
+    }
     
     function eye(input) {
-        console.log('eye click');
         if(input == 'password') {
             input_type = 'text';
             setTimeout(() => {
@@ -70,11 +117,11 @@
     {/if}
     <div class="password-shell">
         <div style="display:{(input_type == 'password' ? 'block':'none')}">
-            <input id="{f.id}" bind:value="{f.answer}" bind:this={input_password} type="password" on:focus="{focusPassword}" on:blur="{blurPassword}" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control" autocomplete="off">
+            <input id="{f.id}" bind:value="{f.answer}" bind:this={input_password} type="password" on:keydown="{keyHandler}" on:focus="{focusPassword}" on:blur="{blurPassword}" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control" autocomplete="off">
             <i on:click="{ () => { eye('password')}}"class="i-view i-24"></i>
         </div>
         <div style="display:{(input_type == 'text' ? 'block':'none')}">
-        <input id="{f.id}_alt" bind:value="{f.answer}" bind:this="{input_text}" type="text" on:focus="{focusPassword}" on:blur="{blurPassword}" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control" autocomplete="off">
+            <input id="{f.id}_alt" bind:value="{f.answer}" bind:this="{input_text}" type="text" on:focus="{focusPassword}" on:blur="{blurPassword}" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control" autocomplete="off">
             <i on:click="{ () => { eye('text')}}"class="i-view i-24"></i>
         </div>
     </div>
@@ -113,6 +160,13 @@
         position:absolute;
         right:8px;
         top:12px;
+    }
+    .password-shell:hover .i-view {
+        opacity:1;
+    }
+    .i-view {
+        opacity:0;
+        transition: all 0.3s ease-out;
     }
     .form-item {
         margin-bottom:0;

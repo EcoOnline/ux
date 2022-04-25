@@ -89,6 +89,7 @@ li {
     margin-right:8px;
     margin-left:0;
     cursor:pointer;
+    position:relative;
 }
 .btn-secondary{
     background: #fff;
@@ -630,6 +631,7 @@ h1 .i-32 {
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
 .i-error                { background-image:url(../images/icons/error.svg) }
+.i-feide-color          { background-image:url(../images/icons/feide_login_icon.svg)}
 .i-filter               { background-image:url(../images/icons/filter.svg)}
 .i-fingerprint          { background-image:url(../images/icons/fingerprint.svg)}
 .i-hazard-assessments   { background-image:url(../images/icons/hazard-assessments.svg)}
@@ -640,8 +642,9 @@ h1 .i-32 {
 .i-location             { background-image:url(../images/icons/location.svg)}
 .i-logo                 { background-image:url(../images/icons/logo.svg)}
 .i-maximize             { background-image:url(../images/icons/maximize.svg)}
-.i-minimize             { background-image:url(../images/icons/minimize.svg)}
 .i-menu                 { background-image:url(../images/icons/menu.svg)}
+.i-microsoft-color      { background-image:url(../images/icons/microsoft_login_icon.svg)}
+.i-minimize             { background-image:url(../images/icons/minimize.svg)}
 .i-notification         { background-image:url(../images/icons/notification.svg)}
 .i-page-single          { background-image:url(../images/icons/page-single.svg)}
 .i-page-tabs            { background-image:url(../images/icons/page-tabs.svg)}

@@ -1,7 +1,10 @@
 <script>
     import Shortcuts from "./Shortcuts.svelte";
+    import PubSub from 'pubsub-js';
+
     export let f;
     export let channel;
+
     let input_type = 'password';
     let has_focus = false;
 
@@ -89,6 +92,8 @@
         validation_showing = false
     }
     function blurPassword() {
+        console.log('password in this state', f);
+        PubSub.publish(channel, f); // publish so that confirmation can pick it up
         setTimeout(() => {
             if(input_password !== document.activeElement && input_text !== document.activeElement) {
                 has_focus = false;
@@ -97,7 +102,7 @@
                     //only show valid for a short time and then fade out
                     setTimeout(() => {
                         validation_showing = false;
-                    }, 3000);
+                    }, 1000);
                 }
             }
         }, 300);

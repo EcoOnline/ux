@@ -18,8 +18,6 @@
 
         ],
         condition_matches: {}
-
-        ]
     }
 
     function nav(str) {

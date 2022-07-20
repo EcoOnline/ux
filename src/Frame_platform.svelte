@@ -211,10 +211,10 @@
 .popup .pop1, .popup .pop2 {
     transition: all 0.3s linear;
 }
-.popup.active .pop1 {
+.page-actions.active .pop1 {
     d: path("M8 22.5837L22.5836 8L24 9.41421L9.41421 24L8 22.5837Z");
 }
-.popup.active .pop2 {
+.page-actions.active .pop2 {
     d: path("M22.5837 24L8 9.41429L9.41421 8L24 22.5837L22.5837 24Z");
 }
 
@@ -257,7 +257,7 @@
         margin-right:0;
     }
     .page-actions .btn:not(.popup){
-        transform: translateX(100px);
+        transform: translateY(100px);
         opacity:0;
     }
     

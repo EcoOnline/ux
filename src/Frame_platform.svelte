@@ -234,19 +234,20 @@
         align-items: flex-end;
     }
     .page-actions .btn:nth-child(2) {
-        transition-delay: 0.05s;
+        transition-delay: 0s;
+        /*New Audit*/
     }
     .page-actions .btn:nth-child(3) {
+        transition-delay: 0.05s;
+        /*Query*/
+    }
+    .page-actions .btn:nth-child(4) {
         transition-delay: 0.1s;
-    }
-    .page-actions .btn:nth-child(4) {
-        transition-delay: 0.15s;
-    }
-    .page-actions .btn:nth-child(4) {
-        transition-delay: 0.2s;
+        /*Summary*/
     }
     .page-actions .btn:nth-child(5) {
-        transition-delay: 0.25s;
+        transition-delay: 0.15s;
+        /*Admin*/
     }
     .page-actions .btn{
         float:right;
@@ -257,7 +258,7 @@
         margin-right:0;
     }
     .page-actions .btn:not(.popup){
-        transform: translateY(100px);
+        transform: translateY(32px);
         opacity:0;
     }
     
@@ -284,7 +285,7 @@
     */
     .page-actions.active .btn {
         display: inline-block;
-        transform: translateX(0px);
+        transform: translateY(0px);
         opacity:1;
     }
 

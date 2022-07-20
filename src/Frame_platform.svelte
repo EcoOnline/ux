@@ -25,8 +25,8 @@
 
 </script>
 
-<div class="page-actions">
-    <a href='#platform' class='btn popup' class:active="{popup_active}" on:click|preventDefault="{ () => { popup_active = !popup_active} }">
+<div class="page-actions" class:active="{popup_active}" on:click|preventDefault="{ () => { popup_active = !popup_active} }">
+    <a href='#platform' class='btn popup' >
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="pop1" d="M6 20L16 10L17.4121 11.4164L7.41409 21.4146L6 20Z" fill="white"/>
             <path class="pop2"  d="M24.5856 21.4146L14.5874 11.4165L16.0016 10.0023L26 20L24.5856 21.4146Z" fill="white"/>
@@ -220,7 +220,7 @@
         line-height: 48px;
     }
     .page-actions {
-        width:100%;
+        width:0%;
         overflow: visible;
         float: none;
         position:absolute;
@@ -259,12 +259,25 @@
     .popup {
         display: inline-block;  
     }
+    .page-actions.active {
+        width:100%;
+    }
+    .page-actions.active:before {
+        content: '';
+        display: block;
+        background:rgba(0,0,0,0.3);
+        width:100%;
+        height:100vh;
+        position: absolute;
+        bottom:-16px;
+        right:-16px;
+    }
     /*
     .popup ~ .btn {
         display: none;
     }
     */
-    .popup.active ~ .btn {
+    .page-actions.active .btn {
         display: inline-block;
         transform: translateX(0px);
         opacity:1;

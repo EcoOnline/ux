@@ -400,6 +400,9 @@ li {
     flex-direction: row;
     padding:0;
 }
+.tabs .i-24 {
+    display: none; /* hide icons on desktop - theyre only used tablet and down at screen bottom */
+}
 .tabs li {
     padding-right:16px;
     overflow: hidden;
@@ -617,12 +620,15 @@ h1 .i-32 {
 }
 .i-actions              { background-image:url(../images/icons/actions.svg) }
 .i-add                  { background-image:url(../images/icons/add--alt.svg) }
+.i-administration       { background-image:url(../images/icons/administration.svg) }
+.i-apps                 { background-image:url(../images/icons/apps.svg) }
 .i-arrow-down           { background-image:url(../images/icons/arrow-down.svg) }
 .i-arrow-up             { background-image:url(../images/icons/arrow-up.svg) }
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
 .i-checkbox             { background-image:url(../images/icons/checkbox.svg) }
 .i-checkbox-selected    { background-image:url(../images/icons/checkbox-selected.svg) }
 .i-checkmark-green      { background-image:url(../images/icons/checkmark-green.svg) }
+.i-chemical-manager     { background-image:url(../images/icons/chemical_manager.svg) }
 .i-chevron-down         { background-image:url(../images/icons/chevron-down.svg) }
 .i-chevron-up           { background-image:url(../images/icons/chevron-up.svg) }
 .i-close                { background-image:url(../images/icons/close.svg) }
@@ -630,6 +636,7 @@ h1 .i-32 {
 .i-desktop              { background-image:url(../images/icons/desktop.svg) }
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
+.i-ehs                  { background-image:url(../images/icons/health_safety.svg) }
 .i-error                { background-image:url(../images/icons/error.svg) }
 .i-feide-color          { background-image:url(../images/icons/feide_login_icon.svg)}
 .i-filter               { background-image:url(../images/icons/filter.svg)}
@@ -645,10 +652,12 @@ h1 .i-32 {
 .i-menu                 { background-image:url(../images/icons/menu.svg)}
 .i-microsoft-color      { background-image:url(../images/icons/microsoft_login_icon.svg)}
 .i-minimize             { background-image:url(../images/icons/minimize.svg)}
+.i-news                 { background-image:url(../images/icons/news.svg)}
 .i-notification         { background-image:url(../images/icons/notification.svg)}
 .i-page-single          { background-image:url(../images/icons/page-single.svg)}
 .i-page-tabs            { background-image:url(../images/icons/page-tabs.svg)}
 .i-pin                  { background-image:url(../images/icons/pin.svg)}
+.i-platform             { background-image:url(../images/icons/platform.svg)}
 .i-printer              { background-image:url(../images/icons/printer.svg)}
 .i-qr                   { background-image:url(../images/icons/qr.svg)}
 .i-reset                { background-image:url(../images/icons/reset.svg)}
@@ -826,4 +835,75 @@ div.form-control input {
     .print_block { display: block ! important }
     .print_flex { display: flex ! important }
     .no_print { display: none ! important }
+}
+
+
+
+
+
+.sidebar {
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.sidebar li {
+    height:76px;
+    margin-bottom:16px;
+    border-radius:12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0 0 0 16px;
+    width:64px;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+.sidebar li span{
+    max-width:0;
+    display: inline-block;
+    overflow: hidden;
+    transition: 0.5s linear;
+    white-space: nowrap;
+    margin-left:8px;
+}
+.sidebar li:hover {
+    width:100%;
+    background-color: var(--eo-surface-selected);
+}
+.sidebar li:hover span {
+    max-width:calc(100% - 40px);
+}
+.sidebar li.active {
+    width:100%;
+    /*background-color: var(--eo-secondary-500);*/
+    background-color: var(--eo-surface-selected);
+}
+.sidebar li.active span{
+    max-width:calc(100% - 40px);
+}
+
+.hometile {
+    width:100%;
+    border-radius:12px;
+    background:#fff;
+    box-shadow:0 6px 10px rgba(186, 191, 195, 0.2);
+    transition: all 0.2s linear;
+    display: block;
+    padding: 8px 16px;
+}
+.home h1 {
+    line-height:1em;
+    padding:0;
+    margin:8px 0 0 0;
+}
+
+.ar_12_1 { height:76px; }
+.ar_10_1 { aspect-ratio: 10/1; }
+.ar_1_1 { aspect-ratio: 1; }
+
+.mb {
+    margin-bottom:16px;
 }

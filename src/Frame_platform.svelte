@@ -200,6 +200,10 @@
 }
 
 
+.page-actions .btn{
+    margin-right:0;
+    margin-left:8px;
+}
 .popup {
     display: none;
     padding:0 12px;      
@@ -250,6 +254,7 @@
         clear:both;
         transition: all 0.3s ease-out;
         position: relative;
+        margin-right:0;
     }
     .page-actions .btn:not(.popup){
         transform: translateX(100px);

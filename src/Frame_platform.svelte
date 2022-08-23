@@ -11,7 +11,7 @@
 
 
     let tab = "apps";
-    let home_layout = false;
+    let home_layout = true;
 
     let popup_active = false;
 
@@ -21,7 +21,7 @@
         tab = (t == '' ? 'apps' : t);
     }
 
-    let sidebar = 'home';
+    let sidebar = 'ehs';
 
 </script>
 
@@ -87,23 +87,202 @@
 
                     {#if sidebar == 'ehs'}
                         <div class="col12">
-                            <div class="ar_12_1">
+                            <div class="hometile x ar_12_1">
                                 <h1>Health & Safety</h1>
                             </div>
                         </div>
                         
-                        <div class="col2">
-                            <div class="hometile ar_1_1">tile</div>
+
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile" on:click|preventDefault="{ () => {nav('incidents');window.location.hash='#ehs/incidents'}}">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/incidents.svg)"></div>
+                                <b>Incidents</b>
+                                <div class="tools">
+                                    <a href="#ehs/incidents/incidents_new" class="add" on:click|stopPropagation="{ () => {nav('incidents_new')}}"> </a>
+                                    <a href="#ehs/incidents/queries_new" class="filter" on:click|stopPropagation="{ () => {nav('queries_new')}}"> </a>
+                                    <a href="#ehs/incidents/summary" class="summary" on:click|stopPropagation="{ () => {nav('incidents/summary')}}"> </a>
+                                    <a href="#ehs/incidents/incidents_admin" class="tool" on:click="{ () => {nav('incidents/incidents_admin')}}" > </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col2">
-                            <div class="hometile ar_1_1">tile</div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/actions.svg)"></div>
+                                <b>Actions</b>
+                                <div class="tools">
+                                    <a href="#incidents/incidents_new" class="add"> </a>
+                                    <a href="queries_new" class="filter"> </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col2">
-                            <div class="hometile ar_1_1">tile</div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/audits.svg)"></div>
+                                <b>Audit & Inspection</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col2">
-                            <div class="hometile ar_1_1">tile</div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/observations.svg)"></div>
+                                <b>Observation</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
                         </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/risk_assessment.svg)"></div>
+                                <b>Risk Assessment</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile" on:click|preventDefault="{ () => {nav('hazard_assessments');window.location.hash='#ehs/hazard_assessments'}}">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/hazard_assessment.svg)"></div>
+                                <b>Hazard Assessment</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/scheduling.svg)"></div>
+                                <b>Scheduling</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/epr.svg)"></div>
+                                <b>Environmental</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/period_statistics.svg)"></div>
+                                <b>Period Statistics</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/register.svg)"></div>
+                                <b>Register</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/advanced_rca.svg)"></div>
+                                <b>Adavanced RCA</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/documents.svg)"></div>
+                                <b>Document</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/tracker.svg)"></div>
+                                <b>COVID-19 Tracker</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/pow_ra.svg)"></div>
+                                <b>Point of Work</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/lost_time.svg)"></div>
+                                <b>Lost Time</b>
+                                <div class="tools">
+                                    <a href="./" class="add"> </a>
+                                    <a href="./" class="filter"> </a>
+                                    <a href="./" class="summary"> </a>
+                                    <a href="./" class="tool"> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="tile" on:click|preventDefault="{ () => {nav('linkedfields');window.location.hash='#ehs/administration/linkedfields'}}">
+                                <div class="icon" style="background-image:url(./images/ehs_svgs_clean/administration.svg)"></div>
+                                <b>Administration</b>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
                         <div class="col2">
                             <div class="hometile ar_1_1">tile</div>
                         </div>
@@ -167,6 +346,15 @@
                         <div class="col2">
                             <div class="hometile ar_1_1">tile</div>
                         </div>
+                        <div class="col2">
+                            <div class="hometile ar_1_1">tile</div>
+                        </div>
+                        <div class="col2">
+                            <div class="hometile ar_1_1">tile</div>
+                        </div>
+                        <div class="col2">
+                            <div class="hometile ar_1_1">tile</div>
+                        </div>
                     {/if}
 
 
@@ -193,6 +381,24 @@
 
 
 <style>
+
+/*dirty hack for proper tile sizes inside a 10col*/
+:root {
+    --col10: calc(10 * var(--c) + 9 * var(--g) );
+    --hack: calc((var(--col10) - (9 * var(--g))) / 8.055);
+}
+.col9 .col6 {
+    width: calc(2 * var(--hack) + var(--g) );
+
+}
+
+.hometile.x {
+    box-shadow: none;
+    background: transparent;
+}
+
+
+
 .page-actions {
     float:right;
     display: flex;

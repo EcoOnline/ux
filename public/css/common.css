@@ -259,7 +259,8 @@ li {
     /*border-top:1px solid #eee;*/
     padding:5% 4px 4px 4px;
     transition: all 0.5s linear;
-    opacity:1;
+    opacity:0;
+    display:none;
 }
 
 
@@ -334,9 +335,7 @@ li {
         margin:0 2px;
     }
     .tile b { font-size:135%; }
-    .tile .tools {
-        opacity:0;
-    }
+    
     .col-md-1 { width: calc(var(--c)) }
     .col-md-2 { width: calc(2 * var(--c) + 1 * var(--g) ) }
     .col-md-3 { width: calc(3 * var(--c) + 2 * var(--g) ) }
@@ -436,8 +435,13 @@ li {
 }
 
 
-
-.drawer {
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.drawer, .modal {
     position:fixed;
     top:0;
     left:0;
@@ -445,7 +449,7 @@ li {
     height:100%;
     z-index: 1000;
 }
-.drawer .mask {
+.drawer .mask, .modal .mask {
     position:absolute;
     top:0;
     left:0;
@@ -455,11 +459,11 @@ li {
     background-color: rgba(0,0,0,0);
     transition: background-color 1s linear;
 }
-.drawer .mask.block {
+.drawer .mask.block, .modal .mask.block {
     pointer-events:all;
 }
 
-.drawer .mask.visible {
+.drawer .mask.visible, .modal .mask.visible {
     background-color: rgba(0,0,0,0.2);
 }
 .drawer .pullout {
@@ -472,6 +476,32 @@ li {
     background:#fff;
     transition:right 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.3s linear;
 }
+
+
+.modal .modal-window {
+    width:840px;
+    max-width:calc(100vw - 32px);
+    height:auto;
+    max-height:calc(100vh - 32px);
+    background:#fff;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+    transition: opacity 0.3s linear;
+    z-index: 1;
+    border-radius:12px; 
+    /*transition:right 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.3s linear;*/
+}
+.modal .modal-window.in {
+    opacity: 1;
+}
+
+.modal-window {
+    display:flex;
+    flex-direction: column;
+}
+
+
+
+
 .drawer .pullout:after {
     content: '';
     display:block;
@@ -492,16 +522,21 @@ li {
     flex-direction: column;
 }
 
-.pullout-head {
+.pullout-head, .modal-head {
     padding: 0 16px;
 }
-.pullout-head h2 {
+.pullout-head h2, .modal-head h2 {
     font-weight:300;
+}
+.modal-head h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .drawer .i-maximize {
     display:none;
 }
-.pullout-body {
+.pullout-body, .modal-body {
     flex:1;
     padding:16px;
     overflow-y: auto;
@@ -625,6 +660,7 @@ h1 .i-32 {
 .i-arrow-down           { background-image:url(../images/icons/arrow-down.svg) }
 .i-arrow-up             { background-image:url(../images/icons/arrow-up.svg) }
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
+.i-calendar             { background-image:url(../images/icons/calendar.svg) }
 .i-checkbox             { background-image:url(../images/icons/checkbox.svg) }
 .i-checkbox-selected    { background-image:url(../images/icons/checkbox-selected.svg) }
 .i-checkmark-green      { background-image:url(../images/icons/checkmark-green.svg) }

@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import Section from './Section.svelte';
 	import InputCheckbox from "./InputCheckbox.svelte";
+	import InputFilters from "./InputFilters.svelte";
 	import InputLookup from "./InputLookup.svelte";
 	import InputMatrix from "./InputMatrix.svelte";
 	import InputMulti from "./InputMulti.svelte";
@@ -19,6 +20,7 @@
     let components = {
         "section": Section,
 		"input_checkbox": InputCheckbox,
+		"input_filters": InputFilters,
 		"input_lookup": InputLookup,
 		"input_matrix": InputMatrix,
 		"input_multi": InputMulti,

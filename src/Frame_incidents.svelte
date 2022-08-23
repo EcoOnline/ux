@@ -3,6 +3,7 @@
     import PubSub from 'pubsub-js'
 
     import Pullout from './components/Pullout.svelte';
+    import Modal from './components/Modal.svelte';
 
     import Form from './components/form/Form.svelte';
     import RecordID from "./components/table/RecordID.svelte";
@@ -10,7 +11,7 @@
     import Channel from "./components/table/Channel.svelte";
     import DateComp from "./components/table/Date.svelte";
 
-
+    let filter_modal = false;
    
 
 	let components = {
@@ -364,6 +365,24 @@
     }
 
 
+
+
+    let table_filter_form = [
+        {
+            item_type: "input_filters",
+            id: "0_1",
+            label: "Only show rows where:",
+            options: [
+                {value: '', text: "Select one", type: null},
+                {value: 'channel', text: "Channel", type: 'channel_select'},
+                {value: 'date_created', text: "Date created on", type: 'date'},
+                {value: 'creator', text: "Creator", type: 'text'}
+            ],
+            answer: ''
+        }
+    ];
+
+
 </script>
 
 <div class="row sticky">
@@ -505,6 +524,7 @@
             <h4 style="">Latest Events
                 <a href="/" class="i-pin i-20 btn-right" on:click|preventDefault="{ () => { pin_module('Latest Events')}}"> </a>
                 <a href="/" class="i-settings i-20 btn-right"  on:click|preventDefault="{ () => { table_drawer=true;}}"> </a>
+                <a href="/" class="i-filter i-20 btn-right" on:click|preventDefault="{ () => { filter_modal=true; }}"> </a>
             </h4>
             <div class="sticky-wrapper">
                 <table class="table">
@@ -568,6 +588,10 @@
     <!--<span class="btn btn-secondary" on:click="{pin_cancel}">Pin and Open Dashboard</span>-->
     <span class="btn btn-secondary" on:click="{pin_cancel}">Cancel</span>
 </Pullout>
+
+<Modal show_modal={filter_modal} title={'Filter Table'}>
+    <Form f={table_filter_form}></Form>
+</Modal>
 
 <style>
     .sticky-wrapper {

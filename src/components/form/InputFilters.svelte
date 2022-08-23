@@ -87,7 +87,7 @@ import Date from "../table/Date.svelte";
                     
                 }},
                 {value: 'greater_than', text: "is after", input: {
-                    item_type: "input_date2",
+                    item_type: "input_date",
                     id: "filter_date",
                     optional: false,
                     hint: false,

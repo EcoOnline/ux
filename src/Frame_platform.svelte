@@ -25,6 +25,9 @@
 
 </script>
 
+
+
+<!--
 <div class="page-actions" class:active="{popup_active}" on:click|preventDefault="{ () => { popup_active = !popup_active} }">
     <a href='#platform' class='btn popup' >
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,9 +41,11 @@
     <a href='#platform' class='btn btn-secondary'>Admin</a>
     
 </div>
-
+-->
 <h1>EcoOnline Home</h1>
 
+
+<!--
 <ul class="tabs">
     <li><a href="#platform" class:active="{tab == 'apps'}"><i class='i-apps i-24'></i><span>Applications</span></a></li>
     <li><a href="#platform/news" class:active="{tab == 'news'}"><i class='i-news i-24'></i><span>News</span></a></li>
@@ -376,7 +381,7 @@
 <h1>Dashboards</h1>
 {/if}
 
-
+-->
 
 
 

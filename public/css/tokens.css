@@ -28,4 +28,7 @@
 
     --navH: 56px;
     --mainH: calc(100vh - var(--navH));
+
+
+    --max-page:1328px;
 }

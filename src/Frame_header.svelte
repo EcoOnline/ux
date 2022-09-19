@@ -700,7 +700,7 @@
 						</div>
 					{/if}
 					{#if toggle_view}
-						<div class='action-item view-mode' on:click={ () => { view_mode = view_mode == 'tabbed' ? 'single':'tabbed' }}><i class="i-page-tabs i-24" class:i-page-single="{view_mode == 'tabbed'}"></i><span>{view_mode == 'single' ? 'View tabs' : 'View single page'}</span></div>
+						<div class='action-item view-mode' on:click={ () => { view_mode = view_mode == 'tabbed' ? 'single':'tabbed' }}><i class="i-24" class:i-page-tabs="{view_mode == 'single'}" class:i-page-single="{view_mode == 'tabbed'}"></i><span>{view_mode == 'single' ? 'View tabs' : 'View single page'}</span></div>
 					{/if}
 				{/if}
 

@@ -57,6 +57,44 @@
 	let multi_tennant = false;
 	let user_level = 'admin';
 
+	let slices= {
+		ehs: {
+			basic: [0,5],
+			multi: [0,10],
+			admin: [0, -2]
+		},
+		cm: {
+			basic: [0,10],
+			multi: [0,-3],
+			admin: [0]
+		},
+		munio: {
+			basic: [0,-1],
+			multi: [0,-1],
+			admin: [0]
+		}
+	}
+
+	function user_slicer(temp, a) {
+		let ul = user_level;
+		let slice_arr = (slices[a] ? (slices[a][ul] ? slices[a][ul] : null) : null);
+		console.log(slices[a], slice_arr);
+		if(slice_arr) {
+			temp = temp.slice(slice_arr[0], (typeof slice_arr[1] !== 'undefined' ? slice_arr[1] : temp.length) );
+		}
+		console.log('sliced');
+		return temp;
+	}
+
+	function filter_mods(temp) {
+		if(filter_key !== '') {
+			temp = temp.filter( (m) => {
+				return m.name.toLowerCase().includes(filter_key.toLowerCase())
+			});
+		}
+		return temp;
+	}
+
 	$: {
 		let mt = multi_tennant;
 		apps.forEach( (a) => {
@@ -69,24 +107,26 @@
 		apps.forEach( (a) => {
 			app_data[a].show_tennants = multi_tennant;
 		})
-		let ehs_start = extras_as_modules ? 5 : 0;
-		let cm_start = 0;
-		switch(user_level) {
-			case 'basic': 
-				app_data.ehs.modules_to_paint = app_data.ehs.modules.slice(ehs_start,5); 
-				app_data.cm.modules_to_paint = app_data.cm.modules.slice(cm_start,10); 
-				break;
-			case 'multi': 
-				app_data.ehs.modules_to_paint = app_data.ehs.modules.slice(ehs_start,10); 
-				app_data.cm.modules_to_paint = app_data.cm.modules.slice(cm_start,app_data.cm.modules.length-3); 
-				break;
-			case 'admin': 
-				app_data.ehs.modules_to_paint = app_data.ehs.modules.slice(ehs_start,app_data.ehs.modules.length); 
-				app_data.cm.modules_to_paint = app_data.cm.modules.slice(cm_start,app_data.cm.modules.length); 
-				break;
-		}
-		app_data.ehs.modules_to_paint = app_data.ehs.modules_to_paint; //trigger repaint
-		app_data.cm.modules_to_paint = app_data.cm.modules_to_paint; //trigger repaint
+		
+
+		
+
+
+		
+
+		
+		apps.forEach( (a) => {
+			let temp = [...app_data[a].modules];
+			//remove apps from user type
+			temp = user_slicer(temp, a);
+			//sort apps
+			temp = temp.sort(sort_mods);
+			//filter
+			temp = filter_mods(temp);
+
+			console.log('PAINT from user_level', temp);
+			app_data[a].modules_to_paint = [...temp];//trigger repaint
+		})
 	}
 
 	$: {
@@ -132,14 +172,14 @@
 		
 	}
 
-	let apps = ['home','ehs', 'cm', 'almego', 'munio', 'crisis', 'staysafe'];
+	let apps = ['home','ehs', 'cm'];
 
 	let extras_as_modules = false;
 
 
-	let view_mode = 'single';
+	let view_mode = 'tabbed';
 	let toggle_view = true;
-	let sort_view = true;
+	let sort_view = false;
 	let action_dd = false;
 	let sort_key = 'default';
 	function sort_mods(amod,bmod) {
@@ -159,18 +199,27 @@
 		let trigger = sort_key;
 
 		apps.forEach( (a) => {
-			let temp = [...app_data[a].modules].sort(sort_mods);
-			app_data[a].modules_to_paint = temp;
+			let temp = [...app_data[a].modules];
+			//remove apps from user type
+			temp = user_slicer(temp, a);
+			//sort apps
+			temp = temp.sort(sort_mods);
+			//filter
+			temp = filter_mods(temp);
+
+			console.log('PAINT from sortkey', temp);
+			app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
 
-	let filter_view = true;
+	let filter_view = false;
 	let filter_key = ''; 
 	let filter_input;
 	$:{
 		let trigger = filter_key;
 		
 		apps.forEach( (a) => {
+			/*
 			let temp = [...app_data[a].modules].sort(sort_mods);
 			if(filter_key !== '') {
 				temp = temp.filter( (m) => {
@@ -178,6 +227,18 @@
 				});
 			}
 			app_data[a].modules_to_paint = [...temp];
+			*/
+
+			let temp = [...app_data[a].modules];
+			//remove apps from user type
+			temp = user_slicer(temp, a);
+			//sort apps
+			temp = temp.sort(sort_mods);
+			//filter
+			temp = filter_mods(temp);
+
+			console.log('PAINT from filter_key', temp);
+			app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
 	
@@ -260,7 +321,7 @@
 					url: 'ehs/advanced_rca'
 				},
 				{
-					name: 'Document',
+					name: 'Documents',
 					icon: 'documents',
 					url: 'ehs/document'
 				},
@@ -416,7 +477,23 @@
 			show_tennants: false,
 			tennants: false,
 			modules_to_paint: [],
-			modules: []
+			modules: [
+				{
+					name: 'Documents',
+					icon: 'documents',
+					url: 'almego/document'
+				},
+				{
+					name: 'Reports',
+					icon: 'reports',
+					url: 'almego/reports'
+				},
+				{
+					name: 'Administration',
+					icon: 'administration',
+					url: 'almego/administration'
+				}
+			]
 		},
 		munio: {
 			name: 'Munio Learning',
@@ -428,7 +505,18 @@
 			show_tennants: true,
 			tennants: [],
 			modules_to_paint: [], 
-			modules: []
+			modules: [
+				{
+					name: 'My Courses',
+					icon: 'classroom',
+					url: 'munio/courses'
+				},
+				{
+					name: 'Administration',
+					icon: 'administration',
+					url: 'munio/administration'
+				}
+			]
 		},
 		crisis: {
 			name: 'Crisis Manager',
@@ -471,12 +559,24 @@
 	let menu_param_rendered = false;
 
 	$: {
-		let a = apps;
 		let ad = app_data;
+		let a = apps;
+		let u = user_level;
+		let v1 = view_mode;
+		let v2 = toggle_view;
+		let v3 = sort_view;
+		let v4 = filter_view;
+		let up = menu_upsell;
 
 		if(menu_param_rendered) {
 			let ret_obj = {
 				'apps': a,
+				'user': u,
+				'v1': v1,
+				'v2': v2,
+				'v3': v3,
+				'v4': v4,
+				'up': up,
 			}
 			let hashed_menu = btoa(JSON.stringify(ret_obj));
 			console.log('menu=' + hashed_menu);
@@ -510,6 +610,15 @@
 			if(preconfig.apps) {
 				apps = preconfig.apps;
 			}
+			if(preconfig.user) {
+				user_level = preconfig.user;
+			}
+			console.log('preconfig view mode?', preconfig.v1);
+			view_mode = preconfig.v1;
+			toggle_view = preconfig.v2;
+			sort_view = preconfig.v3;
+			filter_view = preconfig.v4;
+			menu_upsell = preconfig.up;
 
 
 		} catch (error) {
@@ -738,19 +847,27 @@
 															{/if}
 														{/if}
 													</div>
+												{:else}
+													{#if filter_key !== ''}
+														<p>There are no modules with this filter</p>
+													{:else}
+														<!--<p>Jump straight to the application</p>-->
+													{/if}
 												{/each}
 											</div>
 										
 										{/if}
 									{:else}
-										<h3>Access</h3>
-										<p style='max-width:480px;'>We’ve added <i>{app_data[a].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
-										{#if app_data[a].external_login}
-											<a href='{app_data[a].external_login}' target='_blank' class='btn'>Login</a>
-										{/if}
-										{#if app_data[a].external_marketing}
-											<a href='{app_data[a].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>
-										{/if}
+										<div style='margin-left:48px'>
+											<h3>Access</h3>
+											<p style='max-width:480px;'>We’ve added <i>{app_data[a].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
+											{#if app_data[a].external_login}
+												<a href='{app_data[a].external_login}' target='_blank' class='btn'>Login</a>
+											{/if}
+											{#if app_data[a].external_marketing}
+												<a href='{app_data[a].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>
+											{/if}
+										</div>
 									{/if}
 
 								</div>
@@ -870,7 +987,6 @@
 
 	.action-holder { 
 		background-color: #fff;
-		height: 48px;
 		position: sticky;
 		width: calc(100% + 20px);
 		box-sizing: border-box;

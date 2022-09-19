@@ -61,7 +61,7 @@
 		ehs: {
 			basic: [0,5],
 			multi: [0,10],
-			admin: [0, -2]
+			admin: [0]
 		},
 		cm: {
 			basic: [0,10],
@@ -78,6 +78,8 @@
 	function user_slicer(temp, a) {
 		let ul = user_level;
 		let slice_arr = (slices[a] ? (slices[a][ul] ? slices[a][ul] : null) : null);
+
+
 		console.log(slices[a], slice_arr);
 		if(slice_arr) {
 			temp = temp.slice(slice_arr[0], (typeof slice_arr[1] !== 'undefined' ? slice_arr[1] : temp.length) );

@@ -4,6 +4,7 @@
 		a responsive frame to hold smaller experiments so that they don't have to be continually framed,
 	*/
 
+	import NotFound from "./Frame_notfound.svelte";
 	import Platform from "./Frame_platform.svelte";
 	import Nav from "./Frame_header.svelte";
 	import Home from "./Frame_home.svelte";
@@ -19,15 +20,26 @@
 	let module = '';
 
     const comps = {
+		"notfound": NotFound,
         "platform": Platform,
         "ehs": Home,
-        "linkedfields": AdminLinkedFields,
-        "incidents": Incidents,
-        "incidents_new": IncidentsNew,
-        "incidents_admin": IncidentsAdmin,
-        "queries_new": QueriesNew,
-        "queries_result": QueriesResult,
-        "hazard_assessments": HazardAssessments
+        "ehs_linkedfields": AdminLinkedFields,
+        "ehs_incidents": Incidents,
+        "ehs_incidents_new": IncidentsNew,
+        "ehs_incidents_incidents_admin": IncidentsAdmin,
+        "ehs_incidents_queries_new": QueriesNew,
+        "ehs_incidents_queries_result": QueriesResult,
+        "ehs_hazard_assessment": HazardAssessments,
+		"ehs_audits": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_risk_assessment": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
+		"ehs_observations": NotFound,
 	}
     let comp = comps.ehs;
 	let hash = window.location.hash.substring(1);
@@ -46,6 +58,28 @@
    }
 
    function handleNavStr(hash) {
+
+		let hash_arr = hash.split('/');
+		let found = false;
+		tabnav = '';
+
+		for(let i = hash_arr.length;i>=0;i--){
+			let test_join = hash_arr.slice(0,i).join('_');
+			if(comps[test_join]) {
+				comp = comps[test_join];
+				found = true;
+				if(hash_arr[i]) {
+					tabnav = hash_arr[i];
+					console.log('tabnav', tabnav);
+				}
+				i = -1;
+			}
+		}
+		if(!found) {
+			comp = comps.notfound; //default to first
+		}
+
+	   /*
 		tabnav = '';
 		let hash_arr = hash.split('/');
 		let id = hash_arr[hash_arr.length-1];
@@ -63,7 +97,8 @@
 				return;
 			}
 		}
-		comp = comps.ehs; //default to first
+		comp = comps.notfound; //default to first
+		*/
 
    }
 
@@ -87,7 +122,7 @@
 <svelte:window on:hashchange={handleHash}/>
 
 
-<Nav {module}></Nav>
+<Nav></Nav>
 	
 <main on:scroll={handleScroll}>
 	<div class="frame">

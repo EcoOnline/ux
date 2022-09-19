@@ -61,17 +61,20 @@
 		ehs: {
 			basic: [0,5],
 			multi: [0,10],
-			admin: [0]
+			admin: [0],
+			changing_tennant: false
 		},
 		cm: {
 			basic: [0,10],
 			multi: [0,-3],
-			admin: [0]
+			admin: [0],
+			changing_tennant: false
 		},
 		munio: {
 			basic: [0,-1],
 			multi: [0,-1],
-			admin: [0]
+			admin: [0],
+			changing_tennant: false
 		}
 	}
 
@@ -131,17 +134,15 @@
 		})
 	}
 
-	$: {
-		//faking retrieval of new modules
-		let trigger = selected_tennant;
-		if(selected_tennant !== ''){ 
-			
-			changing_tennant = true;
-			const min = 2000;
-			const max = 5000;
-			let delay =  Math.floor(Math.random() * (max - min) + min);
-			setTimeout( () => { changing_tennant = false }, delay)
-		}
+
+	function fake_tennant_change(a) {
+		slices[a].changing_tennant = true;
+		const min = 2000;
+		const max = 5000;
+		let delay =  Math.floor(Math.random() * (max - min) + min);
+		setTimeout( () => { 
+			slices[a].changing_tennant = false; 
+		}, delay)
 	}
 
 
@@ -596,6 +597,7 @@
 		let ad = app_data;
 		let a = apps;
 		let u = user_level;
+		let m = multi_tennant;
 		let v1 = view_mode;
 		let v2 = toggle_view;
 		let v3 = sort_view;
@@ -606,6 +608,7 @@
 			let ret_obj = {
 				'apps': a,
 				'user': u,
+				'm': m,
 				'v1': v1,
 				'v2': v2,
 				'v3': v3,
@@ -648,6 +651,7 @@
 				user_level = preconfig.user;
 			}
 			console.log('preconfig view mode?', preconfig.v1);
+			multi_tennant = preconfig.m;
 			view_mode = preconfig.v1;
 			toggle_view = preconfig.v2;
 			sort_view = preconfig.v3;
@@ -851,13 +855,14 @@
 											<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
 										{/if}
 										{#if app_data[a].show_tennants && app_data[a].tennants && app_data[a].tennants.length}
-											<select bind:value="{selected_tennant}" class='tennant-select'>
+											<!-- svelte-ignore a11y-no-onchange -->
+											<select bind:value="{selected_tennant}" class='tennant-select' on:change="{()=> { fake_tennant_change(a); }}">
 												{#each app_data[a].tennants as tennant}
 													<option>{tennant}</option>
 												{/each}
 											</select>
 										{/if}
-										{#if changing_tennant}
+										{#if slices[a] && slices[a].changing_tennant}
 											<div style='text-align:center'>
 												<div class='changing-tennant'>
 													<div class="icon" style={"background-image:url('./images/svgs_clean/loading.svg')"}></div>

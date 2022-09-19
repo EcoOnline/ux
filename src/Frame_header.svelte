@@ -992,7 +992,7 @@
 		padding:16px 16px 40px 32px;
 		max-height: calc( 100vh - var(--navH) - 32px );
     	box-shadow:0 6px 10px rgba(25, 25, 26, 0.2);
-		transition: all 0.3s ease-out;
+		transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 	}
 
 	.anim_dd_grow {

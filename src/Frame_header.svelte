@@ -1298,6 +1298,9 @@
 		.dd.in {
 			transform: translateX( 0 );
 		}
+		.action-holder { 
+			padding-right:0px;	
+		}
 		.action-holder .i-close { 
 			display: block;
 		}

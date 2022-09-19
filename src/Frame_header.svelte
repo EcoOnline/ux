@@ -248,10 +248,42 @@
 			name: 'Home',
 			key: 'platform',
 			icon: 'platform',
+			url: 'platform',
 			has_ecoid: true,
 			has_modules: true,
 			modules_to_paint: [],
-			modules: []
+			modules: [
+				{
+					name: 'eCourseLibrary',
+					icon: 'ecourse_library',
+					url: 'platform/ecourse_library'
+				},
+				{
+					name: 'Classroom Training',
+					icon: 'classroom',
+					url: 'platform/classroom'
+				},
+				{
+					name: 'Webinars',
+					icon: 'webinars',
+					url: 'platform/webinars'
+				},
+				{
+					name: 'Resources',
+					icon: 'resources',
+					url: 'platform/resources'
+				},
+				{
+					name: 'Ideas',
+					icon: 'ideas_portal',
+					url: 'platform/ideas_portal'
+				},
+				{
+					name: 'Contact Us',
+					icon: 'mail',
+					url: 'platform/mail'
+				}
+			]
 		},
 		ehs: {
 			name: 'EcoOnline EHS',
@@ -811,7 +843,9 @@
 								
 
 									{#if app_data[a].has_modules}
-										{#if a !== 'home'}
+										{#if a == 'home'}
+											<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
+										{:else}
 											<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
 										{/if}
 										{#if app_data[a].show_tennants && app_data[a].tennants && app_data[a].tennants.length}
@@ -991,14 +1025,24 @@
 		width: calc(100% + 20px);
 		box-sizing: border-box;
 		left: 0;
-		top: 0;
+		top: 16px;
+		padding-top:16px;
 		transform: translate(-16px,-16px);
-		padding-top: 16px;
+		height:1px;
 		padding-right:16px;	
 		display:flex;
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: center;
+	}
+	.action-holder:before {
+		content:'';
+		display:block;
+		background:#fff;
+		position: absolute;
+		width: 100%;
+		height: 48px;
+		top: -16px;
 	}
 	.action-item {
 		margin-left:32px;

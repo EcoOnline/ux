@@ -5,7 +5,7 @@
 	*/
 
 	import NotFound from "./Frame_notfound.svelte";
-	import Platform from "./Frame_platform.svelte";
+	import Platform from "./Frame_notfound.svelte";
 	import Nav from "./Frame_header.svelte";
 	import Home from "./Frame_home.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";

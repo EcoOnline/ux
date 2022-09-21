@@ -737,7 +737,7 @@
 							{/if}
 						</div>
 					{/if}
-					{#if toggle_view}
+					{#if toggle_view && apps.length > 1}
 						<div class='action-item view-mode' on:click={ () => { view_mode = view_mode == 'tabbed' ? 'single':'tabbed' }}><i class="i-24" class:i-page-tabs="{view_mode == 'single'}" class:i-page-single="{view_mode == 'tabbed'}"></i><span>{view_mode == 'single' ? 'View tabs' : 'View single page'}</span></div>
 					{/if}
 				{/if}

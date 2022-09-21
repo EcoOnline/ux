@@ -25,7 +25,7 @@
         "ehs": Home,
         "ehs_linkedfields": AdminLinkedFields,
         "ehs_incidents": Incidents,
-        "ehs_incidents_new": IncidentsNew,
+        "ehs_incidents_incidents_new": IncidentsNew,
         "ehs_incidents_incidents_admin": IncidentsAdmin,
         "ehs_incidents_queries_new": QueriesNew,
         "ehs_incidents_queries_result": QueriesResult,

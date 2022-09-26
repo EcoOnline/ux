@@ -1,5 +1,5 @@
 <script>
-
+	import { writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
 
@@ -9,7 +9,6 @@
 			window.open(module.url, "_blank")
 		} else {
 
-			console.log('module?', module);
 			window.location.hash = '#' + module.url
 			dispatch('nav', {
 				text: module.url
@@ -24,6 +23,7 @@
 	let module = false;
 	
 	let selected_app = false;
+	let selected_hover_item = false;
 
 	function set_app_module() {
 		let h = window.location.hash.substring(1);
@@ -35,7 +35,6 @@
 			module = false;
 		}
 		selected_app = app;
-		console.log('menu listens to HashChangeEvent', app, module);
 	}
 	set_app_module();
 	
@@ -48,10 +47,35 @@
 	let menu_mask_in = false;
 	let menu_view_rendered = true;
 	let menu_view_section = 'nav';
-	let menu_time = 400;
+	let menu_time = 200;
+	let menu_hover = true;
+	let menu_hover_item = false;
+	let menu_hover_icons = [
+		'none',
+		'bento',
+		'arrow'
+	]
+	let menu_hover_icon = menu_hover_icons[1];
 	let selected_tennant = '';
 	let changing_tennant = false;
 	let menu_upsell = false; //discover + new + updated
+
+	let nav_item_holder;
+	let apps_item_holder;
+
+
+	let svg_height = 100;
+	let svg_width = 0;
+	let svg_peak = 0;
+	let svg_path = 'M100 100L100 0L0 50L0 40Z';
+	let svg_show = false;
+
+	$: {
+		let s = svg_peak;
+		let w = svg_width;
+		svg_path = 'M100 100L100 0L0 '+(s-2)+'L0 '+(s+2)+'Z';
+	}
+
 
 
 	let multi_tennant = false;
@@ -83,11 +107,9 @@
 		let slice_arr = (slices[a] ? (slices[a][ul] ? slices[a][ul] : null) : null);
 
 
-		console.log(slices[a], slice_arr);
 		if(slice_arr) {
 			temp = temp.slice(slice_arr[0], (typeof slice_arr[1] !== 'undefined' ? slice_arr[1] : temp.length) );
 		}
-		console.log('sliced');
 		return temp;
 	}
 
@@ -129,7 +151,6 @@
 			//filter
 			temp = filter_mods(temp);
 
-			console.log('PAINT from user_level', temp);
 			app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
@@ -210,7 +231,6 @@
 			//filter
 			temp = filter_mods(temp);
 
-			console.log('PAINT from sortkey', temp);
 			app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
@@ -240,7 +260,6 @@
 			//filter
 			temp = filter_mods(temp);
 
-			console.log('PAINT from filter_key', temp);
 			app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
@@ -616,8 +635,6 @@
 				'up': up,
 			}
 			let hashed_menu = btoa(JSON.stringify(ret_obj));
-			console.log('menu=' + hashed_menu);
-			console.log(JSON.stringify(ret_obj, null, 4));
 		
 
 			let str = window.location.protocol + '//' +
@@ -626,7 +643,6 @@
 			'?menu=' + hashed_menu +
 			window.location.hash
 
-			console.log(str);
 
 		}
 		menu_param_rendered = true;
@@ -642,7 +658,6 @@
 		try {
 			let str = atob(menu);
 			let preconfig = JSON.parse(str);
-			console.log('preconfig', preconfig);
 
 			if(preconfig.apps) {
 				apps = preconfig.apps;
@@ -650,7 +665,6 @@
 			if(preconfig.user) {
 				user_level = preconfig.user;
 			}
-			console.log('preconfig view mode?', preconfig.v1);
 			multi_tennant = preconfig.m;
 			view_mode = preconfig.v1;
 			toggle_view = preconfig.v2;
@@ -663,7 +677,37 @@
 			console.log("couldnt parse search");
 		}
 	}
+	function sidebar_click(menu_item) {
+		console.log('click');
+		if(menu_hover) {
+			//if hover mode set go straight to app
+			nav(menu_item)
+		} else {
+			selected_app = menu_item.key
 
+		}
+	}
+
+	function sidebar_enter(m, menu_item, index) {
+		if(menu_hover) {
+			selected_app = menu_item.key;
+			menu_hover_item = menu_item;
+			setTimeout(() => {
+
+				let apps_height = (apps.length+1)*48;
+				svg_height = Math.max(nav_item_holder.clientHeight, apps_height);
+				let apps_width = apps_item_holder.clientWidth;
+				svg_width = apps_width - m.layerX + 16;
+
+				let factor =  apps_height / svg_height ;
+				let pct = (index+1.25)/(apps.length+1);
+				svg_peak = pct*100*factor;
+				//svg_peak = pct * 48 * factor
+			}, 30)
+			
+
+		}
+	}
 
 </script>
 
@@ -785,6 +829,17 @@
 					</select><br>
 					(note: behaviour adapts based on whether youre on small screens and/or only have one app)
 					<br>
+					{#if view_mode == 'tabbed'}
+						<label><input type='checkbox' bind:checked="{menu_hover}"> Hover tabs to change (unchecked requires a click)</label><br>
+						{#if menu_hover}
+							<label><input type='checkbox' bind:checked="{svg_show}"> Show protected hover region</label><br>
+							Hover Icon: <select bind:value="{menu_hover_icon}">
+								{#each menu_hover_icons as icon}
+									<option>{icon}</option>
+								{/each}
+							</select><br>
+						{/if}
+					{/if}
 					<br>
 					<label><input type='checkbox' bind:checked="{menu_upsell}"> Show upsell (discover + new + updated) (phase 2) </label><br>
 					<label><input type='checkbox' bind:checked="{toggle_view}"> Allow user to toggle view mode (only works with 2 or more products)(phase 2) </label><br>
@@ -814,17 +869,50 @@
 				
 				<div class='nav-row' class:tabbed={view_mode == 'tabbed'} class:single={view_mode == 'single'}>
 					{#if view_mode == 'tabbed' && apps.length > 1}
-						<div class='nav-tabs'>
+						<div class='nav-tabs' bind:this={apps_item_holder}>
 							<div style='position:sticky;top:16px'>
 								<h4>Applications</h4>
-								<div class='nav-item-holder'>
+								<div class='nav-item-holder' title="Click to navigate to the Application">
 								
-									{#each apps as a}
-										<div class='nav-item' class:selected="{ selected_app == app_data[a].key }" on:click|preventDefault="{ () => { selected_app = app_data[a].key }}">
+									{#each apps as a, index}
+										<a 
+											href="#"
+											title="Click to navigate to the Application"
+											on:mouseenter={(m) => { sidebar_enter(m, app_data[a], index); } } 
+											style='position:relative;' 
+											class='nav-item' 
+											class:selected="{ selected_app == app_data[a].key }" 
+											class:menu_hover
+											class:menu_hover_icon_show="{menu_hover_item.key == app_data[a].key}"
+											on:click|preventDefault="{ () => { sidebar_click(app_data[a]) }}">
 											<div class="icon" style={"background-image:url('./images/svgs_clean/" + app_data[a].icon + (selected_app == app_data[a].key ? '':'bw')+ ".svg')"}></div>
 											<b>{app_data[a].name}</b>
-										</div>
+
+											{#if menu_hover_icon == 'bento' }
+												<i class='menu_hover_icon i-switcher i-16'></i>
+											{/if}
+											{#if menu_hover_icon == 'arrow' }
+												<i class='menu_hover_icon i-arrow-right i-16'></i>
+											{/if}
+										</a>
 									{/each}
+
+									<svg 
+										style="position:absolute;right:0;top:0;pointer-events:none"
+										width="{svg_width}" 
+										height="{svg_height}" 
+										preserveAspectRatio="none"
+										viewBox="0 0 100 100" 
+										xmlns="http://www.w3.org/2000/svg">
+										
+										<path 
+											title="Click to navigate to the Application" 
+											d="{svg_path}" fill="{svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
+											style="pointer-events:auto;cursor:pointer" 
+											on:mouseleave="{ () => { svg_width = 0; }}" 
+											on:click="{ () => { sidebar_click(menu_hover_item); }}"/>
+									</svg>
+
 								</div>
 							</div>
 						</div>
@@ -845,14 +933,16 @@
 							</h2>
 							
 							{#if (app_data[a].key == selected_app) || view_mode == 'single'}
-								<div class='nav-page'>
+								<div class='nav-page' bind:this={nav_item_holder}>
 								
 
 									{#if app_data[a].has_modules}
-										{#if a == 'home'}
-											<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
-										{:else}
-											<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
+										{#if !menu_hover}
+											{#if a == 'home'}
+												<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
+											{:else}
+												<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
+											{/if}
 										{/if}
 										{#if app_data[a].show_tennants && app_data[a].tennants && app_data[a].tennants.length}
 											<!-- svelte-ignore a11y-no-onchange -->
@@ -1121,6 +1211,9 @@
 		flex: 3; /*on wide screens */
 		min-width:238px;
 	}
+	.nav-content .nav-item-holder {
+		margin-top:16px;
+	}
 	h2 {
 		line-height:40px;
 		font-weight: normal;
@@ -1168,7 +1261,6 @@
 		padding:4px 8px;
 		border-radius:4px;
 		margin-left:46px;
-		margin-bottom:16px;	
 		background: rgba(26,25,25,5%);
 		font-size:12px;
 		text-transform: uppercase;
@@ -1228,9 +1320,11 @@
 		padding:8px;
 		transition: background-color 0.5s ease-out;
 		background: rgba(26,25,25,0%);
+		text-decoration: none;
 
 		display:flex;
 		flex-direction: row;
+		align-items: center;
 	}
 
 	.anim_navi_wave .nav-item {
@@ -1292,9 +1386,18 @@
 		text-overflow: ellipsis;
   		overflow: hidden;
 		/*max-width:148px;*/
+		flex:1;
 	}
 	.nav-item.selected b {
 		font-weight: bold;
+	}
+	.nav-item .menu_hover_icon {
+		display:none;
+		opacity:0.5;
+	}
+
+	.nav-item.menu_hover_icon_show .menu_hover_icon  {
+		display: block;
 	}
 
 	.badge {

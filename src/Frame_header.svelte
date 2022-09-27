@@ -48,7 +48,7 @@
 	let menu_view_rendered = true;
 	let menu_view_section = 'nav';
 	let menu_time = 200;
-	let menu_hover = true;
+	let menu_hover = false;
 	let menu_hover_item = false;
 	let menu_hover_icons = [
 		'none',
@@ -58,6 +58,7 @@
 	let menu_hover_icon = menu_hover_icons[1];
 	let selected_tennant = '';
 	let changing_tennant = false;
+	let hide_headers = true;
 	let menu_upsell = false; //discover + new + updated
 
 	let nav_item_holder;
@@ -134,12 +135,6 @@
 		apps.forEach( (a) => {
 			app_data[a].show_tennants = multi_tennant;
 		})
-		
-
-		
-
-
-		
 
 		
 		apps.forEach( (a) => {
@@ -839,8 +834,8 @@
 								{/each}
 							</select><br>
 						{/if}
+						<label><input type='checkbox' bind:checked="{hide_headers}"> Hide headers</label><br>
 					{/if}
-					<br>
 					<label><input type='checkbox' bind:checked="{menu_upsell}"> Show upsell (discover + new + updated) (phase 2) </label><br>
 					<label><input type='checkbox' bind:checked="{toggle_view}"> Allow user to toggle view mode (only works with 2 or more products)(phase 2) </label><br>
 					<label><input type='checkbox' bind:checked="{sort_view}"> Allow user to sort icon order (phase 2 or 3) </label><br>
@@ -870,14 +865,14 @@
 				<div class='nav-row' class:tabbed={view_mode == 'tabbed'} class:single={view_mode == 'single'}>
 					{#if view_mode == 'tabbed' && apps.length > 1}
 						<div class='nav-tabs' bind:this={apps_item_holder}>
-							<div style='position:sticky;top:16px'>
+							<div style='position:sticky;top:16px;margin-top:24px;'>
 								<h4>Applications</h4>
-								<div class='nav-item-holder' title="Click to navigate to the Application">
+								<div class='nav-item-holder' title="{(menu_hover ? 'Click to navigate to the Application' : '')}">
 								
 									{#each apps as a, index}
 										<a 
 											href="#"
-											title="Click to navigate to the Application"
+											title="{(menu_hover ? 'Click to navigate to the Application' : '')}"
 											on:mouseenter={(m) => { sidebar_enter(m, app_data[a], index); } } 
 											style='position:relative;' 
 											class='nav-item' 
@@ -906,7 +901,7 @@
 										xmlns="http://www.w3.org/2000/svg">
 										
 										<path 
-											title="Click to navigate to the Application" 
+											title="{(menu_hover ? 'Click to navigate to the Application' : '')}" 
 											d="{svg_path}" fill="{svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
 											style="pointer-events:auto;cursor:pointer" 
 											on:mouseleave="{ () => { svg_width = 0; }}" 
@@ -923,12 +918,14 @@
 						
 						{#each apps as a}
 							
-							<h2 class:selected="{ selected_app == app_data[a].key }" >
+							<h2 class:hide_headers class:selected="{ selected_app == app_data[a].key }" >
 								<div class="icon" style={"background-image:url('./images/svgs_clean/" + app_data[a].icon + (app_data[a].key == selected_app ? '' : 'bw') + ".svg')"}></div>
 								
 								<span>{app_data[a].name}</span>
 								{#if apps.length > 1}
-									<i class="collapser i-chevron-down i-24" class:i-chevron-up="{ selected_app == app_data[a].key }" on:click="{ () => { selected_app = selected_app == app_data[a].key ? false : app_data[a].key }}"></i>
+									<div class="collapser" on:click="{ () => { selected_app = selected_app == app_data[a].key ? false : app_data[a].key }}">
+										<i class="i-chevron-down i-24" class:i-chevron-up="{ selected_app == app_data[a].key }" ></i>
+									</div>
 								{/if}
 							</h2>
 							
@@ -939,14 +936,14 @@
 									{#if app_data[a].has_modules}
 										{#if !menu_hover}
 											{#if a == 'home'}
-												<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
+												<span class='hub-link btn btn-secondary' class:hub-link-left="{hide_headers}" on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
 											{:else}
-												<span class='hub-link' on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
+												<span class='hub-link btn btn-secondary' class:hub-link-left="{hide_headers}" on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
 											{/if}
 										{/if}
 										{#if app_data[a].show_tennants && app_data[a].tennants && app_data[a].tennants.length}
 											<!-- svelte-ignore a11y-no-onchange -->
-											<select bind:value="{selected_tennant}" class='tennant-select' on:change="{()=> { fake_tennant_change(a); }}">
+											<select bind:value="{selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
 												{#each app_data[a].tennants as tennant}
 													<option>{tennant}</option>
 												{/each}
@@ -1124,6 +1121,7 @@
 		left: 0;
 		top: 16px;
 		padding-top:16px;
+		margin-bottom: 16px;
 		transform: translate(-16px,-16px);
 		height:1px;
 		padding-right:16px;	
@@ -1194,6 +1192,11 @@
 	.nav-row.single .nav-page {
 		margin-bottom: 40px;
 	}
+	.collapser {
+		cursor: pointer;
+		flex: 1;
+    	text-align: right;
+	}
 	.nav-row.single .collapser {
 		display: none !important;
 	}
@@ -1220,14 +1223,18 @@
 		margin:16px 0 0 0;
 		display: flex;
 		flex-direction: row;
+		cursor:pointer;
+	}
+	h2.hide_headers {
+		display:none;
 	}
 	h2 span {
-		flex:1;
 		line-height: 32px;
 		font-size: 24px
 	}
 	h2 .icon {
 		width: 28px;
+		height:28px;
 		aspect-ratio: 1;
 		margin-left:6px;
 		margin-top:2px;
@@ -1255,32 +1262,37 @@
 	}
 
 	.hub-link {
-		color: var(--black);
+		/*color: var(--black);*/
 		line-height: 16px;
 		display: inline-block;
 		padding:4px 8px;
-		border-radius:4px;
+		/*border-radius:4px;*/
 		margin-left:46px;
-		background: rgba(26,25,25,5%);
+		margin-bottom: 8px;
+		/*background: rgba(26,25,25,5%);*/
 		font-size:12px;
-		text-transform: uppercase;
+		/*text-transform: uppercase;*/
+	}
+	.hub-link-left {
+		margin-left:0px;
 	}
 	.hub-link:hover {
-		background: rgba(26,25,25,10%);
-		text-decoration: underline;
+		/*background: rgba(26,25,25,10%);
+		text-decoration: underline;*/
 		cursor:pointer;
 	}
 
 	.tennant-select {
-		border:none;
+		/*border:none;
 		border-radius:4px;
 		background: rgba(26,25,25,5%);
-		padding:4px 8px;
+		text-transform: uppercase;*/
+		padding:3px 8px;
 		font-size:12px;
-		text-transform: uppercase;
     	font-family: "IBM Plex Sans", sans-serif;
 		outline: none;
 		cursor: pointer;
+		vertical-align: top;
 	}
 	.changing-tennant {
 		margin:0 auto;
@@ -1289,6 +1301,7 @@
 	}
 	.changing-tennant .icon {
 		width: 32px;
+		height:32px;
 		aspect-ratio: 1;
 		margin-right:8px;
 		background-color: transparent;
@@ -1367,6 +1380,7 @@
 	}
 	.nav-item .icon {
 		width: 24px;
+		height:24px;
 		aspect-ratio: 1;
 		margin-right:8px;
 		background-color: transparent;
@@ -1467,8 +1481,8 @@
 		.filter-view input {
 			width:90px;
 		}
-		.nav-row.tabbed h2:not(.selected) {
-			display: flex;
+		.nav-row.tabbed h2 {
+			display: flex ! important;
 		}
 		h2 span { font-size: 20px}
 		.nav-row.tabbed h2 i {

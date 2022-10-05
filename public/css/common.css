@@ -26,7 +26,8 @@ a {
 hr {
     height:0;
     background:transparent;
-    border-top:1px solid #ccc;
+    border:none;
+    border-top:1px solid rgba(26,25,25,10%);
     margin:30px 0;
 }
 
@@ -946,4 +947,33 @@ div.form-control input {
 
 .mb {
     margin-bottom:16px;
+}
+
+
+
+
+.evolution_slider {
+    -webkit-appearance: none;
+    width: 50%; /* Full-width */
+    height: 10px; /* Specified height */
+    border-radius:5px;
+    background: rgba(255,255,255,10%); /* Grey background */
+    outline: none; /* Remove outline */
+    margin-top:20px;
+}
+.evolution_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 32px;
+    height: 16px;
+    border-radius:8px;
+    background: var(--eo-secondary-500);
+    cursor: pointer;
+}
+
+.evolution_slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
 }

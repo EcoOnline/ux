@@ -5,7 +5,8 @@
 	*/
 
 	import NotFound from "./Frame_notfound.svelte";
-	import Platform from "./Frame_notfound.svelte";
+	import Platform from "./Frame_platform.svelte";
+	import Login from "./Frame_login.svelte";
 	import Nav from "./Frame_header.svelte";
 	import Home from "./Frame_home.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
@@ -19,9 +20,12 @@
 	let tabnav = '';
 	let module = '';
 
+	let mainCSS = '';
+
     const comps = {
 		"notfound": NotFound,
         "platform": Platform,
+        "login": Login,
         "ehs": Home,
         "ehs_linkedfields": AdminLinkedFields,
         "ehs_incidents": Incidents,
@@ -41,7 +45,7 @@
 		"ehs_observations": NotFound,
 		"ehs_observations": NotFound,
 	}
-    let comp = comps.ehs;
+    let comp = comps.login;
 	let hash = window.location.hash.substring(1);
 	if(hash!== '') {
 		handleNavStr(hash);
@@ -58,8 +62,9 @@
    }
 
    function handleNavStr(hash) {
-
 		let hash_arr = hash.split('/');
+
+		mainCSS = hash_arr[0];
 		let found = false;
 		tabnav = '';
 
@@ -121,10 +126,11 @@
 
 <svelte:window on:hashchange={handleHash}/>
 
-
+{#if comp !== comps.login }
 <Nav></Nav>
+{/if}
 	
-<main on:scroll={handleScroll}>
+<main on:scroll={handleScroll} class={mainCSS}>
 	<div class="frame">
 		<svelte:component this={comp} on:nav={handleNav} {tabnav} {bodyScroll}/>
 	</div>
@@ -153,7 +159,7 @@
 	}
 	
 	main, nav {
-		padding: 0 16px;
+		padding: var(--main-pad);
 		width:100%;
 		text-align: center;
 		overflow-y: scroll;

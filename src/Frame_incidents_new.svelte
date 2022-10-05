@@ -201,6 +201,22 @@
                     answer: {}
                 },
                 {
+                    item_type: "input_tally",
+                    id: "tally_test",
+                    label: "In order",
+                    sentiment: "good",
+                    optional: true,
+                    answer: ""
+                },
+                {
+                    item_type: "input_tally",
+                    id: "tally_test2",
+                    label: "Not in order",
+                    sentiment: "bad",
+                    optional: true,
+                    answer: ""
+                },
+                {
                     item_type: "input_matrix",
                     id: "0_9",
                     label: "Another Matrix",
@@ -718,7 +734,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col3 d960up-block">
+    <div class="sidebarinc col3 d960up-block">
         <div class="side_menu_wrapper" style="position:sticky;top:56px">
             <h1 class="page-title"><i class="i-incidents i-32"></i> Incident</h1>
             <div class="card">

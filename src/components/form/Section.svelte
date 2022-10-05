@@ -5,10 +5,11 @@
 	import InputMatrix from "./InputMatrix.svelte";
 	import InputMulti from "./InputMulti.svelte";
 	import InputSelect from "./InputSelect.svelte";
-	import InputText from "./InputText.svelte";
-	import InputTextarea from "./InputTextarea.svelte";
 	import InputSignature from "./InputSignature.svelte";
 	import InputSwitch from "./InputSwitch.svelte";
+	import InputTally from "./InputTally.svelte";
+	import InputText from "./InputText.svelte";
+	import InputTextarea from "./InputTextarea.svelte";
 
 	let components = {
 		"input_checkbox": InputCheckbox,
@@ -18,6 +19,7 @@
 		"input_select": InputSelect,
 		"input_signature": InputSignature,
 		"input_switch": InputSwitch,
+		"input_tally": InputTally,
 		"input_text": InputText,
 		"input_textarea": InputTextarea
     }

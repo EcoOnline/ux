@@ -1,6 +1,10 @@
 <script>
     import Shortcuts from "./Shortcuts.svelte";
+    export let channel = 'ANSWER';
     export let f;
+    console.log('channel', channel);
+
+    
 </script>
 
 

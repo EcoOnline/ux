@@ -18,7 +18,7 @@
     <div class="row sticky">
         <div class="col12">
             <ul class="breadcrumb">
-                <li><a href="#platform">EcoOnline</a></li>
+                <li><a href="#platform"><i class="i-16 i-platform"></i></a></li>
                 <li>EHS</li>
             </ul>
         </div>
@@ -27,7 +27,7 @@
     
 
     <ul class="tabs">
-        <li><a href="#ehs" class:active="{tab == 'home'}">Home</a></li>
+        <li><a href="#ehs" class:active="{tab == 'home'}">Hub</a></li>
         <li><a href="#ehs/dashboards" class:active="{tab == 'dashboards'}">Dashboards</a></li>
         <li><a href="#ehs/reports" class:active="{tab == 'reports'}">Reports</a></li>
         <li><a href="#ehs/tasks" class:active="{tab == 'tasks'}">My Tasks</a></li>

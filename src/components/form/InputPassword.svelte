@@ -92,7 +92,6 @@
         validation_showing = false
     }
     function blurPassword() {
-        console.log('password in this state', f);
         PubSub.publish(channel, f); // publish so that confirmation can pick it up
         setTimeout(() => {
             if(input_password !== document.activeElement && input_text !== document.activeElement) {
@@ -131,7 +130,7 @@
         </div>
     </div>
 
-    <ul class='rules' class:in={has_focus && !v_all}>
+    <ul class='rules' class:in={!f.hide_rules && has_focus && !v_all}>
         <li><b>Your password must contain at least:</b></li>
         <li><i class="i-checkmark-green i-16" class:in={v_length}></i> 10 characters</li>
         <li><i class="i-checkmark-green i-16" class:in={v_uppercase}></i> 1 uppercase letter (A-Z)</li>
@@ -141,16 +140,18 @@
     </ul>
 
     <div class='validation-message'>
-        {#if has_focus}
-            {#if v_all}
-                <i class='i-checkmark-green i-20'></i> Password meets the requirements
+        {#if !f.hide_rules}
+            {#if has_focus}
+                {#if v_all}
+                    <i class='i-checkmark-green i-20'></i> Password meets the requirements
+                {/if}
             {/if}
-        {/if}
-        {#if validation_showing}
-            {#if v_all}
-                <i class='i-checkmark-green i-20'></i> Password meets the requirements
-            {:else}
-                <span class="error"><i class='i-error i-20'></i> Password does not meet the requirements</span>
+            {#if validation_showing}
+                {#if v_all}
+                    <i class='i-checkmark-green i-20'></i> Password meets the requirements
+                {:else}
+                    <span class="error"><i class='i-error i-20'></i> Password does not meet the requirements</span>
+                {/if}
             {/if}
         {/if}
     </div>

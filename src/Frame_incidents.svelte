@@ -388,7 +388,7 @@
 <div class="row sticky">
     <div class="col12 col-sm-5">
         <ul class="breadcrumb">
-            <li><a href="#platform">EcoOnline</a></li>
+            <li><a href="#platform"><i class="i-16 i-platform"></i></a></li>
             <li><a href="#ehs">EHS</a></li>
             <li>Incidents</li>
         </ul>

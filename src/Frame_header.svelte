@@ -1,6 +1,11 @@
 <script>
 	import { writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
+
+	import MenuSettings from "./Frame_menusettings.svelte";
+	import AppMenu from "./Frame_appmenu.svelte";
+	import { config, app_data } from './Frame_menusettings.js';
+
     const dispatch = createEventDispatcher();
 
     function nav(module) {
@@ -16,72 +21,40 @@
 		}
 	}
 
-
-
 	//work out current app and module
 	let app = 'platform';
 	let module = false;
 	
 	let selected_app = false;
 	let selected_hover_item = false;
+	let selected_menu_item = false; //settings|menu|notifications|my account
 
-	function set_app_module() {
-		let h = window.location.hash.substring(1);
-		let h_arr = h.split('/');
-		app = h_arr[0];
-		if(h_arr[1]) {
-			module = h_arr[1];
-		} else {
-			module = false;
-		}
-		selected_app = app;
-	}
-	set_app_module();
-	
-
-	
-
-	let selected_menu_item = false; //trigger
+	let nav_item_holder;
+	let apps_item_holder;
 	let menu_view_bool = false;
 	let menu_view_in = false;
 	let menu_mask_in = false;
-	let menu_view_rendered = true;
+	let menu_view_rendered = false;
 	let menu_view_section = 'nav';
 	let menu_time = 200;
 	let menu_hover = false;
 	let menu_hover_item = false;
-	let menu_hover_icons = [
-		'none',
-		'bento',
-		'arrow'
-	]
-	let menu_hover_icon = menu_hover_icons[1];
 	let selected_tennant = '';
 	let changing_tennant = false;
-	let hide_headers = true;
-	let menu_upsell = false; //discover + new + updated
+	let extras_as_modules = false;
+	let sort_key = 'default';
 
-	let nav_item_holder;
-	let apps_item_holder;
+	//vars for filtering modules
+	let filter_key = ''; 
+	let filter_input;
 
-
+	//vars for svg mask
 	let svg_height = 100;
 	let svg_width = 0;
 	let svg_peak = 0;
 	let svg_path = 'M100 100L100 0L0 50L0 40Z';
-	let svg_show = false;
-
-	$: {
-		let s = svg_peak;
-		let w = svg_width;
-		svg_path = 'M100 100L100 0L0 '+(s-2)+'L0 '+(s+2)+'Z';
-	}
-
-
-
-	let multi_tennant = false;
-	let user_level = 'admin';
-
+	
+	//hacks for app settings
 	let slices= {
 		ehs: {
 			basic: [0,5],
@@ -103,8 +76,43 @@
 		}
 	}
 
+	function set_app_module() {
+		let h = window.location.hash.substring(1);
+		let h_arr = h.split('/');
+		app = h_arr[0];
+		if(h_arr[1]) {
+			module = h_arr[1];
+		} else {
+			module = false;
+		}
+		selected_app = app;
+	}
+	set_app_module();
+
+
+	function filter_mods(temp) {
+		if($config.filter_key !== '') {
+			temp = temp.filter( (m) => {
+				return m.name.toLowerCase().includes(filter_key.toLowerCase())
+			});
+		}
+		return temp;
+	}
+	function sort_mods(amod,bmod) {
+		if(sort_key == 'default') {
+			return 1;
+		} else {
+			if (amod.name < bmod.name) {
+				return -1;
+			}
+			if (amod.name > bmod.name) {
+				return 1;
+			}
+			return 0;
+		}
+	}
 	function user_slicer(temp, a) {
-		let ul = user_level;
+		let ul = $config.user_level;
 		let slice_arr = (slices[a] ? (slices[a][ul] ? slices[a][ul] : null) : null);
 
 
@@ -113,44 +121,6 @@
 		}
 		return temp;
 	}
-
-	function filter_mods(temp) {
-		if(filter_key !== '') {
-			temp = temp.filter( (m) => {
-				return m.name.toLowerCase().includes(filter_key.toLowerCase())
-			});
-		}
-		return temp;
-	}
-
-	$: {
-		let mt = multi_tennant;
-		apps.forEach( (a) => {
-			app_data[a].show_tennants = multi_tennant;
-		})
-	}
-
-	$: {
-		let ul = user_level;
-		apps.forEach( (a) => {
-			app_data[a].show_tennants = multi_tennant;
-		})
-
-		
-		apps.forEach( (a) => {
-			let temp = [...app_data[a].modules];
-			//remove apps from user type
-			temp = user_slicer(temp, a);
-			//sort apps
-			temp = temp.sort(sort_mods);
-			//filter
-			temp = filter_mods(temp);
-
-			app_data[a].modules_to_paint = [...temp];//trigger repaint
-		})
-	}
-
-
 	function fake_tennant_change(a) {
 		slices[a].changing_tennant = true;
 		const min = 2000;
@@ -161,7 +131,96 @@
 		}, delay)
 	}
 
+	function menu_change_handler(event){
+		if($config.menu_hover) {
+			//if hover mode set go straight to app
+			nav(event.detail.menu_item)
+		} else {
+			selected_app = event.detail.menu_item.key;
+		}
+	}
 
+	function menu_hover_handler(event){
+		sidebar_enter(event.detail.m, event.detail.menu_item, event.detail.index);
+	}
+	function sidebar_enter(m, menu_item, index) {
+		if($config.menu_hover) {
+			selected_app = menu_item.key;
+			menu_hover_item = menu_item;
+			setTimeout(() => {
+
+				let apps_height = ($config.apps.length+1)*48;
+				svg_height = Math.max(nav_item_holder.clientHeight, apps_height);
+				let apps_width = apps_item_holder.clientWidth;
+				svg_width = apps_width - m.layerX + 16;
+
+				let factor =  apps_height / svg_height ;
+				let pct = (index+1.25)/($config.apps.length+1);
+				svg_peak = pct*100*factor;
+				//svg_peak = pct * 48 * factor
+			}, 30)
+			
+
+		}
+	}
+
+	function logout() {
+		let c = $config;
+		let btoa_str = btoa(JSON.stringify(c));
+
+		let params = new URLSearchParams(document.location.search);
+		let menu = params.get("menu");
+		let origin = params.get("origin");
+
+		window.location.href = window.location.protocol + '//' +
+		window.location.host +
+		window.location.pathname + '?' +
+		(origin ? 'origin=' + origin : '') + 
+		(menu ? '&menu=' + menu : '') +
+		'&ran=' + Math.random()
+	}
+
+
+	
+
+
+	
+	
+	
+
+
+	
+
+	$: {
+		let s = svg_peak;
+		let w = svg_width;
+		svg_path = 'M100 100L100 0L0 '+(s-2)+'L0 '+(s+2)+'Z';
+	}
+	$: {
+		let mt = config.multi_tennant;
+		$config.apps.forEach( (a) => {
+			$app_data[a].show_tennants = $config.multi_tennant;
+		})
+	}
+	$: {
+		let ul = $config.user_level;
+		$config.apps.forEach( (a) => {
+			$app_data[a].show_tennants = $config.multi_tennant;
+		})
+
+		
+		$config.apps.forEach( (a) => {
+			let temp = [...$app_data[a].modules];
+			//remove apps from user type
+			temp = user_slicer(temp, a);
+			//sort apps
+			temp = temp.sort(sort_mods);
+			//filter
+			temp = filter_mods(temp);
+
+			$app_data[a].modules_to_paint = [...temp];//trigger repaint
+		})
+	}
 	$: {
 		let trigger = selected_menu_item;
 		if(menu_view_rendered) {
@@ -190,35 +249,11 @@
 		menu_view_rendered = true;
 		
 	}
-
-	let apps = ['home','ehs', 'cm'];
-
-	let extras_as_modules = false;
-
-
-	let view_mode = 'tabbed';
-	let toggle_view = true;
-	let sort_view = false;
-	let action_dd = false;
-	let sort_key = 'default';
-	function sort_mods(amod,bmod) {
-		if(sort_key == 'default') {
-			return 1;
-		} else {
-			if (amod.name < bmod.name) {
-				return -1;
-			}
-			if (amod.name > bmod.name) {
-				return 1;
-			}
-			return 0;
-		}
-	}
 	$:{
 		let trigger = sort_key;
 
-		apps.forEach( (a) => {
-			let temp = [...app_data[a].modules];
+		$config.apps.forEach( (a) => {
+			let temp = [...$app_data[a].modules];
 			//remove apps from user type
 			temp = user_slicer(temp, a);
 			//sort apps
@@ -226,28 +261,15 @@
 			//filter
 			temp = filter_mods(temp);
 
-			app_data[a].modules_to_paint = [...temp];//trigger repaint
+			$app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
-
-	let filter_view = false;
-	let filter_key = ''; 
-	let filter_input;
 	$:{
 		let trigger = filter_key;
 		
-		apps.forEach( (a) => {
-			/*
-			let temp = [...app_data[a].modules].sort(sort_mods);
-			if(filter_key !== '') {
-				temp = temp.filter( (m) => {
-					return m.name.toLowerCase().includes(filter_key.toLowerCase())
-				});
-			}
-			app_data[a].modules_to_paint = [...temp];
-			*/
-
-			let temp = [...app_data[a].modules];
+		$config.apps.forEach( (a) => {
+			
+			let temp = [...$app_data[a].modules];
 			//remove apps from user type
 			temp = user_slicer(temp, a);
 			//sort apps
@@ -255,454 +277,15 @@
 			//filter
 			temp = filter_mods(temp);
 
-			app_data[a].modules_to_paint = [...temp];//trigger repaint
+			$app_data[a].modules_to_paint = [...temp];//trigger repaint
 		})
 	}
 	
 
-	let app_data = {
-		home: {
-			name: 'Home',
-			key: 'platform',
-			icon: 'platform',
-			url: 'platform',
-			has_ecoid: true,
-			has_modules: true,
-			modules_to_paint: [],
-			modules: [
-				{
-					name: 'eCourseLibrary',
-					icon: 'ecourse_library',
-					url: 'platform/ecourse_library'
-				},
-				{
-					name: 'Classroom Training',
-					icon: 'classroom',
-					url: 'platform/classroom'
-				},
-				{
-					name: 'Webinars',
-					icon: 'webinars',
-					url: 'platform/webinars'
-				},
-				{
-					name: 'Resources',
-					icon: 'resources',
-					url: 'platform/resources'
-				},
-				{
-					name: 'Ideas',
-					icon: 'ideas_portal',
-					url: 'platform/ideas_portal'
-				},
-				{
-					name: 'Contact Us',
-					icon: 'mail',
-					url: 'platform/mail'
-				}
-			]
-		},
-		ehs: {
-			name: 'EcoOnline EHS',
-			key: 'ehs',
-			icon: 'ehs',
-			url: 'ehs',
-			has_ecoid: true,
-			has_modules: true,
-			show_tennants: true,
-			tennants: ["Production", "Testing"],
-			modules_to_paint: [], /* actual list based on user type in settings */
-			modules: [
-				{
-					name: 'Incidents',
-					icon: 'incidents',
-					url: 'ehs/incidents'
-				},
-				{
-					name: 'Actions',
-					icon: 'actions',
-					url: 'ehs/actions'
-				},
-				{
-					name: 'Audits & Inspections',
-					icon: 'audits',
-					url: 'ehs/audits'
-				},
-				{
-					name: 'Observation',
-					icon: 'observations',
-					url: 'ehs/observations'
-				},
-				{
-					name: 'Risk Assessment',
-					icon: 'risk_assessment',
-					url: 'ehs/risk_assessment'
-				},
-				{
-					name: 'Hazard Assessment',
-					icon: 'hazard_assessment',
-					url: 'ehs/hazard_assessment'
-				},
-				{
-					recent: true, /* newly purchased or released */
-					name: 'Scheduling',
-					icon: 'scheduling',
-					url: 'ehs/scheduling'
-				},
-				{
-					name: 'Environmental',
-					icon: 'epr',
-					url: 'ehs/environmental'
-				},
-				{
-					name: 'Period Statistics',
-					icon: 'period_statistics',
-					url: 'ehs/period_statistics'
-				},
-				{
-					name: 'Register',
-					icon: 'register',
-					url: 'ehs/register'
-				},
-				{
-					name: 'Advanced RCA',
-					icon: 'advanced_rca',
-					url: 'ehs/advanced_rca'
-				},
-				{
-					name: 'Documents',
-					icon: 'documents',
-					url: 'ehs/document'
-				},
-				{
-					name: 'COVID-19 Tracker',
-					icon: 'tracker',
-					url: 'ehs/tracker'
-				},
-				{
-					name: 'Point of Work',
-					icon: 'pow_ra',
-					url: 'ehs/pow_ra'
-				},
-				{
-					name: 'Lost Time',
-					icon: 'lost_time',
-					url: 'ehs/lost_time'
-				},
-				{
-					discover: true,
-					name: 'Permit to Work',
-					icon: 'permit_to_work',
-					url: 'https://www.ecoonline.com/health-and-safety/permit-to-work-software'
-				},
-				{
-					name: 'Administration',
-					icon: 'administration',
-					url: 'ehs/administration'
-				}
-			]
-		},
-		cm: {
-			name: 'Chemical Manager',
-			key: 'cm',
-			icon: 'cm',
-			url: 'cm',
-			has_ecoid: true,
-			has_modules: true,
-			show_tennants: true,
-			tennants: ["Big Company", "Little Company"],
-			modules_to_paint: [], /* actual list based on user type in settings */
-			modules: [
-				{
-					name: 'My Products',
-					icon: 'cm',
-					url: 'cm/products'
-				},
-				{
-					name: 'Search',
-					icon: 'search',
-					url: 'cm/search'
-				},
-				{
-					name: 'SDS Requests',
-					icon: 'sds_request',
-					url: 'cm/sds_request'
-				},
-				{
-					name: 'Locations',
-					icon: 'locations',
-					url: 'cm/locations'
-				},
-				{
-					name: 'Risk Assessment',
-					icon: 'risk_assessment',
-					url: 'cm/risk_assessment'
-				},
-				{
-					name: 'Reports',
-					icon: 'reports',
-					url: 'cm/reports'
-				},
-				{
-					updated: true, /* newly purchased or released */
-					name: 'Chemical Approval',
-					icon: 'chemical_approval',
-					url: 'cm/chemical_approval'
-				},
-				{
-					name: 'Exposures',
-					icon: 'exposure_register',
-					url: 'cm/exposures'
-				},
-				{
-					name: 'Substitutions',
-					icon: 'substitution',
-					url: 'cm/substitution'
-				},
-				{
-					name: 'Actions',
-					icon: 'actions',
-					url: 'cm/actions'
-				},
-				{
-					name: 'Publisher',
-					icon: 'sds',
-					url: 'cm/publisher'
-				},
-				{
-					name: 'Amounts',
-					icon: 'amount',
-					url: 'cm/amounts'
-				},
-				{
-					name: 'Smart Forms',
-					icon: 'smartforms',
-					url: 'cm/smartforms'
-				},
-				{
-					name: 'Workplace Descriptions',
-					icon: 'workplace_description',
-					url: 'cm/workplace_description'
-				},
-				{
-					name: 'Legislation Lists',
-					icon: 'legislation',
-					url: 'cm/legislation_lists'
-				},
-				{
-					name: 'Read Links/ QR Codes',
-					icon: 'read_link_qr',
-					url: 'cm/read_link_qr'
-				},
-				{
-					name: 'Custom Lists',
-					icon: 'custom_lists',
-					url: 'cm/custom_lists'
-				},
-				{
-					name: 'Reports & Analytics',
-					icon: 'analytics',
-					url: 'cm/analytics'
-				},
-				{
-					name: 'User Management',
-					icon: 'user_management',
-					url: 'cm/user_management'
-				},
-				{
-					name: 'Administration',
-					icon: 'administration',
-					url: 'cm/administration'
-				}
-			]
-		},
-		almego: {
-			name: 'Almego',
-			key: 'almego',
-			icon: 'sds',
-			url: 'almego',
-			has_ecoid: true,
-			has_modules: true,
-			show_tennants: false,
-			tennants: false,
-			modules_to_paint: [],
-			modules: [
-				{
-					name: 'Documents',
-					icon: 'documents',
-					url: 'almego/document'
-				},
-				{
-					name: 'Reports',
-					icon: 'reports',
-					url: 'almego/reports'
-				},
-				{
-					name: 'Administration',
-					icon: 'administration',
-					url: 'almego/administration'
-				}
-			]
-		},
-		munio: {
-			name: 'Munio Learning',
-			key: 'munio',
-			icon: 'training',
-			url: 'munio',
-			has_ecoid: true,
-			has_modules: true,
-			show_tennants: true,
-			tennants: [],
-			modules_to_paint: [], 
-			modules: [
-				{
-					name: 'My Courses',
-					icon: 'classroom',
-					url: 'munio/courses'
-				},
-				{
-					name: 'Administration',
-					icon: 'administration',
-					url: 'munio/administration'
-				}
-			]
-		},
-		crisis: {
-			name: 'Crisis Manager',
-			key: 'crisis',
-			icon: 'crisis_manager',
-			url: 'crisis',
-			has_ecoid: true,
-			has_modules: true,
-			show_tennants: true,
-			tennants: [],
-			modules_to_paint: [],
-			modules: []
-		},
-		staysafe: {
-			name: 'StaySafe',
-			key: 'staysafe',
-			icon: 'locations',
-			url: 'staysafe',
-			has_ecoid: true,
-			has_modules: false, //meaning EcoId hasnt been integrated
-			external_login: 'https://staysafeapp.com/en-nz/lone-worker-solution/lone-worker-hub/',
-			external_marketing: 'https://www.ecoonline.com/news/ecoonline-acquires-staysafe-a-uk-based-specialist-in-lone-worker-protection',
-			show_tennants: true,
-			tennants: [],
-			modules_to_paint: [], 
-			modules: []
-		}
-	}
-
 	
 	
-
-	let anim_navi_wave = false;
-	let anim_navi_grow = false;
-	let anim_dd_grow = false;
-	let anim_dd_opacity = false;
-
-
-
-	let menu_param_rendered = false;
-
-	$: {
-		let ad = app_data;
-		let a = apps;
-		let u = user_level;
-		let m = multi_tennant;
-		let v1 = view_mode;
-		let v2 = toggle_view;
-		let v3 = sort_view;
-		let v4 = filter_view;
-		let up = menu_upsell;
-
-		if(menu_param_rendered) {
-			let ret_obj = {
-				'apps': a,
-				'user': u,
-				'm': m,
-				'v1': v1,
-				'v2': v2,
-				'v3': v3,
-				'v4': v4,
-				'up': up,
-			}
-			let hashed_menu = btoa(JSON.stringify(ret_obj));
-		
-
-			let str = window.location.protocol + '//' +
-			window.location.host +
-			window.location.pathname +
-			'?menu=' + hashed_menu +
-			window.location.hash
-
-
-		}
-		menu_param_rendered = true;
-		
-
-	}
-	//preload config from url param
-
-	let params = new URLSearchParams(document.location.search);
-	let menu = params.get("menu");
-	if(menu) {
-		
-		try {
-			let str = atob(menu);
-			let preconfig = JSON.parse(str);
-
-			if(preconfig.apps) {
-				apps = preconfig.apps;
-			}
-			if(preconfig.user) {
-				user_level = preconfig.user;
-			}
-			multi_tennant = preconfig.m;
-			view_mode = preconfig.v1;
-			toggle_view = preconfig.v2;
-			sort_view = preconfig.v3;
-			filter_view = preconfig.v4;
-			menu_upsell = preconfig.up;
-
-
-		} catch (error) {
-			console.log("couldnt parse search");
-		}
-	}
-	function sidebar_click(menu_item) {
-		console.log('click');
-		if(menu_hover) {
-			//if hover mode set go straight to app
-			nav(menu_item)
-		} else {
-			selected_app = menu_item.key
-
-		}
-	}
-
-	function sidebar_enter(m, menu_item, index) {
-		if(menu_hover) {
-			selected_app = menu_item.key;
-			menu_hover_item = menu_item;
-			setTimeout(() => {
-
-				let apps_height = (apps.length+1)*48;
-				svg_height = Math.max(nav_item_holder.clientHeight, apps_height);
-				let apps_width = apps_item_holder.clientWidth;
-				svg_width = apps_width - m.layerX + 16;
-
-				let factor =  apps_height / svg_height ;
-				let pct = (index+1.25)/(apps.length+1);
-				svg_peak = pct*100*factor;
-				//svg_peak = pct * 48 * factor
-			}, 30)
-			
-
-		}
-	}
+	
+	
 
 </script>
 
@@ -732,7 +315,16 @@
 			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'menu_settings' ? false : 'menu_settings'}}' class:selected="{selected_menu_item == 'menu_settings'}" class="menu-icon" style="opacity:0.2"><i class="i-administration i-24"></i></span>
 			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'notification' ? false : 'notification'}}' class:selected="{selected_menu_item == 'notification'}" class="menu-icon"><i class="i-notification i-24"></i></span>
 			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'user' ? false : 'user'}}' class:selected="{selected_menu_item == 'user'}" class="menu-icon"><i class="i-user-avatar i-24"></i></span>
-			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'nav' ? false : 'nav'}}' class:selected="{selected_menu_item == 'nav'}" class="menu-icon"><i class="i-menu i-24"></i></span>
+			<span on:click='{ () => {
+				if(selected_menu_item == 'nav') {
+					selected_menu_item = false;
+				} else {
+					selected_menu_item = 'menu_settings';
+					setTimeout(()=>{
+						selected_menu_item = 'nav';
+					}, 30)
+				}
+			}}' class:selected="{selected_menu_item == 'nav'}" class="menu-icon"><i class="i-menu i-24"></i></span>
 		</div>
 	</div>
 </nav>
@@ -746,29 +338,29 @@
 
 		<div class="dd" 
 			class:in="{menu_view_in}" 
-			class:anim_dd_grow 
-			class:anim_dd_opacity
-			class:anim_navi_grow 
-			class:anim_navi_wave>
+			class:anim_dd_grow={$config.anim_dd_grow}
+			class:anim_dd_opacity={$config.anim_dd_opacity}
+			class:anim_navi_grow={$config.anim_navi_grow}
+			class:anim_navi_wave={$config.anim_navi_wave}>
 
 
 			<div class='action-holder'>
 
 
 				{#if menu_view_section == 'nav'}
-					{#if filter_view}
-						<div class='action-item filter-view' on:click="{ () => { if(action_dd == 'filter_view') { action_dd = false; } else { action_dd = 'filter_view';setTimeout(() => { filter_input.focus()}, 50)} }}">
+					{#if $config.filter_view}
+						<div class='action-item filter-view' on:click="{ () => { if($config.action_dd == 'filter_view') { $config.action_dd = false; } else { $config.action_dd = 'filter_view';setTimeout(() => { filter_input.focus()}, 50)} }}">
 							<i class="i-filter i-24"></i><span>Filter</span>
-							{#if action_dd == 'filter_view'}
-								<input type="text" bind:value="{filter_key}" bind:this="{filter_input}" on:blur="{ () => { action_dd = false}}">
+							{#if $config.action_dd == 'filter_view'}
+								<input type="text" bind:value="{filter_key}" bind:this="{filter_input}" on:blur="{ () => { $config.action_dd = false}}">
 							{/if}
 						</div>
 					{/if}
 					
-					{#if sort_view}
-						<div class='action-item sort-view' on:click="{ () => { action_dd = action_dd == 'sort_view' ? false : 'sort_view'}}">
+					{#if $config.sort_view}
+						<div class='action-item sort-view' on:click="{ () => { $config.action_dd = $config.action_dd == 'sort_view' ? false : 'sort_view'}}">
 							<i class="i-orderby i-24"></i><span>Order by</span><i class="i-chevron-down i-16"></i>
-							{#if action_dd == 'sort_view'}
+							{#if $config.action_dd == 'sort_view'}
 								<ul class='action-dd'>
 									<li class:selected="{sort_key == 'default'}" on:click|preventDefault="{ () => { sort_key = 'default';  }}">Default</li>
 									<li class:selected="{sort_key == 'alphabetical'}"  on:click|preventDefault="{ () => { sort_key = 'alphabetical';  }}">Alphabetical</li>
@@ -776,8 +368,8 @@
 							{/if}
 						</div>
 					{/if}
-					{#if toggle_view && apps.length > 1}
-						<div class='action-item view-mode' on:click={ () => { view_mode = view_mode == 'tabbed' ? 'single':'tabbed' }}><i class="i-24" class:i-page-tabs="{view_mode == 'single'}" class:i-page-single="{view_mode == 'tabbed'}"></i><span>{view_mode == 'single' ? 'View tabs' : 'View single page'}</span></div>
+					{#if $config.toggle_view && $config.apps.length > 1}
+						<div class='action-item view-mode' on:click={ () => { $config.view_mode = $config.view_mode == 'tabbed' ? 'single':'tabbed' }}><i class="i-24" class:i-page-tabs="{$config.view_mode == 'single'}" class:i-page-single="{$config.view_mode == 'tabbed'}"></i><span>{$config.view_mode == 'single' ? 'View tabs' : 'View single page'}</span></div>
 					{/if}
 				{/if}
 
@@ -789,67 +381,7 @@
 				<h3>Menu Settings (for testingonly)</h3>
 
 				
-				<div>
-					<b>Apps:</b><br>
-					<label><input type='checkbox' bind:group={apps} value="home"> Home (aka platform)</label><br>
-					<label><input type='checkbox' bind:group={apps} value="ehs"> EcoOnline EHS</label><br>
-					<label><input type='checkbox' bind:group={apps} value="cm"> Chemical Manager</label><br>
-					<label><input type='checkbox' bind:group={apps} value="munio"> Munio Learning</label><br>
-					<label><input type='checkbox' bind:group={apps} value="crisis"> Crisis Manager</label><br>
-					<label><input type='checkbox' bind:group={apps} value="almego"> Almego</label><br>
-					<label><input type='checkbox' bind:group={apps} value="staysafe"> StaySafe</label><br>
-				</div>
-				<hr>
-
-				<div>
-					<b>User level:</b><br>
-					<select bind:value="{user_level}">
-						<option value='basic'>Basic</option>
-						<option value='multi'>Multiple modules</option>
-						<option value='admin'>Admin level</option>
-					</select><br>
-				</div>
-				<hr>
-				<div>
-					<b>Tennants:</b><br>
-					<label><input type='checkbox' bind:checked={multi_tennant}> Show multi-tennants / organisations</label>
-				</div>	
-				<hr>
-
-				<div>
-					<b>View options:</b><br>
-					<select bind:value="{view_mode}">
-						<option value='tabbed'>Tabbed View</option>
-						<option value='single'>Single-page View</option>
-					</select><br>
-					(note: behaviour adapts based on whether youre on small screens and/or only have one app)
-					<br>
-					{#if view_mode == 'tabbed'}
-						<label><input type='checkbox' bind:checked="{menu_hover}"> Hover tabs to change (unchecked requires a click)</label><br>
-						{#if menu_hover}
-							<label><input type='checkbox' bind:checked="{svg_show}"> Show protected hover region</label><br>
-							Hover Icon: <select bind:value="{menu_hover_icon}">
-								{#each menu_hover_icons as icon}
-									<option>{icon}</option>
-								{/each}
-							</select><br>
-						{/if}
-						<label><input type='checkbox' bind:checked="{hide_headers}"> Hide headers</label><br>
-					{/if}
-					<label><input type='checkbox' bind:checked="{menu_upsell}"> Show upsell (discover + new + updated) (phase 2) </label><br>
-					<label><input type='checkbox' bind:checked="{toggle_view}"> Allow user to toggle view mode (only works with 2 or more products)(phase 2) </label><br>
-					<label><input type='checkbox' bind:checked="{sort_view}"> Allow user to sort icon order (phase 2 or 3) </label><br>
-					<label><input type='checkbox' bind:checked="{filter_view}"> Allow user to filter modules (phase3) </label><br>
-					
-				</div>
-
-				<hr>
-				<div>
-					<b>Animations:</b><br>
-					<label><input type='checkbox' bind:checked={anim_dd_grow}> Dropdown grow — grow/shrink towards top right</label><br>
-					<label><input type='checkbox' bind:checked={anim_navi_grow}> Nav item grow</label><br>
-					<label><input type='checkbox' bind:checked={anim_navi_wave}> Nav item slide — slight genie effect to modules</label><br>
-				</div>		
+				<MenuSettings ></MenuSettings>	
 
 			{/if}
 			{#if menu_view_section == 'notification'}
@@ -859,34 +391,42 @@
 			{#if menu_view_section == 'user'}
 				<h3>User Settings</h3>
 				<p>Won't be changed until they're ready for incorporation into main menu</p>
+				<div on:click="{logout}" class="btn btn-secondary">Log Out</div>
 			{/if}
 			{#if menu_view_section == 'nav'}
 				
-				<div class='nav-row' class:tabbed={view_mode == 'tabbed'} class:single={view_mode == 'single'}>
-					{#if view_mode == 'tabbed' && apps.length > 1}
+				<div class='nav-row' class:tabbed={$config.view_mode == 'tabbed'} class:single={$config.view_mode == 'single'}>
+					{#if $config.view_mode == 'tabbed' && $config.apps.length > 1}
+						<div class='nav-tabs-wrapper'>
+						
+							<div class='nav-tabs' bind:this={apps_item_holder}>
+								<AppMenu {selected_app} on:menu_change={menu_change_handler} on:menu_hover={menu_hover_handler}></AppMenu>
+							</div>
+						</div>
+					<!--
 						<div class='nav-tabs' bind:this={apps_item_holder}>
 							<div style='position:sticky;top:16px;margin-top:24px;'>
 								<h4>Applications</h4>
-								<div class='nav-item-holder' title="{(menu_hover ? 'Click to navigate to the Application' : '')}">
+								<div class='nav-item-holder' title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}">
 								
-									{#each apps as a, index}
+									{#each $config.apps as a, index}
 										<a 
 											href="#"
-											title="{(menu_hover ? 'Click to navigate to the Application' : '')}"
-											on:mouseenter={(m) => { sidebar_enter(m, app_data[a], index); } } 
+											title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}"
+											on:mouseenter={(m) => { sidebar_enter(m, $app_data[a], index); } } 
 											style='position:relative;' 
 											class='nav-item' 
-											class:selected="{ selected_app == app_data[a].key }" 
-											class:menu_hover
-											class:menu_hover_icon_show="{menu_hover_item.key == app_data[a].key}"
-											on:click|preventDefault="{ () => { sidebar_click(app_data[a]) }}">
-											<div class="icon" style={"background-image:url('./images/svgs_clean/" + app_data[a].icon + (selected_app == app_data[a].key ? '':'bw')+ ".svg')"}></div>
-											<b>{app_data[a].name}</b>
+											class:selected="{ selected_app == $app_data[a].key }" 
+											class:menu_hover="{$config.menu_hover}"
+											class:menu_hover_icon_show="{menu_hover_item.key == $app_data[a].key}"
+											on:click|preventDefault="{ () => { sidebar_click($app_data[a]) }}">
+											<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[a].icon + (selected_app == $app_data[a].key ? '':'bw')+ ".svg')"}></div>
+											<b>{$app_data[a].name}</b>
 
-											{#if menu_hover_icon == 'bento' }
+											{#if $config.menu_hover_icon == 'bento' }
 												<i class='menu_hover_icon i-switcher i-16'></i>
 											{/if}
-											{#if menu_hover_icon == 'arrow' }
+											{#if $config.menu_hover_icon == 'arrow' }
 												<i class='menu_hover_icon i-arrow-right i-16'></i>
 											{/if}
 										</a>
@@ -901,8 +441,8 @@
 										xmlns="http://www.w3.org/2000/svg">
 										
 										<path 
-											title="{(menu_hover ? 'Click to navigate to the Application' : '')}" 
-											d="{svg_path}" fill="{svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
+											title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}" 
+											d="{svg_path}" fill="{$config.svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
 											style="pointer-events:auto;cursor:pointer" 
 											on:mouseleave="{ () => { svg_width = 0; }}" 
 											on:click="{ () => { sidebar_click(menu_hover_item); }}"/>
@@ -911,40 +451,45 @@
 								</div>
 							</div>
 						</div>
+
+					-->
 					{/if}
 					<div class='nav-content'>
 
 
 						
-						{#each apps as a}
+						{#each $config.apps as a}
 							
-							<h2 class:hide_headers class:selected="{ selected_app == app_data[a].key }" >
-								<div class="icon" style={"background-image:url('./images/svgs_clean/" + app_data[a].icon + (app_data[a].key == selected_app ? '' : 'bw') + ".svg')"}></div>
+							<h2 class:hide_headers={$config.hide_headers} class:selected="{ selected_app == $app_data[a].key }" >
+								<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[a].icon + ($app_data[a].key == selected_app ? '' : 'bw') + ".svg')"}></div>
 								
-								<span>{app_data[a].name}</span>
-								{#if apps.length > 1}
-									<div class="collapser" on:click="{ () => { selected_app = selected_app == app_data[a].key ? false : app_data[a].key }}">
-										<i class="i-chevron-down i-24" class:i-chevron-up="{ selected_app == app_data[a].key }" ></i>
+								<span>{$app_data[a].name}</span>
+								{#if $config.apps.length > 1}
+									<div class="collapser" on:click="{ () => { selected_app = selected_app == $app_data[a].key ? false : $app_data[a].key }}">
+										<i class="i-chevron-down i-24" class:i-chevron-up="{ selected_app == $app_data[a].key }" ></i>
 									</div>
 								{/if}
 							</h2>
 							
-							{#if (app_data[a].key == selected_app) || view_mode == 'single'}
+							{#if ($app_data[a].key == selected_app) || $config.view_mode == 'single'}
 								<div class='nav-page' bind:this={nav_item_holder}>
 								
 
-									{#if app_data[a].has_modules}
-										{#if !menu_hover}
-											{#if a == 'home'}
-												<span class='hub-link btn btn-secondary' class:hub-link-left="{hide_headers}" on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to EcoOnline Home</span>
-											{:else}
-												<span class='hub-link btn btn-secondary' class:hub-link-left="{hide_headers}" on:click|preventDefault="{ () => {nav(app_data[a]); }}">Go to Application</span>
+									{#if $app_data[a].has_ecoid}
+
+										{#if ($app_data[a].has_modules && $app_data[a].modules_to_paint.length) || !$app_data[a].has_modules}
+											{#if !$config.menu_hover}
+												{#if a == 'home'}
+													<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[a]); }}">Go to EcoOnline Home</span>
+												{:else}
+													<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[a]); }}">Go to {($config.hide_headers ? $app_data[a].name : 'Application')} Hub</span>
+												{/if}
 											{/if}
 										{/if}
-										{#if app_data[a].show_tennants && app_data[a].tennants && app_data[a].tennants.length}
+										{#if $app_data[a].show_tennants && $app_data[a].tennants && $app_data[a].tennants.length}
 											<!-- svelte-ignore a11y-no-onchange -->
 											<select bind:value="{selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
-												{#each app_data[a].tennants as tennant}
+												{#each $app_data[a].tennants as tennant}
 													<option>{tennant}</option>
 												{/each}
 											</select>
@@ -957,44 +502,77 @@
 												</div>
 											</div>
 										{:else}
+											{#if $app_data[a].has_modules}
+												<div class='nav-item-holder' class:limited={$app_data[a].modules_to_paint.length < 3}>
+													{#each $app_data[a].modules_to_paint as m, i}
+														<div class='nav-item' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
+															<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+															<b>
+																{m.name}
+																<span class='tip'>{m.tip}</span>
+															</b>
+															{#if $config.menu_upsell}
+																<!--{#if m.recent}
+																	<span class='badge badge-new'>New</span>
+																{/if}
+																
+																{#if m.updated}
+																	<span class='badge badge-updated'>Updated</span>
+																{/if}
+																-->
+																{#if m.discover}
+																	<span class='badge badge-discover'>Discover</span>
+																{/if}
 
-											<div class='nav-item-holder'>
-												{#each app_data[a].modules_to_paint as m, i}
-													<div class='nav-item' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
-														<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
-														<b>{m.name}</b>
-														{#if menu_upsell}
-															{#if m.recent}
-																<span class='badge badge-new'>New</span>
 															{/if}
-															{#if m.updated}
-																<span class='badge badge-updated'>Updated</span>
-															{/if}
-															{#if m.discover}
-																<span class='badge badge-discover'>Discover</span>
-															{/if}
-														{/if}
-													</div>
-												{:else}
-													{#if filter_key !== ''}
-														<p>There are no modules with this filter</p>
+														</div>
 													{:else}
-														<!--<p>Jump straight to the application</p>-->
-													{/if}
-												{/each}
-											</div>
+														{#if filter_key !== ''}
+															<p class='exception exception-filter'>There are no modules with this filter</p>
+														{:else}
+															<!-- App has modules but you dont have access to them -->
+															<div class='exception exception-permissions'>
+																<h3>Access</h3>
+																<p>
+																	This Application has been enabled for your organisation but your roles have not been set yet.<br>
+																	Please talk to your company administrator.
+																</p>
+															</div>
+														{/if}
+													{/each}
+												</div>
+											{:else}
+												<!-- App doesnt have modules -->
+												<div class='nav-item-holder limited'>
+
+													<!--
+													<div class='nav-item'>
+														<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[a].icon + ".svg')"}></div>
+														<b>
+															{$app_data[a].name}
+															<span class='tip'>{$app_data[a].tip}</span>
+														</b>
+													</div>
+													-->
+													<div class='exception exception-nomodules'>
+														<p>{$app_data[a].tip}</p>
+													</div>
+												</div>
+											{/if}
 										
 										{/if}
 									{:else}
-										<div style='margin-left:48px'>
-											<h3>Access</h3>
-											<p style='max-width:480px;'>We’ve added <i>{app_data[a].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
-											{#if app_data[a].external_login}
-												<a href='{app_data[a].external_login}' target='_blank' class='btn'>Login</a>
-											{/if}
-											{#if app_data[a].external_marketing}
-												<a href='{app_data[a].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>
-											{/if}
+										<div class='nav-item-holder limited'>
+											<div class='exception'>
+												<h3>Access</h3>
+												<p>We’ve added <i>{$app_data[a].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
+												{#if $app_data[a].external_login}
+													<a href='{$app_data[a].external_login}' target='_blank' class='btn'>Login</a>
+												{/if}
+												{#if $app_data[a].external_marketing}
+													<a href='{$app_data[a].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>
+												{/if}
+											</div>
 										</div>
 									{/if}
 
@@ -1201,11 +779,11 @@
 		display: none !important;
 	}
 
-	.nav-tabs, .nav-content {
+	.nav-tabs-wrapper, .nav-content {
 		/* hidden on small */
 		box-sizing: border-box;
 	}
-	.nav-tabs {
+	.nav-tabs-wrapper {
 		width:238px;
 		margin-right:16px;
 
@@ -1222,6 +800,7 @@
 		font-weight: normal;
 		margin:16px 0 0 0;
 		display: flex;
+		align-items: center;
 		flex-direction: row;
 		cursor:pointer;
 	}
@@ -1267,11 +846,13 @@
 		display: inline-block;
 		padding:4px 8px;
 		/*border-radius:4px;*/
-		margin-left:46px;
-		margin-bottom: 8px;
+		margin-left:0px;
+		margin-bottom: 13px;
+		margin-top: 8px;
 		/*background: rgba(26,25,25,5%);*/
 		font-size:12px;
 		/*text-transform: uppercase;*/
+		position:initial;
 	}
 	.hub-link-left {
 		margin-left:0px;
@@ -1287,12 +868,20 @@
 		border-radius:4px;
 		background: rgba(26,25,25,5%);
 		text-transform: uppercase;*/
-		padding:3px 8px;
-		font-size:12px;
-    	font-family: "IBM Plex Sans", sans-serif;
+		
+		padding: 3px 24px 3px 8px;
+		margin-top: 8px;
+		font-size: 12px;
+		font-family: "IBM Plex Sans", sans-serif;
 		outline: none;
 		cursor: pointer;
 		vertical-align: top;
+		background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat;
+		background-position: right 5px top;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		appearance: none;
+		line-height: 18px;
 	}
 	.changing-tennant {
 		margin:0 auto;
@@ -1323,6 +912,7 @@
 		flex-direction: row;
     	flex-wrap: wrap;
 	}
+
 	.nav-item {
 		/*max-width: 236px;*/
 		width: 236px;
@@ -1338,6 +928,27 @@
 		display:flex;
 		flex-direction: row;
 		align-items: center;
+	}
+	.nav-item-holder.limited {
+		/*justify-content: space-evenly;*/
+	}
+	.nav-item-holder.limited .nav-item {
+		/*box-shadow: 0 0 4px rgba(26,25,25,5%);*/
+		width: 320px;
+		min-height: 64px;
+	}
+	.nav-item-holder.limited .nav-item .icon {
+		width: 48px;
+		height:48px;
+	}
+
+	.nav-item-holder .nav-item .tip {
+		display:none;
+	}
+	.nav-item-holder.limited .nav-item .tip {
+		display:block;
+		font-size:12px;
+		color:#666;
 	}
 
 	.anim_navi_wave .nav-item {
@@ -1436,6 +1047,16 @@
 		background: #72737A;
 	}
 
+
+	.exception {
+		border: 1px solid #BABFC3;
+		background: #FBFBFB;
+		border-radius:8px;
+		padding:16px;
+		width:100%; max-width:480px;
+	}
+	.exception h3 {margin-top:0;}
+
 	@media (max-width: 379px) {
 		.dd {
 			width: 100vw !important;
@@ -1488,7 +1109,7 @@
 		.nav-row.tabbed h2 i {
 			display: inline-block;
 		}
-		.nav-tabs {
+		.nav-tabs-wrapper {
 			display: none;
 		}
 
@@ -1503,7 +1124,7 @@
 			margin-top:16px;
 		}
 		.tennant-select {
-			margin-top:8px;
+			margin-top:16px;
 		}
 	}
 	@media (max-width: 959px) {

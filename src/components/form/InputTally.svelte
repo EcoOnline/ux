@@ -50,12 +50,13 @@ import { now } from "svelte/internal";
     }
     function keyup_input(e) {
         if(e.code == 'Enter') {
-            let v = parseInt(f.answer? f.answer : 0);
-            f.answer = v;
             input_el.blur();
         }
     }
     function blur_input(e) {
+
+        let v = parseInt(f.answer);
+        f.answer = (Number.isNaN(v) ? 0 : v);
         focussed = false;
     }
     

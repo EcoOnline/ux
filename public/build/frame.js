@@ -12939,7 +12939,7 @@ var app = (function () {
     const { console: console_1$a } = globals;
     const file$D = "src/components/form/InputTally.svelte";
 
-    // (71:4) {#if f.label}
+    // (72:4) {#if f.label}
     function create_if_block_1$i(ctx) {
     	let label;
     	let t0_value = /*f*/ ctx[0].label + "";
@@ -12955,7 +12955,7 @@ var app = (function () {
     			t1 = space();
     			if (if_block) if_block.c();
     			attr_dev(label, "for", label_for_value = /*f*/ ctx[0].id);
-    			add_location(label, file$D, 71, 8, 1734);
+    			add_location(label, file$D, 72, 8, 1737);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, label, anchor);
@@ -12991,14 +12991,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$i.name,
     		type: "if",
-    		source: "(71:4) {#if f.label}",
+    		source: "(72:4) {#if f.label}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (72:38) {#if f.optional}
+    // (73:38) {#if f.optional}
     function create_if_block_2$g(ctx) {
     	let span;
 
@@ -13007,7 +13007,7 @@ var app = (function () {
     			span = element("span");
     			span.textContent = "(Optional)";
     			attr_dev(span, "class", "optional");
-    			add_location(span, file$D, 71, 54, 1780);
+    			add_location(span, file$D, 72, 54, 1783);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -13021,14 +13021,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2$g.name,
     		type: "if",
-    		source: "(72:38) {#if f.optional}",
+    		source: "(73:38) {#if f.optional}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (74:4) {#if f.hint}
+    // (75:4) {#if f.hint}
     function create_if_block$n(ctx) {
     	let p;
     	let t_value = /*f*/ ctx[0].hint + "";
@@ -13038,7 +13038,7 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			t = text(t_value);
-    			add_location(p, file$D, 74, 8, 1869);
+    			add_location(p, file$D, 75, 8, 1872);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -13056,7 +13056,7 @@ var app = (function () {
     		block,
     		id: create_if_block$n.name,
     		type: "if",
-    		source: "(74:4) {#if f.hint}",
+    		source: "(75:4) {#if f.hint}",
     		ctx
     	});
 
@@ -13121,15 +13121,15 @@ var app = (function () {
     			div4 = element("div");
     			div4.textContent = "+1";
     			if (audio0.src !== (audio0_src_value = "./sound/click.mp3")) attr_dev(audio0, "src", audio0_src_value);
-    			add_location(audio0, file$D, 65, 0, 1510);
+    			add_location(audio0, file$D, 66, 0, 1513);
     			if (audio1.src !== (audio1_src_value = "./sound/click.mp3")) attr_dev(audio1, "src", audio1_src_value);
-    			add_location(audio1, file$D, 67, 0, 1619);
+    			add_location(audio1, file$D, 68, 0, 1622);
     			attr_dev(div0, "class", "btn svelte-l0oo99");
-    			add_location(div0, file$D, 78, 8, 1996);
+    			add_location(div0, file$D, 79, 8, 1999);
     			attr_dev(div1, "class", "shadow svelte-l0oo99");
-    			add_location(div1, file$D, 80, 12, 2223);
+    			add_location(div1, file$D, 81, 12, 2226);
     			attr_dev(div2, "class", "count svelte-l0oo99");
-    			add_location(div2, file$D, 81, 12, 2276);
+    			add_location(div2, file$D, 82, 12, 2279);
     			attr_dev(input, "id", input_id_value = /*f*/ ctx[0].id);
     			attr_dev(input, "type", "text");
 
@@ -13138,20 +13138,20 @@ var app = (function () {
     			: "0");
 
     			attr_dev(input, "class", "form-control svelte-l0oo99");
-    			add_location(input, file$D, 82, 12, 2324);
+    			add_location(input, file$D, 83, 12, 2327);
     			attr_dev(div3, "class", "tally-count svelte-l0oo99");
     			toggle_class(div3, "increment_anim", /*increment_anim*/ ctx[3]);
     			toggle_class(div3, "decrement_anim", /*decrement_anim*/ ctx[4]);
     			toggle_class(div3, "focussed", /*focussed*/ ctx[2]);
-    			add_location(div3, file$D, 79, 8, 2050);
+    			add_location(div3, file$D, 80, 8, 2053);
     			attr_dev(div4, "class", "btn btn-secondary svelte-l0oo99");
-    			add_location(div4, file$D, 84, 8, 2566);
+    			add_location(div4, file$D, 85, 8, 2569);
     			attr_dev(div5, "class", "tally svelte-l0oo99");
     			toggle_class(div5, "good", /*f*/ ctx[0].sentiment == "good");
     			toggle_class(div5, "bad", /*f*/ ctx[0].sentiment == "bad");
-    			add_location(div5, file$D, 77, 4, 1900);
+    			add_location(div5, file$D, 78, 4, 1903);
     			attr_dev(div6, "class", "form-item");
-    			add_location(div6, file$D, 69, 0, 1684);
+    			add_location(div6, file$D, 70, 0, 1687);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13348,13 +13348,13 @@ var app = (function () {
 
     	function keyup_input(e) {
     		if (e.code == "Enter") {
-    			let v = parseInt(f.answer ? f.answer : 0);
-    			$$invalidate(0, f.answer = v, f);
     			input_el.blur();
     		}
     	}
 
     	function blur_input(e) {
+    		let v = parseInt(f.answer);
+    		$$invalidate(0, f.answer = Number.isNaN(v) ? 0 : v, f);
     		$$invalidate(2, focussed = false);
     	}
 

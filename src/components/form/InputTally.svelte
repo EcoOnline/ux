@@ -24,8 +24,6 @@ import { now } from "svelte/internal";
             f.answer = shadow_value;
             increment_anim = false;
 
-            console.log('f is now', f)
-
         },300);
     }
     function decrement() {

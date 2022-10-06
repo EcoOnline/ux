@@ -4,11 +4,12 @@
     --eo-primary-300: #9397CA;
 	--eo-primary-500: #272F96;
 	--eo-secondary-500: #1CD390;
-	--eo-critical-500: #E40C0C;
 
     --eo-addon-blue: #007CFF;
 
+    --eo-success-500: #00875A;
     --eo-warning-500: #FFC430;
+	--eo-critical-500: #E40C0C;
 
 
     --eo-surface-background: #F6F6F7;
@@ -27,12 +28,8 @@
     --c: calc((100% - (12 * var(--g))) / 12);
     --gutter: calc(var(--col) + var(--g));
     --block: calc( var(--col) + 0px);
-
     --navH: 56px;
     --mainH: calc(100vh - var(--navH));
-
     --main-pad: 0 16px;
-
-
     --max-page:1904px;
 }

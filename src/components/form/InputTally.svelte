@@ -38,6 +38,7 @@ import { now } from "svelte/internal";
             audio_minus.play();
             decrement_anim = true;
             setTimeout(() => {
+                shadow_value = shadow_value < 0 ? 0 : shadow_value;
                 f.answer = shadow_value;
                 decrement_anim = false;
 
@@ -72,20 +73,21 @@ import { now } from "svelte/internal";
 
 <div class="form-item">
     {#if f.label}
-        <label for="{f.id}">{f.label} {#if f.optional}<span class="optional">(Optional)</span>{/if}</label>
+        <label for="{f.id}">{f.label} {#if !f.optional}<span class="required">*</span>{/if}</label>
     {/if}
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
 
     <div class='tally' class:good={f.sentiment == 'good'} class:bad={f.sentiment == 'bad'}>
-        <div class='btn' on:click={decrement}>—</div>
+        <div class='indicator' title="{(f.sentiment=='good'?'A positive tally':(f.sentiment=='bad'?'A negative tally':''))}"></div>
+        <div class='btn' on:click={decrement} class:disabled={f.answer < 1}><i class='i-32 i-minus'></i></div>
         <div class='tally-count' class:increment_anim class:decrement_anim class:focussed on:click='{ () => {focussed=true;setTimeout(() => { input_el.focus();},50)}}'>
             <div class="shadow">{shadow_value}</div>
             <div class="count">{f.answer}</div>
             <input id="{f.id}" on:focus={focus_input} on:keyup={keyup_input} on:blur={blur_input} bind:this="{input_el}" bind:value="{f.answer}" type="text" placeholder="{f.placeholder ? f.placeholder : '0'}" class="form-control">
         </div>
-        <div class='btn btn-secondary' on:click={increment}>+1</div>
+        <div class='btn btn-secondary' on:click={increment}><i class='i-32 i-plus'></i></div>
     </div>
     
 </div>
@@ -105,6 +107,21 @@ import { now } from "svelte/internal";
     position: relative;
     margin-right: 8px;
 }
+.indicator {
+    height:40px;
+    width:4px;
+    border-radius: 2px;
+    background:#ccc;
+    margin:4px 8px 4px 0;   
+}
+.good .indicator {
+    display:inline-block;
+    background-color: var(--eo-success-500);
+}
+.bad .indicator {
+    display:inline-block;
+    background-color: var(--eo-critical-500);
+}
 
 .form-control {
     display:none
@@ -120,8 +137,16 @@ import { now } from "svelte/internal";
     font-size: 16px;
     transition: top linear 0.3s;
 }
+.count:hover {
+    background-color: #F5F6FF;
+}
 .shadow {
     top:-48px;
+}
+.tally-count.focussed {
+    background-color: #F5F6FF;
+    border: 1px solid var(--eo-primary-500);
+    box-shadow: 0 0 4px var(--eo-primary-500);
 }
 .tally-count.focussed .form-control {
     display: inline-block;
@@ -132,12 +157,14 @@ import { now } from "svelte/internal";
 .tally-count.focussed .shadow, .tally-count.focussed .count {
     display: none;
 }
+/*
 .tally.good .shadow, .tally.good .count {
     color: var(--eo-secondary-500);
 }
 .tally.bad .shadow, .tally.bad .count {
     color: var(--eo-critical-500);
 }
+*/
 
 .increment_anim .shadow {
     animation: increment_shadow 0.3s ease-out forwards;
@@ -175,6 +202,27 @@ import { now } from "svelte/internal";
     border-radius:12px;
     line-height:46px;
     user-select: none; 
+    border-color: var(--eo-border-input);
+    background: #fff;
+    color: var(--black);
+    padding-left:8px;
+    padding-right:8px;
+}
+.btn:hover {
+    background-color: #F5F6FF;
+}
+.btn:active {
+    background-color: var(--eo-primary-500);
+}
+.btn:active .i-32 {
+    filter: invert(1);
+}
+.btn.disabled {
+    border-color: transparent;
+    background: #E4E5E7;
+}
+.btn.disabled .i-32 {
+    opacity:0.5;
 }
 
 .btn-secondary {
@@ -182,10 +230,5 @@ import { now } from "svelte/internal";
     padding-right:32px;
 }
 
-.btn:not(.btn-secondary) {
-    background:rgba(26,25,25,5%);
-    color: var(--black);
-    border-color: transparent;
-}
 
 </style>

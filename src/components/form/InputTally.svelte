@@ -167,16 +167,16 @@ import { now } from "svelte/internal";
 */
 
 .increment_anim .shadow {
-    animation: shadow 0.3s ease-out forwards;
+    animation: increment_shadow 0.3s ease-out forwards;
 }
 .increment_anim .count {
-    animation: count 0.3s ease-out forwards;
+    animation: increment_count 0.3s ease-out forwards;
 }
 .decrement_anim .shadow {
-    animation: shadow 0.3s ease-out forwards;
+    animation: decrement_shadow 0.3s ease-out forwards;
 }
 .decrement_anim .count {
-    animation: count 0.3s ease-out forwards;
+    animation: decrement_count 0.3s ease-out forwards;
 }
 
 
@@ -221,8 +221,9 @@ import { now } from "svelte/internal";
     background-color: #F5F6FF;
 }
 .btn:active {
-    /*background-color: var(--eo-primary-500);*/
-    background-color: rgba(40,47,150,30%);
+    /*background-color: var(--eo-primary-500);
+    background-color: rgba(40,47,150,30%);*/
+    background-color: #DBDEFF;
 }
 .btn:active .i-32 {
     /*filter: invert(1);*/

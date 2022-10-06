@@ -15,6 +15,8 @@ import { now } from "svelte/internal";
     let audio_minus;
 
     function increment() {
+        audio_plus.pause();
+        audio_plus.currentTime = 0;
         audio_plus.play();
         focussed = false;
         let v = parseInt(f.answer? f.answer : 0);
@@ -31,6 +33,8 @@ import { now } from "svelte/internal";
         let v = parseInt(f.answer? f.answer : 0);
         shadow_value = v-1;
         if(shadow_value>=0) {
+            audio_minus.pause();
+            audio_minus.currentTime = 0;
             audio_minus.play();
             decrement_anim = true;
             setTimeout(() => {

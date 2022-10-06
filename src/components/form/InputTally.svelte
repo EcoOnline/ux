@@ -135,7 +135,7 @@ import { now } from "svelte/internal";
     top:0;
     line-height:48px;
     font-size: 16px;
-    transition: top linear 0.3s;
+    transition: all linear 0.3s;
 }
 .count:hover {
     background-color: #F5F6FF;
@@ -167,16 +167,16 @@ import { now } from "svelte/internal";
 */
 
 .increment_anim .shadow {
-    animation: increment_shadow 0.3s ease-out forwards;
+    animation: shadow 0.3s ease-out forwards;
 }
 .increment_anim .count {
-    animation: increment_count 0.3s ease-out forwards;
+    animation: count 0.3s ease-out forwards;
 }
 .decrement_anim .shadow {
-    animation: decrement_shadow 0.3s ease-out forwards;
+    animation: shadow 0.3s ease-out forwards;
 }
 .decrement_anim .count {
-    animation: decrement_count 0.3s ease-out forwards;
+    animation: count 0.3s ease-out forwards;
 }
 
 
@@ -197,6 +197,15 @@ import { now } from "svelte/internal";
   to {top: -48px;}
 }
 
+@keyframes shadow {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+@keyframes count {
+  from {opacity: 1}
+  to {opacity: 0}
+}
+
 
 .btn {
     border-radius:12px;
@@ -212,10 +221,11 @@ import { now } from "svelte/internal";
     background-color: #F5F6FF;
 }
 .btn:active {
-    background-color: var(--eo-primary-500);
+    /*background-color: var(--eo-primary-500);*/
+    background-color: rgba(40,47,150,30%);
 }
 .btn:active .i-32 {
-    filter: invert(1);
+    /*filter: invert(1);*/
 }
 .btn.disabled {
     border-color: transparent;

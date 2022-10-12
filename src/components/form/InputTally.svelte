@@ -20,6 +20,10 @@ import { now } from "svelte/internal";
         audio_plus.play();
         focussed = false;
         let v = parseInt(f.answer? f.answer : 0);
+
+        if(typeof navigator.vibrate !== 'undefined') {
+            console.log(window.navigator.vibrate(200));
+        }
         shadow_value = v+1;
         increment_anim = true;
         setTimeout(() => {
@@ -241,47 +245,4 @@ import { now } from "svelte/internal";
     padding-right:32px;
 }
 
-/*
-<style scoped>
-  :root {
-	--rag-r: #E40C0C;
-	--rag-a: #FFC430;
-	--rag-g: #00875A;
-  }
-.body {background:#eee;padding:16px}
-.indicator {
-	width:4px;
-	height:40px;
-	border-radius:2px;
-  margin-right:16px;
-  display:inline-block;
-}
-.rag-r { background-color: var(--rag-r)}
-.rag-a { background-color: var(--rag-a)}
-.rag-g { background-color: var(--rag-g)}
-  
-
-.color-blind .rag-r {
-	background-color: transparent;
-background-image: repeating-linear-gradient(45deg, var(--rag-r), var(--rag-r) 3px, transparent 3px, transparent 4px);
-}
-  .color-blind .rag-a {
-	background-color: transparent;
-background-image: repeating-linear-gradient(0deg, var(--rag-a), var(--rag-a) 3px, transparent 3px, transparent 4px);
-}
-  .color-blind .rag-g {
-	background-color: transparent;
-background-image: repeating-conic-gradient(var(--rag-g) 0% 25%, rgba(0, 0, 0, 0) 0% 50%);
-background-position: 0 0, 2px 2px;
-background-size: 4px 4px;
-}
-  
-  
-</style>
-<div class='body'>
-	<div class="indicator rag-r"></div>
-	<div class="indicator rag-a"></div>
-	<div class="indicator rag-g"></div>
-</div>
-*/
 </style>

@@ -46,7 +46,7 @@ import { config, app_data } from './Frame_menusettings.js';
 </div>
 
 
-<div>
+<div style='width:1px;height:1px;overflow:hidden;'>
     <MenuSettings></MenuSettings>
 </div>
 

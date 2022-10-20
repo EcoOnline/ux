@@ -18,17 +18,26 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    <div class="form-control" on:click="{open_matrix}">
-        <div class="matrix" class:ok="{f.answer.color == 'ok'}" class:warning="{f.answer.color == 'warning'}" class:critical="{f.answer.color == 'critical'}">{f.answer.text ? f.answer.text : ''}</div>
-        <i class="i-hinton-plot  i-20" ></i>
-    </div>
-    <Shortcuts {f} on:shortcut={(ev) => { f.answer = ev.detail.value.toLocaleString(); }}/>
+    {#if f.readonly}
+        <div class="form-control readonly">
+            <div class="matrix" class:ok="{f.answer.color == 'ok'}" class:warning="{f.answer.color == 'warning'}" class:critical="{f.answer.color == 'critical'}">{f.answer.text ? f.answer.text : ''}</div>
+        </div>
+    {:else}
+        <div class="form-control" on:click="{open_matrix}">
+            <div class="matrix" class:ok="{f.answer.color == 'ok'}" class:warning="{f.answer.color == 'warning'}" class:critical="{f.answer.color == 'critical'}">{f.answer.text ? f.answer.text : ''}</div>
+            <i class="i-hinton-plot  i-20" ></i>
+        </div>
+        <Shortcuts {f} on:shortcut={(ev) => { f.answer = ev.detail.value.toLocaleString(); }}/>
+    {/if}
 </div>
 
 <style>
     .form-control {
         width:82px;
         padding:4px;
+    }
+    .form-control.readonly {
+        width:46px;
     }
     .matrix {
         border:1px solid var(--eo-border-reduced);
@@ -39,6 +48,9 @@
         text-align: center;
         line-height: 38px;
         font-weight: 900;
+    }
+    .form-control.readonly .matrix {
+        margin-right:0;
     }
     .matrix.ok {
         background: var(--eo-secondary-500);

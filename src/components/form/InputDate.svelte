@@ -25,22 +25,28 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-
-    {#if hack_calendar}
-    
-        <DatePicker
-        time={true} 
-        format='ddd, DD MMM YYYY HH:mm'
-        locale = 'en'
-        bind:selected={f.answer}
-    >
-    <button class="form-control">
-        {dayjs(f.answer).format('ddd, DD MMM YYYY HH:mm')}
-        <div class='separator'></div>
-        <i class='i-calendar i-20'></i>
-    </button>
-    </DatePicker>
+    {#if f.readonly}
+        <div class='readonly'>{f.answer}</div>
+    {:else}
+        <div style='max-width:250px'>
+            {#if hack_calendar}
+            
+                <DatePicker
+                time={true} 
+                format='ddd, DD MMM YYYY HH:mm'
+                locale = 'en'
+                bind:selected={f.answer}
+            >
+            <button class="form-control">
+                {dayjs(f.answer).format('ddd, DD MMM YYYY HH:mm')}
+                <div class='separator'></div>
+                <i class='i-calendar i-20'></i>
+            </button>
+            </DatePicker>
+            {/if}
+        </div>
     {/if}
+
 
 </div>
 
@@ -56,6 +62,7 @@
 }
 .form-control .i-20 {
     /*vertical-align: sub;*/
+    margin-left: 8px;
 }
 .separator {
     border-left-width:1px;
@@ -65,6 +72,7 @@
     vertical-align: middle;
     height: 48px;
     width: 1px;
+    margin-left:8px;
 }
 
 </style>

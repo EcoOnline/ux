@@ -2,7 +2,7 @@
     export let obj;
 </script>
 
-<a href="/">{obj}</a>
+<a href="{window.location.href + '/'+ obj }">{obj}</a>
 
 <style>
     a {

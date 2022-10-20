@@ -8,8 +8,11 @@
 	import Platform from "./Frame_platform.svelte";
 	import Login from "./Frame_login.svelte";
 	import Nav from "./Frame_header.svelte";
-	import Home from "./Frame_home.svelte";
+	import EHS from "./Frame_home.svelte";
+	import CM from "./Frame_cm.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
+	import Actions from "./Frame_actions.svelte";
+	import Actions123 from "./Frame_actions_123.svelte";
 	import Incidents from "./Frame_incidents.svelte";
 	import IncidentsNew from "./Frame_incidents_new.svelte";
 	import IncidentsAdmin from "./Frame_incidents_admin.svelte";
@@ -26,10 +29,14 @@
 		"notfound": NotFound,
         "platform": Platform,
         "login": Login,
-        "ehs": Home,
+        "ehs": EHS,
+        "cm": CM,
         "ehs_linkedfields": AdminLinkedFields,
+        "ehs_actions": Actions,
         "ehs_incidents": Incidents,
         "ehs_incidents_incidents_new": IncidentsNew,
+        "ehs_actions_123": Actions123,
+        "ehs_actions_122": Actions123,
         "ehs_incidents_incidents_admin": IncidentsAdmin,
         "ehs_incidents_queries_new": QueriesNew,
         "ehs_incidents_queries_result": QueriesResult,

@@ -6,6 +6,10 @@ import Form from './components/form/Form.svelte';
 
 export let tabnav;
 export let bodyScroll;
+
+let login_phase = 1;
+let show_admin = false;
+
 console.log('-', tabnav, bodyScroll);
 /*
 origin = false -> login screen without context and goes to platform aka HOME
@@ -23,7 +27,7 @@ let r = document.querySelector(':root').style;
 switch(origin_param) {
 	case 'ehs_email':
 		origin = 'ehs_email';
-		context = 'ehs';
+		context = 'ehs/actions/123';
 		break;
 	case 'ehs':
 		origin = false;
@@ -85,14 +89,18 @@ let show_menu = false;
 
 
 const channel = 'LOGIN';
-let f = [
+let f1 = [
 	{
 		item_type: "input_text",
 		id: "0_1",
+		placeholder: 'Enter company code',
 		label: "Company ID",
 		hint: false,
 		answer: ""
-	},
+	}
+];
+
+let f2 = [
 	{
 		item_type: "input_text",
 		id: "0_2",
@@ -109,11 +117,11 @@ let f = [
 		answer: "",
 	}
 ];
+
 </script>
 
 
 {#if !origin}
-	<div class='context'>context: {context}</div>
 	<div class="login-wrapper">
 		<svg class='logo' width="129" height="33" viewBox="0 0 129 33" fill="none" xmlns="http://www.w3.org/2000/svg" >
 			<path d="M16.202 11.0018L16.792 9.6818C17.232 8.7118 18.202 8.0918 19.262 8.0918C19.982 8.0918 20.662 8.3718 21.172 8.8818L21.872 9.5818C20.632 10.2618 19.792 11.5818 19.792 13.0918V14.9718C19.792 18.3318 17.402 21.2218 14.102 21.8518L7.20199 23.1718C6.85199 23.2418 6.57199 23.4818 6.45199 23.8118C6.33199 24.1418 6.39199 24.5118 6.61199 24.7818C10.482 29.5718 16.302 31.0118 16.552 31.0718C16.632 31.0818 16.712 31.0918 16.792 31.0918C16.872 31.0918 16.952 31.0818 17.022 31.0618C17.162 31.0318 30.292 27.7318 30.292 15.0918V3.0918C30.292 1.9918 29.392 1.0918 28.292 1.0918H5.29199C4.19199 1.0918 3.29199 1.9918 3.29199 3.0918V18.3518L5.29199 16.3518V3.0918H28.292V15.0918C28.292 25.3918 18.512 28.5818 16.792 29.0518C15.852 28.7818 12.252 27.6018 9.34199 24.7918L14.482 23.8118C18.722 23.0018 21.792 19.2818 21.792 14.9718V13.0918C21.792 11.9918 22.692 11.0918 23.792 11.0918H24.642C25.222 11.0918 25.512 10.3918 25.102 9.9818L22.592 7.4718C21.702 6.5818 20.522 6.0918 19.262 6.0918C17.412 6.0918 15.732 7.1818 14.972 8.8618L14.452 10.0118L0.291992 24.1818V27.0118L16.002 11.3018C16.092 11.2118 16.152 11.1118 16.202 11.0018Z" fill="black"/>
@@ -128,9 +136,17 @@ let f = [
 			<path d="M123.662 22.3318C122.912 22.3318 122.242 22.2018 121.652 21.9518C121.062 21.7018 120.562 21.3318 120.152 20.8618C119.742 20.3918 119.422 19.8118 119.202 19.1418C118.982 18.4718 118.872 17.7118 118.872 16.8818C118.872 16.0518 118.982 15.3018 119.202 14.6218C119.422 13.9518 119.742 13.3718 120.152 12.9018C120.562 12.4318 121.072 12.0618 121.652 11.8118C122.242 11.5618 122.912 11.4318 123.662 11.4318C124.422 11.4318 125.092 11.5618 125.682 11.8318C126.262 12.1018 126.752 12.4718 127.132 12.9418C127.512 13.4118 127.812 13.9718 128.002 14.5918C128.192 15.2218 128.292 15.8918 128.292 16.6218V17.4418H121.132V17.7818C121.132 18.5818 121.372 19.2318 121.842 19.7418C122.312 20.2518 122.992 20.5118 123.882 20.5118C124.522 20.5118 125.062 20.3718 125.502 20.0918C125.942 19.8118 126.312 19.4318 126.622 18.9518L127.902 20.2218C127.512 20.8618 126.952 21.3818 126.222 21.7618C125.492 22.1418 124.632 22.3318 123.662 22.3318ZM123.662 13.1218C123.292 13.1218 122.942 13.1918 122.632 13.3218C122.322 13.4518 122.052 13.6418 121.832 13.8818C121.612 14.1218 121.442 14.4118 121.322 14.7418C121.202 15.0718 121.142 15.4418 121.142 15.8418V15.9818H125.992V15.7818C125.992 14.9818 125.782 14.3318 125.372 13.8518C124.952 13.3718 124.382 13.1218 123.662 13.1218Z" fill="black"/>
 		</svg>
 		<h3>Login</h3>
-		<Form {f} {channel}></Form>
+		{#if login_phase == 1}
+			<Form f={f1} {channel}></Form>
+			<a href="/" on:click|preventDefault={ () => { login_phase = 2} } class="btn btn-mob">Login</a>
+			<a href="{menu_url}" class="btn btn-mob btn-clear">Forgot your company code?</a>
+			<a href="{menu_url}" class="btn btn-mob btn-clear">Don't have an account?</a>
+		{:else}
+			<Form f={f2} {channel}></Form>
+			<a href="{menu_url}" class="btn btn-mob">Login</a>
+			<a href="{menu_url}" class="btn btn-mob btn-clear">Forgot your password?</a>
+		{/if}
 
-		<a href="{menu_url}" class="btn btn-mob">Login</a>
 	</div>
 {:else}
 	{#if origin == 'ehs_email'}
@@ -168,6 +184,11 @@ let f = [
 				<hr>
 				<table>
 					<tr>
+						<th>Record ID</th>
+						<td><a class='record-id' href='/' on:click|preventDefault="{ () => { origin = false; } }">
+							123</a></td>
+					</tr>
+					<tr>
 						<th>Title</th>
 						<td>Check fire extinguisher in Block D</td>
 					</tr>
@@ -176,7 +197,7 @@ let f = [
 						<td>Warehouse</td>
 					</tr>
 					<tr>
-						<th>Asigned by</th>
+						<th>Assigned by</th>
 						<td>A Einstein</td>
 					</tr>
 				</table>
@@ -227,7 +248,8 @@ let f = [
 	{/if}
 
 {/if}
-	
+
+{#if show_admin}
 <div class='admin'>
 	<a href="?origin=platform">No App Context</a>
 	<a href="?origin=ehs">EHS</a>
@@ -242,6 +264,13 @@ let f = [
 		<MenuSettings ></MenuSettings>
 	</div>
 </div>
+{:else}
+	<div class='admin-hide'>
+
+		<div class='context'>context: {context}</div>
+		<i on:mouseenter="{ () => {show_admin = true; }}" class="i-20 i-administration"  style="float:right"></i>
+	</div>
+{/if}
 
 
 <style>
@@ -251,12 +280,27 @@ let f = [
 	.context {
 		font-family: monospace;
 		padding:8px;
+		font-size:9px;
+		color:#ccc;
+		float:left;
+
+	}
+	.admin-hide {
 		position: absolute;
 		left:0;
-		top:0;
-		font-size:9px;
-		color:#999;
+		bottom:0;
+		width:100%;
+		background:transparent;
+		color:rgba(25,26,26,10%);
+		padding: 8px 16px;
+		max-height:80vh;
+		overflow: auto;
 	}
+	
+	.admin-hide > i {
+		opacity:0.1;
+	}
+	
 	.admin {
 		position: absolute;
 		left:0;
@@ -323,7 +367,9 @@ let f = [
 	}
 
 
-
+	.record-id {
+		color: var(--eo-primary-500);
+	}
 
 	.login-wrapper {
 		width: 320px;

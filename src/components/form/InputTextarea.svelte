@@ -10,6 +10,10 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    <textarea id="{f.id}" bind:value="{f.answer}" class="form-control"></textarea>
+    {#if f.readonly}
+        <div class='readonly'>{f.answer}</div>
+    {:else}
+        <textarea id="{f.id}" bind:value="{f.answer}" class="form-control"></textarea>
+    {/if}
     
 </div>

@@ -1,5 +1,6 @@
 :root {
 	--black  :  #1A1919;
+    --eo-primary-50: rgb(245, 246, 255);
     --eo-primary-100: #D4D5EA;
     --eo-primary-300: #9397CA;
 	--eo-primary-500: #272F96;
@@ -31,5 +32,6 @@
     --navH: 56px;
     --mainH: calc(100vh - var(--navH));
     --main-pad: 0 16px;
-    --max-page:1904px;
+   /* --max-page:1904px;*/
+    --max-page:1704px;
 }

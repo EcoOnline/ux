@@ -13,6 +13,10 @@
         "awaiting_investigation": {
             value: "Awaiting Investigation",
             color: "critical"
+        },
+        "awaiting_verification": {
+            value: "Awaiting Verification",
+            color: "critical"
         }
     }
 </script>

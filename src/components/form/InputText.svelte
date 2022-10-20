@@ -15,8 +15,12 @@
     {#if f.hint}
         <p>{f.hint}</p>
     {/if}
-    <input id="{f.id}" bind:value="{f.answer}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control">
+    {#if f.readonly}
+        <div class='readonly'>{f.answer}</div>
+    {:else}
+        <input id="{f.id}" bind:value="{f.answer}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}" class="form-control">
     
-    <Shortcuts {f} on:shortcut={(ev) => { f.answer = ev.detail.value.toLocaleString(); }}/>
+        <Shortcuts {f} on:shortcut={(ev) => { f.answer = ev.detail.value.toLocaleString(); }}/>
+    {/if}
 </div>
 

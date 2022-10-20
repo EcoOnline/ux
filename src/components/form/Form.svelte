@@ -16,6 +16,7 @@
 	import InputTally from "./InputTally.svelte";
 	import InputText from "./InputText.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
+	import RandomSelector from "./RandomSelector.svelte";
 
     export let f;
     export let channel = 'ANSWER';
@@ -36,7 +37,8 @@
 		"input_switch": InputSwitch,
 		"input_tally": InputTally,
 		"input_text": InputText,
-		"input_textarea": InputTextarea
+		"input_textarea": InputTextarea,
+		"random_selector": RandomSelector
     }
 
     onMount(() => {

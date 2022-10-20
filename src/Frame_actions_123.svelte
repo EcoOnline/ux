@@ -753,9 +753,9 @@
                     </div>
                 </div>
                 <div class="card overview_5">
-                    <div class="card-header">Channel</div>
+                    <div class="card-header">Attached record</div>
                     <div class="card-body">
-                        <p><i class="i-desktop i-20"></i> Desktop</p>
+                        <p><i class="i-error i-20"></i> None</p>
                     </div>
                 </div>
                 <div class="card overview_6">

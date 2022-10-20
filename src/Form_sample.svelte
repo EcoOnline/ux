@@ -27,6 +27,43 @@
             hint: "This can be first, last or both.",
             optional: true,
             answer: ""
+        }],
+        "random_selector": [{
+            item_type: "random_selector",
+            id: "rs",
+            label: "Finnish game name generator",
+            hint: false,
+            optional: false,
+            options: [
+                {text: "Clash of"},
+                {text: "Kings vs"},
+                {text: "Hoard of"},
+                {text: "Clans vs"},
+                {text: "War of"},
+                {text: "Heroes vs"},
+                {text: "Zombies vs"},
+                {text: "Plants vs"},
+                {text: "Battle of"},
+                {text: "Masters vs"}
+            ],
+            answer: ""
+        },
+        {
+            item_type: "random_selector",
+            id: "rs",
+            label: "",
+            hint: false,
+            optional: false,
+            spin_button: true,
+            options: [
+                {text: "Clans"},
+                {text: "Kings"},
+                {text: "Heroes"},
+                {text: "Plants"},
+                {text: "Zombies"},
+                {text: "Masters"}
+            ],
+            answer: ""
         }]
     }
 

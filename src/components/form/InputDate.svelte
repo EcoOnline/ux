@@ -28,7 +28,7 @@
     {#if f.readonly}
         <div class='readonly'>{f.answer}</div>
     {:else}
-        <div style='max-width:250px'>
+        <div style='max-width:255px'>
             {#if hack_calendar}
             
                 <DatePicker

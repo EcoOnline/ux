@@ -31,12 +31,13 @@ export const config = writable({
 	app not integrated									STAY SAFE
 
 */
+export let favourites = writable([]);
 export const app_data = writable({
 	home: {
 		name: 'Home',
-		key: 'platform',
+		key: 'home',
 		icon: 'platform',
-		url: 'platform',
+		url: 'home',
 		has_ecoid: true,
 		has_modules: true,
 		modules_to_paint: [],
@@ -350,6 +351,28 @@ export const app_data = writable({
 		tennants: [],
 		modules_to_paint: [], 
 		modules: []
+	}
+});
+
+//hacks for app settings
+export const slices = writable({
+	ehs: {
+		basic: [0,5],
+		multi: [0,10],
+		admin: [0],
+		changing_tennant: false
+	},
+	cm: {
+		basic: [0,10],
+		multi: [0,-3],
+		admin: [0],
+		changing_tennant: false
+	},
+	munio: {
+		basic: [0,-1],
+		multi: [0,-1],
+		admin: [0],
+		changing_tennant: false
 	}
 });
 

@@ -6,6 +6,7 @@
     export let mask_visible = true;
     export let mask_block = true;
 	export let show_modal = false;
+    export let w = '840px';
 
     let modal_in = false;
     let modal_bool = false;
@@ -42,7 +43,7 @@
 {#if modal_bool}
     <div class="modal">
         <div class="mask" class:visible="{mask_visible}" class:block="{mask_block}"></div>
-        <div class="modal-window" class:in="{modal_in}">
+        <div class="modal-window" class:in="{modal_in}" style="width:{w}">
             <div class="modal-head">
                 <h2>
                     {title} 

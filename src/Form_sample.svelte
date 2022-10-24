@@ -31,7 +31,7 @@
         "random_selector": [{
             item_type: "random_selector",
             id: "rs",
-            label: "Finnish game name generator",
+            label: "Choose a game name",
             hint: false,
             optional: false,
             options: [
@@ -43,7 +43,6 @@
                 {text: "Heroes vs"},
                 {text: "Zombies vs"},
                 {text: "Plants vs"},
-                {text: "Battle of"},
                 {text: "Masters vs"}
             ],
             answer: ""

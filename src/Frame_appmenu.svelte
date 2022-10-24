@@ -14,6 +14,7 @@
 		} else {
 
 			window.location.hash = '#' + module.url
+			console.log('sidebar nav', window.location.hash)
 			dispatch('nav', {
 				text: module.url
 			});
@@ -75,6 +76,7 @@
 	}
 	
 	function sidebar_click(menu_item) {
+		console.log('appmenu sidebar click');
 		if($config.menu_hover) {
 			//if hover mode set go straight to app
 			nav(menu_item)
@@ -88,12 +90,15 @@
 	}
 
 	function sidebar_enter(m, menu_item, index) {
-		menu_hover_item = menu_item;
-		dispatch('menu_hover', {
-			m: m,
-			menu_item: menu_item,
-			index: index
-		});
+		if($config.menu_hover) {
+		console.log('appmenu sidebar hover');
+			menu_hover_item = menu_item;
+			dispatch('menu_hover', {
+				m: m,
+				menu_item: menu_item,
+				index: index
+			});
+		}
 		
 	}
 
@@ -121,17 +126,17 @@
 	<div style='position:sticky;top:16px;margin-top:24px;'>
 		<h4>Applications</h4>
 		<div class='nav-item-holder' title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}">
-		
+			
 			{#each $config.apps as a, index}
 				<a 
-					href="#"
+					href="/"
 					title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}"
 					on:mouseenter={(m) => { sidebar_enter(m, $app_data[a], index); } } 
 					style='position:relative;' 
 					class='nav-item' 
 					class:selected="{ selected_app == $app_data[a].key }" 
 					class:menu_hover="{$config.menu_hover}"
-					class:menu_hover_icon_show="{menu_hover_item.key == $app_data[a].key}"
+					class:menu_hover_icon_show="{$config.menu_hover && menu_hover_item.key == $app_data[a].key}"
 					on:click|preventDefault="{ () => { sidebar_click($app_data[a]) }}">
 					<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[a].icon + (selected_app == $app_data[a].key ? '':'bw')+ ".svg')"}></div>
 					<b>{$app_data[a].name}</b>

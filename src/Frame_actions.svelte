@@ -354,13 +354,13 @@
 <div class="row sticky">
     <div class="col12 col-sm-5">
         <ul class="breadcrumb">
-            <li><a href="#platform"><i class="i-16 i-platform"></i></a></li>
+            <li><a href="#home"><i class="i-16 i-platform"></i></a></li>
             <li><a href="#ehs">EHS</a></li>
             <li>Actions</li>
         </ul>
     </div>
     <div class="col12 col-sm-7 text-right">
-        <a title="New Incident" href="#ehs/incidents/incidents_new" on:click="{ () => {nav('incidents_new')}}" class='btn'>New</a>
+        <a title="New Action" href="#ehs/incidents/action_new" on:click|preventDefault="{ () => { return false; }}" class='btn'>New</a>
         
     </div>
 </div>

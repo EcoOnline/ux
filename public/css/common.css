@@ -357,7 +357,7 @@ li {
     .col-md-11 { width: calc(11 * var(--c) + 10 * var(--g) ) }
     .col-md-12 { width: calc(12 * var(--c) + 11 * var(--g) ) }
 
-    .col-md-9 .col-md-3 { width: calc(3/9 * 100% - 16px) !important; }
+    /*.col-md-9 .col-md-3 { width: calc(3/9 * 100% - 16px) !important; }*/
     .col-md-9 .col-md-6 { width: calc(6/9 * 100% - 16px) !important; }
 }
 @media (min-width: 1264px) {
@@ -470,7 +470,7 @@ li {
     left:0;
     width:100%;
     height:100%;
-    z-index: 1000;
+    z-index: 10000;
 }
 .drawer .mask, .modal .mask {
     position:absolute;
@@ -487,7 +487,7 @@ li {
 }
 
 .drawer .mask.visible, .modal .mask.visible {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.4);
 }
 .drawer .pullout {
     position:absolute;

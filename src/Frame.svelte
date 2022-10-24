@@ -5,10 +5,10 @@
 	*/
 
 	import NotFound from "./Frame_notfound.svelte";
-	import Platform from "./Frame_platform.svelte";
+	import Home from "./Frame_home.svelte";
 	import Login from "./Frame_login.svelte";
 	import Nav from "./Frame_header.svelte";
-	import EHS from "./Frame_home.svelte";
+	import EHS from "./Frame_ehs.svelte";
 	import CM from "./Frame_cm.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Actions from "./Frame_actions.svelte";
@@ -27,7 +27,7 @@
 
     const comps = {
 		"notfound": NotFound,
-        "platform": Platform,
+        "home": Home,
         "login": Login,
         "ehs": EHS,
         "cm": CM,
@@ -69,6 +69,7 @@
    }
 
    function handleNavStr(hash) {
+		console.log('frame handleNavStr', hash);
 		let hash_arr = hash.split('/');
 
 		mainCSS = hash_arr[0];

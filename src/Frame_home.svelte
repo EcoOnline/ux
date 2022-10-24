@@ -1,230 +1,403 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
+import { writable } from 'svelte/store';
+import { createEventDispatcher } from 'svelte';
+import Modal from './components/Modal.svelte';
 
-    function nav(str) {
-		dispatch('nav', {
-			text: str
-		});
+import MenuSettings from "./Frame_menusettings.svelte";
+import AppMenu from "./Frame_appmenu.svelte";
+import { config, app_data, slices, favourites } from './Frame_menusettings.js';
+    import BigNumber from './components/cards/BigNumber.svelte';
+    import Channel from './components/table/Channel.svelte';
+
+let nav_item_holder;
+let selected_tennant;
+let favourite_filter = '';
+let favourite_results = [];
+function fav_toggle(m) {
+	let i = $favourites.indexOf(m);
+	console.log('add?', i, m);
+	if(i<0) {
+		//add
+		$favourites = [...$favourites, ...[m]]
+	} else {
+		//remove
+		$favourites.splice(i,1);
 	}
-    let tab = "home";
-    export let tabnav = '';
-    $: {
-        let t = tabnav;
-        tab = (t == '' ? 'home' : t);
-    }
+}
+
+$: {
+	let f = favourite_filter.toLowerCase();
+	let res = [];
+
+	if(f.length > 1) {
+		//filter down results
+		for (const [app, prod] of Object.entries($app_data)) {
+			let v = prod.modules.filter( (m) => {
+				m.parent_name = prod.name;
+				return m.name.toLowerCase().indexOf(f) >= 0
+			})
+			res.push(...v);
+		}
+	} 
+	favourite_results = res;
+}
+
+let favourites_modal = false;
+
+const dispatch = createEventDispatcher();
+
+function nav(str) {
+	window.location.hash = '#' + str;
+	dispatch('nav', {
+		text: str
+	});
+}
+
+
+
+
+let apps_item_holder = false;
+let selected_app = 'home';
+
+function menu_change_handler(event){
+	if($config.menu_hover) {
+		//if hover mode set go straight to app
+		nav(event.detail.menu_item)
+	} else {
+		let k = event.detail.menu_item.key;
+		selected_app = k;
+	}
+}
+
+function menu_hover_handler(event){
+	//sidebar_enter(event.detail.m, event.detail.menu_item, event.detail.index);
+}
+
 </script>
 
-    <div class="row sticky">
-        <div class="col12">
-            <ul class="breadcrumb">
-                <li><a href="#platform"><i class="i-16 i-platform"></i></a></li>
-                <li>EHS</li>
-            </ul>
+<h1>EcoOnline Home</h1>
+<div class="row">
+    <div class="col3 col-md-3 d960up-block">
+        <div class='nav-tabs' bind:this={apps_item_holder}>
+            <AppMenu {selected_app} on:menu_change={menu_change_handler} on:menu_hover={menu_hover_handler}></AppMenu>
         </div>
-       
     </div>
-    
+    <div class="col12 col-md-9">
 
-    <ul class="tabs">
-        <li><a href="#ehs" class:active="{tab == 'home'}">Hub</a></li>
-        <li><a href="#ehs/dashboards" class:active="{tab == 'dashboards'}">Dashboards</a></li>
-        <li><a href="#ehs/reports" class:active="{tab == 'reports'}">Reports</a></li>
-        <li><a href="#ehs/tasks" class:active="{tab == 'tasks'}">My Tasks</a></li>
-    </ul>
 
-    {#if tab == 'home'}
-        <div class="row">
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile" on:click|preventDefault="{ () => {nav('incidents');window.location.hash='#ehs/incidents'}}">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/incidents.svg)"></div>
-                    <b>Incidents</b>
-                    <div class="tools">
-                        <a href="#ehs/incidents/incidents_new" class="add" on:click|stopPropagation="{ () => {nav('incidents_new')}}"> </a>
-                        <a href="#ehs/incidents/queries_new" class="filter" on:click|stopPropagation="{ () => {nav('queries_new')}}"> </a>
-                        <a href="#ehs/incidents/summary" class="summary" on:click|stopPropagation="{ () => {nav('incidents/summary')}}"> </a>
-                        <a href="#ehs/incidents/incidents_admin" class="tool" on:click="{ () => {nav('incidents/incidents_admin')}}" > </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile" on:click|preventDefault="{ () => {nav('actions');window.location.hash='#ehs/actions'}}">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/actions.svg)"></div>
-                    <b>Actions</b>
-                    <div class="tools">
-                        <a href="#incidents/incidents_new" class="add"> </a>
-                        <a href="queries_new" class="filter"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/audits.svg)"></div>
-                    <b>Audit & Inspection</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/observations.svg)"></div>
-                    <b>Observation</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/risk_assessment.svg)"></div>
-                    <b>Risk Assessment</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile" on:click|preventDefault="{ () => {nav('hazard_assessments');window.location.hash='#ehs/hazard_assessments'}}">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/hazard_assessment.svg)"></div>
-                    <b>Hazard Assessment</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/scheduling.svg)"></div>
-                    <b>Scheduling</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/epr.svg)"></div>
-                    <b>Environmental</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/period_statistics.svg)"></div>
-                    <b>Period Statistics</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/register.svg)"></div>
-                    <b>Register</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/advanced_rca.svg)"></div>
-                    <b>Adavanced RCA</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/documents.svg)"></div>
-                    <b>Document</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/tracker.svg)"></div>
-                    <b>COVID-19 Tracker</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/pow_ra.svg)"></div>
-                    <b>Point of Work</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/lost_time.svg)"></div>
-                    <b>Lost Time</b>
-                    <div class="tools">
-                        <a href="./" class="add"> </a>
-                        <a href="./" class="filter"> </a>
-                        <a href="./" class="summary"> </a>
-                        <a href="./" class="tool"> </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile" on:click|preventDefault="{ () => {nav('linkedfields');window.location.hash='#ehs/administration/linkedfields'}}">
-                    <div class="icon" style="background-image:url(./images/svgs_clean/administration.svg)"></div>
-                    <b>Administration</b>
-                </div>
-            </div>
-            
-        </div>
-    {:else if tab == 'dashboards'}
-        <h2>Dashboards</h2>
-    {:else if tab == 'reports'}
-        <h2>Reports</h2>
-    {:else if tab == 'tasks'}
-        <h2>My Tasks</h2>
-    {/if}
-        
+		
+			
+			{#if selected_app == 'home'}
+				<h2>Favourites</h2>
+				<div class='row'>
+					{#each $favourites as m, i}
+						<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
+							<div class='tile' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m.url); }}">
+								<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+								<b>
+									{m.name}
+									{#if m.tip}
+										<span class='tip'>{m.tip}</span>
+									{/if}
+								</b>
+								{#if $config.menu_upsell}
+									
+									{#if m.discover}
+										<span class='badge badge-discover'>Discover</span>
+									{/if}
+
+								{/if}
+							</div>
+						</div>
+					{/each}
+					<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
+						<div class='tile' on:click|preventDefault="{ () => { favourites_modal = true }}">
+							<div class="icon" style="opacity:0.3;background-image:url('./images/icons/add--alt.svg')"></div>
+							<b>
+								Add Favourite
+							</b>
+						</div>
+					</div>
+				</div>
+
+				<h2>Helpful links</h2>
+				<div class='nav-page' bind:this={nav_item_holder}>
+					
+					
+					
+					{#if $app_data[selected_app].has_modules}
+						<div class='row'>
+							{#each $app_data[selected_app].modules_to_paint as m, i}
+							<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
+									<div class='tile' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
+										<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+										<b>
+											{m.name}
+											{#if m.tip}
+												<span class='tip'>{m.tip}</span>
+											{/if}
+										</b>
+										{#if $config.menu_upsell}
+											
+											{#if m.discover}
+												<span class='badge badge-discover'>Discover</span>
+											{/if}
+
+										{/if}
+									</div>
+								</div>
+							{:else}
+								{#if filter_key !== ''}
+									<p class='exception exception-filter'>There are no modules with this filter</p>
+								{:else}
+									<div class='exception exception-permissions'>
+										<h3>Access</h3>
+										<p>
+											This Application has been enabled for your organisation but your roles have not been set yet.<br>
+											Please talk to your company administrator.
+										</p>
+									</div>
+								{/if}
+							{/each}
+						</div>
+					
+					{/if}
+						
+				
+
+				</div>
+			{:else}
+			
+				<h2>
+					<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[selected_app].icon + ($app_data[selected_app].key == selected_app ? '' : 'bw') + ".svg')"}></div>
+					
+					<span>{$app_data[selected_app].name}</span>
+					
+				</h2>
+				
+				
+				<div class='nav-page' bind:this={nav_item_holder}>
+				
+
+					{#if $app_data[selected_app].has_ecoid}
+
+						{#if ($app_data[selected_app].has_modules && $app_data[selected_app].modules_to_paint.length) || !$app_data[selected_app].has_modules}
+							{#if !$config.menu_hover}
+								
+								<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[selected_app].key); }}">Go to {($config.hide_headers ? $app_data[selected_app].name : 'Product')} Hub</span>
+								
+							{/if}
+						{/if}
+						{#if $app_data[selected_app].show_tennants && $app_data[selected_app].tennants && $app_data[selected_app].tennants.length}
+							<!--
+							<select bind:value="{selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
+								{#each $app_data[selected_app].tennants as tennant}
+									<option>{tennant}</option>
+								{/each}
+							</select>
+							-->
+						{/if}
+						{#if $slices[selected_app] && $slices[selected_app].changing_tennant}
+							<div style='text-align:center'>
+								<div class='changing-tennant'>
+									<div class="icon" style={"background-image:url('./images/svgs_clean/loading.svg')"}></div>
+									Loading modules for {selected_tennant}...
+								</div>
+							</div>
+						{:else}
+							{#if $app_data[selected_app].has_modules}
+								<div class='row'>
+									{#each $app_data[selected_app].modules_to_paint as m, i}
+									<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
+											<div class='tile' on:click|preventDefault="{ () => {nav(m); }}">
+												<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+												<b>
+													{m.name}
+													{#if m.tip}
+														<span class='tip'>{m.tip}</span>
+													{/if}
+												</b>
+												{#if $config.menu_upsell}
+													
+													{#if m.discover}
+														<span class='badge badge-discover'>Discover</span>
+													{/if}
+
+												{/if}
+											</div>
+										</div>
+									{:else}
+										{#if filter_key !== ''}
+											<p class='exception exception-filter'>There are no modules with this filter</p>
+										{:else}
+											<div class='exception exception-permissions'>
+												<h3>Access</h3>
+												<p>
+													This Application has been enabled for your organisation but your roles have not been set yet.<br>
+													Please talk to your company administrator.
+												</p>
+											</div>
+										{/if}
+									{/each}
+								</div>
+							{:else}
+								<div class='nav-item-holder limited'>
+
+									<div class='nav-item'>
+										<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[selected_app].icon + ".svg')"}></div>
+										<b>
+											{$app_data[selected_app].name}
+											<span class='tip'>{$app_data[selected_app].tip}</span>
+										</b>
+									</div>
+									<div class='exception exception-nomodules'>
+										<p>{$app_data[selected_app].tip}</p>
+									</div>
+								</div>
+							{/if}
+						
+						{/if}
+					{:else}
+						<div class='nav-item-holder limited'>
+							<div class='exception'>
+								<h3>Access</h3>
+								<p>We’ve added <i>{$app_data[selected_app].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
+								{#if $app_data[selected_app].external_login}
+									<a href='{$app_data[selected_app].external_login}' target='_blank' class='btn'>Login</a>
+								{/if}
+								{#if $app_data[selected_app].external_marketing}
+									<a href='{$app_data[selected_app].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>
+								{/if}
+							</div>
+						</div>
+					{/if}
+
+				</div>
+				
+			
+			{/if}		
+			
+
+    </div>
+</div>
+<div style='width:1px;height:1px;overflow:hidden;'>
+    <MenuSettings></MenuSettings>
+</div>
+
+
+<Modal w={'512px'} show_modal={favourites_modal} title={'Add your favourites'} on:close={ () => { favourites_modal = false}}>
+    <div>
+		<div class="form-item">
+			<label>Search</label>
+			<p>Search for the shortcut you want to add to your favourites.</p>
+			<input type="text" class='form-control' bind:value={favourite_filter}>
+		</div>
+		{#if favourite_filter.length > 1 && !favourite_results.length }
+			<div>
+				No modules with this search.
+			</div>
+		{:else}
+			<ul class='fav_list'>
+				{#each favourite_results as m}
+					<li class:selected={$favourites.indexOf(m) >= 0} on:click={ () => { fav_toggle(m) }}>
+						<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+						{m.name} <span>({m.parent_name})</span></li>
+				{/each}
+			</ul>
+		{/if}
+
+		<div class='btn btn-right' on:click='{ () => favourites_modal = false }'>Done</div>
+	</div>
+</Modal>
+
+
+
+
+
+
+
+
+<style>
+	h2 {
+		line-height:40px;
+		font-weight: normal;
+		margin:16px 0 0 0;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		cursor:pointer;
+	}
+	h2.hide_headers {
+		display:none;
+	}
+	h2 span {
+		line-height: 32px;
+		font-size: 24px
+	}
+	h2 .icon {
+		width: 28px;
+		height:28px;
+		aspect-ratio: 1;
+		margin-left:6px;
+		margin-top:2px;
+		margin-right:12px;
+		background-color: transparent;
+		background-position: center center;
+		background-repeat:no-repeat;
+		background-size:cover;
+		transition: all 0.2s linear;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	h2.selected .icon {
+		width: 32px;
+		margin-left:4px;
+		margin-top:0;
+		margin-right:8px;
+	}
+	.hub-link {
+		/*color: var(--black);*/
+		line-height: 16px;
+		display: inline-block;
+		padding:4px 8px;
+		/*border-radius:4px;*/
+		margin-left:0px;
+		margin-bottom: 13px;
+		margin-top: 8px;
+		/*background: rgba(26,25,25,5%);*/
+		font-size:12px;
+		/*text-transform: uppercase;*/
+		position:initial;
+	}
+
+	.fav_list {
+		padding:0;
+		margin:32px;
+		max-height:200px;
+		overflow: auto;
+	}
+	.fav_list .icon {
+		width:24px;
+		height:24px;
+		aspect-ratio: 1;
+		margin-right:12px;
+		background-color: transparent;
+		background-position: center center;
+		background-repeat:no-repeat;
+		background-size:cover;
+		transition: all 0.2s linear;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.fav_list li {
+		border-radius:8px;
+		margin-bottom: 4px;
+		height:40px;
+		line-height:40px;
+		padding:0 16px;
+		cursor:pointer;
+	}
+	.fav_list .selected {
+		background: rgba(26,25,25,10%);
+	}
+</style>

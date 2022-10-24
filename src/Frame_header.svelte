@@ -4,7 +4,7 @@
 
 	import MenuSettings from "./Frame_menusettings.svelte";
 	import AppMenu from "./Frame_appmenu.svelte";
-	import { config, app_data } from './Frame_menusettings.js';
+	import { config, app_data, slices, favourites } from './Frame_menusettings.js';
 
     const dispatch = createEventDispatcher();
 
@@ -13,8 +13,9 @@
 		if(module.discover) {
 			window.open(module.url, "_blank")
 		} else {
+			window.location.hash = '#' + module.url;
+	
 
-			window.location.hash = '#' + module.url
 			dispatch('nav', {
 				text: module.url
 			});
@@ -54,27 +55,7 @@
 	let svg_peak = 0;
 	let svg_path = 'M100 100L100 0L0 50L0 40Z';
 	
-	//hacks for app settings
-	let slices= {
-		ehs: {
-			basic: [0,5],
-			multi: [0,10],
-			admin: [0],
-			changing_tennant: false
-		},
-		cm: {
-			basic: [0,10],
-			multi: [0,-3],
-			admin: [0],
-			changing_tennant: false
-		},
-		munio: {
-			basic: [0,-1],
-			multi: [0,-1],
-			admin: [0],
-			changing_tennant: false
-		}
-	}
+	
 
 	function set_app_module() {
 		let h = window.location.hash.substring(1);
@@ -113,7 +94,7 @@
 	}
 	function user_slicer(temp, a) {
 		let ul = $config.user_level;
-		let slice_arr = (slices[a] ? (slices[a][ul] ? slices[a][ul] : null) : null);
+		let slice_arr = ($slices[a] ? ($slices[a][ul] ? $slices[a][ul] : null) : null);
 
 
 		if(slice_arr) {
@@ -122,16 +103,18 @@
 		return temp;
 	}
 	function fake_tennant_change(a) {
-		slices[a].changing_tennant = true;
+		$slices[a].changing_tennant = true;
 		const min = 2000;
 		const max = 5000;
 		let delay =  Math.floor(Math.random() * (max - min) + min);
 		setTimeout( () => { 
-			slices[a].changing_tennant = false; 
+			$slices[a].changing_tennant = false; 
 		}, delay)
 	}
 
 	function menu_change_handler(event){
+
+		console.log('header menu_change');
 		if($config.menu_hover) {
 			//if hover mode set go straight to app
 			nav(event.detail.menu_item)
@@ -141,6 +124,7 @@
 	}
 
 	function menu_hover_handler(event){
+		console.log('header menu_hover');
 		sidebar_enter(event.detail.m, event.detail.menu_item, event.detail.index);
 	}
 	function sidebar_enter(m, menu_item, index) {
@@ -293,7 +277,7 @@
 <nav>
 	<div class="frame">
 
-		<svg width="129" height="33" viewBox="0 0 129 33" fill="none" xmlns="http://www.w3.org/2000/svg" >
+		<svg width="129" height="33" viewBox="0 0 129 33" fill="none" xmlns="http://www.w3.org/2000/svg" on:click|preventDefault="{ () => {nav({url:'home'}); }}" style="cursor:pointer">
 			<path d="M16.202 11.0018L16.792 9.6818C17.232 8.7118 18.202 8.0918 19.262 8.0918C19.982 8.0918 20.662 8.3718 21.172 8.8818L21.872 9.5818C20.632 10.2618 19.792 11.5818 19.792 13.0918V14.9718C19.792 18.3318 17.402 21.2218 14.102 21.8518L7.20199 23.1718C6.85199 23.2418 6.57199 23.4818 6.45199 23.8118C6.33199 24.1418 6.39199 24.5118 6.61199 24.7818C10.482 29.5718 16.302 31.0118 16.552 31.0718C16.632 31.0818 16.712 31.0918 16.792 31.0918C16.872 31.0918 16.952 31.0818 17.022 31.0618C17.162 31.0318 30.292 27.7318 30.292 15.0918V3.0918C30.292 1.9918 29.392 1.0918 28.292 1.0918H5.29199C4.19199 1.0918 3.29199 1.9918 3.29199 3.0918V18.3518L5.29199 16.3518V3.0918H28.292V15.0918C28.292 25.3918 18.512 28.5818 16.792 29.0518C15.852 28.7818 12.252 27.6018 9.34199 24.7918L14.482 23.8118C18.722 23.0018 21.792 19.2818 21.792 14.9718V13.0918C21.792 11.9918 22.692 11.0918 23.792 11.0918H24.642C25.222 11.0918 25.512 10.3918 25.102 9.9818L22.592 7.4718C21.702 6.5818 20.522 6.0918 19.262 6.0918C17.412 6.0918 15.732 7.1818 14.972 8.8618L14.452 10.0118L0.291992 24.1818V27.0118L16.002 11.3018C16.092 11.2118 16.152 11.1118 16.202 11.0018Z" fill="black"/>
 			<path d="M39.292 22.0918V8.0918H48.252V10.1018H41.552V13.9918H47.632V16.0018H41.552V20.0918H48.252V22.0918H39.292Z" fill="black"/>
 			<path d="M54.6821 22.3318C53.9321 22.3318 53.2621 22.2018 52.6721 21.9518C52.0821 21.7018 51.5922 21.3318 51.1922 20.8618C50.7922 20.3918 50.4821 19.8118 50.2721 19.1418C50.0621 18.4718 49.9521 17.7118 49.9521 16.8818C49.9521 16.0518 50.0621 15.3018 50.2721 14.6218C50.4821 13.9518 50.7922 13.3718 51.1922 12.9018C51.5922 12.4318 52.0921 12.0618 52.6721 11.8118C53.2621 11.5618 53.9321 11.4318 54.6821 11.4318C55.7221 11.4318 56.5821 11.6618 57.2521 12.1318C57.9221 12.6018 58.4121 13.2218 58.7121 14.0018L56.9121 14.8418C56.7621 14.3618 56.5121 13.9718 56.1421 13.6918C55.7721 13.4018 55.2922 13.2618 54.6922 13.2618C53.8922 13.2618 53.2822 13.5118 52.8722 14.0118C52.4622 14.5118 52.2621 15.1618 52.2621 15.9618V17.8218C52.2621 18.6218 52.4622 19.2718 52.8722 19.7718C53.2822 20.2718 53.8822 20.5218 54.6922 20.5218C55.3321 20.5218 55.8421 20.3618 56.2221 20.0518C56.6021 19.7418 56.9021 19.3218 57.1321 18.8018L58.7921 19.6818C58.4421 20.5418 57.9221 21.2018 57.2321 21.6618C56.5321 22.1018 55.6821 22.3318 54.6821 22.3318Z" fill="black"/>
@@ -482,7 +466,7 @@
 												{#if a == 'home'}
 													<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[a]); }}">Go to EcoOnline Home</span>
 												{:else}
-													<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[a]); }}">Go to {($config.hide_headers ? $app_data[a].name : 'Application')} Hub</span>
+													<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[a]); }}">Go to {($config.hide_headers ? $app_data[a].name : 'Product')} Hub</span>
 												{/if}
 											{/if}
 										{/if}
@@ -494,7 +478,7 @@
 												{/each}
 											</select>
 										{/if}
-										{#if slices[a] && slices[a].changing_tennant}
+										{#if $slices[a] && $slices[a].changing_tennant}
 											<div style='text-align:center'>
 												<div class='changing-tennant'>
 													<div class="icon" style={"background-image:url('./images/svgs_clean/loading.svg')"}></div>
@@ -503,13 +487,32 @@
 											</div>
 										{:else}
 											{#if $app_data[a].has_modules}
+												{#if a == 'home' && $favourites.length}
+													<h4>Favourites</h4>
+													<div class='nav-item-holder' class:limited={$favourites.length < 3}>
+														{#each $favourites as m, i}
+															<div class='nav-item' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
+																<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
+																<b>
+																	{m.name}
+																	{#if m.tip}
+																		<span class='tip'>{m.tip}</span>
+																	{/if}
+																</b>
+															</div>
+														{/each}
+													</div>
+												{/if}
+												<h4>Shortcuts</h4>
 												<div class='nav-item-holder' class:limited={$app_data[a].modules_to_paint.length < 3}>
 													{#each $app_data[a].modules_to_paint as m, i}
 														<div class='nav-item' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
 															<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
 															<b>
 																{m.name}
-																<span class='tip'>{m.tip}</span>
+																{#if m.tip}
+																	<span class='tip'>{m.tip}</span>
+																{/if}
 															</b>
 															{#if $config.menu_upsell}
 																<!--{#if m.recent}
@@ -555,7 +558,9 @@
 													</div>
 													-->
 													<div class='exception exception-nomodules'>
-														<p>{$app_data[a].tip}</p>
+														{#if $app_data[a].tip}
+															<p>{$app_data[a].tip}</p>
+														{/if}
 													</div>
 												</div>
 											{/if}

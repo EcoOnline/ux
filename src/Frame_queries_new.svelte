@@ -30,7 +30,7 @@
 <div class="row sticky">
     <div class="col12 col-sm-7">
         <ul class="breadcrumb">
-            <li><a href="#platform">EcoOnline</a></li>
+            <li><a href="#home">EcoOnline</a></li>
             <li><a href="#ehs">EHS</a></li>
             <li><a href="#ehs/incidents">Incidents</a></li>
             <li>New Query</li>

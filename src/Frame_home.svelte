@@ -2,6 +2,9 @@
 import { writable } from 'svelte/store';
 import { createEventDispatcher } from 'svelte';
 import Modal from './components/Modal.svelte';
+import FavList from './components/FavList.svelte';
+//import SortableList from 'svelte-sortable-list';
+
 
 import MenuSettings from "./Frame_menusettings.svelte";
 import AppMenu from "./Frame_appmenu.svelte";
@@ -15,14 +18,17 @@ let favourite_filter = '';
 let favourite_results = [];
 function fav_toggle(m) {
 	let i = $favourites.indexOf(m);
-	console.log('add?', i, m);
+	let f = $favourites;
 	if(i<0) {
 		//add
-		$favourites = [...$favourites, ...[m]]
+		console.log('add', i, m);
+		f.push(m);
 	} else {
 		//remove
-		$favourites.splice(i,1);
+		console.log('remove', i, m);
+		f.splice(i,1);
 	}
+	$favourites = f;
 }
 
 $: {
@@ -53,6 +59,11 @@ function nav(str) {
 	});
 }
 
+const sortList = ev => {
+	console.log(ev.detail)
+	$favourites = ev.detail;
+
+};
 
 
 
@@ -114,7 +125,7 @@ function menu_hover_handler(event){
 						</div>
 					{/each}
 					<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-						<div class='tile' on:click|preventDefault="{ () => { favourites_modal = true }}">
+						<div class='tile inset' on:click|preventDefault="{ () => { favourites_modal = true }}">
 							<div class="icon" style="opacity:0.3;background-image:url('./images/icons/add--alt.svg')"></div>
 							<b>
 								Add Favourite
@@ -209,7 +220,7 @@ function menu_hover_handler(event){
 							</div>
 						{:else}
 							{#if $app_data[selected_app].has_modules}
-								<div class='row'>
+								<div class='row' style='margin-top:16px;'>
 									{#each $app_data[selected_app].modules_to_paint as m, i}
 									<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
 											<div class='tile' on:click|preventDefault="{ () => {nav(m); }}">
@@ -300,9 +311,27 @@ function menu_hover_handler(event){
 				No modules with this search.
 			</div>
 		{:else}
+			<!--
+		<SortableList 
+		list={favourite_results}
+		key="url" 
+		on:sort={sortList}
+		let:item
+		let:index
+	>
+		<div class="fav-li" class:selected={$favourites.indexOf(item) >= 0} on:click={ () => { fav_toggle(item) }}>
+		<div class="icon" style={"background-image:url('./images/svgs_clean/" + item.icon + ".svg')"}></div>
+		{item.name} <span>({item.parent_name})</span></div>
+	</SortableList>
+-->
+
+
+			
+			<!--<FavList items={favourite_results} on:sort={sortList}/>-->
+
 			<ul class='fav_list'>
 				{#each favourite_results as m}
-					<li class:selected={$favourites.indexOf(m) >= 0} on:click={ () => { fav_toggle(m) }}>
+					<li class="fav-li" class:selected={$favourites.indexOf(m) >= 0} on:click={ () => { fav_toggle(m) }}>
 						<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
 						{m.name} <span>({m.parent_name})</span></li>
 				{/each}
@@ -380,7 +409,7 @@ function menu_hover_handler(event){
 		max-height:200px;
 		overflow: auto;
 	}
-	.fav_list .icon {
+	.fav-li .icon {
 		width:24px;
 		height:24px;
 		aspect-ratio: 1;
@@ -393,7 +422,7 @@ function menu_hover_handler(event){
 		display: inline-block;
 		vertical-align: middle;
 	}
-	.fav_list li {
+	.fav-li {
 		border-radius:8px;
 		margin-bottom: 4px;
 		height:40px;
@@ -402,7 +431,21 @@ function menu_hover_handler(event){
 		cursor:pointer;
 		overflow:hidden;
 	}
-	.fav_list .selected {
+	.fav-li.selected {
 		background: rgba(26,25,25,10%);
 	}
+
+	.tile.inset {
+		background: #F9f9f9;
+		box-shadow: inset 2px 2px 8px rgba(25,25,25,10%);
+	}
+	.tile.inset:hover {
+		background: transparent;
+
+		transform: scale(0.99);
+		box-shadow: inset 2px 2px 8px rgba(25,25,25,20%);
+	}
+	.tile.inset:hover .icon {
+		transform: scale(0.95);
+	}	
 </style>

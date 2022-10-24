@@ -18,7 +18,7 @@
     <div class="row sticky">
         <div class="col12">
             <ul class="breadcrumb">
-                <li><a href="#platform"><i class="i-16 i-platform"></i></a></li>
+                <li><a href="#home"><i class="i-16 i-platform"></i></a></li>
                 <li>Chemical Manager</li>
             </ul>
         </div>

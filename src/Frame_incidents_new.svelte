@@ -709,7 +709,7 @@
 <div class="row sticky">
     <div class="col12 col-md-6">
         <ul class="breadcrumb">
-            <li><a href="#platform" on:click="{ () => {nav('platform')}}"><i class="i-16 i-platform"></i></a></li>
+            <li><a href="#home" on:click="{ () => {nav('platform')}}"><i class="i-16 i-platform"></i></a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
             <li><a href="#ehs/incidents" on:click="{ () => {nav('incidents')}}">Incidents</a></li>
             <li>{(!incident.id ? "New" : "Incident "+incident.id)}</li>

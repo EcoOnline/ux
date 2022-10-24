@@ -138,7 +138,7 @@
 			{#each $config.apps as a, index}
 				<a 
 					href="/"
-					title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}"
+					title="{($config.menu_hover ? 'Click to navigate to the product' : '')}"
 					on:mouseenter={(m) => { sidebar_enter(m, $app_data[a], index); } } 
 					style='position:relative;' 
 					class='nav-item' 
@@ -167,7 +167,7 @@
 				xmlns="http://www.w3.org/2000/svg">
 				
 				<path 
-					title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}" 
+					title="{($config.menu_hover ? 'Click to navigate to the product' : '')}" 
 					d="{svg_path}" fill="{$config.svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
 					style="pointer-events:auto;cursor:pointer" 
 					on:mouseleave="{ () => { svg_width = 0; }}" 

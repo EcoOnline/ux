@@ -370,7 +370,7 @@
 <div class="row sticky">
     <div class="col12 col-sm-5">
         <ul class="breadcrumb">
-            <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
+            <li><a href="#home" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
             <li>Hazard Assessments</li>
         </ul>

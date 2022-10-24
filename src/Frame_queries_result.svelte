@@ -15,7 +15,7 @@
 <div class="row sticky">
     <div class="col12 col-md-5">
         <ul class="breadcrumb">
-            <li><a href="#platform">EcoOnline</a></li>
+            <li><a href="#home">EcoOnline</a></li>
             <li><a href="#ehs">EHS</a></li>
             <li><a href="#ehs/incidents">Incidents</a></li>
             <li>Query Result</li>

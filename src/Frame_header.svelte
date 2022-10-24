@@ -126,11 +126,15 @@
 	function menu_hover_handler(event){
 		console.log('header menu_hover');
 		sidebar_enter(event.detail.m, event.detail.menu_item, event.detail.index);
+
+		
 	}
 	function sidebar_enter(m, menu_item, index) {
 		if($config.menu_hover) {
 			selected_app = menu_item.key;
 			menu_hover_item = menu_item;
+
+			console.warn('sidebar_enter')
 			setTimeout(() => {
 
 				let apps_height = ($config.apps.length+1)*48;
@@ -384,7 +388,7 @@
 						<div class='nav-tabs-wrapper'>
 						
 							<div class='nav-tabs' bind:this={apps_item_holder}>
-								<AppMenu {selected_app} on:menu_change={menu_change_handler} on:menu_hover={menu_hover_handler}></AppMenu>
+								<AppMenu {selected_app} {svg_peak} {svg_width} {svg_height} {svg_path} on:menu_change={menu_change_handler} on:menu_hover={menu_hover_handler}></AppMenu>
 							</div>
 						</div>
 					<!--

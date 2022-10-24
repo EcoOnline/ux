@@ -20,7 +20,7 @@ ehs - a direct link to ehs login
 web - a login via website without context same as origin false
 */
 let origin = false;
-let context = 'platform';
+let context = 'home';
 let params = new URLSearchParams(window.location.search);
 let origin_param = params.get("origin");
 let r = document.querySelector(':root').style;
@@ -43,11 +43,11 @@ switch(origin_param) {
 		break;
 	case 'web': 
 		origin = 'web';
-		context = 'platform';
+		context = 'home';
 		break;
 	default:
 		origin = false;
-		context = 'platform';
+		context = 'home';
 		break;
 }
 
@@ -251,7 +251,7 @@ let f2 = [
 
 {#if show_admin}
 <div class='admin'>
-	<a href="?origin=platform">No App Context</a>
+	<a href="?origin=home">No App Context</a>
 	<a href="?origin=ehs">EHS</a>
 	<a href="?origin=cm">CM</a>
 	<a href="?origin=almego">Almego</a>

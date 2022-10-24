@@ -48,10 +48,10 @@
 	let filter_input;
 
 	//vars for svg mask
-	let svg_height = 100;
-	let svg_width = 0;
-	let svg_peak = 0;
-	let svg_path = 'M100 100L100 0L0 50L0 40Z';
+	export let svg_height = 100;
+	export let svg_width = 0;
+	export let svg_peak = 0;
+	export let svg_path = 'M100 100L100 0L0 50L0 40Z';
 	
 	//hacks for app settings
 	let slices= {
@@ -102,6 +102,8 @@
 		
 	}
 
+	
+
 
 	
 
@@ -124,6 +126,12 @@
 
 </script>
 	<div style='position:sticky;top:16px;margin-top:24px;'>
+		<!--
+		$config.svg_show {$config.svg_show}<br>
+		svg_path {svg_path}<br>
+		svg_width {svg_width}<br>
+		svg_peak {svg_peak}<br>
+		-->
 		<h4>Applications</h4>
 		<div class='nav-item-holder' title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}">
 			

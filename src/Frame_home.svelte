@@ -62,14 +62,17 @@ let selected_app = 'home';
 function menu_change_handler(event){
 	if($config.menu_hover) {
 		//if hover mode set go straight to app
-		nav(event.detail.menu_item)
+		nav(event.detail.menu_item.key)
 	} else {
-		let k = event.detail.menu_item.key;
-		selected_app = k;
+		selected_app = event.detail.menu_item.key;
 	}
 }
 
 function menu_hover_handler(event){
+	if($config.menu_hover) {
+		//if hover mode set go straight to app
+		selected_app = event.detail.menu_item.key;
+	}
 	//sidebar_enter(event.detail.m, event.detail.menu_item, event.detail.index);
 }
 
@@ -372,7 +375,8 @@ function menu_hover_handler(event){
 
 	.fav_list {
 		padding:0;
-		margin:32px;
+		margin-top:32px;
+		margin-bottom:32px;
 		max-height:200px;
 		overflow: auto;
 	}
@@ -396,6 +400,7 @@ function menu_hover_handler(event){
 		line-height:40px;
 		padding:0 16px;
 		cursor:pointer;
+		overflow:hidden;
 	}
 	.fav_list .selected {
 		background: rgba(26,25,25,10%);

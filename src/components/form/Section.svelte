@@ -13,6 +13,7 @@
 	import InputText from "./InputText.svelte";
 	import InputTextarea from "./InputTextarea.svelte";
 	import RandomSelector from "./RandomSelector.svelte";
+	import Swatch from "./Swatch.svelte";
 
 	let components = {
 		"input_checkbox": InputCheckbox,
@@ -27,7 +28,8 @@
 		"input_tally": InputTally,
 		"input_text": InputText,
 		"input_textarea": InputTextarea,
-		"random_selector": RandomSelector
+		"random_selector": RandomSelector,
+		"swatch": Swatch
     }
     
 

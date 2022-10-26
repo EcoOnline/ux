@@ -20,6 +20,20 @@
                 answer: ""
             }
         ],
+        "swatch": [{
+            item_type: "swatch",
+            id: "swatch_sample",
+            label: "Swatch sample",
+            hint: "HSL color mode, set the H & S value.",
+            optional: true,
+            answer: "",
+            shortcuts: [
+                { value: '236/39%', text: "Primary" },
+                { value: '158/76%', text: "Green" },
+                { value: '43/100%', text: "Yellow" },
+                { value: '0/90%', text: "Red" }
+            ]
+        }],
         "input_text": [{
             item_type: "input_text",
             id: "text_sample",

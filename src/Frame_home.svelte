@@ -143,7 +143,7 @@ function menu_hover_handler(event){
 						<div class='row'>
 							{#each $app_data[selected_app].modules_to_paint as m, i}
 							<div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-									<div class='tile' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m); }}">
+									<div class='tile' style="animation-delay:{i*0.02+0.3}s" class:selected="{ window.location.hash == '#' + m.url }" on:click|preventDefault="{ () => {nav(m.url); }}">
 										<div class="icon" style={"background-image:url('./images/svgs_clean/" + m.icon + ".svg')"}></div>
 										<b>
 											{m.name}

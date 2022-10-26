@@ -476,7 +476,7 @@
 										{/if}
 										{#if $app_data[a].show_tennants && $app_data[a].tennants && $app_data[a].tennants.length}
 											<!-- svelte-ignore a11y-no-onchange -->
-											<select bind:value="{selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
+											<select bind:value="{$app_data[a].selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
 												{#each $app_data[a].tennants as tennant}
 													<option>{tennant}</option>
 												{/each}
@@ -486,7 +486,7 @@
 											<div style='text-align:center'>
 												<div class='changing-tennant'>
 													<div class="icon" style={"background-image:url('./images/svgs_clean/loading.svg')"}></div>
-													Loading modules for {selected_tennant}...
+													Loading modules for {$app_data[a].selected_tennant}...
 												</div>
 											</div>
 										{:else}

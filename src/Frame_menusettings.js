@@ -89,6 +89,7 @@ export const app_data = writable({
 		has_modules: true,
 		show_tennants: true,
 		tennants: ["Production", "Testing"],
+		selected_tennant: "Production",
 		modules_to_paint: [], 
 		modules: [
 			{
@@ -206,6 +207,7 @@ export const app_data = writable({
 		has_modules: true,
 		show_tennants: true,
 		tennants: ["Big Company", "Little Company"],
+		selected_tennant: "Big Company",
 		modules_to_paint: [], 
 		modules: [
 			{
@@ -340,6 +342,7 @@ export const app_data = writable({
 		has_modules: true,
 		show_tennants: false,
 		tennants: false,
+		selected_tennant: false,
 		modules_to_paint: [],
 		modules: []
 	},
@@ -352,6 +355,7 @@ export const app_data = writable({
 		has_modules: true,
 		show_tennants: true,
 		tennants: [],
+		selected_tennant: false,
 		modules_to_paint: [], 
 		modules: [
 			{
@@ -380,6 +384,7 @@ export const app_data = writable({
 		has_modules: false,
 		show_tennants: true,
 		tennants: [],
+		selected_tennant: false,
 		modules_to_paint: [],
 		modules: []
 	},
@@ -394,6 +399,7 @@ export const app_data = writable({
 		external_marketing: 'https://www.ecoonline.com/news/ecoonline-acquires-staysafe-a-uk-based-specialist-in-lone-worker-protection',
 		show_tennants: true,
 		tennants: [],
+		selected_tennant: false,
 		modules_to_paint: [], 
 		modules: []
 	}

@@ -75,6 +75,5 @@
     --color-swatch-700: hsl(var(--h), var(--s),calc(var(--l) - 20%));
     --color-swatch-800: hsl(var(--h), var(--s),calc(var(--l) - 30%));
     --color-swatch-900: hsl(var(--h), var(--s),calc(var(--l) - 40%));
-    --color-swatch-1000: hsl(var(--h), var(--s),calc(var(--l) - 50%));
       
 }

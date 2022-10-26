@@ -28,9 +28,9 @@
             optional: true,
             answer: "",
             shortcuts: [
-                { value: '236/39%', text: "Primary" },
-                { value: '158/76%', text: "Green" },
-                { value: '43/100%', text: "Yellow" },
+                { value: '235/59%', text: "Primary" },
+                { value: '158/77%', text: "Green" },
+                { value: '34/100%', text: "Yellow" },
                 { value: '0/90%', text: "Red" }
             ]
         }],

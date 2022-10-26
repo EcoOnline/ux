@@ -40,7 +40,6 @@
             <div class='swatch8'>700</div>
             <div class='swatch9'>800</div>
             <div class='swatch10'>900</div>
-            <div class='swatch11'>1000</div>
         </div>
 
         <input bind:value="{f.answer}" type="text" class="form-control">
@@ -81,7 +80,6 @@
     .swatch8 { background-color: var(--color-swatch-700)}
     .swatch9 { background-color: var(--color-swatch-800)}
     .swatch10 { background-color: var(--color-swatch-900)}
-    .swatch11 { background-color: var(--color-swatch-1000)}
     .form-control {
         max-width:80px;
     }

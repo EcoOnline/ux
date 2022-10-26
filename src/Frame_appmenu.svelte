@@ -22,7 +22,7 @@
 	}
 
 	//work out current app and module
-	let app = 'platform';
+	let app = 'home';
 	let module = false;
 	
 	export let selected_app;

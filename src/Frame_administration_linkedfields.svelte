@@ -186,7 +186,7 @@
 <div class="row sticky">
     <div class="col12">
         <ul class="breadcrumb">
-            <li><a href="#platform" on:click="{ () => {nav('platform')}}">EcoOnline</a></li>
+            <li><a href="#home" on:click="{ () => {nav('home')}}">EcoOnline</a></li>
             <li><a href="#ehs" on:click="{ () => {nav('ehs')}}">EHS</a></li>
             <li><a href="#ehs/administration" on:click="{ () => {nav('administration')}}">Administration</a></li>
             <li>Linked Fields</li>

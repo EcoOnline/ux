@@ -45,24 +45,11 @@
 
 
     /* current metrics for blue */
-    --l: 50%;
+    --l: 57%;
     --h: 236;
     --s: 59%;
     /*
-    --color-swatch-50: hsl(var(--h), var(--s),calc(var(--l) + 60%));
-    --color-swatch-100: hsl(var(--h), var(--s),calc(var(--l) + 50%));
-    --color-swatch-200: hsl(var(--h), var(--s),calc(var(--l) + 37%));
-    --color-swatch-300: hsl(var(--h), var(--s),calc(var(--l) + 25%));
-    --color-swatch-400: hsl(var(--h), var(--s),calc(var(--l) + 12%));
-    --color-swatch-500: hsl(var(--h), var(--s),var(--l));
-    --color-swatch-600: hsl(var(--h), var(--s),calc(var(--l) - 5%));
-    --color-swatch-700: hsl(var(--h), var(--s),calc(var(--l) - 10%));
-    --color-swatch-800: hsl(var(--h), var(--s),calc(var(--l) - 15%));
-    --color-swatch-900: hsl(var(--h), var(--s),calc(var(--l) - 20%));
-    --color-swatch-1000: hsl(var(--h), var(--s),calc(var(--l) - 25%));
-    */
-
-    --color-swatch-50: hsl(var(--h), var(--s),calc(var(--l) + 45%));
+        --color-swatch-50: hsl(var(--h), var(--s),calc(var(--l) + 47%));
     --color-swatch-100: hsl(var(--h), var(--s),calc(var(--l) + 40%));
     --color-swatch-200: hsl(var(--h), var(--s),calc(var(--l) + 30%));
     --color-swatch-300: hsl(var(--h), var(--s),calc(var(--l) + 20%));
@@ -73,5 +60,21 @@
     --color-swatch-800: hsl(var(--h), var(--s),calc(var(--l) - 30%));
     --color-swatch-900: hsl(var(--h), var(--s),calc(var(--l) - 40%));
     --color-swatch-1000: hsl(var(--h), var(--s),calc(var(--l) - 45%));
+    */
+
+    
+
+
+    --color-swatch-50: hsl(var(--h), var(--s),calc(var(--l) + 40%));
+    --color-swatch-100: hsl(var(--h), var(--s),calc(var(--l) + 38%));
+    --color-swatch-200: hsl(var(--h), var(--s),calc(var(--l) + 30%));
+    --color-swatch-300: hsl(var(--h), var(--s),calc(var(--l) + 20%));
+    --color-swatch-400: hsl(var(--h), var(--s),calc(var(--l) + 10%));
+    --color-swatch-500: hsl(var(--h), var(--s),var(--l));
+    --color-swatch-600: hsl(var(--h), var(--s),calc(var(--l) - 10%));
+    --color-swatch-700: hsl(var(--h), var(--s),calc(var(--l) - 20%));
+    --color-swatch-800: hsl(var(--h), var(--s),calc(var(--l) - 30%));
+    --color-swatch-900: hsl(var(--h), var(--s),calc(var(--l) - 40%));
+    --color-swatch-1000: hsl(var(--h), var(--s),calc(var(--l) - 50%));
       
 }

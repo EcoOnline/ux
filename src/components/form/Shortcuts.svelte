@@ -24,6 +24,7 @@
         display:flex;
         flex-direction: row;
         margin-top:4px;
+        margin-right:4px;
     }
     .shortcut {
         border: 1px solid var(--eo-border-reduced);

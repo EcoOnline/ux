@@ -33,6 +33,7 @@
         "ehs": EHS,
         "cm": CM,
         "cm_risk_assessments": CMRisk,
+		"cm_risk_assessment": CMRisk,
         "ehs_linkedfields": AdminLinkedFields,
         "ehs_actions": Actions,
         "ehs_incidents": Incidents,

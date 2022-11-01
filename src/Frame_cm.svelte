@@ -24,6 +24,8 @@
         </div>
        
     </div>
+
+    <h1 class="page-title"><i class="i-chemical-manager  i-32"></i>Chemical Manager</h1>
     
     <!--
     <ul class="tabs">
@@ -86,7 +88,7 @@
                 </div>
             </div>
             <div class="col6 col-sm-4 col-md-3 col-lg-2 col-xl-1">
-                <div class="tile">
+                <div class="tile" on:click|preventDefault="{ () => {nav('risk_assessments');window.location.hash='#cm/risk_assessments'}}">
                     <div class="icon" style="background-image:url(./images/svgs_clean/risk_assessment.svg)"></div>
                     <b>Risk Assessments</b>
                     <ol></ol>

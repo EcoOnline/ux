@@ -405,7 +405,7 @@ li {
     line-height:100%;
     padding-right:16px;
     color: var(--eo-primary-500);
-    font-weight:500;
+    font-weight:300;
 }
 .breadcrumb li a:after {
     position: absolute;
@@ -725,6 +725,7 @@ h1 .i-32 {
 .i-printer              { background-image:url(../images/icons/printer.svg)}
 .i-qr                   { background-image:url(../images/icons/qr.svg)}
 .i-reset                { background-image:url(../images/icons/reset.svg)}
+.i-risk-assessment      { background-image:url(../images/icons/risk-assessment.svg)}
 .i-rocket               { background-image:url(../images/icons/rocket.svg)}
 .i-search               { background-image:url(../images/icons/search.svg)}
 .i-settings             { background-image:url(../images/icons/settings.svg)}

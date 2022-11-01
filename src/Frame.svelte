@@ -10,6 +10,7 @@
 	import Nav from "./Frame_header.svelte";
 	import EHS from "./Frame_ehs.svelte";
 	import CM from "./Frame_cm.svelte";
+	import CMRisk from "./Frame_cm_risk.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Actions from "./Frame_actions.svelte";
 	import Actions123 from "./Frame_actions_123.svelte";
@@ -31,6 +32,7 @@
         "login": Login,
         "ehs": EHS,
         "cm": CM,
+        "cm_risk_assessments": CMRisk,
         "ehs_linkedfields": AdminLinkedFields,
         "ehs_actions": Actions,
         "ehs_incidents": Incidents,

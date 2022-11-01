@@ -72,7 +72,7 @@
 
 
 	function filter_mods(temp) {
-		if($config.filter_key !== '') {
+		if(filter_key !== '') {
 			temp = temp.filter( (m) => {
 				return m.name.toLowerCase().includes(filter_key.toLowerCase())
 			});
@@ -338,7 +338,7 @@
 				{#if menu_view_section == 'nav'}
 					{#if $config.filter_view}
 						<div class='action-item filter-view' on:click="{ () => { if($config.action_dd == 'filter_view') { $config.action_dd = false; } else { $config.action_dd = 'filter_view';setTimeout(() => { filter_input.focus()}, 50)} }}">
-							<i class="i-filter i-24"></i><span>Filter</span>
+							<i class="i-search i-24"></i><span>Search</span>
 							{#if $config.action_dd == 'filter_view'}
 								<input type="text" bind:value="{filter_key}" bind:this="{filter_input}" on:blur="{ () => { $config.action_dd = false}}">
 							{/if}
@@ -535,7 +535,7 @@
 														</div>
 													{:else}
 														{#if filter_key !== ''}
-															<p class='exception exception-filter'>There are no modules with this filter</p>
+															<p class='exception exception-filter'>There are no shortcutes with this search</p>
 														{:else}
 															<!-- App has modules but you dont have access to them -->
 															<div class='exception exception-permissions'>

@@ -24,6 +24,9 @@
         </div>
        
     </div>
+
+
+    <h1 class="page-title"><i class="i-ehs  i-32"></i>EcoOnline EHS</h1>
     
 
     <ul class="tabs">

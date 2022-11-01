@@ -40,11 +40,13 @@ $: {
 		for (const [app, prod] of Object.entries($app_data)) {
 			let v = prod.modules.filter( (m) => {
 				m.parent_name = prod.name;
-				return m.name.toLowerCase().indexOf(f) >= 0
+				return m.name.toLowerCase().indexOf(f) >= 0 && $favourites.indexOf(m) < 0;
 			})
 			res.push(...v);
 		}
-	} 
+	}
+	console.log('favs', $favourites, 'res', res);
+	res = res.concat($favourites); 
 	favourite_results = res;
 }
 
@@ -311,23 +313,7 @@ function menu_hover_handler(event){
 				No modules with this search.
 			</div>
 		{:else}
-			<!--
-		<SortableList 
-		list={favourite_results}
-		key="url" 
-		on:sort={sortList}
-		let:item
-		let:index
-	>
-		<div class="fav-li" class:selected={$favourites.indexOf(item) >= 0} on:click={ () => { fav_toggle(item) }}>
-		<div class="icon" style={"background-image:url('./images/svgs_clean/" + item.icon + ".svg')"}></div>
-		{item.name} <span>({item.parent_name})</span></div>
-	</SortableList>
--->
-
-
-			
-			<!--<FavList items={favourite_results} on:sort={sortList}/>-->
+		
 
 			<ul class='fav_list'>
 				{#each favourite_results as m}
@@ -338,7 +324,7 @@ function menu_hover_handler(event){
 			</ul>
 		{/if}
 
-		<div class='btn btn-right' on:click='{ () => favourites_modal = false }'>Done</div>
+		<div class='btn btn-right' on:click='{ () => {favourite_filter='';favourites_modal = false;} }'>Done</div>
 	</div>
 </Modal>
 

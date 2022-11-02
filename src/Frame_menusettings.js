@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 
 export const config = writable({
-	apps: ['home','ehs', 'cm'],
+	apps: ['home','ehs', 'cm', 'crisis'],
 	user_level: 'admin',
-	multi_tennant: false,
+	multi_tennant: true,
 	view_mode: 'tabbed',
 	menu_hover: false,
 	menu_hover_item: false,
@@ -88,7 +88,12 @@ export const app_data = writable({
 		has_ecoid: true,
 		has_modules: true,
 		show_tennants: true,
-		tennants: ["Production", "Testing"],
+		tennants: [{
+			"name" : "Production"
+		},
+		{
+			"name" : "Testing"
+		}],
 		selected_tennant: "Production",
 		modules_to_paint: [], 
 		modules: [
@@ -206,7 +211,12 @@ export const app_data = writable({
 		has_ecoid: true,
 		has_modules: true,
 		show_tennants: true,
-		tennants: ["Big Company", "Little Company"],
+		tennants: [{
+			"name" : "Big Company"
+		},
+		{
+			"name" : "Little Company"
+		}],
 		selected_tennant: "Big Company",
 		modules_to_paint: [], 
 		modules: [
@@ -383,8 +393,32 @@ export const app_data = writable({
 		has_ecoid: true,
 		has_modules: false,
 		show_tennants: true,
-		tennants: [],
-		selected_tennant: false,
+		tennants: [{
+			"name" : "DemoUX",
+			"children": [
+				{
+					"name" : "Office"
+				},
+				{
+					"name" : "Warehouse"
+				}
+			]
+		},
+		{
+			"name" : "Staging test",
+			"children": [
+				{
+					"name" : "Staging Lab"
+				},
+				{
+					"name" : "Staging Lair"
+				}
+			]
+		},
+		{
+			"name" : "Production"
+		}],
+		selected_tennant: "DemoUX",
 		modules_to_paint: [],
 		modules: []
 	},

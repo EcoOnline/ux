@@ -729,7 +729,7 @@
         </div>
         <div class="menu-buttons">
             <a href="/" class='btn btn-secondary' on:click|preventDefault="{save_incident}">Save Progress</a>
-            <a href="/" class='btn'>Submit</a>
+            <a href="#ehs/incidents" class='btn'>Submit</a>
         </div>
     </div>
 </div>

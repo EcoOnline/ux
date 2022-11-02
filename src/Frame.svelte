@@ -11,6 +11,7 @@
 	import EHS from "./Frame_ehs.svelte";
 	import CM from "./Frame_cm.svelte";
 	import CMRisk from "./Frame_cm_risk.svelte";
+	import Crisis from "./Frame_crisis.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Actions from "./Frame_actions.svelte";
 	import Actions123 from "./Frame_actions_123.svelte";
@@ -34,6 +35,7 @@
         "cm": CM,
         "cm_risk_assessments": CMRisk,
 		"cm_risk_assessment": CMRisk,
+        "crisis": Crisis,
         "ehs_linkedfields": AdminLinkedFields,
         "ehs_actions": Actions,
         "ehs_incidents": Incidents,

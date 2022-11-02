@@ -5,6 +5,7 @@
 	import MenuSettings from "./Frame_menusettings.svelte";
 	import AppMenu from "./Frame_appmenu.svelte";
 	import { config, app_data, slices, favourites } from './Frame_menusettings.js';
+    import { children } from 'svelte/internal';
 
     const dispatch = createEventDispatcher();
 
@@ -478,7 +479,13 @@
 											<!-- svelte-ignore a11y-no-onchange -->
 											<select bind:value="{$app_data[a].selected_tennant}" class='tennant-select btn btn-secondary' on:change="{()=> { fake_tennant_change(a); }}">
 												{#each $app_data[a].tennants as tennant}
-													<option>{tennant}</option>
+													<option>{tennant.name}</option>
+													{#if tennant.children}
+														<!-- only going one layer deep for demo - needs to recur -->
+														{#each tennant.children as tc} 
+															<option value='{tc.name}'> - {tc.name}</option>
+														{/each}
+													{/if}
 												{/each}
 											</select>
 										{/if}

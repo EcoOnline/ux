@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const config = writable({
-	apps: ['home','ehs', 'cm', 'crisis'],
+	apps: ['home','ehs', 'cm'],
 	user_level: 'admin',
 	multi_tennant: true,
 	view_mode: 'tabbed',

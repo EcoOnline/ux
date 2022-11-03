@@ -45,9 +45,9 @@
 
 
     /* current metrics for blue */
-    --l: 57%;
     --h: 236;
     --s: 59%;
+    --l: 57%;
     /*
         --color-swatch-50: hsl(var(--h), var(--s),calc(var(--l) + 47%));
     --color-swatch-100: hsl(var(--h), var(--s),calc(var(--l) + 40%));

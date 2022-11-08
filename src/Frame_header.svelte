@@ -542,7 +542,7 @@
 														</div>
 													{:else}
 														{#if filter_key !== ''}
-															<p class='exception exception-filter'>There are no shortcutes with this search</p>
+															<p class='exception exception-filter'>There are no shortcuts with this search</p>
 														{:else}
 															<!-- App has modules but you dont have access to them -->
 															<div class='exception exception-permissions'>

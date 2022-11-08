@@ -424,6 +424,9 @@
 		Colour 2 <select id="foreground"></select>
 
 
+		<div id="dump" class="token"></div>
+
+
 		<script>
 
 			const d = document.documentElement;
@@ -580,6 +583,35 @@
 
 			build_palette();
 			set_illustration_colours();
+
+
+			/*
+			document.getElementById('dump').innerHTML = JSON.stringify(Array.from(document.styleSheets)
+  .filter(
+    sheet =>
+      sheet.href === null || sheet.href.startsWith(window.location.origin)
+  )
+  .reduce(
+    (acc, sheet) =>
+      (acc = [
+        ...acc,
+        ...Array.from(sheet.cssRules).reduce(
+          (def, rule) =>
+            (def =
+              rule.selectorText === ":root"
+                ? [
+                    ...def,
+                    ...Array.from(rule.style).filter(name =>
+                      name.startsWith("--")
+                    )
+                  ]
+                : def),
+          []
+        )
+      ]),
+    []
+  ), null, 4);
+  */
 
 		</script>
 	</body>

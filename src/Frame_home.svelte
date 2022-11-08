@@ -15,7 +15,7 @@ import { config, app_data, slices, favourites } from './Frame_menusettings.js';
 let nav_item_holder;
 let selected_tennant;
 let favourite_filter = '';
-let favourite_results = [];
+let filter_key = '';
 function fav_toggle(m) {
 	let i = $favourites.indexOf(m);
 	let f = $favourites;

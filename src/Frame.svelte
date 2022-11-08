@@ -171,20 +171,11 @@
 		background: repeating-linear-gradient( 90deg, rgba(255,0,0,0.1), rgba(255,0,0,0.1) var(--col), transparent var(--col), transparent var(--gutter) );
 	}
 	
-	main, nav {
+	main {
 		padding: var(--main-pad);
 		width:100%;
 		text-align: center;
 		overflow-y: scroll;
-	}
-
-	nav {
-		height: var(--navH);
-		background:#fff;
-		position: absolute;
-		top:0;
-		z-index: 999;
-		box-shadow: 0 0 16px var(--eo-surface-background);
 	}
 
 	main {
@@ -199,11 +190,6 @@
 		padding:0;
 		height:100%;
 
-	}
-	nav .frame {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
 	}
 	
 

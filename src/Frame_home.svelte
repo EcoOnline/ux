@@ -201,7 +201,7 @@ function menu_hover_handler(event){
 						{#if ($app_data[selected_app].has_modules && $app_data[selected_app].modules_to_paint.length) || !$app_data[selected_app].has_modules}
 							{#if !$config.menu_hover}
 								
-								<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[selected_app].key); }}">Go to {($config.hide_headers ? $app_data[selected_app].name : 'Product')} Hub</span>
+								<span class='hub-link btn btn-secondary' class:hub-link-left="{$config.hide_headers}" on:click|preventDefault="{ () => {nav($app_data[selected_app].key); }}">Open {($config.hide_headers ? $app_data[selected_app].name : 'Product')} Hub</span>
 								
 							{/if}
 						{/if}
@@ -280,7 +280,7 @@ function menu_hover_handler(event){
 								<h3>Access</h3>
 								<p>We’ve added <i>{$app_data[selected_app].name}</i> to the exciting suite of EcoOnline products. If you’re an existing client of this product you can access it here or learn more about what it can do for your company.</p>
 								{#if $app_data[selected_app].external_login}
-									<a href='{$app_data[selected_app].external_login}' target='_blank' class='btn'>Login</a>
+									<a href='{$app_data[selected_app].external_login}' target='_blank' class='btn'>Log In</a>
 								{/if}
 								{#if $app_data[selected_app].external_marketing}
 									<a href='{$app_data[selected_app].external_marketing}' target='_blank' class='btn btn-secondary'>Learn More</a>

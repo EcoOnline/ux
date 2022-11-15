@@ -39,10 +39,10 @@
 	 }
 
 	 .wrapper {
-		width: 510px;
+		width: 600px;
 		position:absolute;
 		bottom:0;
-		right:40px;
+		right:32px;
 	 }
 
 	 .tile {

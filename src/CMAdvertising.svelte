@@ -50,12 +50,12 @@
 		padding:8px;
 		background:transparent;
 		transition: background 0.2s linear, box-shadow 0.4s linear ;
+		overflow: auto;
 	 }
 
 	 .icon {
 		width: 48px;
 		aspect-ratio: 1;
-		display:inline-block;
 		margin-right:8px;
 		background-color: transparent;
 		background-position: center center;
@@ -63,11 +63,16 @@
 		background-size:cover;
 		transition: all 0.2s linear;
 		vertical-align: middle;
+		float:left;
 	 }
-	
+	.tease {
+		float:left;
+	}
 	.pitch {
 		opacity:0;
 		display:none;
+		float:left;
+		max-width:520px;
 	}
 
 	.show_ad .tease {
@@ -98,6 +103,7 @@
 		text-align: center;
 		margin-right:8px;
 		margin-left:0;
+		margin-bottom: 16px;
 		cursor:pointer;
 		position:relative;
 	}

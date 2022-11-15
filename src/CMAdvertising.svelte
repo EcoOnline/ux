@@ -49,7 +49,7 @@
 		border-radius:12px;
 		padding:8px;
 		background:transparent;
-		transition: background 0.5s linear, box-shadow 0.5s linear ;
+		transition: background 0.2s linear, box-shadow 0.4s linear ;
 	 }
 
 	 .icon {

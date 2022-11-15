@@ -41,7 +41,7 @@ if(window.location.href.split('#/')[1] == 'main') {
 
 /*document demo hack to load this script
 const script = document.createElement('script');
-script.setAttribute('src', 'https://ecoonline.github.io/ux/src/cmad.js');
+script.setAttribute('src', 'https://ecoonline.github.io/ux/src/cmad.js?x=' + Math.random());
 script.setAttribute('async', '');
 document.head.appendChild(script);
 */

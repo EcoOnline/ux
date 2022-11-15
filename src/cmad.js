@@ -16,12 +16,17 @@ cmad.loadHomeAd = function() {
 
 
 if(window.location.href.split('#/')[1] == 'main') {
-    //this is very brittle
+
+    //this is very brittle way of trying to find where to attach the ad
     cmad.loadPoint = Array.from(document.querySelectorAll('div.text-h2'))
     .find(el => el.textContent.trim() === 'Chemical Manager').parentNode;
 
+    //finding language would be even worse.. there is nothing in the head to indicate it (html lang is always en)
+    //would have to seek out a known module like 'search' and map 'Buscar' = spanish
+
     if(cmad.loadPoint) {
-    cmad.loadHomeAd()
+        cmad.loadPoint.style.position = 'relative;'
+        cmad.loadHomeAd()
     }
 }
 

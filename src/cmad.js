@@ -14,7 +14,7 @@ cmad.loadHomeAd = function() {
     cmad.loadPoint.appendChild(cmad.ifrm);
 }
 
-
+//check for home page
 if(window.location.href.split('#/')[1] == 'main') {
 
     //this is very brittle way of trying to find where to attach the ad
@@ -24,10 +24,15 @@ if(window.location.href.split('#/')[1] == 'main') {
     //finding language would be even worse.. there is nothing in the head to indicate it (html lang is always en)
     //would have to seek out a known module like 'search' and map 'Buscar' = spanish
 
-    if(cmad.loadPoint) {
+
+
+    //dont load if no loadpoint found and on small devices
+    if(cmad.loadPoint && window.innerWidth > 600) {
         cmad.loadPoint.style.position = 'relative;'
         cmad.loadHomeAd()
     }
+
+
 }
 
 

@@ -35,10 +35,11 @@
 		font-family: "IBM Plex Sans", sans-serif;
 		font-weight:400;
 		font-size:16px;
+		position: relative;
 	 }
 
 	 .wrapper {
-		width: 410px;
+		width: 510px;
 		position:absolute;
 		bottom:0;
 		right:40px;
@@ -48,7 +49,7 @@
 		border-radius:12px;
 		padding:8px;
 		background:transparent;
-		transition: background 1s linear ;
+		transition: background 0.5s linear, box-shadow 0.5s linear ;
 	 }
 
 	 .icon {
@@ -79,6 +80,7 @@
 
 	.show_ad .tile {
 		background-color: #fff;
+		box-shadow: 0 6px 10px 0 rgb(186 191 195 / 20%);
 	}
 	.pitch a {
 		overflow: hidden;

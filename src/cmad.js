@@ -14,13 +14,17 @@ cmad.loadHomeAd = function() {
     cmad.loadPoint.appendChild(cmad.ifrm);
 }
 
-//this is very brittle
-cmad.loadPoint = Array.from(document.querySelectorAll('div.text-h2'))
-  .find(el => el.textContent.trim() === 'Chemical Manager').parentNode;
 
-if(cmad.loadPoint) {
+if(window.location.href.split('#/')[1] == 'main') {
+    //this is very brittle
+    cmad.loadPoint = Array.from(document.querySelectorAll('div.text-h2'))
+    .find(el => el.textContent.trim() === 'Chemical Manager').parentNode;
+
+    if(cmad.loadPoint) {
     cmad.loadHomeAd()
+    }
 }
+
 
 
 

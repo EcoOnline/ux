@@ -3,7 +3,7 @@ let cmad = {}; //global namespace to avoid collisions
 
 cmad.loadHomeAd = function() {
     cmad.ifrm = document.createElement("iframe");
-    cmad.ifrm.setAttribute("src", "http://google.com/");
+    cmad.ifrm.setAttribute("src", "//google.com/");
     cmad.ifrm.style.width = "640px";
     cmad.ifrm.style.height = "480px";
     cmad.ifrm.style.position = "absolute";

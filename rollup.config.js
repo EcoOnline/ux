@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['frame'].map((name, index) => ({
+export default ['cmadvertising'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

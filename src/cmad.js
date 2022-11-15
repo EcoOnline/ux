@@ -3,15 +3,18 @@ let cmad = {}; //global namespace to avoid collisions
 
 cmad.loadHomeAd = function() {
     cmad.ifrm = document.createElement("iframe");
-    cmad.ifrm.setAttribute("src", "//google.com/");
+    cmad.ifrm.setAttribute("src", "//ecoonline.github.io/ux/public/cmad.html");
+    cmad.ifrm.setAttribute("allowtransparency","true");
     cmad.ifrm.style.width = "640px";
     cmad.ifrm.style.height = "480px";
+    cmad.ifrm.style.border = "none";
     cmad.ifrm.style.position = "absolute";
     cmad.ifrm.style.top = 0;
     cmad.ifrm.style.right = 0;
     cmad.loadPoint.appendChild(cmad.ifrm);
 }
 
+//this is very brittle
 cmad.loadPoint = Array.from(document.querySelectorAll('div.text-h2'))
   .find(el => el.textContent.trim() === 'Chemical Manager').parentNode;
 

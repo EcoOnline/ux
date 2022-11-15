@@ -89,6 +89,9 @@
 		background-color: #fff;
 		box-shadow: 0 6px 10px 0 rgb(186 191 195 / 20%);
 	}
+	.pitch h4 {
+		margin-top:0px;
+	}
 	.pitch a {
 		overflow: hidden;
 		text-overflow: ellipsis;

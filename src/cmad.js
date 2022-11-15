@@ -28,8 +28,8 @@ if(window.location.href.split('#/')[1] == 'main') {
 
     //dont load if no loadpoint found and on small devices
     if(cmad.loadPoint && window.innerWidth > 600) {
-        cmad.loadPoint.style.position = 'relative;'
-        cmad.loadHomeAd()
+        cmad.loadPoint.style.position = 'relative';
+        cmad.loadHomeAd();
     }
 
 

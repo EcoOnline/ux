@@ -51,6 +51,7 @@
 		background:transparent;
 		transition: background 0.2s linear, box-shadow 0.4s linear ;
 		overflow: auto;
+		margin-bottom:8px;
 	 }
 
 	 .icon {
@@ -67,6 +68,7 @@
 	 }
 	.tease {
 		float:left;
+		line-height:48px;
 	}
 	.pitch {
 		opacity:0;

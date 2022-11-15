@@ -3,7 +3,7 @@ let cmad = {}; //global namespace to avoid collisions
 
 cmad.loadHomeAd = function() {
     cmad.ifrm = document.createElement("iframe");
-    cmad.ifrm.setAttribute("src", "//ecoonline.github.io/ux/public/cmad.html");
+    cmad.ifrm.setAttribute("src", "https://ecoonline.github.io/ux/public/cmad.html");
     cmad.ifrm.setAttribute("allowtransparency","true");
     cmad.ifrm.style.width = "640px";
     cmad.ifrm.style.height = "220px";

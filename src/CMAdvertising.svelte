@@ -15,7 +15,7 @@
 
 <div class='wrapper' class:show_ad>
 	<div class='tile' on:mouseenter={ () => { show_ad = true}} on:mouseleave={ () => { show_ad = false}}>
-		<div class="icon" style="background-image:url('../images/svgs_clean/{ad.icon}.svg"></div>
+		<div class="icon" style="background-image:url('https://ecoonline.github.io/ux/public/images/svgs_clean/{ad.icon}.svg"></div>
 		<span class='tease'>Do you know about {ad.name}?</span>
 		<div class='pitch'>
 			<h4>{ad.headline}</h4>

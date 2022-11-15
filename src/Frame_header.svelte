@@ -272,7 +272,27 @@
 	
 
 	
-	
+	function focusSearchAndOpenKeyboard() {
+		setTimeout(function() {
+			var __tempEl__ = document.createElement('input');
+			__tempEl__.style.position = 'absolute';
+			__tempEl__.style.top = (filter_input.offsetTop + 7) + 'px';
+			__tempEl__.style.left = filter_input.offsetLeft + 'px';
+			__tempEl__.style.height = 0;
+			__tempEl__.style.opacity = 0;
+			document.body.appendChild(__tempEl__);
+			__tempEl__.focus();
+
+			// The keyboard is open. Now do a delayed focus on the target element
+			setTimeout(function() {
+				filter_input.focus();
+				filter_input.click();
+			// Remove the temp element
+			document.body.removeChild(__tempEl__);
+			}, 100);
+		}, 100);
+	}
+
 	
 	
 
@@ -338,7 +358,7 @@
 
 				{#if menu_view_section == 'nav'}
 					{#if $config.filter_view}
-						<div class='action-item filter-view' on:click="{ () => { if($config.action_dd == 'filter_view') { $config.action_dd = false; } else { $config.action_dd = 'filter_view';setTimeout(() => { filter_input.focus()}, 50)} }}">
+						<div class='action-item filter-view' on:click="{ () => { if($config.action_dd == 'filter_view') { $config.action_dd = false; } else { $config.action_dd = 'filter_view';focusSearchAndOpenKeyboard()} }}">
 							<i class="i-search i-24"></i><span>Search</span>
 							{#if $config.action_dd == 'filter_view'}
 								<input type="text" bind:value="{filter_key}" bind:this="{filter_input}" on:blur="{ () => { $config.action_dd = false}}">

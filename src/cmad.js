@@ -9,7 +9,7 @@ cmad.loadHomeAd = function() {
     cmad.ifrm.style.height = "220px";
     cmad.ifrm.style.border = "none";
     cmad.ifrm.style.position = "absolute";
-    cmad.ifrm.style.top = 0;
+    cmad.ifrm.style.top = "-50px";
     cmad.ifrm.style.right = 0;
     cmad.loadPoint.appendChild(cmad.ifrm);
 }

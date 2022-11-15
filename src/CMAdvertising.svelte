@@ -42,7 +42,7 @@
 		width: 600px;
 		position:absolute;
 		bottom:0;
-		right:32px;
+		right:0;
 	 }
 
 	 .tile {

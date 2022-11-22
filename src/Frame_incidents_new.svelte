@@ -6,6 +6,8 @@
     import Form from './components/form/Form.svelte';
     import Slide from './components/Slide.svelte';
     
+    
+    
     const dispatch = createEventDispatcher();
 
     let single_page = false; //view as tabs
@@ -699,11 +701,14 @@
     }
 
     let audio;
+    let content;
 
     onMount(() => {
         audio.volume = 0.1;
     });    
 </script>
+
+
 <!-- svelte-ignore a11y-media-has-caption -->
 <audio src="./sound/click.mp3" bind:this={audio}></audio>
 <div class="row sticky">
@@ -800,7 +805,7 @@
             {/if}
         </div>
     </div>
-    <div class="col12 col-md-9">
+    <div bind:this={content} class="col12 col-md-9">
         {#if print_mode}
         <div class="card" in:fly="{{ y: -200, duration: 1000 }}" out:fade>
             <div class="card-header">
@@ -1378,10 +1383,11 @@
     .card {
         margin-bottom:16px;
     }
-    
+    /*
     .card h4 {
         margin-bottom: 8px;
     }
+    */
     .side_menu {
         margin:0;
         padding:0;

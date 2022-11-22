@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['cmadvertising'].map((name, index) => ({
+export default ['frame'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {
@@ -41,7 +41,11 @@ export default ['cmadvertising'].map((name, index) => ({
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
-			}
+			},
+			onwarn: (warning, handler) => {
+				// e.g. don't warn on a11y
+				return
+			  }
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

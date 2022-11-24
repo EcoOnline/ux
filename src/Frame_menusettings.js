@@ -43,6 +43,12 @@ export const app_data = writable({
 		modules_to_paint: [],
 		modules: [
 			{
+				id: '1_0',
+				name: 'Help',
+				icon: 'help',
+				url: 'platform/help'
+			},
+			{
 				id: '1_1',
 				name: 'eCourseLibrary',
 				icon: 'ecourse_library',

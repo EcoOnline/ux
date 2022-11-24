@@ -146,6 +146,25 @@
 <main on:scroll={handleScroll} class={mainCSS}>
 	<div class="frame">
 		<svelte:component this={comp} on:nav={handleNav} {tabnav} {bodyScroll}/>
+		{#if window.location.href.indexOf('help=2') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;"><i class="i-help i-24" style='filter:invert(1)'></i></span>
+		{/if}
+		{#if window.location.href.indexOf('help=3') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="background:#1CD390;border:1px solid #1CD390;position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;"><i class="i-help i-24" style='filter:invert(1)'></i></span>
+		{/if}
+		{#if window.location.href.indexOf('help=4') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;">Help</span>
+		{/if}
+		{#if window.location.href.indexOf('help=5') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="background:#1CD390;border:1px solid #1CD390;position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;">Help</span>
+		{/if}
+
+		{#if window.location.href.indexOf('help=6') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;"><i class="i-help i-20" style='filter:invert(1)'></i> Help</span>
+		{/if}
+		{#if window.location.href.indexOf('help=7') >= 0}
+			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="background:#1CD390;border:1px solid #1CD390;position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;"><i class="i-help i-20" style='filter:invert(1)'></i> Help</span>
+		{/if}
 	</div>
 	
 </main>

@@ -322,7 +322,10 @@
 		</div>
 
 		<div class="menu-icons text-right">
-			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'menu_settings' ? false : 'menu_settings'}}' class:selected="{selected_menu_item == 'menu_settings'}" class="menu-icon" style="opacity:0.2"><i class="i-administration i-24"></i></span>
+			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'menu_settings' ? false : 'menu_settings'}}' class:selected="{selected_menu_item == 'menu_settings'}" class="menu-icon" style="opacity:0.05"><i class="i-administration i-24"></i></span>
+			{#if window.location.href.indexOf('help=1') >= 0}
+				<span on:click='{ () => alert('Help succeeded.')}' class="menu-icon"><i class="i-help i-24"></i></span>
+			{/if}
 			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'notification' ? false : 'notification'}}' class:selected="{selected_menu_item == 'notification'}" class="menu-icon"><i class="i-notification i-24"></i></span>
 			<span on:click='{ () => {selected_menu_item =  selected_menu_item == 'user' ? false : 'user'}}' class:selected="{selected_menu_item == 'user'}" class="menu-icon"><i class="i-user-avatar i-24"></i></span>
 			<span on:click='{ () => {
@@ -413,56 +416,6 @@
 								<AppMenu {selected_app} {svg_peak} {svg_width} {svg_height} {svg_path} on:menu_change={menu_change_handler} on:menu_hover={menu_hover_handler}></AppMenu>
 							</div>
 						</div>
-					<!--
-						<div class='nav-tabs' bind:this={apps_item_holder}>
-							<div style='position:sticky;top:16px;margin-top:24px;'>
-								<h4>Applications</h4>
-								<div class='nav-item-holder' title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}">
-								
-									{#each $config.apps as a, index}
-										<a 
-											href="#"
-											title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}"
-											on:mouseenter={(m) => { sidebar_enter(m, $app_data[a], index); } } 
-											style='position:relative;' 
-											class='nav-item' 
-											class:selected="{ selected_app == $app_data[a].key }" 
-											class:menu_hover="{$config.menu_hover}"
-											class:menu_hover_icon_show="{menu_hover_item.key == $app_data[a].key}"
-											on:click|preventDefault="{ () => { sidebar_click($app_data[a]) }}">
-											<div class="icon" style={"background-image:url('./images/svgs_clean/" + $app_data[a].icon + (selected_app == $app_data[a].key ? '':'bw')+ ".svg')"}></div>
-											<b>{$app_data[a].name}</b>
-
-											{#if $config.menu_hover_icon == 'bento' }
-												<i class='menu_hover_icon i-switcher i-16'></i>
-											{/if}
-											{#if $config.menu_hover_icon == 'arrow' }
-												<i class='menu_hover_icon i-arrow-right i-16'></i>
-											{/if}
-										</a>
-									{/each}
-
-									<svg 
-										style="position:absolute;right:0;top:0;pointer-events:none"
-										width="{svg_width}" 
-										height="{svg_height}" 
-										preserveAspectRatio="none"
-										viewBox="0 0 100 100" 
-										xmlns="http://www.w3.org/2000/svg">
-										
-										<path 
-											title="{($config.menu_hover ? 'Click to navigate to the Application' : '')}" 
-											d="{svg_path}" fill="{$config.svg_show ? 'rgba(123,97,255, 40%)' : 'transparent'}" 
-											style="pointer-events:auto;cursor:pointer" 
-											on:mouseleave="{ () => { svg_width = 0; }}" 
-											on:click="{ () => { sidebar_click(menu_hover_item); }}"/>
-									</svg>
-
-								</div>
-							</div>
-						</div>
-
-					-->
 					{/if}
 					<div class='nav-content'>
 

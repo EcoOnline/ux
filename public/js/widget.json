@@ -9,8 +9,8 @@
         "size": "small",
         "styles": {
           "colors": {
-            "my_orange": {
-              "color": "#ff5500"
+            "accent": {
+              "color": "#1CD390"
             }
           }
         },
@@ -22,9 +22,9 @@
                 "cells": [
                   {
                     "width": 12,
-                    "background_color_style": "my_orange",
+                    "background_color_style": "accent",
                     "text": {
-                      "string": "hello world"
+                      "string": "UX/UI"
                     }
                   }
                 ]

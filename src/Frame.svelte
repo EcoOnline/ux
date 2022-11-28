@@ -158,7 +158,6 @@
 		{#if window.location.href.indexOf('help=5') >= 0}
 			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="background:#1CD390;border:1px solid #1CD390;position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;">Help</span>
 		{/if}
-
 		{#if window.location.href.indexOf('help=6') >= 0}
 			<span on:click='{ () => alert('Help succeeded.')}' class="btn" style="position:fixed;right:0;bottom:16px;z-index:9999;padding-bottom:2px;"><i class="i-help i-20" style='filter:invert(1)'></i> Help</span>
 		{/if}

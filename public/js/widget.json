@@ -1,0 +1,37 @@
+{
+    "name": "ux/ui",
+    "description": "QR prototype",
+    "data": {
+      "content_url": "https://ecoonline.github.io/ux/public/rapid.html?photo=1&singlepage=1"
+    },
+    "layouts": {
+      "hello_small": {
+        "size": "small",
+        "styles": {
+          "colors": {
+            "my_orange": {
+              "color": "#ff5500"
+            }
+          }
+        },
+        "layers": [
+          {
+            "rows": [
+              {
+                "height": 12,
+                "cells": [
+                  {
+                    "width": 12,
+                    "background_color_style": "my_orange",
+                    "text": {
+                      "string": "hello world"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

@@ -2,7 +2,10 @@
     "name": "ux/ui",
     "description": "QR prototype",
     "data": {
-      "content_url": "https://ecoonline.github.io/ux/public/rapid.html?photo=1&singlepage=1"
+      "content_url": "https://ecoonline.github.io/ux/public/rapid.html?photo=1&singlepage=1",
+      "weather_city": "Seattle",
+      "weather_temp": "65°",
+      "weather_icon": "https://.../sunny.png"
     },
     "layouts": {
       "hello_small": {
@@ -11,6 +14,66 @@
           "colors": {
             "accent": {
               "color": "#1CD390"
+            },
+            "white": {
+              "color": "#ffffff"
+            },
+            "black": {
+              "color": "#1a1919"
+            }
+          }
+        },
+        "layers": [
+          {
+            "rows": [
+              {
+                "height": 1.5,
+                "cells": [
+                  {
+                    "width": 12,
+                    "background_color_style": "white",
+                    "text": {
+                      "string": "Actions Overdue",
+                      "color_style": "black",
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+
+
+
+
+  {
+    "name": "Local Weather",
+    "description": "This is powered by a weather station in my backyard.",
+    "version": 1,
+    "data": {
+      "content_url": "https://example.com",
+      "weather_city": "Seattle",
+      "weather_temp": "65°",
+      "weather_icon": "https://.../sunny.png"
+    },
+    "layouts": {
+      "small_temp": {
+        "size": "small",
+        "styles": {
+          "colors": {
+            "background_gradient": {
+              "color": "linear-gradient(0deg, #76A5D5, #2469AA)"
+            },
+            "city_text_color": {
+              "color": "#FFFFFFAA"
+            }
+          },
+          "fonts": {
+            "cool_font": {
+              "family": "Chalkduster"
             }
           }
         },
@@ -20,14 +83,78 @@
               {
                 "height": 12,
                 "cells": [
+                    {
+                        "width": 10,
+                        "background_color_style": "background_gradient"
+                    }
+                    {
+                    "width": 2,
+                    "background_color_style": "background_gradient"
+                    }
+                ]
+              }
+            ]
+          },
+          {
+            "rows": [
+              {
+                "height": 1
+              },
+              {
+                "height": 1.5,
+                "cells": [
                   {
+                    "padding": 1.25,
                     "width": 12,
-                    "background_color_style": "accent",
                     "text": {
-                      "string": "UX/UI"
+                      "data_ref": "weather_city",
+                      "size": 12,
+                      "font_style": "cool_font",
+                      "color_style": "city_text_color",
+                      "justification": "left"
                     }
                   }
                 ]
+              },
+              {
+                "height": 0.25
+              },
+              {
+                "height": 3.5,
+                "cells": [
+                  {
+                    "padding": 1,
+                    "width": 12,
+                    "text": {
+                      "data_ref": "weather_temp",
+                      "size": 50,
+                      "font_style": "cool_font",
+                      "weight": "light",
+                      "justification": "left"
+                    }
+                  }
+                ]
+              },
+              {
+                "height": 1.5
+              },
+              {
+                "height": 3,
+                "cells": [
+                  {
+                    "padding": 1.15,
+                    "width": 4,
+                    "image": {
+                      "data_ref": "weather_icon"
+                    }
+                  },
+                  {
+                    "width": 8
+                  }
+                ]
+              },
+              {
+                "height": 1.0
               }
             ]
           }

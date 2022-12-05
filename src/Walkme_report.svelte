@@ -7,7 +7,7 @@
 
     //naive approach to removing fluff words
     const fluffWords = [
-        "fluff","other", "the", "my", "at", "as", "in", "you", "get", "what", "is", "do", "an", "of", "not", "have", "to", "view", "this", "type", "how", "off", "on", "if", "i", "when", "want", "why", "add", "line", "a", "change", "create", "list", "can", "for"
+        "fluff","other", "the", "my", "at", "as", "in", "you", "get", "what", "is", "do", "an", "of", "not", "have", "to", "view", "this", "type", "how", "off", "on", "if", "i", "when", "want", "why", "line", "a", "can", "for"
     ];
     
     

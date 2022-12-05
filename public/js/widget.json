@@ -62,7 +62,7 @@
                     "width": 12,
                     "text": {
                       "string": "2",
-                      "size": 50,
+                      "size": 70,
                       "weight": "light",
                       "justification": "center",
                       "color_style": "danger"

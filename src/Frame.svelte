@@ -21,6 +21,7 @@
 	import HazardAssessments from "./Frame_hazard_assessments.svelte";
 	import QueriesNew from "./Frame_queries_new.svelte";
 	import QueriesResult from "./Frame_queries_result.svelte";
+	import RiskPrint from "./Frame_risk_print.svelte";
 	
 	let tabnav = '';
 	let module = '';
@@ -49,6 +50,7 @@
 		"ehs_audits": NotFound,
 		"ehs_observations": NotFound,
 		"ehs_risk_assessment": NotFound,
+		"ehs_risk_print": RiskPrint,
 		"ehs_observations": NotFound,
 		"ehs_observations": NotFound,
 		"ehs_observations": NotFound,

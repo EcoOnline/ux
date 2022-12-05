@@ -3,7 +3,7 @@
     "description": "QR prototype",
     "data": {
       "content_url": "https://ecoonline.github.io/ux/public/rapid.html?photo=1&singlepage=1",
-      "eco_logo": "https://ecoonline.github.io/ux/public/images/icons/logo.svg"
+      "eco_logo": "https://ecoonline.github.io/ux/public/images/logo_icon.png"
     },
     "layouts": {
       "hello_small": {
@@ -34,8 +34,8 @@
                 "height": 2,
                 "cells": [
                   {
-                    "width": 8,
-                    "padding":1,
+                    "width": 9,
+                    "padding":0.5,
                     "background_color_style": "white",
                     "text": {
                       "string": "Overdue Actions",
@@ -45,8 +45,8 @@
                     }
                   },
                   {
-                    "width": 4,
-                    "padding":1,
+                    "width": 3,
+                    "padding":0.5,
                     "background_color_style": "white",
                     "image": {
                       "data_ref": "eco_logo"

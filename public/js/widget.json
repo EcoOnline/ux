@@ -13,6 +13,9 @@
             "accent": {
               "color": "#1CD390"
             },
+            "danger": {
+              "color": "#EB6047"
+            },
             "white": {
               "color": "#ffffff"
             },
@@ -35,7 +38,7 @@
                     "padding":1,
                     "background_color_style": "white",
                     "text": {
-                      "string": "Actions Overdue",
+                      "string": "Overdue Actions",
                       "size": 10,
                       "weight": "bold",
                       "color_style": "black"
@@ -62,7 +65,7 @@
                       "size": 50,
                       "weight": "light",
                       "justification": "center",
-                      "color_style": "accent"
+                      "color_style": "danger"
                     }
                   }
                 ]

@@ -3,9 +3,7 @@
     "description": "QR prototype",
     "data": {
       "content_url": "https://ecoonline.github.io/ux/public/rapid.html?photo=1&singlepage=1",
-      "weather_city": "Seattle",
-      "weather_temp": "65°",
-      "weather_icon": "https://.../sunny.png"
+      "eco_logo": "data:image/svg+xml,<svg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='m8 5.5.3-.7c.2-.5.7-.8 1.2-.8.4 0 .7.1.9.4l.4.4c-.6.2-1 1-1 1.7v1.1c0 1.6-1.1 3-2.7 3.4l-3.4.9c-.2 0-.3.1-.4.3 0 .2 0 .3.2.5 1.9 2.1 4.5 2.8 4.6 2.8H8.4s6.6-1.7 6.6-8v-6c0-.5-.4-1-1-1H2.5c-.5 0-1 .5-1 1v7.1l1-1V1.5H14v6c0 5.2-4.9 6.7-5.7 7-.5-.1-2.1-.7-3.5-1.9l2.5-.6c2-.5 3.4-2.3 3.4-4.4V6.5c0-.5.5-1 1-1h.5c.3 0 .4-.3.2-.5l-1.3-1.3c-.4-.4-1-.7-1.6-.7-.9 0-1.8.5-2.2 1.4l-.2.6L0 12v1.5l7.9-7.9c0 .1 0-.1.1-.1z' fill='#1A1919'/></svg>"
     },
     "layouts": {
       "hello_small": {
@@ -27,134 +25,48 @@
           {
             "rows": [
               {
-                "height": 1.5,
-                "cells": [
-                  {
-                    "width": 12,
-                    "background_color_style": "white",
-                    "text": {
-                      "string": "Actions Overdue",
-                      "color_style": "black",
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    }
-  }
-
-
-
-
-  {
-    "name": "Local Weather",
-    "description": "This is powered by a weather station in my backyard.",
-    "version": 1,
-    "data": {
-      "content_url": "https://example.com",
-      "weather_city": "Seattle",
-      "weather_temp": "65°",
-      "weather_icon": "https://.../sunny.png"
-    },
-    "layouts": {
-      "small_temp": {
-        "size": "small",
-        "styles": {
-          "colors": {
-            "background_gradient": {
-              "color": "linear-gradient(0deg, #76A5D5, #2469AA)"
-            },
-            "city_text_color": {
-              "color": "#FFFFFFAA"
-            }
-          },
-          "fonts": {
-            "cool_font": {
-              "family": "Chalkduster"
-            }
-          }
-        },
-        "layers": [
-          {
-            "rows": [
-              {
-                "height": 12,
-                "cells": [
-                    {
-                        "width": 10,
-                        "background_color_style": "background_gradient"
-                    }
-                    {
-                    "width": 2,
-                    "background_color_style": "background_gradient"
-                    }
-                ]
-              }
-            ]
-          },
-          {
-            "rows": [
-              {
                 "height": 1
               },
               {
-                "height": 1.5,
+                "height": 2,
                 "cells": [
                   {
-                    "padding": 1.25,
-                    "width": 12,
+                    "width": 8,
+                    "padding":1,
+                    "background_color_style": "white",
                     "text": {
-                      "data_ref": "weather_city",
-                      "size": 12,
-                      "font_style": "cool_font",
-                      "color_style": "city_text_color",
-                      "justification": "left"
+                      "string": "Actions Overdue",
+                      "color_style": "black"
+                    }
+                  },
+                  {
+                    "width": 4,
+                    "padding":1,
+                    "background_color_style": "white",
+                    "image": {
+                      "data_ref": "eco_logo"
                     }
                   }
                 ]
               },
               {
-                "height": 0.25
-              },
-              {
-                "height": 3.5,
+                "height": 6,
                 "cells": [
                   {
                     "padding": 1,
                     "width": 12,
                     "text": {
-                      "data_ref": "weather_temp",
+                      "string": "2",
                       "size": 50,
-                      "font_style": "cool_font",
                       "weight": "light",
-                      "justification": "left"
+                      "justification": "center",
+                      "color_style": "accent"
                     }
                   }
                 ]
               },
               {
-                "height": 1.5
-              },
-              {
-                "height": 3,
-                "cells": [
-                  {
-                    "padding": 1.15,
-                    "width": 4,
-                    "image": {
-                      "data_ref": "weather_icon"
-                    }
-                  },
-                  {
-                    "width": 8
-                  }
-                ]
-              },
-              {
-                "height": 1.0
+                "height": 3
               }
             ]
           }
@@ -162,3 +74,6 @@
       }
     }
   }
+
+
+

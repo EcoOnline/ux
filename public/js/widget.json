@@ -34,14 +34,15 @@
                 "height": 2,
                 "cells": [
                   {
-                    "width": 10,
+                    "width": 9.5,
                     "padding":0.25,
                     "background_color_style": "white",
                     "text": {
                       "string": "Overdue Actions",
                       "size": 10,
                       "weight": "bold",
-                      "color_style": "black"
+                      "color_style": "black",
+                      "align": "left"
                     }
                   },
                   {
@@ -51,6 +52,9 @@
                     "image": {
                       "data_ref": "eco_logo"
                     }
+                  },
+                  {
+                    "width": 0.5,
                   }
                 ]
               },

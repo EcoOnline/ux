@@ -39,7 +39,7 @@
                     "background_color_style": "white",
                     "text": {
                       "string": "Overdue Actions",
-                      "size": 10,
+                      "size": 11,
                       "weight": "bold",
                       "color_style": "black",
                       "align": "left"

@@ -1,16 +1,57 @@
 <script>
+    import { onMount } from 'svelte';
+
     let bc = document.body.classList;
     let text_size = bc.contains('po_text_small') ? 'small' : bc.contains('po_text_large') ? 'large' : 'normal';
 
     //document.body.classList.add('my-class')
 
-</script>
+    export let tabnav;
+    export let bodyScroll;
 
+    let action_columns = [];
+    let action_table;
+    let colgroup;
+
+    function init_table_actions() {
+        action_table = document.getElementById('action_table');
+        if(action_table) {
+            console.log('actions table found')
+            colgroup = action_table.querySelector('colgroup');
+            let ths = action_table.querySelectorAll('thead th');
+            [...ths].forEach((th, i)=>{
+                action_columns.push({text: th.innerText, index: i, checked: (i<4)})
+            });
+            action_columns = action_columns;
+
+        }
+    }
+
+    $: {
+        let acs = action_columns;
+       
+            acs.forEach( (ac) => {
+                let cells = action_table.querySelectorAll('th:nth-child('+(ac.index+1)+'), td:nth-child('+(ac.index+1)+')');
+
+                [...cells].forEach((cell) => {
+                    console.log(ac.index, ac.checked, cell)
+                    cell.style.display = ac.checked ? 'table-cell' : 'none';
+                    //cell.style.opacity = ac.checked ? 1 : 0.2;
+                })
+            })
+        
+    }
+
+    onMount(() => {
+		init_table_actions();
+	});
+
+</script>
+<!--
 <svelte:head>
-	<!-- elements go here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </svelte:head>
-
+-->
 
 
 
@@ -23,15 +64,65 @@
         <div class="print-options">
             <h2>Print Options</h2>
 
-            {text_size}
+<code>The only thing known about the below table is the id.
+    The only requirement is no colspans in the table and for it to have a thead with th's
+</code>
+
+{#each action_columns as col}
+    <div><input type="checkbox" bind:checked={col.checked}> {col.text}</div>
+{/each}
+
+
+
         </div>
         
+
+
+        <table id='action_table' class="table">
+            <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Status</th>
+                    <th>Action Type</th>
+                    <th>Title</th>
+                    <th>Summary</th>
+                    <th>Assignee</th>
+                    <th>Created By</th>
+                    <th>Target Date</th>
+                    <th>Completed Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>145</td>
+                    <td>Completed</td>
+                    <td>Corrective Action</td>
+                    <td>Contain leakage</td>
+                    <td>If possible isolate area of leaking vehicle</td>
+                    <td>Ada Lovelace</td>
+                    <td>Gary Long</td>
+                    <td>11-Feb-2023</td>
+                    <td>08-Jan-2023</td>
+                </tr>
+                <tr>
+                    <td>146</td>
+                    <td>Completed</td>
+                    <td>Corrective Action</td>
+                    <td>Vehicle storage</td>
+                    <td>Store vehicle in vicinity of interceptor where possible</td>
+                    <td>-</td>
+                    <td>Gary Long</td>
+                    <td>11-Feb-2023</td>
+                    <td>08-Jan-2023</td>
+                </tr>
+            </tbody>
+        </table>
 
         <!-- HTML copied from mike's risk assessment with all angular removed
         [a-z-]*ng-[a-z-]+="[$.\s\d:/;,\+=>a-z()\[\]!']+"
         -->
 
-
+        <!--
         <aw-print-preview-record-renderer record="$ctrl.record" are-print-options-visible="$ctrl.hasPrintOptionsEnabled()" class="ng-isolate-scope">
             <aw-template-finder  >
                 <div class="print-preview-header print-preview-step-container ng-scope" id="aw_ff_form_inner">
@@ -3180,221 +3271,13 @@
                     </div>
                 </aw-template-finder>
             </aw-print-preview-record-renderer>
-
+            -->
         <!-- end HTML -->
 
     </div>
 </div>
 
 <style>
-     /* print overrides */
-  @page {
-    /* could force to landscape */
-    /*size: landscape;*/
-  }
-
-
-  html, body {
-    background:#fff ! important;
-    color:#000 !important;
-    font-family: "IBM Plex Sans", sans-serif;
-  }
-  h1,h2,h3,h4 {
-    color:#000 !important;
-  }
-
-  .print-preview-header,
-  .print-preview-step-container {
-    box-shadow: none ! important;
-  }
-
-  /*
-  note: first-child is assumed to be the header because there's currently no better hook
-  */
-
-  /* hack to remove airsweb logo for now */
-  .print-preview-step-container:first-child img {
-    display: none;
-  }
-
-  /* hacking header table to display as flex row */
-  .print-preview-inspector {
-    display:block;
-    position: relative;
-    overflow: visible;
-  }
-  .print-preview-inspector tbody {
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-  .print-preview-inspector tr:first-child {
-    position:absolute;
-    right:0;
-    top:-44px;
-  }
-  .print-preview-inspector tr:first-child th,
-  .print-preview-inspector tr:first-child td {
-    font-size:28px ! important;
-    font-weight:100;
-  }
-  
-  .print-preview-inspector tr {
-    margin-left:32px;
-  }
-
-
-  .field-label {
-    margin-bottom:0;
-  }
-  /*
-  note: nth-child(2) is assumed to be the first tab because there's currently no better hook
-  */
-  aw-print-preview-step-renderer {
-    border:1px solid #BABFC3;
-    border-radius: 12px;
-    display: block;
-    margin-bottom:16px; 
-  }
-  .print-preview-step-container:nth-child(2) h2 {
-      /*border-top:2px solid #000;*/
-      border-bottom:2px solid #000;
-      font-size:20px;
-      line-height:32px;
-      font-weight:100;
-      margin:0 0 8px 0;
-      text-indent:8px;
-  }
-  /* remove useless subheader*/
-  .print-preview-step-container:nth-child(2) h3 {
-      display:none
-  }
-  /* change to flex layout */
-  .print-preview-step-container:nth-child(2) .aw-ff-form-field-group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 16px;
-  }
-  /* each flex item is 25% of page (4 column) */
-  .print-preview-step-container:nth-child(2) .aw-ff-form-field-group > * {
-    width:25%;
-  }
-  /* remove light grey boxes and fix padding */
-  .print-preview-step-container:nth-child(2) .aw-ff-form-field-group pre,
-  .print-preview-step-container:nth-child(2) .aw-ff-form-field-group aw-date-time-readonly,
-  .print-preview-step-container:nth-child(2) .aw-ff-form-field-group .pl-4 /* this is the hackiest hack to get markdown field */
-  {
-    padding: 0 8px 12px 0;
-    background:transparent ! important;
-    font-family: "IBM Plex Sans", sans-serif;
-    white-space: pre-line;  
-    font-size:12px;
-  }
-
-
-
-   /*
-  note: nth-child(3) is assumed to be tasks
-  */
-  .print-preview-step-container:nth-child(3) h1 {
-    display: none;
-  }
-  .print-preview-step-container:nth-child(3) h1 {
-    display: none;
-  }
-  .task-detail-container {
-    margin:0 !important;
-  }
-  .task-description {
-    font-size:20px !important;
-    line-height:32px;
-    font-weight:100 !important;
-    border-bottom:2px solid #000;
-    text-indent:8px;
-  }
-
-  body aw-print-preview-rsk-tasks-and-hazards-step .hazard-detail-container .columns.is-gapless>.column.hazard-name-cell {
-    padding: 0 0 0 8px !important;
-  }
-  body aw-print-preview-step-renderer table .hazard-detail-container > .columns > .column {
-    border-right:1px solid #BABFC3;
-    padding-left:8px !important;
-  }
-  .hazard-field-cell {
-    font-size:12px;
-  }
-  
-  body aw-print-preview-step-renderer table .hazard-detail-container > .columns > .column:last-child {
-    border-right:none;
-  }
-  
-  body aw-print-preview-rsk-tasks-and-hazards-step .hazard-detail-container .columns.is-gapless>.column.hazard-detail-ui-group-header  {
-    font-size:18px !important;
-    line-height:32px !important;
-    font-weight:100 !important;
-    background: transparent !important;
-    padding: 0 0 0 8px !important;
-    border-bottom:1px solid #BABFC3;
-    margin-top:3px;
-  }
-  .hazard-detail-container {
-    position: relative;
-    margin-top: 32px !important;
-
-  }
-  .hazard-detail-container .columns:nth-child(2) {
-    font-size:20px !important;
-    border-bottom:2px solid #000;
-    line-height:32px;
-    font-weight:100 !important;
-    position:absolute;
-    width:100%;
-    top:-32px;
-  }
-
-
-  
-
-body aw-print-preview-rsk-tasks-and-hazards-step .risk-rating-container {
-  padding:0 !important;
-  margin:0 !important;
-  border-bottom:1px solid #BABFC3;
-  border-top:1px solid #BABFC3;
-}
-body aw-print-preview-rsk-tasks-and-hazards-step .risk-rating-container .column {
-  padding: 0 8px !important;
-  line-height:32px;
-}
-
-body aw-print-preview-rsk-tasks-and-hazards-step .risk-rating-container .column:not(:first-child) strong {
-  display:none;
-}
-body aw-print-preview-rsk-tasks-and-hazards-step .risk-rating-container .column .risk-rating-value {
-  float:right;
-  margin:8px;
-  padding: 2px 16px;
-  line-height:24px;
-  border-radius:6px;
-}
-
-.task-detail-container > div:not(.columns, .hazard-detail-container) {
-    margin:0 !important;
-    padding:4px 8px;
-  }
-
-  @media print {
-    /* 
-    page breaks removed to stop splitting into separate pages 
-    - cant apply to pages that arent the tasks page because there's no hook
-    */
-    .print-preview-step-container {
-      page-break-before: initial !important;
-      page-break-after: initial !important;
-      page-break-inside: initial !important;
-    }
-  }
-
   /* force background colour so that risk badges show */
   * {
     -webkit-print-color-adjust:exact !important;
@@ -3408,6 +3291,23 @@ body aw-print-preview-rsk-tasks-and-hazards-step .risk-rating-container .column 
     background:#fff;
     margin:64px 0;
     padding:32px;
+  }
+
+  @media print { 
+    .print-options { display:none }
+  }
+  table {
+    width:100%;
+  }
+  table th {
+    vertical-align: top;
+  }
+
+  table td,
+  table th
+   {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding:0px 8px 2px 8px ;
   }
     
 </style>

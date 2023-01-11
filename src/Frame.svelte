@@ -12,6 +12,7 @@
 	import CM from "./Frame_cm.svelte";
 	import CMRisk from "./Frame_cm_risk.svelte";
 	import Crisis from "./Frame_crisis.svelte";
+	import ENV from "./Frame_environment.svelte";
 	import AdminLinkedFields from "./Frame_administration_linkedfields.svelte";
 	import Actions from "./Frame_actions.svelte";
 	import Actions123 from "./Frame_actions_123.svelte";
@@ -33,6 +34,7 @@
         "home": Home,
         "login": Login,
         "ehs": EHS,
+        "env": ENV,
         "cm": CM,
         "cm_risk_assessments": CMRisk,
 		"cm_risk_assessment": CMRisk,

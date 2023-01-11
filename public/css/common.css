@@ -13,6 +13,9 @@ html, body{
     font-size:16px;
     background-color: var(--eo-surface-background);
 }
+@media print { 
+    body { background-color: #fff }
+}
 
 .page {
     padding:50px;
@@ -682,6 +685,7 @@ h1 .i-32 {
 .i-apps                 { background-image:url(../images/icons/apps.svg) }
 .i-arrow-down           { background-image:url(../images/icons/arrow-down.svg) }
 .i-arrow-up             { background-image:url(../images/icons/arrow-up.svg) }
+.i-arrow-left           { background-image:url(../images/icons/arrow-left.svg) }
 .i-arrow-right          { background-image:url(../images/icons/arrow-right.svg) }
 .i-attachment           { background-image:url(../images/icons/attachment.svg) }
 .i-calendar             { background-image:url(../images/icons/calendar.svg) }
@@ -698,6 +702,7 @@ h1 .i-32 {
 .i-download             { background-image:url(../images/icons/download.svg) }
 .i-edit                 { background-image:url(../images/icons/edit.svg) }
 .i-ehs                  { background-image:url(../images/icons/health_safety.svg) }
+.i-epr                  { background-image:url(../images/icons/epr.svg)}
 .i-error                { background-image:url(../images/icons/error.svg) }
 .i-feide-color          { background-image:url(../images/icons/feide_login_icon.svg)}
 .i-filter               { background-image:url(../images/icons/filter.svg)}
@@ -723,6 +728,7 @@ h1 .i-32 {
 .i-page-tabs            { background-image:url(../images/icons/page-tabs.svg)}
 .i-pin                  { background-image:url(../images/icons/pin.svg)}
 .i-platform             { background-image:url(../images/icons/platform.svg)}
+.i-platform-blue        { background-image:url(../images/icons/platform-blue.svg)}
 .i-plus                 { background-image:url(../images/icons/plus.svg)}
 .i-printer              { background-image:url(../images/icons/printer.svg)}
 .i-qr                   { background-image:url(../images/icons/qr.svg)}

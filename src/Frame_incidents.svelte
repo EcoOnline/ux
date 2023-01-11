@@ -4,6 +4,7 @@
 
     import Pullout from './components/Pullout.svelte';
     import Modal from './components/Modal.svelte';
+    import BC from './components/Breadcrumb.svelte';
 
     import Form from './components/form/Form.svelte';
     import RecordID from "./components/table/RecordID.svelte";
@@ -13,7 +14,10 @@
 
     let filter_modal = false;
    
-
+    let bc_array = [
+            {text: 'EHS', url: '#ehs'},
+            {text: 'Incidents'}
+    ]
 	let components = {
 		"record_id": RecordID,
 		"status": Status,
@@ -387,11 +391,8 @@
 
 <div class="row sticky">
     <div class="col12 col-sm-5">
-        <ul class="breadcrumb">
-            <li><a href="#home"><i class="i-16 i-platform"></i></a></li>
-            <li><a href="#ehs">EHS</a></li>
-            <li>Incidents</li>
-        </ul>
+        <BC {bc_array}></BC>
+        
     </div>
     <div class="col12 col-sm-7 text-right">
     <!--

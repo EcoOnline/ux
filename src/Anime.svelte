@@ -1,4 +1,5 @@
 <script>
+    import Icon from './components/Icon.svelte';
 
     let easings = [
       {'name': 'linear', 'value': 'linear'},
@@ -131,6 +132,14 @@
     this is  right hand side drawer
   </div>
 {/if}
+
+
+
+
+<Icon key='admin_color' size='96'></Icon>
+<Icon key='admin_bw' size='32'></Icon>
+<Icon key='admin_bw'></Icon>
+<Icon key='fjkljsfdkljdskl'></Icon>
 
 <style>
 

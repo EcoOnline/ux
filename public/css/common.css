@@ -1010,3 +1010,18 @@ div.form-control input {
     background: #04AA6D;
     cursor: pointer;
 }
+
+
+
+
+/* test for icon component */
+
+svg.admin_color:hover path:nth-child(3) {
+    transform-origin: 50% 50%;
+    animation: icon_rotate 5s linear infinite;
+}
+
+@keyframes icon_rotate {
+    0%{rotate: 0deg}
+    100%{rotate:360deg}
+}

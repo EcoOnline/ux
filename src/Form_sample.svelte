@@ -52,7 +52,8 @@
             shortcuts: [
                 { value: 'Blue', text: "Blue" },
                 { value: 'Blue!', text: "Red" },
-                { value: 'Blue is best', text: "Green" }
+                { value: 'Blue is best', text: "Green" },
+                { value: 'Actually blue', text: "Computer grey", icon:  'ml'}
             ]
         }],
         "random_selector": [{

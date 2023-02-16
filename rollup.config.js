@@ -27,7 +27,7 @@ function serve() {
 		}
 	};
 }
-export default ['anime'].map((name, index) => ({
+export default ['form_sample'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

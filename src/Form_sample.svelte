@@ -42,6 +42,19 @@
             optional: true,
             answer: ""
         }],
+        "input_text2": [{
+            item_type: "input_text",
+            id: "text_sample2",
+            label: "What's your favourite colour",
+            hint: "Any colour so long as it's blue",
+            optional: true,
+            answer: "",
+            shortcuts: [
+                { value: 'Blue', text: "Blue" },
+                { value: 'Blue!', text: "Red" },
+                { value: 'Blue is best', text: "Green" }
+            ]
+        }],
         "random_selector": [{
             item_type: "random_selector",
             id: "rs",

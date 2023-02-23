@@ -3,6 +3,7 @@
     import Section from './Section.svelte';
 	import InputCheckbox from "./InputCheckbox.svelte";
 	import InputDate from "./InputDate.svelte";
+	import InputFile from "./InputFile.svelte";
 	import InputFilters from "./InputFilters.svelte";
 	import InputLookup from "./InputLookup.svelte";
 	import InputMatrix from "./InputMatrix.svelte";
@@ -26,6 +27,7 @@
         "section": Section,
 		"input_checkbox": InputCheckbox,
 		"input_date": InputDate,
+		"input_file": InputFile,
 		"input_filters": InputFilters,
 		"input_lookup": InputLookup,
 		"input_matrix": InputMatrix,

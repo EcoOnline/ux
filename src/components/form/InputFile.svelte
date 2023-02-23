@@ -134,7 +134,7 @@
     .variant1 .var2 {display:none}
 
     .variant2 {
-        border-radius: 16px;
+        /*border-radius: 16px;*/
         border-style:dashed;
         padding:0px 8px;
     }
@@ -151,7 +151,7 @@
         font-size:12px;
         line-height:32px;
         padding:0px 8px 0 16px;
-        border-radius: 8px;
+        border-radius: 4px;
         border:1px solid var(--eo-border-input);
         flex:1;
         align-items: center;

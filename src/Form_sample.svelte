@@ -56,7 +56,30 @@
                 { value: 'Actually blue', text: "Computer grey", icon:  'ml'}
             ]
         }],
-        "input_file": [{
+        "input_file": [/*
+        {
+            item_type: "input_select",
+            id: "file_sample3",
+            label: "Native language",
+            hint: false,
+            optional: false,
+            options: [
+                {text: "English"},
+                {text: "Norwegian"},
+                {text: "Vietnamese"},
+                {text: "Other"}
+            ],
+            answer: ""
+        },
+        {
+            item_type: "input_text",
+            id: "file_sample2",
+            label: "What's your favourite colour?",
+            hint: false,
+            optional: false,
+            answer: "",
+        },*/
+        {
             item_type: "input_file",
             id: "file_sample",
             label: "Profile image",
@@ -64,7 +87,29 @@
             optional: true,
             answer: ""
         }],
-        "input_file2": [{
+        "input_file2": [/*{
+            item_type: "input_select",
+            id: "file_sample3",
+            label: "Native language",
+            hint: false,
+            optional: false,
+            options: [
+                {text: "English"},
+                {text: "Norwegian"},
+                {text: "Vietnamese"},
+                {text: "Other"}
+            ],
+            answer: ""
+        },
+        {
+            item_type: "input_text",
+            id: "file_sample2",
+            label: "What's your favourite colour?",
+            hint: false,
+            optional: false,
+            answer: "",
+        },*/
+        {
             item_type: "input_file",
             id: "file_sample",
             label: "Profile image",

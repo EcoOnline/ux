@@ -11,8 +11,9 @@
     let temp_name = '';
     let xfiles = [];
 	function onloader(e) {
+
         let temp = {
-            name: file_input.value ? file_input.value.replace(/^.*?([^\\\/]*)$/, '$1') : temp_name,
+            name: file_input.value ? file_input.value.replace(/^.*?([^\\\/]*)$/, '$1') : this.name,
             data: e.target.result
         }
         if(multi) {
@@ -67,6 +68,7 @@
             let reader = new FileReader();
             reader.onload = onloader;
             temp_name = files[i].name;
+            reader.name = files[i].name;
 			reader.readAsDataURL(files[i]);
 		}
 	}
@@ -141,6 +143,8 @@
 
     .file_list {
         width:100%;
+        max-height: 150px;
+        overflow: auto;
     }
 
     .file_item {

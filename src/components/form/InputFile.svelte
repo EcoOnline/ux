@@ -99,7 +99,7 @@
                         {/each}
                     </div>
                 {/if}
-                <span class="fake_file var var1">{xfiles.length &&xfiles[0].name ? xfiles[0].name : ' '}</span>
+                <span class="fake_file var var1">{xfiles.length &&xfiles[0].name ? xfiles[0].name : ' '} {#if xfiles.length}<i class="i-20 i-close" on:click|stopPropagation={ () => { remove_file(xfiles[0])}}></i>{/if}</span>
                 <span class="fake_button var var1"><i class='i-20 i-upload'></i> Browse file</span>
                 <span class="fake_text var var2"><i class='i-20 i-upload'></i> <span>Browse file</span> or drop it here</span>
                 <input bind:this="{file_input}" on:change="{change_file}" type="file" accept="image/*" capture="camera">
@@ -169,7 +169,7 @@
     .fake_file {
         line-height:24px;
         padding:12px 0px;
-        pointer-events: none;
+        /*pointer-events: none;*/
     }
     .fake_text {
         pointer-events: none;

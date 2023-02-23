@@ -2,6 +2,7 @@
     
 	import InputCheckbox from "./InputCheckbox.svelte";
 	import InputDate from "./InputDate.svelte";
+	import InputFile from "./InputFile.svelte";
 	import InputLookup from "./InputLookup.svelte";
 	import InputMatrix from "./InputMatrix.svelte";
 	import InputMulti from "./InputMulti.svelte";
@@ -18,6 +19,7 @@
 	let components = {
 		"input_checkbox": InputCheckbox,
 		"input_date": InputDate,
+		"input_file": InputFile,
 		"input_lookup": InputLookup,
 		"input_matrix": InputMatrix,
 		"input_multi": InputMulti,

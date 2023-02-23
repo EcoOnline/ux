@@ -42,14 +42,6 @@
             optional: true,
             answer: ""
         }],
-        "input_file": [{
-            item_type: "input_file",
-            id: "file_sample",
-            label: "Profile image",
-            hint: "Supported format: pdf,  jpeg, png, svg",
-            optional: true,
-            answer: ""
-        }],
         "input_text2": [{
             item_type: "input_text",
             id: "text_sample2",
@@ -63,6 +55,24 @@
                 { value: 'Blue is best', text: "Green" },
                 { value: 'Actually blue', text: "Computer grey", icon:  'ml'}
             ]
+        }],
+        "input_file": [{
+            item_type: "input_file",
+            id: "file_sample",
+            label: "Profile image",
+            hint: "Supported format: pdf,  jpeg, png, svg",
+            optional: true,
+            answer: ""
+        }],
+        "input_file2": [{
+            item_type: "input_file",
+            id: "file_sample",
+            label: "Profile image",
+            hint: "Supported format: pdf,  jpeg, png, svg",
+            optional: true,
+            variant: 2,
+            multi: true,
+            answer: ""
         }],
         "random_selector": [{
             item_type: "random_selector",

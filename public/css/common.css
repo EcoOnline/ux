@@ -71,6 +71,7 @@ li {
    padding-bottom:12px;
    font-size:14px;
    margin:0;
+   max-width:480px;
 }
 
 
@@ -895,6 +896,10 @@ div.form-control input {
     border: none;
     flex:1;
     outline:none;
+}
+.form-control::placeholder {
+    color: #B1BAC5 ! important;
+    opacity: 1
 }
 
 .mt1 { margin-top:1em ! important }

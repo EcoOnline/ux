@@ -17,7 +17,7 @@
             data: e.target.result
         }
         if(multi) {
-            xfiles.push(temp)
+            xfiles.unshift(temp);
         } else {
             xfiles[0] = temp;
         }
@@ -94,16 +94,18 @@
     {:else}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="fake_input variant{variant}" class:highlight="{highlight}" bind:this="{drop_region}"  on:click="{drop_click}" on:drop={drop_file} on:dragenter={highlights} ondragover="return false" on:dragleave={unhighlights} >
-                {#if multi}
+                {#if variant==2}
                     <div class='file_list'>
                         {#each xfiles as xfile}
-                            <div class="file_item"><span>{xfile.name}</span> <i class="i-20 i-close" on:click|stopPropagation={ () => { remove_file(xfile)}}></i></div>
+                            <div class="file_item" class:one_file={!multi}><span>{xfile.name}</span> <i class="i-20 i-close" on:click|stopPropagation={ () => { remove_file(xfile)}}></i></div>
                         {/each}
                     </div>
                 {/if}
                 <span class="fake_file var var1">{xfiles.length &&xfiles[0].name ? xfiles[0].name : ' '} {#if xfiles.length}<i class="i-20 i-close" on:click|stopPropagation={ () => { remove_file(xfiles[0])}}></i>{/if}</span>
                 <span class="fake_button var var1"><i class='i-20 i-upload'></i> Browse file</span>
-                <span class="fake_text var var2"><i class='i-20 i-upload'></i> <span>Browse file</span> or drop it here</span>
+                {#if !multi && !xfiles.length}
+                    <span class="fake_text var var2"><i class='i-20 i-upload'></i> <span>Browse file</span> or drop it here</span>
+                {/if}
                 <input bind:this="{file_input}" on:change="{change_file}" type="file" accept="image/*" capture="camera">
             </div>
     {/if}
@@ -159,6 +161,9 @@
         border:1px solid var(--eo-border-input);
         flex:1;
         align-items: center;
+    }
+    .one_file {
+        margin-bottom:8px;
     }
     .file_item span {
         flex:1;

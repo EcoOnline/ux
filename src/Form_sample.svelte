@@ -2,6 +2,129 @@
     import Form from './components/form/Form.svelte';
     let channel = 'SAMPLE';
     let samples = {
+        "survey1": [
+            {
+                item_type: "input_select",
+                id: "s1",
+                label: "What day is it today?",
+                hint: false,
+                optional: false,
+                options: [
+                    {text: "Monday"},
+                    {text: "Tuesday"},
+                    {text: "Wednesday"},
+                    {text: "Thursday"},
+                    {text: "Friday"},
+                    {text: "Saturday"},
+                    {text: "Sunday"}
+                ],
+                answer: new Date().toLocaleString('en-us', {  weekday: 'long' })
+            },
+            {
+                item_type: "input_text",
+                id: "s2",
+                label: "What's your name?",
+                placeholder: 'Jane Doe',
+                hint: false,
+                optional: false,
+                answer: "",
+            },
+            {
+                item_type: "input_text",
+                id: "s3",
+                label: "What's your native language?",
+                placeholder: 'Language',
+                hint: false,
+                optional: false,
+                answer: "",
+            },
+            {
+                item_type: "input_text",
+                id: "s4 ",
+                label: "Where do you live",
+                placeholder: 'Name a place',
+                hint: false,
+                optional: false,
+                answer: "Earth",
+            },
+            {
+                item_type: "input_text",
+                id: "s4 ",
+                label: "What time is it now?",
+                placeholder: '00:00',
+                hint: false,
+                optional: false,
+                answer: "",
+            }
+        ],
+        "survey2": [
+            {
+                item_type: "input_text",
+                id: "s2",
+                label: "Who are you?",
+                placeholder: 'Jane Doe',
+                hint: false,
+                optional: false,
+                answer: "A human being",
+            },
+            {
+                item_type: "input_text",
+                id: "s3",
+                label: "How many fingers do you have?",
+                placeholder: '0',
+                hint: false,
+                optional: false,
+                answer: "",
+            },
+            {
+                item_type: "input_text",
+                id: "s4 ",
+                label: "What's your favourite color?",
+                placeholder: 'Deep green',
+                hint: false,
+                optional: false,
+                answer: "",
+            },
+            {
+                item_type: "input_text",
+                id: "s4 ",
+                label: "What's your age?",
+                placeholder: '65',
+                hint: false,
+                optional: true,
+                answer: "",
+            },
+            {
+                item_type: "input_text",
+                id: "s4 ",
+                label: "Is your glass half empty or half full?",
+                placeholder: '',
+                hint: false,
+                optional: false,
+                answer: "Half full of course",
+            },
+        ],
+        "survey3": [
+            {
+                item_type: "input_file",
+                id: "file_sample",
+                label: "File attachment",
+                hint: "Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg",
+                optional: false,
+                answer: ""
+            }
+        ],
+        "survey4": [
+            {
+                item_type: "input_file",
+                id: "file_sample",
+                label: "Profile image",
+                hint: "Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg",
+                optional: false,
+                variant: 2,
+                answer: ""
+            }
+        ],
         "input_tally": [
             {
                 item_type: "input_tally",
@@ -56,29 +179,7 @@
                 { value: 'Actually blue', text: "Computer grey", icon:  'ml'}
             ]
         }],
-        "input_file": [/*
-        {
-            item_type: "input_select",
-            id: "file_sample3",
-            label: "Native language",
-            hint: false,
-            optional: false,
-            options: [
-                {text: "English"},
-                {text: "Norwegian"},
-                {text: "Vietnamese"},
-                {text: "Other"}
-            ],
-            answer: ""
-        },
-        {
-            item_type: "input_text",
-            id: "file_sample2",
-            label: "What's your favourite colour?",
-            hint: false,
-            optional: false,
-            answer: "",
-        },*/
+        "input_file": [
         {
             item_type: "input_file",
             id: "file_sample",
@@ -87,28 +188,7 @@
             optional: true,
             answer: ""
         }],
-        "input_file2": [/*{
-            item_type: "input_select",
-            id: "file_sample3",
-            label: "Native language",
-            hint: false,
-            optional: false,
-            options: [
-                {text: "English"},
-                {text: "Norwegian"},
-                {text: "Vietnamese"},
-                {text: "Other"}
-            ],
-            answer: ""
-        },
-        {
-            item_type: "input_text",
-            id: "file_sample2",
-            label: "What's your favourite colour?",
-            hint: false,
-            optional: false,
-            answer: "",
-        },*/
+        "input_file2": [
         {
             item_type: "input_file",
             id: "file_sample",
@@ -160,6 +240,7 @@
     let selected_sample = "input_text";
     let params = new URLSearchParams(window.location.search);
     let sample_param = params.get("sample");
+    let title = params.get('title') || 'Input sample';
     if(sample_param && samples[sample_param]) {
 
         selected_sample = sample_param;
@@ -170,7 +251,7 @@
     let f = [
         {
             item_type: "section",
-            label: "Input sample",
+            label: title,
             children: []
         }
     ];
@@ -182,5 +263,7 @@
 <div style='margin:32px;'>
     <Form {f} {channel}></Form>
 </div>
+
+
 	
         

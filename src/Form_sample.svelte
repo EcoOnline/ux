@@ -87,7 +87,7 @@
             },
             {
                 item_type: "input_text",
-                id: "s4 ",
+                id: "s5 ",
                 label: "What's your age?",
                 placeholder: '65',
                 hint: false,
@@ -96,7 +96,7 @@
             },
             {
                 item_type: "input_text",
-                id: "s4 ",
+                id: "s6 ",
                 label: "Is your glass half empty or half full?",
                 placeholder: '',
                 hint: false,

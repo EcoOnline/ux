@@ -1,4 +1,5 @@
 <script>
+    //Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg"
     import Form from './components/form/Form.svelte';
     let channel = 'SAMPLE';
     let samples = {
@@ -109,7 +110,7 @@
                 item_type: "input_file",
                 id: "file_sample",
                 label: "File attachment",
-                hint: "Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg",
+                hint: false,
                 optional: false,
                 answer: ""
             }
@@ -119,7 +120,7 @@
                 item_type: "input_file",
                 id: "file_sample",
                 label: "File attachment",
-                hint: "Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg",
+                hint: false,
                 optional: false,
                 variant: 2,
                 answer: ""

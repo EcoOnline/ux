@@ -76,8 +76,8 @@
             {
                 item_type: "input_text",
                 id: "s3",
-                label: "How many fingers do you have?",
-                placeholder: '0',
+                label: "What was your first job?",
+                placeholder: 'Waiter',
                 hint: false,
                 optional: false,
                 answer: "",
@@ -85,8 +85,8 @@
             {
                 item_type: "input_text",
                 id: "s4 ",
-                label: "What's your favourite color?",
-                placeholder: 'Deep green',
+                label: "What was the last book you read?",
+                placeholder: 'Dune',
                 hint: false,
                 optional: false,
                 answer: "",

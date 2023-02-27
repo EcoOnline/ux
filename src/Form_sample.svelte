@@ -118,7 +118,7 @@
             {
                 item_type: "input_file",
                 id: "file_sample",
-                label: "Profile image",
+                label: "File attachment",
                 hint: "Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg",
                 optional: false,
                 variant: 2,

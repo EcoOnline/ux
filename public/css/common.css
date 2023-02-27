@@ -54,6 +54,9 @@ li {
     width: 300px;
     font-family: "IBM Plex Sans", sans-serif;
 }
+.form-control:hover {
+    background-color: #EBECFF;
+}
 .form-item label{
    display:block;
    font-weight:bold;
@@ -74,6 +77,10 @@ li {
    max-width:480px;
 }
 
+/*hack*/
+.survey2 .form-control::placeholder {
+    color:#6B7D91 !important;
+}
 
 .note {
     font-family: courier, monospace;

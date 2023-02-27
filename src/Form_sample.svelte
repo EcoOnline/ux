@@ -260,10 +260,9 @@
     })
     
 </script>
-<div style='margin:32px;'>
+<div style='margin:32px;' class={selected_sample}>
     <Form {f} {channel}></Form>
 </div>
 
 
-	
         

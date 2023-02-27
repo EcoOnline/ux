@@ -15,6 +15,7 @@
 	import InputTextarea from "./InputTextarea.svelte";
 	import RandomSelector from "./RandomSelector.svelte";
 	import Swatch from "./Swatch.svelte";
+	import SubmitButton from "./SubmitButton.svelte";
 
 	let components = {
 		"input_checkbox": InputCheckbox,
@@ -31,7 +32,8 @@
 		"input_text": InputText,
 		"input_textarea": InputTextarea,
 		"random_selector": RandomSelector,
-		"swatch": Swatch
+		"swatch": Swatch,
+		"submit_button": SubmitButton
     }
     
 

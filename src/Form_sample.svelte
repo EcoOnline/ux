@@ -56,6 +56,11 @@
                 hint: false,
                 optional: false,
                 answer: "",
+            },
+            {
+                item_type: "submit_button",
+                id: "s5 ",
+                label: "Submit"
             }
         ],
         "survey2": [
@@ -104,6 +109,11 @@
                 optional: false,
                 answer: "Half full of course",
             },
+            {
+                item_type: "submit_button",
+                id: "s5 ",
+                label: "Submit"
+            }
         ],
         "survey3": [
             {

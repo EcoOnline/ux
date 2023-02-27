@@ -19,6 +19,7 @@
 	import InputTextarea from "./InputTextarea.svelte";
 	import RandomSelector from "./RandomSelector.svelte";
 	import Swatch from "./Swatch.svelte";
+	import SubmitButton from "./SubmitButton.svelte";
 
     export let f;
     export let channel = 'ANSWER';
@@ -42,7 +43,8 @@
 		"input_text": InputText,
 		"input_textarea": InputTextarea,
 		"random_selector": RandomSelector,
-		"swatch": Swatch
+		"swatch": Swatch,
+		"submit_button": SubmitButton
     }
 
     onMount(() => {

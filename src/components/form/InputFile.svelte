@@ -102,9 +102,9 @@
                     </div>
                 {/if}
                 <span class="fake_file var var1">{xfiles.length &&xfiles[0].name ? xfiles[0].name : ' '} {#if xfiles.length}<i class="i-20 i-close" on:click|stopPropagation={ () => { remove_file(xfiles[0])}}></i>{/if}</span>
-                <span class="fake_button var var1"><i class='i-20 i-upload'></i> Browse file</span>
+                <span class="fake_button var var1"><i class='i-20 i-upload'></i> Browse files</span>
                 {#if !multi && !xfiles.length}
-                    <span class="fake_text var var2"><i class='i-20 i-upload'></i> <span>Browse file</span> or drop it here</span>
+                    <span class="fake_text var var2"><i class='i-20 i-upload'></i> <span>Browse files</span> or drop it here</span>
                 {/if}
                 <input bind:this="{file_input}" on:change="{change_file}" type="file" accept="image/*" capture="camera">
             </div>

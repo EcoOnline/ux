@@ -42,7 +42,7 @@
             {
                 item_type: "input_text",
                 id: "s4 ",
-                label: "Where do you live",
+                label: "Where do you live?",
                 placeholder: 'Name a place',
                 hint: false,
                 optional: false,

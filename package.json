@@ -28,6 +28,7 @@
     "exif-js": "^2.3.0",
     "html2canvas": "*",
     "papaparse": "^5.3.1",
+    "pdfjs": "^2.4.7",
     "piexifjs": "^1.0.4",
     "pubnub": "^5.0.1",
     "pubsub-js": "^1.9.4",
@@ -35,6 +36,7 @@
     "react-social-login-buttons": "^3.4.0",
     "sirv-cli": "^1.0.0",
     "svelte-dragdroplist": "^1.1.0",
-    "svelte-qrcode": "^1.0.0"
+    "svelte-qrcode": "^1.0.0",
+    "tesseract.js": "^4.0.2"
   }
 }

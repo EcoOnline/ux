@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 
+
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -27,7 +28,7 @@ function serve() {
 		}
 	};
 }
-export default ['form_sample'].map((name, index) => ({
+export default ['ecoplus'].map((name, index) => ({
 	
 	input: `src/${name}.js`,
 	output: {

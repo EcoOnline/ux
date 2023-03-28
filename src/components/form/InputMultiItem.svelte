@@ -52,8 +52,8 @@
 
 <style>
     .multi-item {
+       /*border-top:1px solid var(--eo-border-reduced);*/
         border-top:1px solid var(--eo-border-reduced);
-        border-bottom:1px solid var(--eo-border-reduced);
         padding:8px 16px;
         border-left:3px solid #D4D5EA;
         margin-top:-1px;

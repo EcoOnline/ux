@@ -1,13 +1,16 @@
 <script>
+	import EcoPlusForm from "./EcoPlusForm.svelte";
 	import EcoPlusSDS from "./EcoPlusSDS.svelte";
+
+	let sel;
 </script>
 
 <div id="ecoplus_wrapper">
 	<div>
-		EcoPlus form
+		<EcoPlusForm bind:selected={sel}/>
 	</div>
-	<div>
-		<EcoPlusSDS />
+	<div class='sds'>
+		<EcoPlusSDS bind:selected={sel}/>
 	</div>
 </div>
 
@@ -24,6 +27,10 @@
 		flex:1;
 		height:100%;
 		overflow: auto;
+	}
+
+	#ecoplus_wrapper > .sds {
+		flex: 1.5;
 	}
 	
 

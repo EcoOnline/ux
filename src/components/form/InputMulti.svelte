@@ -118,6 +118,13 @@
         f.options = f.options;
         recalc();
     }
+    function remove_all_tags() {
+        f.options.forEach( (tag) => {
+            tag.selected = false;
+        }) 
+        dd_in = false;
+        f.options = f.options;
+    }
     function handleItemUpdate(ev) {
         recalc();
     }
@@ -148,20 +155,18 @@
     {#if dd_in}
         <div class="multi-mask" on:click={ () => { dd_in = false;f.answer=''; }}></div>
     {/if}
-    {#if selected_shortlist.length}
-        {#each selected_shortlist as tag}
-            {#if tag.key == 'record_id'}
-                <div class="tag no_delete">{tag.value}</div>
-            {:else}
-                <div class="tag" on:click="{ () => remove_tag(tag)}">{tag.value}<i class="i-close i-20"></i></div>
-            {/if}
-        {/each}
-        {#if selected_shortlist.length < selected.length}
-            <div class="tag no_delete">+{selected.length - selected_shortlist.length}</div>
-        {/if}
-    {/if}
+    
     <div class="multi-wrapper">
         <div class="form-control">
+            {#if selected_shortlist.length}
+
+                {#if selected_shortlist.length == 1}
+                    <div class="tag" on:click="{ () => remove_tag(selected_shortlist[0])}">{selected_shortlist[0].value}<i class="i-close i-20"></i></div>
+                {:else}
+                    <div class="tag" on:click="{ () => remove_all_tags()}">{selected_shortlist.length} selected<i class="i-close i-20"></i></div>
+                {/if}
+
+            {/if}
             <input bind:value="{f.answer}" on:focus="{ (ev) => { ev.target.select()}}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
             {#if !dd_in}
                 <i class="i-chevron-down i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
@@ -172,7 +177,6 @@
         
         <div class="multi-dropdown" class:dd_in>
             <ul class="tabs">
-                <li class="select"><a href="#ehs/incidents/dashboard" on:click|preventDefault ="{ () => { tab = 'all';}}">Select</a></li>
                 <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'all'}" on:click|preventDefault ="{ () => { tab = 'all';}}">All</a></li>
                 <li><a href="#ehs/incidents/dashboard" class:active="{tab == 'selected'}" on:click|preventDefault ="{ () => { tab = 'selected'; }}">Selected</a></li>
             </ul>
@@ -196,11 +200,15 @@
 </div>
 
 <style>
+    .form-control:hover {
+        background: #fff ! important
+    }
     .form-item {
         overflow: initial;
     }
     .tag {
         position:relative;
+        margin-right:8px;
     }
     .multi-mask {
         background:transparent;
@@ -247,13 +255,12 @@
     .multi-dropdown.dd_in {
         max-height: 50vh;
     }
+
     .tabs {
         margin-left:16px;
     }
     .tabs li a {
         font-weight: 300;
     }
-    .select {
-        flex:1;
-    }
+    
 </style>

@@ -168,6 +168,83 @@
                 { value: '0/90%', text: "Red" }
             ]
         }],
+        "input_multi": [
+            {
+                item_type: "input_multi",
+                id: "group_a",
+                label: "Group A",
+                hint: "Select some names",
+                options: [
+                    {
+                        "key": "1",
+                        "value": "John Smith",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "2",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "3",
+                        "value": "Michael Davis",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "4",
+                        "value": "Sarah Thompson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "5",
+                        "value": "Robert Willams",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "6",
+                        "value": "Jennifer Lee",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "7",
+                        "value": "David Hernandez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "8",
+                        "value": "Laura Davis",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "9",
+                        "value": "Anthony Perez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "10",
+                        "value": "Adela Chambers",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "11",
+                        "value": "Ivan Troubitsine",
+                        "selectable": true,
+                        "selected": false
+                    }
+                ],
+                answer: ""
+            }
+        ],
         "input_text": [{
             item_type: "input_text",
             id: "text_sample",
@@ -210,7 +287,8 @@
             multi: true,
             answer: ""
         }],
-        "random_selector": [{
+        "random_selector": [
+            {
             item_type: "random_selector",
             id: "rs",
             label: "Choose a game name",
@@ -228,24 +306,25 @@
                 {text: "Masters vs"}
             ],
             answer: ""
-        },
-        {
-            item_type: "random_selector",
-            id: "rs",
-            label: "",
-            hint: false,
-            optional: false,
-            spin_button: true,
-            options: [
-                {text: "Clans"},
-                {text: "Kings"},
-                {text: "Heroes"},
-                {text: "Plants"},
-                {text: "Zombies"},
-                {text: "Masters"}
-            ],
-            answer: ""
-        }]
+            },
+            {
+                item_type: "random_selector",
+                id: "rs",
+                label: "",
+                hint: false,
+                optional: false,
+                spin_button: true,
+                options: [
+                    {text: "Clans"},
+                    {text: "Kings"},
+                    {text: "Heroes"},
+                    {text: "Plants"},
+                    {text: "Zombies"},
+                    {text: "Masters"}
+                ],
+                answer: ""
+            }
+        ]
     }
 
     let selected_sample = "input_text";

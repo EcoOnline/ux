@@ -2,7 +2,37 @@
 	
     import { onMount } from 'svelte';
 
-
+	export let selected;
+	let mode = false
+	$: {
+		let s = selected;
+		let scaler = scale;
+		if(s){
+			if(s.ml.value_obtained && s.ml.rects.length == 1) {
+				//obtained a value through ml and have 1 rect
+				rect.x0 = s.ml.rects[0].x0 * scaler;
+				rect.y0 = s.ml.rects[0].y0 * scaler;
+				rect.x1 = s.ml.rects[0].x1 * scaler;
+				rect.y1 = s.ml.rects[0].y1 * scaler;
+				mode = 'confirm';
+			}
+			if(s.ml.rects.length > 1) {
+				//a choice of rects
+				mode = 'choose';
+				rect.x0 = -20;
+				rect.y0 = -20;
+				rect.x1 = -10;
+				rect.y1 = -10;
+			}
+			if(!s.ml.value_obtained && !s.ml.rects.length) {
+				mode = 'draw';
+				rect.x0 = -20;
+				rect.y0 = -20;
+				rect.x1 = -10;
+				rect.y1 = -10;
+			}
+		}
+	}
 
 	let canvas = false;
 	let words = [];
@@ -13,6 +43,7 @@
 	let w = 100;
 	let svg_width=100;
 	let svg_height=100;
+	let scale = 1;
 
 	let rect = {
 		x0: -10,
@@ -45,7 +76,7 @@
 			pdf.getPage(pageNumber).then(function(page) {
 				console.log('Page loaded');
 				
-				var scale = w/595;
+				scale = w/595;
 				var viewport = page.getViewport({scale: scale});
 				var context = canvas.getContext('2d');
 				canvas.height = viewport.height;
@@ -138,7 +169,10 @@
 			{/if}
 			{progress}% 
 		{/if}
-		{selected_term} 
+		{#if selected}
+			{selected.f.answer}
+		{/if}
+		{mode}
 	</div>
 	<canvas class="viewport" bind:this={canvas}></canvas>
 	<svg class="viewport" width={svg_width} height={svg_height} viewBox="0 0 {svg_width} {svg_height}" xmlns="http://www.w3.org/2000/svg" on:mousedown={startRect} on:mousemove={dragRect} on:mouseup={stopRect}>
@@ -146,6 +180,10 @@
 			<rect x="{word.bbox.x0}" y="{word.bbox.y0}" width="{(word.bbox.x1-word.bbox.x0)}" height="{(word.bbox.y1-word.bbox.y0)}" fill="rgba(23,173,211,0.5)"/>
 		{/each}
 		<rect x="{rect.x0}" y="{rect.y0}" width="{(rect.x1-rect.x0)}" height="{(rect.y1-rect.y0)}" rx="4" stroke="rgb(23,173,211)" stroke-width="4" fill="transparent"/>
+	
+		{#if mode == 'choose'}
+			<rect x="{rect.x0}" y="{rect.y0}" width="{(rect.x1-rect.x0)}" height="{(rect.y1-rect.y0)}" rx="4" stroke="rgb(23,173,211)" stroke-width="4" fill="transparent"/>
+		{/if}
 	</svg>
 </div>
 	

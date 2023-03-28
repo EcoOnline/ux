@@ -157,7 +157,7 @@
     {/if}
     
     <div class="multi-wrapper">
-        <div class="form-control">
+        <div class="form-control" style="padding-left:12px;">
             {#if selected_shortlist.length}
 
                 {#if selected_shortlist.length == 1}

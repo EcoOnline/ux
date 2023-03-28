@@ -253,7 +253,7 @@
         z-index: 200;
     }
     .multi-dropdown.dd_in {
-        max-height: 480px;
+        max-height: 300px;
     }
 
     .tabs {

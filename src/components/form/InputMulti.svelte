@@ -209,6 +209,9 @@
     .tag {
         position:relative;
         margin-right:8px;
+        white-space: nowrap;
+        border-radius:4px;
+        margin-top:4px;
     }
     .multi-mask {
         background:transparent;

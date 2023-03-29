@@ -215,9 +215,7 @@
         border-radius:4px;
         margin-top:4px;
         height:24px;
-    }
-    .tag span {
-        margin-top:4px;
+        display: flex;
     }
     .tag.tag_hover {
         background-color: #D0D6DC !important;

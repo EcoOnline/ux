@@ -170,9 +170,9 @@
             {/if}
             <input bind:value="{f.answer}" on:focus="{ (ev) => { ev.target.select()}}" type="text" placeholder="{f.placeholder ? f.placeholder : ''}">
             {#if !dd_in}
-                <i class="i-chevron-down i-20" on:click="{ () => { dd_in = !dd_in}}"></i>
+                <i class="i-chevron-down i-20" on:click="{ () => { tab = 'all';dd_in = !dd_in}}"></i>
             {:else}
-                <i class="i-chevron-up i-20" on:click="{ () => { dd_in = !dd_in; f.answer=''}}"></i>
+                <i class="i-chevron-up i-20" on:click="{ () => { tab = 'all';dd_in = !dd_in; f.answer=''}}"></i>
             {/if}
         </div>
         

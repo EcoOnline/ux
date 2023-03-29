@@ -131,6 +131,7 @@
     function handleItemUpdate2(ev) {
         recalc();
     }
+    let tag_hover = false;
 
 
     onMount(() => {
@@ -161,9 +162,9 @@
             {#if selected_shortlist.length}
 
                 {#if selected_shortlist.length == 1}
-                    <div class="tag" on:click="{ () => remove_tag(selected_shortlist[0])}">{selected_shortlist[0].value}<i class="i-close i-20"></i></div>
+                    <div class="tag" class:tag_hover><span  on:click="{ () => { dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist[0].value}</span><i class="i-close i-20" on:click="{ () => remove_tag(selected_shortlist[0])}"></i></div>
                 {:else}
-                    <div class="tag" on:click="{ () => remove_all_tags()}">{selected_shortlist.length} selected<i class="i-close i-20"></i></div>
+                    <div class="tag" class:tag_hover><span  on:click="{ () => { dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist.length} selected</span><i class="i-close i-20" on:click="{ () => remove_all_tags()}"></i></div>
                 {/if}
 
             {/if}
@@ -207,11 +208,28 @@
         overflow: initial;
     }
     .tag {
+        background-color: #E4E7EB;
         position:relative;
         margin-right:8px;
         white-space: nowrap;
         border-radius:4px;
         margin-top:4px;
+        height:24px;
+    }
+    .tag span {
+        margin-top:4px;
+    }
+    .tag.tag_hover {
+        background-color: #D0D6DC !important;
+    }
+    .tag .i-close {
+        vertical-align: text-bottom;
+        margin-top:2px;
+        margin-left:2px;
+        border-radius:4px;
+    }
+    .tag .i-close:hover {
+        background-color: rgba(0,0,0,0.2) !important;
     }
     .multi-mask {
         background:transparent;

@@ -162,9 +162,9 @@
             {#if selected_shortlist.length}
 
                 {#if selected_shortlist.length == 1}
-                    <div class="tag" class:tag_hover><span  on:click="{ () => { dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist[0].value}</span><i class="i-close i-20" on:click="{ () => remove_tag(selected_shortlist[0])}"></i></div>
+                    <div class="tag" class:tag_hover><span  on:click="{ () => { tab ='selected';dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist[0].value}</span><i class="i-close i-20" on:click="{ () => remove_tag(selected_shortlist[0])}"></i></div>
                 {:else}
-                    <div class="tag" class:tag_hover><span  on:click="{ () => { dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist.length} selected</span><i class="i-close i-20" on:click="{ () => remove_all_tags()}"></i></div>
+                    <div class="tag" class:tag_hover><span  on:click="{ () => { tab = 'selected'; dd_in = true;}}" on:mouseenter={ () => { tag_hover = true;}} on:mouseleave={ () => { tag_hover = false;}}>{selected_shortlist.length} selected</span><i class="i-close i-20" on:click="{ () => remove_all_tags()}"></i></div>
                 {/if}
 
             {/if}

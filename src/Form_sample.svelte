@@ -218,7 +218,7 @@
                         "key": "17",
                         "value": "Victoria Wilson",
                         "selectable": true,
-                        "selected": true
+                        "selected": false
                     },
                     {
                         "key": "9",
@@ -336,7 +336,7 @@
                         "key": "17",
                         "value": "Victoria Wilson",
                         "selectable": true,
-                        "selected": true
+                        "selected": false
                     },
                     {
                         "key": "9",
@@ -454,7 +454,7 @@
                         "key": "17",
                         "value": "Victoria Wilson",
                         "selectable": true,
-                        "selected": true
+                        "selected": false
                     },
                     {
                         "key": "9",

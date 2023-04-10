@@ -466,7 +466,7 @@
                         "key": "10",
                         "value": "Adela Chambers",
                         "selectable": true,
-                        "selected": true
+                        "selected": false
                     },
                     {
                         "key": "15",

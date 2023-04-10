@@ -136,6 +136,360 @@
                 answer: ""
             }
         ],
+        "multi_survey1": [
+            {
+                item_type: "input_multi",
+                id: "group_a",
+                label: "Group A",
+                options: [
+                    {
+                        "key": "13",
+                        "value": "Richard Kim",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "1",
+                        "value": "John Smith",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "2",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "3",
+                        "value": "Michael Davis",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "4",
+                        "value": "Sarah Thompson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "5",
+                        "value": "Robert Willams",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "6",
+                        "value": "Jennifer Lee",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "7",
+                        "value": "David Hernandez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "8",
+                        "value": "Laura Davis",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "11",
+                        "value": "Christopher Brown",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "16",
+                        "value": "Stephanie Chen",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "17",
+                        "value": "Victoria Wilson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "9",
+                        "value": "Anthony Perez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "12",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "10",
+                        "value": "Adela Chambers",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "15",
+                        "value": "Samantha Garcia",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "14",
+                        "value": "Amanda Collins",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "11",
+                        "value": "Ivan Troubitsine",
+                        "selectable": true,
+                        "selected": false
+                    }
+                ],
+                answer: ""
+            }
+        ],
+        "multi_survey2": [
+            {
+                item_type: "input_multi",
+                id: "group_b",
+                label: "Group B",
+                options: [
+                    {
+                        "key": "13",
+                        "value": "Richard Kim",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "1",
+                        "value": "John Smith",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "2",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "3",
+                        "value": "Michael Davis",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "4",
+                        "value": "Sarah Thompson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "5",
+                        "value": "Robert Willams",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "6",
+                        "value": "Jennifer Lee",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "7",
+                        "value": "David Hernandez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "8",
+                        "value": "Laura Davis",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "11",
+                        "value": "Christopher Brown",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "16",
+                        "value": "Stephanie Chen",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "17",
+                        "value": "Victoria Wilson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "9",
+                        "value": "Anthony Perez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "12",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "10",
+                        "value": "Adela Chambers",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "15",
+                        "value": "Samantha Garcia",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "14",
+                        "value": "Amanda Collins",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "11",
+                        "value": "Ivan Troubitsine",
+                        "selectable": true,
+                        "selected": false
+                    }
+                ],
+                answer: ""
+            }
+        ],
+        "multi_survey3": [
+            {
+                item_type: "input_multi",
+                id: "group_c",
+                label: "Group C",
+                options: [
+                    {
+                        "key": "13",
+                        "value": "Richard Kim",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "1",
+                        "value": "John Smith",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "2",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "3",
+                        "value": "Michael Davis",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "4",
+                        "value": "Sarah Thompson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "5",
+                        "value": "Robert Willams",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "6",
+                        "value": "Jennifer Lee",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "7",
+                        "value": "David Hernandez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "8",
+                        "value": "Laura Davis",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "11",
+                        "value": "Christopher Brown",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "16",
+                        "value": "Stephanie Chen",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "17",
+                        "value": "Victoria Wilson",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "9",
+                        "value": "Anthony Perez",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "12",
+                        "value": "Mary Johnson",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "10",
+                        "value": "Adela Chambers",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "15",
+                        "value": "Samantha Garcia",
+                        "selectable": true,
+                        "selected": true
+                    },
+                    {
+                        "key": "14",
+                        "value": "Amanda Collins",
+                        "selectable": true,
+                        "selected": false
+                    },
+                    {
+                        "key": "11",
+                        "value": "Ivan Troubitsine",
+                        "selectable": true,
+                        "selected": false
+                    }
+                ],
+                answer: ""
+            }
+        ],
         "input_tally": [
             {
                 item_type: "input_tally",

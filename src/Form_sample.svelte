@@ -227,12 +227,6 @@
                         "selected": false
                     },
                     {
-                        "key": "12",
-                        "value": "Mary Johnson",
-                        "selectable": true,
-                        "selected": false
-                    },
-                    {
                         "key": "10",
                         "value": "Adela Chambers",
                         "selectable": true,
@@ -351,12 +345,6 @@
                         "selected": false
                     },
                     {
-                        "key": "12",
-                        "value": "Mary Johnson",
-                        "selectable": true,
-                        "selected": false
-                    },
-                    {
                         "key": "10",
                         "value": "Adela Chambers",
                         "selectable": true,
@@ -471,12 +459,6 @@
                     {
                         "key": "9",
                         "value": "Anthony Perez",
-                        "selectable": true,
-                        "selected": false
-                    },
-                    {
-                        "key": "12",
-                        "value": "Mary Johnson",
                         "selectable": true,
                         "selected": false
                     },

@@ -28,6 +28,7 @@
     {#if f.readonly}
         <div class='readonly'>{f.answer}</div>
     {:else}
+
         <div style='max-width:255px'>
             {#if hack_calendar}
             
@@ -45,6 +46,9 @@
             </DatePicker>
             {/if}
         </div>
+
+        <Shortcuts {f} on:shortcut={(ev) => { f.answer = ev.detail.value.toLocaleString(); }}/>
+
     {/if}
 
 

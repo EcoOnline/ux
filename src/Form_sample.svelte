@@ -2,6 +2,8 @@
     //Choose a random image from your computer, a screenshot, or a blank page and include it in the below input. Supported formats: pdf,  jpeg, png, svg"
     import Form from './components/form/Form.svelte';
     let channel = 'SAMPLE';
+    let fortnight = new Date();
+    let date_opts = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
     let samples = {
         "survey1": [
             {
@@ -621,6 +623,25 @@
                 { value: 'Actually blue', text: "Computer grey", icon:  'ml'}
             ]
         }],
+        "input_date": [
+            {
+                item_type: "input_date",
+                id: "input_date",
+                label: "Date and time of event",
+                readonly: false,
+                optional: true,
+                hint: false,
+                answer: "",
+                shortcuts: [
+                    {
+                        value: (new Date()).toLocaleDateString("en-GB", date_opts), text: "Today"
+                    },
+                    {
+                        value: (new Date(fortnight.setTime( fortnight.getTime() + 14 * 86400000 ))).toLocaleDateString("en-GB", date_opts), text: "A fortnight"
+                    },
+                ]
+            }
+        ],
         "input_file": [
         {
             item_type: "input_file",
